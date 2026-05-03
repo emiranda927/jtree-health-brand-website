@@ -1,0 +1,116 @@
+{
+  "exportFormatVersion": 2,
+  "containerVersion": {
+    "tag": [
+      {
+        "name": "GA4 Configuration",
+        "type": "gaawc",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "G-XXXXXXXXXX"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "sendPageView",
+            "value": "true"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "enableSendToServerContainer",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": ["all_pages"],
+        "notes": "GA4 base configuration tag. Replace G-XXXXXXXXXX with actual Measurement ID. IP anonymization, Google Signals OFF, Ads personalization OFF must be set in the GA4 property admin."
+      },
+      {
+        "name": "GA4 Event - Inquiry Submitted",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "inquiry_submitted"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "G-XXXXXXXXXX"
+          },
+          {
+            "type": "LIST",
+            "key": "eventParameters",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "event_category"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "form"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "event_label"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "inquiry_form"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "firingTriggerId": ["thank_you_pageview"],
+        "notes": "Fires the inquiry_submitted conversion event ONLY on /thank-you/ page. This is the sole conversion event for the site."
+      }
+    ],
+    "trigger": [
+      {
+        "name": "All Pages",
+        "type": "PAGEVIEW",
+        "triggerId": "all_pages"
+      },
+      {
+        "name": "Thank You Page View",
+        "type": "PAGEVIEW",
+        "triggerId": "thank_you_pageview",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Page Path}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "/thank-you/"
+              }
+            ]
+          }
+        ],
+        "notes": "Fires only when Page Path equals /thank-you/"
+      }
+    ],
+    "variable": [],
+    "notes": "JTree Health GTM Container Template. IMPORTANT: Replace G-XXXXXXXXXX with actual GA4 Measurement ID before importing. Do NOT add Meta Pixel, TikTok Pixel, session replay tools, or form-field capture variables."
+  }
+}

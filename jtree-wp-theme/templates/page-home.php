@@ -1,0 +1,692 @@
+<?php
+/**
+ * Template Name: Home
+ */
+
+get_header();
+?>
+
+<style>
+/* ── HERO ────────────────────────────────────────── */
+.hero {
+  min-height: 94vh;
+  position: relative;
+  overflow: hidden;
+}
+.hero__scene {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero__content {
+  position: relative; z-index: 3;
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 3rem;
+  align-items: center;
+  padding: 5rem 2rem 4rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: 94vh;
+}
+.hero__eyebrow {
+  font-size: .65rem; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--deep-sage);
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.hero__eyebrow::before {
+  content: ''; width: 24px; height: 2px;
+  background: var(--lime); border-radius: 2px;
+}
+.hero__title {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: clamp(3.2rem, 6.5vw, 5.8rem);
+  line-height: 1.0; letter-spacing: -.04em;
+  color: var(--forest); margin-bottom: 1.75rem;
+}
+.hero__title .accent { color: var(--lavender); }
+.hero__body {
+  font-size: 1.15rem; color: rgba(42,42,42,.65);
+  max-width: 520px; margin-bottom: 2.5rem; line-height: 1.7;
+}
+.hero__ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* Hero visual — illustration scene */
+.hero__visual { position: relative; }
+.hero__blob-wrap {
+  position: relative; width: 100%; aspect-ratio: 4/5;
+}
+.hero__blob {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--pale-lav) 0%, var(--pale-sage) 100%);
+  clip-path: polygon(8% 0%,35% 4%,62% 0%,82% 6%,96% 18%,100% 40%,96% 62%,100% 82%,84% 96%,60% 100%,38% 96%,14% 100%,2% 82%,0% 58%,4% 32%);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+/* Floating badges */
+.hero__carf {
+  position: absolute; bottom: -1.5rem; left: -1.5rem;
+  background: var(--lime); border: 2px solid var(--forest);
+  border-radius: 14px; padding: 1.1rem 1.4rem;
+  box-shadow: 6px 6px 0 var(--forest); z-index: 4;
+}
+.hero__carf-title { font-family: var(--font-head); font-weight: 900; font-size: 1.6rem; color: var(--forest); line-height: 1; }
+.hero__carf-sub { font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--forest); margin-top: .2rem; opacity: .7; }
+.hero__stat {
+  position: absolute; top: 2rem; right: -2rem;
+  background: var(--forest); color: #fff;
+  border-radius: 12px; padding: .9rem 1.2rem; text-align: center;
+  box-shadow: 4px 4px 0 rgba(30,61,52,.3); z-index: 4;
+}
+.hero__stat-num { font-family: var(--font-head); font-weight: 900; font-size: 1.8rem; line-height: 1; color: var(--lime); }
+.hero__stat-label { font-size: .6rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .7; margin-top: .2rem; max-width: 80px; }
+
+/* ── TRUST BAR ──────────────────────────────────── */
+.trust { background:rgba(255,255,255,.55); border-top:1px solid rgba(30,61,52,.07); border-bottom:1px solid rgba(30,61,52,.07); padding:1.75rem 2rem; }
+.trust__inner { max-width:1280px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+.trust__label { font-size:.65rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(42,42,42,.35); white-space:nowrap; }
+.trust__logos { display:flex; align-items:center; gap:2.5rem; flex-wrap:wrap; }
+.trust__logo { font-family:var(--font-head); font-weight:700; font-size:.95rem; color:rgba(42,42,42,.3); letter-spacing:.05em; transition:color .2s; }
+.trust__logo:hover { color:var(--deep-sage); }
+.trust__divider { width:1px; height:24px; background:rgba(30,61,52,.1); }
+.trust__carf { display:flex; align-items:center; gap:.6rem; }
+.trust__carf-badge { background:var(--lime); color:var(--forest); font-family:var(--font-head); font-weight:900; font-size:.85rem; padding:.3rem .7rem; border-radius:6px; border:1.5px solid var(--forest); }
+.trust__carf-text { font-size:.7rem; font-weight:600; color:rgba(42,42,42,.5); }
+
+/* ── PROGRAMS GRID ──────────────────────────────── */
+.programs-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; max-width: 1280px; margin: 0 auto;
+}
+.prog-card {
+  background: var(--sand); border-radius: 20px;
+  border: 2px solid rgba(30,61,52,.08); padding: 2.2rem;
+  display: flex; flex-direction: column;
+  transition: transform .4s var(--ease-expo), box-shadow .4s var(--ease-expo);
+  position: relative; overflow: hidden;
+}
+.prog-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(30,61,52,.12); }
+.prog-card--featured { border-color: var(--lime); background: var(--pale-lime); }
+.prog-card__header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:1.5rem; }
+.prog-card__icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(30,61,52,.05);
+  transition: transform .4s var(--ease-expo);
+}
+.prog-card:hover .prog-card__icon { transform: scale(1.1) rotate(-4deg); }
+.prog-card__title { font-family:var(--font-head); font-weight:800; font-size:1.5rem; color:var(--forest); letter-spacing:-.02em; margin:.75rem 0 .6rem; line-height:1.1; }
+.prog-card__body { font-size:.9rem; color:rgba(42,42,42,.65); line-height:1.7; margin-bottom:1.5rem; }
+.prog-card__list { list-style:none; margin-bottom:1.75rem; flex:1; }
+.prog-card__list li { display:flex; align-items:center; gap:.6rem; font-size:.8rem; font-weight:600; color:var(--deep-sage); letter-spacing:.01em; padding:.35rem 0; }
+.prog-card__list li::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--lime); flex-shrink:0; }
+.prog-card .btn { text-align:center; justify-content:center; font-size:.78rem; }
+
+/* ── STATS ──────────────────────────────────────── */
+.stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  max-width: 1280px; margin: 0 auto;
+  border: 2px solid rgba(30,61,52,.1); border-radius: 20px; overflow: hidden;
+}
+.stat-block {
+  padding: 4rem 3.5rem; background: var(--sand);
+  border-right: 2px solid rgba(30,61,52,.1);
+  transition: background .3s var(--ease-expo);
+  position: relative; overflow: hidden;
+}
+.stat-block:last-child { border-right: none; }
+.stat-block:hover { background: #fff; }
+.stat-number {
+  font-family: var(--font-head); font-weight: 900;
+  font-size: clamp(4rem, 9vw, 7rem); line-height: 1;
+  letter-spacing: -.05em; color: var(--forest); margin-bottom: .5rem;
+}
+.stat-number span { color: var(--lavender); }
+.stat-desc { font-size: 1rem; color: rgba(42,42,42,.55); max-width: 260px; line-height: 1.6; }
+/* Stat illustration */
+.stat-block__illus {
+  position: absolute; bottom: 10px; right: 20px; opacity: .08;
+  transition: opacity .4s, transform .6s var(--ease-expo);
+}
+.stat-block:hover .stat-block__illus { opacity: .16; transform: translateY(-4px); }
+
+/* ── HOW IT WORKS ───────────────────────────────── */
+.steps-header { display:flex; justify-content:space-between; align-items:flex-end; max-width:1280px; margin:0 auto 3rem; gap:2rem; flex-wrap:wrap; }
+.steps-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border: 2px solid var(--forest); border-radius: 20px; overflow: hidden;
+}
+.step {
+  padding: 3rem 2.5rem; border-right: 2px solid var(--forest);
+  transition: background .3s var(--ease-expo); position: relative; overflow: hidden;
+}
+.step:last-child { border-right: none; }
+.step:hover { background: rgba(255,255,255,.6); }
+.step__num { font-family:var(--font-head); font-weight:900; font-size:4.5rem; line-height:1; letter-spacing:-.06em; color:rgba(30,61,52,.1); margin-bottom:1.25rem; transition:color .2s; }
+.step:hover .step__num { color: rgba(30,61,52,.22); }
+.step__title { font-family:var(--font-head); font-weight:700; font-size:1.2rem; color:var(--forest); margin-bottom:.6rem; letter-spacing:-.01em; }
+.step__body { font-size:.88rem; color:rgba(42,42,42,.6); line-height:1.7; }
+/* Step illustration */
+.step__illus {
+  position: absolute; bottom: 12px; right: 16px; opacity: .1;
+  transition: opacity .4s, transform .5s var(--ease-expo);
+}
+.step:hover .step__illus { opacity: .2; transform: scale(1.08); }
+
+/* ── QUOTE ──────────────────────────────────────── */
+.quote-section {
+  background: var(--lavender); padding: 6rem 2rem; text-align: center;
+  position: relative; overflow: hidden;
+}
+.quote-section blockquote {
+  font-family: var(--font-mono); font-size: clamp(1.3rem, 3vw, 2.1rem);
+  line-height: 1.45; color: var(--forest); max-width: 820px;
+  margin: 0 auto 2rem; position: relative; z-index: 2;
+}
+.quote-section blockquote::before {
+  content: '\201C'; font-size: 6rem; line-height: 0;
+  color: rgba(30,61,52,.18); position: absolute; top: 1.2rem; left: -1rem;
+  font-family: Georgia, serif;
+}
+.quote-section cite {
+  font-family: var(--font-body); font-style: normal;
+  font-size: .85rem; font-weight: 600; color: var(--forest); opacity: .7;
+  position: relative; z-index: 2;
+}
+
+/* ── REFERRERS ──────────────────────────────────── */
+.referrers-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  max-width: 1280px; margin: 0 auto;
+}
+.ref-card {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px; padding: 1.75rem; text-align: center;
+  transition: transform .4s var(--ease-expo), background .3s;
+}
+.ref-card:hover { background: rgba(255,255,255,.12); transform: translateY(-4px); }
+.ref-card__icon { font-size: 1.8rem; margin-bottom: .75rem; }
+.ref-card__title { font-family: var(--font-head); font-weight: 700; font-size: .95rem; color: #fff; margin-bottom: .3rem; }
+.ref-card__desc { font-size: .78rem; color: rgba(255,255,255,.5); line-height: 1.5; }
+
+/* ── LOCATION ───────────────────────────────────── */
+.location-tags {
+  display: flex; gap: .75rem; flex-wrap: wrap;
+  max-width: 1280px; margin: 2rem auto 0;
+}
+.location-tag {
+  background: rgba(30,61,52,.05); border: 1px solid rgba(30,61,52,.08);
+  border-radius: 9999px; padding: .5rem 1.2rem;
+  font-size: .78rem; font-weight: 600; color: var(--deep-sage);
+  transition: all .3s var(--ease-expo);
+}
+.location-tag:hover { background: var(--pale-sage); transform: translateY(-2px); }
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero__content { grid-template-columns: 1fr; min-height: auto; padding-top: 3rem; }
+  .hero__visual { max-width: 360px; margin: 0 auto; }
+  .programs-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .step { border-right: none; border-bottom: 2px solid var(--forest); }
+  .step:last-child { border-bottom: none; }
+  .referrers-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .referrers-grid { grid-template-columns: 1fr; }
+  .hero__carf { left: 0; bottom: -1rem; }
+  .hero__stat { right: 0; top: 1rem; }
+}
+</style>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero spike-bg">
+
+  <div class="hero__content">
+    <!-- Left: copy -->
+    <div>
+      <p class="hero__eyebrow anim-1">Ages 10-17 &middot; Apex, NC &middot; CARF Accredited</p>
+      <h1 class="hero__title anim-2">
+        Real help.<br/>Real fast.<br/><span class="accent">For your teen.</span>
+      </h1>
+      <p class="hero__body anim-3">
+        PHP and IOP mental health programs for teens ages 10–17 in Apex, NC. Structured daily care that fits around your family's life — with results you can track from week one.
+      </p>
+      <div class="hero__ctas anim-4">
+        <a href="<?php echo esc_url(home_url('/admissions/')); ?>" class="btn btn--primary btn--lg">Start the Conversation</a>
+        <a href="<?php echo esc_url(home_url('/programs/')); ?>" class="btn btn--secondary btn--lg">Explore Programs</a>
+      </div>
+    </div>
+
+    <!-- Right: blob with illustrated scene inside -->
+    <div class="hero__visual anim-5">
+      <div class="hero__blob-wrap">
+        <div class="hero__blob">
+          <!-- Illustrated scene inside blob: teens in nature -->
+          <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <!-- Sky/background gradient -->
+            <rect width="400" height="500" fill="#E0EEEA" opacity=".3"/>
+            <!-- Rolling hills -->
+            <ellipse cx="200" cy="460" rx="280" ry="80" fill="#2C5F52" opacity=".3"/>
+            <ellipse cx="120" cy="470" rx="200" ry="60" fill="#2C5F52" opacity=".2"/>
+            <!-- Joshua tree (geometric) -->
+            <rect x="180" y="280" width="12" height="100" rx="3" fill="#1E3D34" opacity=".7"/>
+            <line x1="186" y1="320" x2="160" y2="280" stroke="#1E3D34" stroke-width="6" stroke-linecap="round" opacity=".7"/>
+            <line x1="186" y1="310" x2="216" y2="270" stroke="#1E3D34" stroke-width="6" stroke-linecap="round" opacity=".7"/>
+            <line x1="186" y1="300" x2="186" y2="260" stroke="#1E3D34" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+            <!-- Leaf clusters -->
+            <circle cx="155" cy="272" r="14" fill="#B8E04A" opacity=".7"/>
+            <circle cx="165" cy="268" r="10" fill="#2C5F52" opacity=".6"/>
+            <circle cx="220" cy="262" r="12" fill="#B8E04A" opacity=".7"/>
+            <circle cx="212" cy="258" r="9" fill="#2C5F52" opacity=".6"/>
+            <circle cx="186" cy="252" r="13" fill="#B8E04A" opacity=".7"/>
+            <circle cx="182" cy="248" r="10" fill="#2C5F52" opacity=".5"/>
+            <!-- Teen figure 1 (sitting, reading) -->
+            <circle cx="110" cy="385" r="18" fill="#A89FD8"/> <!-- head -->
+            <ellipse cx="110" cy="420" rx="20" ry="24" fill="#2C5F52"/> <!-- body -->
+            <circle cx="104" cy="383" r="2.5" fill="#1E3D34"/> <!-- eye -->
+            <circle cx="116" cy="383" r="2.5" fill="#1E3D34"/> <!-- eye -->
+            <rect x="96" y="410" width="16" height="12" rx="2" fill="#EAE8F5"/> <!-- book -->
+            <!-- Teen figure 2 (standing) -->
+            <circle cx="280" cy="375" r="20" fill="#B8E04A"/> <!-- head -->
+            <ellipse cx="280" cy="418" rx="22" ry="28" fill="#1E3D34"/> <!-- body -->
+            <circle cx="273" cy="373" r="2.5" fill="#2C5F52"/> <!-- eye -->
+            <circle cx="287" cy="373" r="2.5" fill="#2C5F52"/> <!-- eye -->
+            <path d="M274 380 Q280 384 286 380" stroke="#2C5F52" stroke-width="2" stroke-linecap="round" fill="none"/> <!-- smile -->
+            <!-- Speech bubble -->
+            <ellipse cx="310" cy="350" rx="24" ry="16" fill="white" opacity=".85"/>
+            <path d="M296 360 L290 370 L302 362" fill="white" opacity=".85"/>
+            <circle cx="304" cy="348" r="2" fill="#B8E04A"/>
+            <circle cx="310" cy="348" r="2" fill="#A89FD8"/>
+            <circle cx="316" cy="348" r="2" fill="#B8E04A"/>
+            <!-- Clouds -->
+            <ellipse cx="80" cy="180" rx="28" ry="14" fill="white" opacity=".6"/>
+            <ellipse cx="100" cy="175" rx="22" ry="16" fill="white" opacity=".6"/>
+            <ellipse cx="310" cy="200" rx="24" ry="12" fill="white" opacity=".5"/>
+            <ellipse cx="328" cy="196" rx="18" ry="14" fill="white" opacity=".5"/>
+            <!-- Sun -->
+            <circle cx="340" cy="100" r="30" fill="#B8E04A" opacity=".5"/>
+            <circle cx="340" cy="100" r="22" fill="#B8E04A" opacity=".3"/>
+          </svg>
+        </div>
+        <!-- Floating badges -->
+        <div class="hero__carf anim-5">
+          <div class="hero__carf-title">CARF</div>
+          <div class="hero__carf-sub">Accredited</div>
+        </div>
+        <div class="hero__stat illus-float-slow">
+          <div class="hero__stat-num">82%</div>
+          <div class="hero__stat-label">Symptom Improvement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Wave divider -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:60px;">
+    <path d="M0 40 C240 80 480 0 720 40 C960 80 1200 0 1440 40 L1440 80 L0 80 Z" fill="rgba(255,255,255,0.55)"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ TRUST BAR ═══════════════ -->
+<section class="trust">
+  <div class="trust__inner">
+    <span class="trust__label">Referred by</span>
+    <div class="trust__logos">
+      <span class="trust__logo">UNC Health</span>
+      <div class="trust__divider"></div>
+      <span class="trust__logo">WakeMed</span>
+      <div class="trust__divider"></div>
+      <span class="trust__logo">Duke Health</span>
+      <div class="trust__divider"></div>
+      <span class="trust__logo">BlueCross NC</span>
+    </div>
+    <div class="trust__carf">
+      <span class="trust__carf-badge">CARF</span>
+      <span class="trust__carf-text">Accredited Facility</span>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<div class="wave-divider" style="background:var(--sand);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 30 C240 60 480 0 720 30 C960 60 1200 0 1440 30 L1440 60 L0 60 Z" fill="#EAE8F5"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ PROGRAMS ═══════════════ -->
+<section class="section section--lav" style="position:relative;">
+
+  <div class="programs-header container" data-reveal>
+    <p class="section-label">Our Programs</p>
+    <h2 class="section-head">Two programs.<br/>One team.<br/>Zero waitlists.</h2>
+    <p class="section-sub">PHP for full-day structured care. IOP for after-school intensive support. Both evidence-based. Both built for how teens actually live.</p>
+  </div>
+  <div class="programs-grid" data-stagger>
+    <!-- PHP Card -->
+    <div class="prog-card" data-stagger-child>
+      <div class="prog-card__header">
+        <div class="prog-card__icon">
+          <!-- Sun icon -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="7" fill="#B8E04A"/>
+            <line x1="14" y1="2" x2="14" y2="6" stroke="#1E3D34" stroke-width="2" stroke-linecap="round"/>
+            <line x1="14" y1="22" x2="14" y2="26" stroke="#1E3D34" stroke-width="2" stroke-linecap="round"/>
+            <line x1="2" y1="14" x2="6" y2="14" stroke="#1E3D34" stroke-width="2" stroke-linecap="round"/>
+            <line x1="22" y1="14" x2="26" y2="14" stroke="#1E3D34" stroke-width="2" stroke-linecap="round"/>
+            <line x1="5.5" y1="5.5" x2="8.3" y2="8.3" stroke="#1E3D34" stroke-width="2" stroke-linecap="round"/>
+            <line x1="19.7" y1="19.7" x2="22.5" y2="22.5" stroke="#1E3D34" stroke-width="2" stroke-linecap="round"/>
+            <line x1="5.5" y1="22.5" x2="8.3" y2="19.7" stroke="#1E3D34" stroke-width="2" stroke-linecap="round"/>
+            <line x1="19.7" y1="8.3" x2="22.5" y2="5.5" stroke="#1E3D34" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="pill pill--lime">Full Day</span>
+      </div>
+      <h3 class="prog-card__title">Partial Hospitalization<br/>(PHP)</h3>
+      <p class="prog-card__body">Five days a week, 9 a.m. – 3 p.m. Structured daily care for teens who need more than therapy — and can still go home each night.</p>
+      <ul class="prog-card__list">
+        <li>Group + individual therapy daily</li>
+        <li>Family session every week</li>
+        <li>Academic liaison on staff</li>
+        <li>Lunch + snacks provided</li>
+      </ul>
+      <a href="<?php echo esc_url(home_url('/programs/')); ?>#php" class="btn btn--primary">Learn About PHP</a>
+    </div>
+
+    <!-- IOP Card (featured) -->
+    <div class="prog-card prog-card--featured" data-stagger-child>
+      <div class="prog-card__header">
+        <div class="prog-card__icon" style="background:rgba(30,61,52,.08);">
+          <!-- Moon/evening icon -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M20 14 A8 8 0 1 1 10 6 A6 6 0 0 0 20 14Z" fill="#A89FD8"/>
+            <circle cx="22" cy="6" r="1.5" fill="#B8E04A"/>
+            <circle cx="24" cy="10" r="1" fill="#B8E04A"/>
+          </svg>
+        </div>
+        <span class="pill pill--forest">After School</span>
+      </div>
+      <h3 class="prog-card__title">Intensive Outpatient<br/>(IOP)</h3>
+      <p class="prog-card__body">Three afternoons a week, 3 – 6 p.m. Teens stay in school, stay at home, and get intensive therapeutic support.</p>
+      <ul class="prog-card__list">
+        <li>Group therapy core</li>
+        <li>Individual session weekly</li>
+        <li>Family session biweekly</li>
+        <li>Dinner provided</li>
+      </ul>
+      <a href="<?php echo esc_url(home_url('/programs/')); ?>#iop" class="btn btn--primary">Learn About IOP</a>
+    </div>
+
+    <!-- Med Management Card -->
+    <div class="prog-card" data-stagger-child>
+      <div class="prog-card__header">
+        <div class="prog-card__icon">
+          <!-- Pill/capsule icon -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="8" y="4" width="12" height="20" rx="6" fill="none" stroke="#1E3D34" stroke-width="2"/>
+            <rect x="8" y="14" width="12" height="10" rx="6" fill="#2C5F52"/>
+            <line x1="8" y1="14" x2="20" y2="14" stroke="#1E3D34" stroke-width="2"/>
+          </svg>
+        </div>
+        <span class="pill pill--lav">Add-on</span>
+      </div>
+      <h3 class="prog-card__title">Medication Management</h3>
+      <p class="prog-card__body">Board-certified psychiatrist for teens who benefit from pharmacological support alongside therapy.</p>
+      <ul class="prog-card__list">
+        <li>Adolescent-focused prescribing</li>
+        <li>Coordinates with your pediatrician</li>
+        <li>In-network with major plans</li>
+        <li>Monthly follow-ups</li>
+      </ul>
+      <a href="<?php echo esc_url(home_url('/programs/')); ?>#medmgmt" class="btn btn--secondary">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<div class="wave-divider" style="background:var(--pale-lav);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 30 C360 60 720 0 1080 30 C1260 45 1380 10 1440 20 L1440 60 L0 60 Z" fill="#F5F0E8"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ STATS ═══════════════ -->
+<section class="section">
+
+  <div class="container" data-reveal style="margin-bottom:3rem;">
+    <p class="section-label">What We Track</p>
+    <h2 class="section-head">82% of teens. 78% of families.</h2>
+  </div>
+  <div class="stats-grid" data-reveal>
+    <div class="stat-block">
+      <div class="stat-number"><span data-count="82" data-count-suffix="%">0%</span></div>
+      <p class="stat-desc">of teens show clinically significant symptom improvement by week 8.</p>
+      <!-- Stat illustration: growing plant -->
+      <div class="stat-block__illus">
+        <svg width="80" height="100" viewBox="0 0 80 100" fill="none">
+          <rect x="30" y="60" width="20" height="35" rx="4" fill="#2C5F52" opacity=".3"/>
+          <line x1="40" y1="60" x2="40" y2="30" stroke="#2C5F52" stroke-width="3" stroke-linecap="round" opacity=".4"/>
+          <ellipse cx="30" cy="28" rx="12" ry="16" fill="#B8E04A" opacity=".3" transform="rotate(-20 30 28)"/>
+          <ellipse cx="50" cy="24" rx="10" ry="14" fill="#B8E04A" opacity=".3" transform="rotate(20 50 24)"/>
+          <ellipse cx="40" cy="16" rx="9" ry="13" fill="#B8E04A" opacity=".4"/>
+        </svg>
+      </div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-number">78<span>%</span></div>
+      <p class="stat-desc">of families report improved communication at home after 6 weeks.</p>
+      <!-- Stat illustration: connected hearts -->
+      <div class="stat-block__illus">
+        <svg width="90" height="80" viewBox="0 0 90 80" fill="none">
+          <path d="M25 30 C25 20 35 15 40 25 C45 15 55 20 55 30 C55 45 40 55 40 55 C40 55 25 45 25 30Z" fill="#A89FD8" opacity=".25"/>
+          <path d="M50 40 C50 32 58 28 62 36 C66 28 74 32 74 40 C74 52 62 60 62 60 C62 60 50 52 50 40Z" fill="#B8E04A" opacity=".3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<div class="wave-divider" style="background:var(--sand);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 20 C180 50 360 0 540 25 C720 50 900 5 1080 25 C1260 45 1380 15 1440 30 L1440 60 L0 60 Z" fill="#E0EEEA"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ HOW IT WORKS ═══════════════ -->
+<section class="section section--sage" style="position:relative;">
+
+  <div class="steps-header" data-reveal>
+    <div>
+      <p class="section-label">How It Works</p>
+      <h2 class="section-head">Three steps. Then a plan.</h2>
+    </div>
+    <a href="<?php echo esc_url(home_url('/admissions/')); ?>" class="btn btn--primary">Start Now</a>
+  </div>
+  <div class="steps-grid" data-stagger>
+    <div class="step" data-stagger-child>
+      <div class="step__num">01</div>
+      <h3 class="step__title">Fill out the form</h3>
+      <p class="step__body">Takes 2 minutes. No medical details needed here — we discuss those by phone.</p>
+      <!-- Step illustration: form/clipboard -->
+      <div class="step__illus">
+        <svg width="60" height="70" viewBox="0 0 60 70" fill="none">
+          <rect x="10" y="8" width="40" height="55" rx="6" fill="#1E3D34" opacity=".15"/>
+          <rect x="18" y="4" width="24" height="8" rx="4" fill="#2C5F52" opacity=".2"/>
+          <line x1="20" y1="28" x2="40" y2="28" stroke="#B8E04A" stroke-width="2.5" stroke-linecap="round" opacity=".3"/>
+          <line x1="20" y1="38" x2="36" y2="38" stroke="#B8E04A" stroke-width="2.5" stroke-linecap="round" opacity=".3"/>
+          <line x1="20" y1="48" x2="32" y2="48" stroke="#B8E04A" stroke-width="2.5" stroke-linecap="round" opacity=".3"/>
+        </svg>
+      </div>
+    </div>
+    <div class="step" data-stagger-child>
+      <div class="step__num">02</div>
+      <h3 class="step__title">We call you</h3>
+      <p class="step__body">A real admissions coordinator calls within 1 business day — at your preferred time.</p>
+      <!-- Step illustration: phone -->
+      <div class="step__illus">
+        <svg width="50" height="65" viewBox="0 0 50 65" fill="none">
+          <rect x="10" y="5" width="30" height="55" rx="8" fill="#1E3D34" opacity=".15"/>
+          <rect x="14" y="12" width="22" height="36" rx="2" fill="#A89FD8" opacity=".15"/>
+          <circle cx="25" cy="56" r="3" fill="#2C5F52" opacity=".2"/>
+          <!-- speech lines -->
+          <path d="M42 20 Q50 18 48 12" stroke="#B8E04A" stroke-width="2" stroke-linecap="round" fill="none" opacity=".3"/>
+          <path d="M44 26 Q52 24 50 18" stroke="#B8E04A" stroke-width="2" stroke-linecap="round" fill="none" opacity=".25"/>
+        </svg>
+      </div>
+    </div>
+    <div class="step" data-stagger-child>
+      <div class="step__num">03</div>
+      <h3 class="step__title">Start within 3–5 days</h3>
+      <p class="step__body">Most families begin within 3–5 business days. No waitlist, no months of limbo.</p>
+      <!-- Step illustration: calendar with check -->
+      <div class="step__illus">
+        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+          <rect x="8" y="12" width="44" height="40" rx="6" fill="#1E3D34" opacity=".15"/>
+          <rect x="8" y="12" width="44" height="12" rx="6" fill="#2C5F52" opacity=".2"/>
+          <line x1="18" y1="8" x2="18" y2="16" stroke="#2C5F52" stroke-width="2.5" stroke-linecap="round" opacity=".3"/>
+          <line x1="42" y1="8" x2="42" y2="16" stroke="#2C5F52" stroke-width="2.5" stroke-linecap="round" opacity=".3"/>
+          <path d="M22 38 L28 44 L40 32" stroke="#B8E04A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".4"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<div class="wave-divider" style="background:var(--pale-sage);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 40 C360 0 720 60 1080 20 C1260 0 1380 40 1440 30 L1440 60 L0 60 Z" fill="#A89FD8"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ PARENT QUOTE ═══════════════ -->
+<section class="quote-section" style="position:relative;">
+
+  <blockquote data-reveal>
+    "I didn't know if this was the right level of care. It was. They met my son exactly where he was."
+  </blockquote>
+  <cite data-reveal>— Parent of a JTree Health graduate</cite>
+</section>
+
+<!-- Wave divider -->
+<div class="wave-divider" style="background:var(--lavender);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 0 C360 60 720 0 1080 50 C1260 70 1380 20 1440 40 L1440 60 L0 60 Z" fill="#1E3D34"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ REFERRERS ═══════════════ -->
+<section class="section section--forest" style="position:relative;">
+
+  <div class="container" data-reveal style="margin-bottom:3rem;">
+    <p class="section-label" style="color:rgba(255,255,255,.35);">Who Refers to Us</p>
+    <h2 class="section-head section-head--white">Trusted by providers across the Triangle.</h2>
+    <p class="section-sub section-sub--white">Pediatricians, school counselors, and hospital discharge teams across Raleigh, Cary, Durham, and Chapel Hill refer their families here.</p>
+  </div>
+  <div class="referrers-grid" data-stagger>
+    <div class="ref-card" data-stagger-child>
+      <div class="ref-card__icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="8" width="24" height="18" rx="4" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"/>
+          <path d="M4 14 L16 22 L28 14" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="ref-card__title">Pediatricians</p>
+      <p class="ref-card__desc">Direct referral pathway with same-week intake.</p>
+    </div>
+    <div class="ref-card" data-stagger-child>
+      <div class="ref-card__icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="6" y="6" width="20" height="22" rx="3" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"/>
+          <line x1="10" y1="12" x2="22" y2="12" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="10" y1="17" x2="18" y2="17" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="10" y1="22" x2="20" y2="22" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="ref-card__title">School Counselors</p>
+      <p class="ref-card__desc">Academic liaison coordinates with your teen's school.</p>
+    </div>
+    <div class="ref-card" data-stagger-child>
+      <div class="ref-card__icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M16 4 L16 16 M10 10 L22 10 M10 16 L10 28 M22 16 L22 28" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="16" cy="10" r="6" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+        </svg>
+      </div>
+      <p class="ref-card__title">Therapists</p>
+      <p class="ref-card__desc">We collaborate with outpatient providers for continuity of care.</p>
+    </div>
+    <div class="ref-card" data-stagger-child>
+      <div class="ref-card__icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="10" width="24" height="16" rx="3" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"/>
+          <line x1="4" y1="16" x2="28" y2="16" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+          <rect x="8" y="6" width="16" height="4" rx="2" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+        </svg>
+      </div>
+      <p class="ref-card__title">Hospitals</p>
+      <p class="ref-card__desc">Warm handoff from inpatient. Coordinated step-down from day one.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<div class="wave-divider" style="background:var(--forest);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 35 C180 60 360 0 540 30 C720 60 900 0 1080 30 C1260 55 1380 15 1440 25 L1440 60 L0 60 Z" fill="#F5F0E8"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ LOCATION ═══════════════ -->
+<section class="section" style="position:relative;">
+
+  <div class="container" data-reveal>
+    <p class="section-label">Location</p>
+    <h2 class="section-head">Apex, NC — easy access from across the Triangle.</h2>
+    <p class="section-sub">Easy access from Raleigh, Cary, Durham, and Chapel Hill. Safe, welcoming clinic space designed for teens — not a hospital.</p>
+  </div>
+  <div class="location-tags" data-reveal>
+    <span class="location-tag">Apex</span>
+    <span class="location-tag">Raleigh</span>
+    <span class="location-tag">Cary</span>
+    <span class="location-tag">Durham</span>
+    <span class="location-tag">Chapel Hill</span>
+    <span class="location-tag">Holly Springs</span>
+    <span class="location-tag">Fuquay-Varina</span>
+    <span class="location-tag">Morrisville</span>
+    <span class="location-tag">Wake Forest</span>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<div class="wave-divider" style="background:var(--sand);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 25 C300 55 600 0 900 35 C1100 60 1300 10 1440 30 L1440 60 L0 60 Z" fill="#EAE8F5"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ FOOTER CTA ═══════════════ -->
+<section class="footer-cta" style="position:relative;">
+
+  <h2 class="footer-cta__title" data-reveal>Your teen doesn't have to keep struggling. Neither do you.</h2>
+  <p class="footer-cta__sub" data-reveal>Fill out the form and we'll call you within one business day. Two minutes. No commitment. Just a conversation.</p>
+  <div class="footer-cta__btns" data-reveal>
+    <a href="<?php echo esc_url(home_url('/admissions/')); ?>" class="btn btn--primary btn--lg">Start the Conversation</a>
+    <a href="tel:9192764005" class="btn btn--secondary btn--lg">Call (919) 276-4005</a>
+  </div>
+</section>
+
+<!-- Wave divider -->
+<div class="wave-divider" style="background:var(--pale-lav);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 20 C480 60 960 0 1440 40 L1440 60 L0 60 Z" fill="#1E3D34"/>
+  </svg>
+</div>
+
+<?php get_footer(); ?>

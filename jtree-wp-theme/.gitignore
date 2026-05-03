@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# WP Engine / SFTP artifacts
+.wpe/
+
+# Local builds
+*.zip
+!gtm-container.json
+
+# Logs
+*.log
+
+# Generated images / cache (keep source assets in git)
+assets/cache/
+
+# Optional: OS metadata
+Thumbs.db
+ehthumbs.db

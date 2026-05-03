@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx vitest:*)",
+      "Bash(npx skills:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(grep -rn \"World-class\\\\|Built different\\\\|numbers speak\\\\|good company\\\\|heart of the Triangle\\\\|doesn't need to keep\\\\|Start the Process\\\\|Start the Admissions\\\\|Submit this form\\\\|We call you back\\\\|Free intake assessment\\\\|what it costs to not get\\\\|Three things we do\\\\|stay grounded\\\\|show up genuine\\\\|measure growth\\\\|behind the work\\\\|chose this work on purpose\\\\|We meet it\\\\|deep roots, a long timeline, and\\\\|within 8 weeks\\\\|Three steps. That's it\\\\|Start within the week\\\\|After-school support. Life still\\\\|Full-day care for teens who need more\\\\|don't require 24-hour\\\\|What we treat in PHP\\\\|no out-of-pocket surprises\\\\|Same in-network carriers\\\\|Add-On Service\\\\|Ready to find the right level\\\\|Trusted by$\\\\|Real help.*for real\" /Users/emiranda/Projects/jtree-health-brand/website/jtree-wp-theme/templates/ /Users/emiranda/Projects/jtree-health-brand/website/preview/)",
+      "WebSearch",
+      "WebFetch(domain:www.keragon.com)",
+      "Bash(gh auth *)"
+    ]
+  }
+}

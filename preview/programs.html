@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Teen PHP &amp; IOP Programs | JTree Health — Apex, NC</title>
+<meta name="robots" content="index, follow"/>
+<meta name="description" content="JTree Health offers PHP (30 hrs/week) and IOP (9 hrs/week) mental health programs for teens ages 10–17 in Apex, NC. After-school and full-day options. No waitlist."/>
+<link rel="canonical" href="https://jtreehealth.com/programs"/>
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="JTree Health"/>
+<meta property="og:title" content="Teen PHP &amp; IOP Programs | JTree Health — Apex, NC"/>
+<meta property="og:description" content="PHP and IOP mental health programs for teens. Full-day and after-school options. No waitlist. CARF accredited."/>
+<meta property="og:url" content="https://jtreehealth.com/programs"/>
+<meta property="og:image" content="https://jtreehealth.com/og-image.jpg"/>
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Teen PHP &amp; IOP Programs | JTree Health"/>
+<meta name="twitter:description" content="PHP and IOP mental health programs for teens in Apex, NC. No waitlist."/>
+<meta name="twitter:image" content="https://jtreehealth.com/og-image.jpg"/>
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jtreehealth.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Programs", "item": "https://jtreehealth.com/programs" }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+/* ── PROGRAM HERO ──────────────────────────────── */
+.prog-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+}
+.prog-hero__title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(2.8rem,5.5vw,5rem);
+  line-height: 1.0;
+  letter-spacing: -.04em;
+  color: var(--forest);
+  margin-bottom: 1.25rem;
+}
+.prog-hero__title span { color: var(--lavender); }
+.prog-hero__sub { font-size: 1.1rem; color: rgba(42,42,42,.6); line-height: 1.7; margin-bottom: 2rem; max-width: 480px; }
+.prog-hero__nav {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.prog-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .65rem 1.25rem;
+  border-radius: 9999px;
+  border: 2px solid rgba(30,61,52,.15);
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--deep-sage);
+  background: transparent;
+  transition: all .2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.prog-tab:hover, .prog-tab--active {
+  background: var(--forest);
+  color: #fff;
+  border-color: var(--forest);
+}
+.prog-hero__img {
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, var(--pale-lav) 0%, var(--pale-sage) 100%);
+  border-radius: 24px;
+  border: 2px solid rgba(30,61,52,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  box-shadow: 20px 20px 0 rgba(30,61,52,.06);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── PROGRAM CARD FULL ─────────────────────────── */
+.prog-detail {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 5rem;
+  align-items: start;
+}
+.prog-detail--reverse { direction: rtl; }
+.prog-detail--reverse > * { direction: ltr; }
+
+.prog-detail__label { margin-bottom: .75rem; }
+.prog-detail__title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(2.2rem,4vw,3.5rem);
+  line-height: 1.05;
+  letter-spacing: -.04em;
+  color: var(--forest);
+  margin-bottom: 1rem;
+}
+.prog-detail__subtitle { font-size: 1.05rem; color: rgba(42,42,42,.65); line-height: 1.7; margin-bottom: 2rem; }
+
+.readiness {
+  margin-bottom: 2rem;
+}
+.readiness__title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--forest);
+  margin-bottom: .75rem;
+}
+.readiness__list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.readiness__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  font-size: .9rem;
+  color: rgba(42,42,42,.7);
+  line-height: 1.5;
+}
+.readiness__list li::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: var(--pale-lime);
+  border: 1.5px solid rgba(30,61,52,.15);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: .1rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%232C5F52' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.ins-note {
+  font-size: .82rem;
+  color: rgba(42,42,42,.45);
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(30,61,52,.08);
+  margin-top: 1.25rem;
+  line-height: 1.6;
+}
+
+/* ── SCHEDULE CARD ─────────────────────────────── */
+.schedule-card {
+  background: var(--sand);
+  border-radius: 20px;
+  border: 2px solid rgba(30,61,52,.08);
+  padding: 2rem;
+  position: sticky;
+  top: 100px;
+}
+.schedule-card__title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--forest);
+  margin-bottom: .35rem;
+}
+.schedule-card__days {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1.5px solid rgba(30,61,52,.08);
+}
+.schedule-row {
+  display: flex;
+  gap: 1rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid rgba(30,61,52,.05);
+  font-size: .85rem;
+  align-items: baseline;
+}
+.schedule-row:last-of-type { border-bottom: none; }
+.schedule-time { color: var(--deep-sage); font-weight: 600; min-width: 88px; font-size: .78rem; }
+.schedule-desc { color: rgba(42,42,42,.65); line-height: 1.4; }
+.schedule-extras {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1.5px solid rgba(30,61,52,.08);
+}
+.schedule-extra {
+  font-size: .8rem;
+  color: rgba(42,42,42,.55);
+  padding: .3rem 0;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.schedule-extra::before { content: '+'; color: var(--lime); font-weight: 700; }
+
+/* ── TREATS GRID ───────────────────────────────── */
+.treats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: 1.5rem;
+}
+.treat-tag {
+  background: white;
+  border: 1.5px solid rgba(30,61,52,.12);
+  color: var(--forest);
+  font-size: .78rem;
+  font-weight: 600;
+  padding: .4rem .9rem;
+  border-radius: 9999px;
+  transition: all .2s;
+}
+.treat-tag:hover { background: var(--pale-sage); border-color: var(--deep-sage); }
+
+/* ── MED MGMT ──────────────────────────────────── */
+.med-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  max-width: 1280px;
+  margin: 2rem auto 0;
+}
+.med-card {
+  background: rgba(255,255,255,.5);
+  border: 1.5px solid rgba(30,61,52,.1);
+  border-radius: 16px;
+  padding: 1.75rem;
+}
+.med-card__title { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--forest); margin-bottom: .5rem; }
+.med-card__body  { font-size: .88rem; color: rgba(42,42,42,.6); line-height: 1.65; }
+
+/* ── HERO ILLUSTRATION (inside the blob area) ─── */
+.prog-hero__illus-scene {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ── STATS ROW ────────────────────────────────── */
+.prog-stats {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding: 3rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.prog-stat {
+  text-align: center;
+}
+.prog-stat__num {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 2.4rem;
+  color: var(--forest);
+  line-height: 1;
+}
+.prog-stat__label {
+  font-size: .75rem;
+  font-weight: 600;
+  color: rgba(42,42,42,.45);
+  margin-top: .35rem;
+  max-width: 120px;
+}
+
+@media (max-width: 1024px) {
+  .prog-hero { grid-template-columns: 1fr; }
+  .prog-hero__img { display: none; }
+  .prog-detail { grid-template-columns: 1fr; }
+  .prog-detail--reverse { direction: ltr; }
+  .schedule-card { position: static; }
+  .med-grid { grid-template-columns: 1fr; }
+  .prog-stats { gap: 2rem; flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<div class="crisis-bar">
+  If your teen is in crisis, call or text&nbsp;<strong>988</strong>&nbsp;&nbsp;&middot;&nbsp;&nbsp;Crisis Text Line: text&nbsp;<strong>HOME</strong>&nbsp;to&nbsp;<strong>741741</strong>
+</div>
+
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">jtree health<span>.</span></a>
+    <div class="nav__links">
+      <a href="programs.html" class="nav__link nav__link--active">Programs</a>
+      <a href="for-parents.html" class="nav__link">Who We Help</a>
+      <a href="what-we-treat.html" class="nav__link">Conditions</a>
+      <a href="about.html" class="nav__link">About</a>
+      <a href="insurance.html" class="nav__link">Insurance</a>
+    </div>
+    <div class="nav__right">
+      <a href="tel:9192764005" class="nav__phone">(919) 276-4005</a>
+      <a href="admissions.html" class="btn btn--primary">Start Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="spike-bg" style="position:relative; overflow:hidden;">
+
+  <div class="prog-hero">
+    <div>
+      <p class="page-hero__eyebrow anim-1">Ages 10–17 · Apex, NC · CARF Accredited</p>
+      <h1 class="prog-hero__title anim-2">
+        Two levels<br/>of care.<br/><span>One team.<br/>No waitlist.</span>
+      </h1>
+      <p class="prog-hero__sub anim-3">Evidence-based PHP and IOP for teens ages 10–17 in Apex, NC. Structured intensive care that fits around your family — not the other way around.</p>
+      <div class="prog-hero__nav anim-4">
+        <a href="#php" class="prog-tab prog-tab--active">PHP Program</a>
+        <a href="#iop" class="prog-tab">IOP Program</a>
+        <a href="#medmgmt" class="prog-tab">Medication Management</a>
+      </div>
+    </div>
+    <div class="prog-hero__img anim-5">
+      <!-- Hero scene illustration: tree with geometric shapes -->
+      <div class="prog-hero__illus-scene">
+        <svg width="100%" height="100%" viewBox="0 0 400 300" fill="none" preserveAspectRatio="xMidYMid slice">
+          <!-- Ground -->
+          <ellipse cx="200" cy="270" rx="140" ry="18" fill="#2C5F52" opacity=".12"/>
+          <!-- Trunk -->
+          <rect x="188" y="170" width="24" height="90" rx="6" fill="#1E3D34" opacity=".2"/>
+          <!-- Canopy layers -->
+          <circle cx="200" cy="130" r="55" fill="#2C5F52" opacity=".15"/>
+          <circle cx="170" cy="145" r="40" fill="#B8E04A" opacity=".18"/>
+          <circle cx="230" cy="140" r="42" fill="#A89FD8" opacity=".15"/>
+          <circle cx="200" cy="105" r="38" fill="#2C5F52" opacity=".12"/>
+          <!-- Small decorative leaves -->
+          <ellipse cx="145" cy="120" rx="12" ry="18" fill="#B8E04A" opacity=".2" transform="rotate(-20 145 120)"/>
+          <ellipse cx="255" cy="115" rx="10" ry="16" fill="#A89FD8" opacity=".18" transform="rotate(25 255 115)"/>
+          <!-- Sun rays -->
+          <circle cx="320" cy="60" r="22" fill="#B8E04A" opacity=".2"/>
+          <circle cx="320" cy="60" r="12" fill="#B8E04A" opacity=".15"/>
+          <!-- Birds -->
+          <path d="M80 70 Q90 55 100 68" stroke="#1E3D34" stroke-width="2" stroke-linecap="round" fill="none" opacity=".15"/>
+          <path d="M110 55 Q118 42 126 54" stroke="#1E3D34" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".12"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Wave divider: hero to trust -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:60px;">
+    <path d="M0 40 C240 80 480 0 720 40 C960 80 1200 0 1440 40 L1440 80 L0 80 Z" fill="rgba(255,255,255,0.55)"/>
+  </svg>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust__inner">
+    <span class="trust__label">In-network with</span>
+    <div class="trust__logos">
+      <span class="trust__logo">BCBS</span>
+      <span class="trust__logo">Cigna</span>
+      <span class="trust__logo">Aetna</span>
+      <span class="trust__logo">UHC</span>
+      <span class="trust__logo">Tricare</span>
+    </div>
+    <div class="trust__divider"></div>
+    <div class="trust__carf"><span class="trust__carf-badge">CARF</span><span class="trust__carf-text">Accredited Facility</span></div>
+  </div>
+</div>
+
+<!-- Stats row -->
+<div class="prog-stats" data-stagger>
+  <div class="prog-stat" data-stagger-child>
+    <div class="prog-stat__num"><span data-count="30" data-count-suffix="hrs">0hrs</span></div>
+    <p class="prog-stat__label">Clinical care per week in PHP</p>
+  </div>
+  <div class="prog-stat" data-stagger-child>
+    <div class="prog-stat__num"><span data-count="9" data-count-suffix="hrs">0hrs</span></div>
+    <p class="prog-stat__label">Group therapy per week in IOP</p>
+  </div>
+  <div class="prog-stat" data-stagger-child>
+    <div class="prog-stat__num"><span data-count="5" data-count-suffix="">0</span></div>
+    <p class="prog-stat__label">Major insurers in-network</p>
+  </div>
+  <div class="prog-stat" data-stagger-child>
+    <div class="prog-stat__num"><span>3–5 days</span></div>
+    <p class="prog-stat__label">Typical time from call to start</p>
+  </div>
+</div>
+
+<!-- Wave divider: stats to PHP -->
+<div class="wave-divider" style="background:var(--sand);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 30 C360 60 720 0 1080 30 C1260 45 1380 10 1440 20 L1440 60 L0 60 Z" fill="#EAE8F5"/>
+  </svg>
+</div>
+
+<!-- PHP -->
+<section id="php" class="section section--lav" style="scroll-margin-top:80px; position:relative;">
+
+  <div class="prog-detail">
+    <div>
+      <div class="prog-detail__label" data-reveal><span class="pill pill--lav">PHP Program</span></div>
+      <h2 class="prog-detail__title" data-reveal>Full-day care. Home each evening.</h2>
+      <p class="prog-detail__subtitle" data-reveal>PHP is a structured day program — 5 days a week, 9am to 3pm — for teens who need intensive mental health care but can go home each evening. Teens receive 30 hours of clinical care per week, with academic support built in.</p>
+
+      <div class="readiness" data-reveal>
+        <p class="readiness__title">Your teen may be ready for PHP if:</p>
+        <ul class="readiness__list" data-stagger>
+          <li data-stagger-child>Weekly therapy alone isn't making a difference</li>
+          <li data-stagger-child>They've been discharged from inpatient and need step-down support</li>
+          <li data-stagger-child>They're in crisis but safe enough to come home each evening</li>
+          <li data-stagger-child>School attendance has been severely impacted</li>
+          <li data-stagger-child>Safety concerns are present but manageable in a structured setting</li>
+        </ul>
+      </div>
+
+      <div data-reveal>
+        <p style="font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--forest);margin-bottom:1rem;">We work with teens experiencing:</p>
+        <div class="treats-grid" data-stagger>
+          <span class="treat-tag" data-stagger-child>Anxiety</span>
+          <span class="treat-tag" data-stagger-child>Depression</span>
+          <span class="treat-tag" data-stagger-child>OCD</span>
+          <span class="treat-tag" data-stagger-child>ADHD</span>
+          <span class="treat-tag" data-stagger-child>Trauma / PTSD</span>
+          <span class="treat-tag" data-stagger-child>Self-Harm</span>
+          <span class="treat-tag" data-stagger-child>Suicidal Ideation</span>
+          <span class="treat-tag" data-stagger-child>Co-occurring Disorders</span>
+        </div>
+      </div>
+
+      <p class="ins-note" data-reveal>Covered by most major insurance plans. We're in-network with BCBS, Cigna, Aetna, UHC, and Tricare — and we verify your benefits before you start, so there are no surprises.</p>
+
+      <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;" data-reveal>
+        <a href="admissions.html" class="btn btn--primary btn--lg">Start Admissions →</a>
+        <a href="tel:9192764005" class="btn btn--secondary btn--lg">Talk to Our Team</a>
+      </div>
+    </div>
+
+    <div class="schedule-card" data-reveal="right">
+      <p class="schedule-card__title">PHP Daily Schedule</p>
+      <p class="schedule-card__days">Monday – Friday · 9:00am – 3:00pm</p>
+      <div class="schedule-row"><span class="schedule-time">9:00–10:00</span><span class="schedule-desc">Morning check-in + mindfulness</span></div>
+      <div class="schedule-row"><span class="schedule-time">10:00–11:30</span><span class="schedule-desc">Skills group (DBT / CBT / ACT)</span></div>
+      <div class="schedule-row"><span class="schedule-time">11:30–12:00</span><span class="schedule-desc">Lunch (provided)</span></div>
+      <div class="schedule-row"><span class="schedule-time">12:00–1:30</span><span class="schedule-desc">Process group</span></div>
+      <div class="schedule-row"><span class="schedule-time">1:30–2:30</span><span class="schedule-desc">Expressive arts / elective group</span></div>
+      <div class="schedule-row"><span class="schedule-time">2:30–3:00</span><span class="schedule-desc">Daily wrap + goals</span></div>
+      <div class="schedule-extras">
+        <div class="schedule-extra">Individual therapy: 2× per week</div>
+        <div class="schedule-extra">Family therapy: 1× per week</div>
+        <div class="schedule-extra">Medication management: as needed</div>
+        <div class="schedule-extra">Licensed teacher on-site</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider: PHP to IOP -->
+<div class="wave-divider" style="background:var(--pale-lav);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 20 C180 50 360 0 540 25 C720 50 900 5 1080 25 C1260 45 1380 15 1440 30 L1440 60 L0 60 Z" fill="#F5F0E8"/>
+  </svg>
+</div>
+
+<!-- IOP -->
+<section id="iop" class="section" style="scroll-margin-top:80px; position:relative;">
+
+  <div class="prog-detail prog-detail--reverse">
+    <div class="schedule-card" data-reveal="left">
+      <p class="schedule-card__title">IOP Daily Schedule</p>
+      <p class="schedule-card__days">Tue / Wed / Thu · 3:00pm – 6:00pm</p>
+      <div class="schedule-row"><span class="schedule-time">3:00–3:30</span><span class="schedule-desc">Check-in + mindfulness</span></div>
+      <div class="schedule-row"><span class="schedule-time">3:30–5:00</span><span class="schedule-desc">Skills group (DBT / CBT / ACT)</span></div>
+      <div class="schedule-row"><span class="schedule-time">5:00–5:30</span><span class="schedule-desc">Snack + informal group</span></div>
+      <div class="schedule-row"><span class="schedule-time">5:30–6:00</span><span class="schedule-desc">Process group + wrap</span></div>
+      <div class="schedule-extras">
+        <div class="schedule-extra">Individual therapy: 1× per week</div>
+        <div class="schedule-extra">Family therapy: 1× every 2 weeks</div>
+        <div class="schedule-extra">Teen stays in school full-time</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="prog-detail__label" data-reveal><span class="pill pill--lime">IOP Program</span></div>
+      <h2 class="prog-detail__title" data-reveal>After school. Life stays intact.</h2>
+      <p class="prog-detail__subtitle" data-reveal>Three afternoons a week, 3–6 p.m. Teens stay in school, stay at home, and stay connected to their lives — while getting the intensive support they actually need.</p>
+
+      <div class="readiness" data-reveal>
+        <p class="readiness__title">Your teen may be ready for IOP if:</p>
+        <ul class="readiness__list" data-stagger>
+          <li data-stagger-child>Their current therapist recommends a higher level of care</li>
+          <li data-stagger-child>They're stepping down from PHP and need continued structure</li>
+          <li data-stagger-child>Symptoms are present but school attendance is manageable</li>
+          <li data-stagger-child>They need intensive support but they're ready to stay in school</li>
+        </ul>
+      </div>
+
+      <div data-reveal>
+        <div class="treats-grid" data-stagger>
+          <span class="treat-tag" data-stagger-child>Anxiety</span>
+          <span class="treat-tag" data-stagger-child>Depression</span>
+          <span class="treat-tag" data-stagger-child>OCD</span>
+          <span class="treat-tag" data-stagger-child>ADHD</span>
+          <span class="treat-tag" data-stagger-child>Trauma / PTSD</span>
+          <span class="treat-tag" data-stagger-child>Self-Harm</span>
+          <span class="treat-tag" data-stagger-child>Mood Disorders</span>
+          <span class="treat-tag" data-stagger-child>Co-occurring Disorders</span>
+        </div>
+      </div>
+
+      <p class="ins-note" data-reveal>Covered by most major insurance plans. We're in-network with BCBS, Cigna, Aetna, UHC, and Tricare — and we verify your benefits before you start, so there are no surprises.</p>
+
+      <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;" data-reveal>
+        <a href="admissions.html" class="btn btn--primary btn--lg">Start Admissions →</a>
+        <a href="tel:9192764005" class="btn btn--secondary btn--lg">Talk to Our Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider: IOP to Med Mgmt -->
+<div class="wave-divider" style="background:var(--sand);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 25 C240 55 480 5 720 30 C960 55 1200 10 1440 35 L1440 60 L0 60 Z" fill="#E0EEEA"/>
+  </svg>
+</div>
+
+<!-- MEDICATION MANAGEMENT -->
+<section id="medmgmt" class="section section--sage" style="scroll-margin-top:80px; position:relative;">
+
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="max-width:700px;margin-bottom:3rem;">
+      <span class="pill pill--lav" data-reveal style="margin-bottom:1rem;display:inline-block;">Integrated Psychiatric Care</span>
+      <h2 class="section-head" data-reveal>Medication Management</h2>
+      <p class="section-sub" data-reveal>For teens who benefit from psychiatric evaluation and medication support. Our psychiatrists are embedded in the treatment team — not a separate referral.</p>
+    </div>
+    <div class="med-grid" data-stagger>
+      <div class="med-card" data-stagger-child>
+        <h3 class="med-card__title">Board-Certified Psychiatrists</h3>
+        <p class="med-card__body">Child and adolescent psychiatrists with deep experience in teen mental health, trauma-informed care, and complex presentations.</p>
+      </div>
+      <div class="med-card" data-stagger-child>
+        <h3 class="med-card__title">Pharmacogenomic Testing</h3>
+        <p class="med-card__body">Genetic testing that identifies how your teen's body metabolizes specific medications — removing the guesswork from prescribing decisions.</p>
+      </div>
+      <div class="med-card" data-stagger-child>
+        <h3 class="med-card__title">Coordinated with Therapy</h3>
+        <p class="med-card__body">Psychiatric and therapy teams meet weekly to align on treatment goals. Your teen's care plan is genuinely integrated, not siloed.</p>
+      </div>
+      <div class="med-card" data-stagger-child>
+        <h3 class="med-card__title">Ongoing Monitoring</h3>
+        <p class="med-card__body">As your teen progresses, dosing is reviewed and adjusted carefully — always with your input. No changes happen without your knowledge.</p>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;" data-reveal>
+      <a href="admissions.html" class="btn btn--primary btn--lg">Ask About Medication Management →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Wave divider: Med Mgmt to Footer CTA -->
+<div class="wave-divider" style="background:var(--pale-sage);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 30 C360 60 720 0 1080 30 C1260 45 1380 10 1440 20 L1440 60 L0 60 Z" fill="#EAE8F5"/>
+  </svg>
+</div>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta" style="position:relative; overflow:hidden;">
+
+  <p class="footer-cta__title" data-reveal>Not sure if PHP or IOP is the right fit?</p>
+  <p class="footer-cta__sub" data-reveal>That's what our admissions call is for. We'll walk you through both programs and help you decide together — no commitment required.</p>
+  <div class="footer-cta__btns" data-reveal>
+    <a href="admissions.html" class="btn btn--primary btn--lg">Start the Conversation</a>
+    <a href="tel:9192764005" class="btn btn--secondary btn--lg">(919) 276-4005</a>
+  </div>
+</div>
+
+<!-- Wave divider: Footer CTA to Footer -->
+<div class="wave-divider" style="background:var(--pale-lav);">
+  <svg viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none" style="height:50px;">
+    <path d="M0 20 C480 60 960 0 1440 40 L1440 60 L0 60 Z" fill="#1E3D34"/>
+  </svg>
+</div>
+
+<footer class="footer">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">jtree health<span>.</span></div>
+      <p class="footer__tagline">Adolescent PHP &amp; IOP in Apex, NC. Named for a desert plant — and for a brother we lost too soon.</p>
+      <div class="footer__crisis"><p class="footer__crisis-label">Need Immediate Help?</p><p class="footer__crisis-num">Call or text 988</p></div>
+    </div>
+    <div>
+      <p class="footer__col-title">Programs</p>
+      <ul class="footer__links">
+        <li><a href="#php">PHP Program</a></li>
+        <li><a href="#iop">IOP Program</a></li>
+        <li><a href="#medmgmt">Medication Management</a></li>
+        <li><a href="admissions.html">Admissions</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer__col-title">Who We Help</p>
+      <ul class="footer__links">
+        <li><a href="for-teens.html">For Teens</a></li>
+        <li><a href="for-parents.html">For Parents</a></li>
+        <li><a href="what-we-treat.html">Conditions</a></li>
+        <li><a href="insurance.html">Insurance</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer__col-title">Company</p>
+      <ul class="footer__links">
+        <li><a href="about.html">About JTree</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="crisis.html">Crisis Resources</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">&copy; 2026 JTree Health &middot; Apex, NC &middot; If in crisis, call or text <strong style="color:rgba(255,255,255,.4)">988</strong></p>
+    <div class="footer__legal"><a href="privacy.html">Privacy</a><a href="crisis.html">Crisis Resources</a></div>
+  </div>
+</footer>
+
+<script src="animations.js"></script>
+</body>
+</html>

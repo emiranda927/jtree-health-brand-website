@@ -1,0 +1,306 @@
+<?php
+/**
+ * Template Name: Thank You
+ */
+// GA4: fire inquiry_submitted conversion on thank-you pageview
+add_action('wp_head', function() {
+?>
+<script>window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'inquiry_submitted' });</script>
+<?php
+}, 1);
+get_header();
+?>
+
+<style>
+  /* ── Thank You page–specific styles ── */
+
+  .ty-main {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 1.5rem;
+    background: var(--sand);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Faint spike background on the thank-you hero area */
+  .ty-main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--spike-bg);
+    background-size: 480px 480px;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+
+  .ty-card {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    width: 100%;
+    text-align: center;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  /* Check badge */
+  .ty-check {
+    width: 88px;
+    height: 88px;
+    background: var(--lime);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    box-shadow: 4px 4px 0 var(--forest);
+    position: relative;
+  }
+
+  .ty-check svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ty-headline {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    line-height: 1.1;
+    color: var(--forest);
+    margin-bottom: 1rem;
+  }
+
+  .ty-sub {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--charcoal);
+    opacity: 0.7;
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+  }
+
+  /* Next steps panel */
+  .ty-next {
+    background: var(--pale-lavender, #EAE8F5);
+    border-radius: 16px;
+    border: 1px solid rgba(30, 61, 52, 0.1);
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ty-next__title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: var(--forest);
+    margin-bottom: 1.75rem;
+  }
+
+  .ty-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .ty-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .ty-step__num {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    background: var(--forest);
+    color: #fff;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.875rem;
+  }
+
+  .ty-step:nth-child(2) .ty-step__num { background: var(--deep-sage); }
+  .ty-step:nth-child(3) .ty-step__num { background: #5a8a7a; }
+
+  .ty-step__label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    color: var(--forest);
+    margin-bottom: 0.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .ty-step__desc {
+    font-size: 0.875rem;
+    color: var(--charcoal);
+    opacity: 0.65;
+    line-height: 1.6;
+  }
+
+  /* CTA group */
+  .ty-cta-label {
+    font-size: 0.8125rem;
+    color: var(--charcoal);
+    opacity: 0.5;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .ty-phone-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--forest);
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .ty-phone-btn:hover {
+    background: var(--deep-sage);
+    transform: translateY(-1px);
+  }
+
+  .ty-phone-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Crisis bar at bottom */
+  .ty-crisis {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(30, 61, 52, 0.12);
+  }
+
+  .ty-crisis__label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    opacity: 0.4;
+    margin-bottom: 0.5rem;
+  }
+
+  .ty-crisis__text {
+    font-size: 0.875rem;
+    color: var(--charcoal);
+    opacity: 0.6;
+    line-height: 1.6;
+  }
+
+  .ty-crisis__text strong {
+    color: var(--forest);
+    opacity: 1;
+  }
+
+  /* Footer for thank-you */
+  .ty-footer {
+    background: var(--forest);
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+  }
+
+  .ty-footer p {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .ty-footer strong {
+    color: rgba(255,255,255,0.55);
+  }
+
+  @media (max-width: 480px) {
+    .ty-next { padding: 1.75rem 1.25rem; }
+    .ty-phone-btn { font-size: 1rem; padding: 0.875rem 2rem; }
+  }
+</style>
+
+<!-- Main confirmation -->
+<main class="ty-main">
+
+  <div class="ty-card">
+
+    <!-- Check badge with small plant/growth element -->
+    <div class="ty-check">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 21L16 29L32 13" stroke="#1E3D34" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <!-- Small plant/sprout near the checkmark -->
+    </div>
+
+    <h1 class="ty-headline" data-reveal>We received your inquiry.</h1>
+    <p class="ty-sub" data-reveal>Thank you for reaching out. Our admissions team will call you within one business day at your preferred time — no commitment required.</p>
+
+    <!-- What happens next -->
+    <div class="ty-next" data-reveal>
+      <p class="ty-next__title">What happens next</p>
+      <div class="ty-steps" data-stagger>
+        <div class="ty-step" data-stagger-child>
+          <div class="ty-step__num">1</div>
+          <div>
+            <p class="ty-step__label">We call you</p>
+            <p class="ty-step__desc">A real admissions coordinator — not a call center — will reach out within 1 business day at your preferred time.</p>
+          </div>
+        </div>
+        <div class="ty-step" data-stagger-child>
+          <div class="ty-step__num">2</div>
+          <div>
+            <p class="ty-step__label">Free intake assessment</p>
+            <p class="ty-step__desc">We talk through your teen's needs together and determine the right level of care. No forms, no pressure.</p>
+          </div>
+        </div>
+        <div class="ty-step" data-stagger-child>
+          <div class="ty-step__num">3</div>
+          <div>
+            <p class="ty-step__label">Start within the week</p>
+            <p class="ty-step__desc">Most families begin within 3–5 business days of first contact. No waitlist.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <p class="ty-cta-label" data-reveal>Can't wait? Call us directly:</p>
+    <a href="tel:9192764005" class="ty-phone-btn" data-reveal>
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="white"/>
+      </svg>
+      (919) 276-4005
+    </a>
+
+    <!-- Crisis resources -->
+    <div class="ty-crisis" data-reveal>
+      <p class="ty-crisis__label">Crisis Resources</p>
+      <p class="ty-crisis__text">
+        If your teen is in immediate danger, call <strong>988</strong> (Suicide &amp; Crisis Lifeline),
+        text <strong>HOME</strong> to <strong>741741</strong> (Crisis Text Line),
+        or call <strong>911</strong>.
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="ty-footer">
+  <p>&copy; 2026 JTree Health &nbsp;&middot;&nbsp; If in crisis, call or text <strong>988</strong></p>
+</footer>
+
+<?php get_footer(); ?>

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jtree-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "3456", "/Users/emiranda/Projects/jtree-health-brand/website/preview"],
+      "port": 3456
+    }
+  ]
+}
