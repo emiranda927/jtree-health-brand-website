@@ -12,9 +12,7 @@ export default async function handler(
   try {
     const count = await countRecentLeads(TWENTY_FOUR_HOURS_MS);
 
-    logger.info("Watchdog check", {
-      message: `Lead count in last 24h: ${count}`,
-    });
+    logger.info(`Watchdog check — lead count in last 24h: ${count}`);
 
     if (count === 0) {
       await sendAlertEmail(

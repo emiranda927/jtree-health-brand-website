@@ -15,6 +15,6 @@
     "lib": ["ES2022"],
     "types": ["node"]
   },
-  "include": ["api/**/*.ts", "lib/**/*.ts", "test/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["api/**/*.ts", "lib/**/*.ts"],
+  "exclude": ["node_modules", "dist", "test"]
 }
