@@ -1,0 +1,557 @@
+/* ──────────────────────────────────────────────────────────────────
+   JTree Health · Home page · editorial layer
+   Layered on top of site.css. Scoped under .home-v2.
+   ───────────────────────────────────────────────────────────────── */
+
+.home-v2 { color: var(--jth-charcoal); }
+
+/* Container override — wider, with more breathing room */
+.home-v2 .container { max-width: 1240px; padding: 0 32px; }
+@media (max-width: 880px) { .home-v2 .container { padding: 0 20px; } }
+
+/* ────────────────────────────────────────────────
+   HERO — editorial spread
+   ──────────────────────────────────────────────── */
+
+.h-hero {
+  position: relative;
+  padding: 72px 0 96px;
+  overflow: hidden;
+}
+.h-hero::before {
+  /* soft horizontal rule below the nav anchoring the spread */
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--jth-rule) 18%, var(--jth-rule) 82%, transparent);
+}
+.h-hero-grid {
+  position: relative; z-index: 2;
+  max-width: 1240px; margin: 0 auto; padding: 0 32px;
+  display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 88px; align-items: end;
+}
+@media (max-width: 980px) {
+  .h-hero { padding: 48px 0 64px; }
+  .h-hero-grid { grid-template-columns: 1fr; gap: 48px; padding: 0 20px; }
+}
+
+.h-hero-kicker {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--font-mono); font-weight: 500; font-size: 12px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--jth-fg-muted);
+  margin-bottom: 36px;
+}
+.h-hero-kicker::before {
+  content: ""; width: 32px; height: 1px; background: var(--jth-deep-green); display: block;
+}
+.h-hero-kicker strong { color: var(--jth-deep-green); font-weight: 600; }
+
+.h-hero h1 {
+  margin: 0 0 28px;
+  font-family: var(--font-editorial); font-weight: 500;
+  font-size: clamp(48px, 7.4vw, 104px);
+  line-height: 0.96; letter-spacing: -0.035em;
+  color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+  text-wrap: balance;
+}
+.h-hero h1 em {
+  font-family: var(--font-editorial); font-style: italic; font-weight: 500;
+  color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+.h-hero h1 .amp {
+  display: inline-block; transform: translateY(2px);
+  color: var(--jth-lavender);
+  font-style: italic;
+  font-variation-settings: "SOFT" 100;
+}
+
+.h-hero-sub {
+  max-width: 44ch; margin: 0 0 36px;
+  font-family: var(--font-body); font-weight: 400;
+  font-size: 19px; line-height: 1.55; color: var(--jth-charcoal);
+  text-wrap: pretty;
+}
+.h-hero-sub strong { font-weight: 600; color: var(--jth-deep-green); }
+
+.h-hero-ctas {
+  display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+}
+.h-hero-ctas .meta {
+  margin-left: 4px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--jth-fg-subtle);
+}
+
+/* image column */
+.h-hero-art {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+}
+.h-hero-art-frame {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(rgba(24, 59, 46, 0.04) 1px, transparent 1.2px) 0 0/16px 16px,
+    var(--jth-cream-2);
+  border: 1px solid var(--jth-rule);
+  border-radius: 6px;
+  overflow: visible;
+}
+.h-hero-photo {
+  position: absolute; inset: 6% 8% 14% 8%;
+  object-fit: contain; object-position: center;
+  filter: contrast(1.04) saturate(0.85);
+}
+.h-hero-tape-1 {
+  position: absolute; left: -16px; top: 8%; width: 110px;
+  transform: rotate(-14deg); pointer-events: none;
+}
+.h-hero-tape-2 {
+  position: absolute; right: -22px; bottom: 18%; width: 90px;
+  transform: rotate(11deg); pointer-events: none;
+}
+.h-hero-twinkle {
+  position: absolute; right: -6px; top: 6%; width: 44px;
+  pointer-events: none;
+}
+.h-hero-caption {
+  position: absolute; left: 0; right: 0; bottom: -38px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--jth-fg-subtle);
+}
+.h-hero-caption span:first-child { color: var(--jth-deep-green); font-weight: 500; }
+
+/* hand-drawn note floating over the hero text */
+.h-hero-hand {
+  position: absolute;
+  font-family: var(--font-hand); font-weight: 400;
+  font-size: 28px; line-height: 1; color: var(--jth-deep-green);
+  transform: rotate(-3deg);
+  pointer-events: none;
+}
+
+/* ────────────────────────────────────────────────
+   MARQUEE / TRUST — quiet, mono, ruled
+   ──────────────────────────────────────────────── */
+
+.h-trust {
+  border-top: 1px solid var(--jth-rule);
+  border-bottom: 1px solid var(--jth-rule);
+  background: var(--jth-cream);
+}
+.h-trust-row {
+  max-width: 1240px; margin: 0 auto; padding: 22px 32px;
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.h-trust-label {
+  font-family: var(--font-mono); font-weight: 500; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--jth-fg-subtle);
+  padding-right: 32px; border-right: 1px solid var(--jth-rule);
+}
+.h-trust-items {
+  display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+  font-family: var(--font-display); font-weight: 500; font-size: 14px;
+  letter-spacing: -0.005em; color: var(--jth-fg-muted);
+}
+.h-trust-items .carf {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 12px; border-radius: 999px;
+  border: 1.5px solid var(--jth-deep-green); color: var(--jth-deep-green);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* ────────────────────────────────────────────────
+   MANIFESTO — pull-quote style intro
+   ──────────────────────────────────────────────── */
+
+.h-manifesto {
+  position: relative; padding: 120px 0;
+  overflow: hidden;
+}
+.h-manifesto-inner {
+  max-width: 1080px; margin: 0 auto; padding: 0 32px;
+  position: relative; z-index: 2;
+}
+.h-manifesto-num {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--jth-fg-subtle);
+  margin-bottom: 24px;
+}
+.h-manifesto blockquote {
+  margin: 0; padding: 0;
+  font-family: var(--font-editorial); font-weight: 400;
+  font-size: clamp(32px, 4.4vw, 56px);
+  line-height: 1.12; letter-spacing: -0.018em;
+  color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30, "opsz" 96;
+  text-wrap: balance;
+}
+.h-manifesto blockquote em {
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "opsz" 96;
+}
+.h-manifesto-mark {
+  position: absolute; pointer-events: none; user-select: none;
+}
+.h-manifesto-mark.scribble {
+  right: 6%; top: 18%; width: 200px; opacity: 0.85; transform: rotate(8deg);
+}
+.h-manifesto-mark.brush {
+  left: -40px; bottom: 8%; width: 180px; opacity: 0.6; transform: rotate(-8deg);
+}
+
+/* ────────────────────────────────────────────────
+   PROGRAMS — three editorial cards with mono nums
+   ──────────────────────────────────────────────── */
+
+.h-programs {
+  background: var(--jth-deep-green); color: var(--jth-cream);
+  padding: 96px 0 120px;
+  position: relative; overflow: hidden;
+}
+.h-programs::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: color-mix(in oklch, var(--jth-cream) 18%, var(--jth-deep-green) 82%);
+}
+.h-programs-head {
+  max-width: 1240px; margin: 0 auto 56px; padding: 0 32px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end;
+}
+@media (max-width: 880px) { .h-programs-head { grid-template-columns: 1fr; gap: 16px; } }
+.h-programs-head .lead {
+  font-family: var(--font-editorial); font-weight: 500;
+  font-size: clamp(32px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.02em;
+  color: var(--jth-cream);
+  font-variation-settings: "SOFT" 30, "opsz" 96;
+  margin: 0;
+  text-wrap: balance;
+}
+.h-programs-head .lead em { font-style: italic; color: var(--jth-lime-green); font-variation-settings: "SOFT" 100; }
+.h-programs-head .meta {
+  font-family: var(--font-mono); font-weight: 500; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: color-mix(in oklch, var(--jth-cream) 65%, var(--jth-deep-green) 35%);
+  display: flex; align-items: center; gap: 14px;
+  margin: 0 0 14px;
+}
+.h-programs-head .meta::before {
+  content: ""; width: 32px; height: 1px;
+  background: var(--jth-lime-green); display: block;
+}
+.h-programs-body {
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  color: color-mix(in oklch, var(--jth-cream) 80%, var(--jth-deep-green) 20%);
+  max-width: 50ch;
+  margin: 0;
+}
+
+.h-programs-grid {
+  max-width: 1240px; margin: 0 auto; padding: 0 32px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+}
+@media (max-width: 880px) { .h-programs-grid { grid-template-columns: 1fr; } }
+
+.h-pcard {
+  display: flex; flex-direction: column;
+  padding: 32px 28px 28px;
+  background: transparent; color: inherit; text-decoration: none;
+  border-left: 1px solid color-mix(in oklch, var(--jth-cream) 18%, var(--jth-deep-green) 82%);
+  transition: background var(--dur-base) var(--ease-calm);
+}
+.h-pcard:first-child { border-left: 0; }
+@media (max-width: 880px) {
+  .h-pcard { border-left: 0; border-top: 1px solid color-mix(in oklch, var(--jth-cream) 18%, var(--jth-deep-green) 82%); }
+  .h-pcard:first-child { border-top: 0; }
+}
+.h-pcard:hover { background: color-mix(in oklch, var(--jth-cream) 6%, var(--jth-deep-green) 94%); }
+.h-pcard-num {
+  font-family: var(--font-mono); font-weight: 500; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--jth-lime-green);
+  margin-bottom: 18px;
+}
+.h-pcard-title {
+  font-family: var(--font-editorial); font-weight: 500;
+  font-size: 30px; line-height: 1.05; letter-spacing: -0.02em;
+  color: var(--jth-cream);
+  font-variation-settings: "SOFT" 30, "opsz" 96;
+  margin: 0 0 14px;
+}
+.h-pcard-schedule {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
+  color: color-mix(in oklch, var(--jth-cream) 60%, var(--jth-deep-green) 40%);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.h-pcard-schedule::before {
+  content: ""; width: 6px; height: 6px; background: var(--jth-lime-green); border-radius: 50%;
+}
+.h-pcard-body {
+  font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  color: color-mix(in oklch, var(--jth-cream) 78%, var(--jth-deep-green) 22%);
+  margin: 0 0 28px;
+}
+.h-pcard-arrow {
+  margin-top: auto;
+  font-family: var(--font-display); font-weight: 600; font-size: 14px;
+  color: var(--jth-cream);
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: gap var(--dur-fast) var(--ease-calm);
+}
+.h-pcard:hover .h-pcard-arrow { gap: 14px; }
+
+/* ────────────────────────────────────────────────
+   FIGURES — large editorial stats
+   ──────────────────────────────────────────────── */
+
+.h-figures {
+  padding: 120px 0;
+  position: relative;
+  background: var(--jth-cream);
+}
+.h-figures-head {
+  max-width: 1240px; margin: 0 auto 64px; padding: 0 32px;
+}
+.h-figures-head .num {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--jth-fg-subtle);
+  display: flex; align-items: center; gap: 14px;
+}
+.h-figures-head .num::before { content: ""; width: 32px; height: 1px; background: var(--jth-deep-green); }
+.h-figures-head h2 {
+  margin: 22px 0 0; max-width: 24ch;
+  font-family: var(--font-editorial); font-weight: 500;
+  font-size: clamp(40px, 5vw, 72px); line-height: 1; letter-spacing: -0.025em;
+  color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+  text-wrap: balance;
+}
+.h-figures-head h2 em { font-style: italic; font-variation-settings: "SOFT" 100; }
+
+.h-figures-grid {
+  max-width: 1240px; margin: 0 auto; padding: 0 32px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid var(--jth-rule-strong);
+}
+@media (max-width: 880px) { .h-figures-grid { grid-template-columns: 1fr 1fr; } }
+.h-fig {
+  padding: 32px 24px 24px;
+  border-right: 1px solid var(--jth-rule);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.h-fig:last-child { border-right: 0; }
+@media (max-width: 880px) {
+  .h-fig:nth-child(2n) { border-right: 0; }
+  .h-fig:nth-child(n+3) { border-top: 1px solid var(--jth-rule); }
+}
+.h-fig-num {
+  font-family: var(--font-editorial); font-weight: 500;
+  font-size: clamp(56px, 7vw, 96px); line-height: 0.92; letter-spacing: -0.04em;
+  color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+}
+.h-fig-num .pct, .h-fig-num .frac {
+  font-family: var(--font-editorial); font-weight: 400; font-size: 0.4em;
+  vertical-align: 0.55em; letter-spacing: -0.02em; margin-left: 2px;
+  color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30;
+}
+.h-fig-label {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--jth-fg-muted);
+}
+.h-fig-body {
+  font-family: var(--font-body); font-size: 14px; line-height: 1.5;
+  color: var(--jth-charcoal);
+  max-width: 28ch;
+  margin: 0;
+}
+
+/* ────────────────────────────────────────────────
+   PROCESS — three numbered steps
+   ──────────────────────────────────────────────── */
+
+.h-process {
+  padding: 120px 0;
+  background: var(--jth-cream-2);
+  position: relative; overflow: hidden;
+}
+.h-process-head {
+  max-width: 1240px; margin: 0 auto 64px; padding: 0 32px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end;
+}
+@media (max-width: 880px) { .h-process-head { grid-template-columns: 1fr; gap: 16px; } }
+.h-process-head .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--jth-fg-subtle); display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.h-process-head .num::before { content: ""; width: 32px; height: 1px; background: var(--jth-deep-green); }
+.h-process-head h2 {
+  margin: 0;
+  font-family: var(--font-editorial); font-weight: 500;
+  font-size: clamp(36px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -0.022em;
+  color: var(--jth-deep-green); font-variation-settings: "SOFT" 30, "opsz" 144;
+  text-wrap: balance;
+}
+.h-process-head h2 em { font-style: italic; font-variation-settings: "SOFT" 100; }
+.h-process-head p {
+  margin: 0; font-size: 17px; line-height: 1.55;
+  color: var(--jth-charcoal); max-width: 38ch;
+}
+
+.h-process-grid {
+  max-width: 1240px; margin: 0 auto; padding: 0 32px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  position: relative;
+}
+@media (max-width: 880px) { .h-process-grid { grid-template-columns: 1fr; } }
+
+.h-step {
+  position: relative; padding: 32px 28px 32px;
+  background: var(--jth-cream);
+  border: 1px solid var(--jth-rule);
+  border-radius: 4px;
+}
+.h-step-num {
+  font-family: var(--font-editorial); font-weight: 400;
+  font-size: 56px; line-height: 1; letter-spacing: -0.04em;
+  color: var(--jth-lavender);
+  font-variation-settings: "SOFT" 100, "opsz" 96;
+  margin-bottom: 22px;
+}
+.h-step h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display); font-weight: 600; font-size: 20px;
+  color: var(--jth-deep-green);
+  letter-spacing: -0.01em;
+}
+.h-step p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--jth-charcoal); }
+.h-step .duration {
+  display: inline-block; margin-top: 18px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--jth-fg-muted);
+  padding-top: 14px; border-top: 1px solid var(--jth-rule);
+}
+
+/* ────────────────────────────────────────────────
+   QUOTE — full bleed, oversized, with rule
+   ──────────────────────────────────────────────── */
+
+.h-quote {
+  padding: 140px 0;
+  background: var(--jth-deep-green);
+  color: var(--jth-cream);
+  position: relative; overflow: hidden;
+}
+.h-quote-inner {
+  max-width: 1080px; margin: 0 auto; padding: 0 32px;
+  position: relative; z-index: 2;
+}
+.h-quote .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--jth-lime-green); display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.h-quote .num::before { content: ""; width: 32px; height: 1px; background: var(--jth-lime-green); }
+.h-quote blockquote {
+  margin: 0;
+  font-family: var(--font-editorial); font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 80px); line-height: 1.04; letter-spacing: -0.025em;
+  color: var(--jth-cream);
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+  text-wrap: balance;
+}
+.h-quote blockquote em {
+  font-style: italic; color: var(--jth-lime-green);
+  font-variation-settings: "SOFT" 100;
+}
+.h-quote cite {
+  display: flex; align-items: center; gap: 14px;
+  margin-top: 40px;
+  font-style: normal; font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: color-mix(in oklch, var(--jth-cream) 70%, var(--jth-deep-green) 30%);
+}
+.h-quote cite::before { content: ""; width: 32px; height: 1px; background: color-mix(in oklch, var(--jth-cream) 50%, var(--jth-deep-green) 50%); }
+.h-quote-mark {
+  position: absolute; pointer-events: none; user-select: none;
+}
+.h-quote-mark.brush { left: -50px; top: 12%; width: 220px; opacity: 0.55; transform: rotate(-12deg); }
+.h-quote-mark.tw1   { right: 8%; top: 18%; width: 32px; }
+.h-quote-mark.tw2   { right: 16%; bottom: 22%; width: 24px; }
+
+/* ────────────────────────────────────────────────
+   REFERRALS — providers row
+   ──────────────────────────────────────────────── */
+
+.h-refer {
+  padding: 96px 0;
+}
+.h-refer-inner {
+  max-width: 1240px; margin: 0 auto; padding: 0 32px;
+  display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center;
+}
+@media (max-width: 880px) { .h-refer-inner { grid-template-columns: 1fr; gap: 24px; } }
+.h-refer-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--jth-fg-subtle); display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.h-refer-num::before { content: ""; width: 32px; height: 1px; background: var(--jth-deep-green); }
+.h-refer h2 {
+  margin: 0 0 16px; font-family: var(--font-editorial); font-weight: 500;
+  font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.022em;
+  color: var(--jth-deep-green); font-variation-settings: "SOFT" 30, "opsz" 96;
+}
+.h-refer h2 em { font-style: italic; font-variation-settings: "SOFT" 100; }
+.h-refer p { margin: 0; font-size: 17px; line-height: 1.55; color: var(--jth-charcoal); max-width: 50ch; }
+.h-refer-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ────────────────────────────────────────────────
+   CTA BAND — full-bleed, oversized
+   ──────────────────────────────────────────────── */
+
+.h-cta {
+  padding: 140px 0;
+  background: var(--jth-cream);
+  text-align: center;
+  position: relative; overflow: hidden;
+  border-top: 1px solid var(--jth-rule);
+}
+.h-cta-inner {
+  max-width: 880px; margin: 0 auto; padding: 0 32px;
+  position: relative; z-index: 2;
+}
+.h-cta-tree {
+  width: 64px; height: auto; margin: 0 auto 32px; display: block;
+}
+.h-cta h2 {
+  margin: 0 0 24px;
+  font-family: var(--font-editorial); font-weight: 500;
+  font-size: clamp(40px, 5.4vw, 80px); line-height: 1.02; letter-spacing: -0.025em;
+  color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+  text-wrap: balance;
+}
+.h-cta h2 em { font-style: italic; font-variation-settings: "SOFT" 100; }
+.h-cta p {
+  margin: 0 auto 36px; max-width: 48ch;
+  font-family: var(--font-body); font-size: 18px; line-height: 1.55;
+  color: var(--jth-charcoal);
+}
+.h-cta-actions { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.h-cta-mark { position: absolute; pointer-events: none; user-select: none; opacity: 0.7; }
+.h-cta-mark.swash { left: -30px; top: 30%; width: 120px; }
+.h-cta-mark.tape  { right: 6%; top: 18%; width: 100px; transform: rotate(8deg); }
+.h-cta-mark.tw    { right: 14%; bottom: 22%; width: 30px; }
+
+/* ────────────────────────────────────────────────
+   subtle entrance — once on load
+   ──────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  .h-fade { animation: hFade 800ms var(--ease-out) both; }
+  .h-fade.d2 { animation-delay: 100ms; }
+  .h-fade.d3 { animation-delay: 200ms; }
+  .h-fade.d4 { animation-delay: 300ms; }
+  @keyframes hFade {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}

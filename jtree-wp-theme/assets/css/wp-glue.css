@@ -1,0 +1,25 @@
+/* ──────────────────────────────────────────────────────────────────
+   JTree Health · WordPress glue
+   GeneratePress resets + WP admin bar offset.
+   Loaded after site.css; isolated so the design system stays pristine.
+   ───────────────────────────────────────────────────────────────── */
+
+/* Hide GP default structural elements — our partials own header + footer. */
+.site > .site-header,
+.main-navigation,
+.inside-header { display: none !important; }
+
+/* Strip GP wrappers' default padding so the design system controls layout. */
+.site-content { padding: 0 !important; }
+.site-main { padding: 0 !important; margin: 0 !important; }
+.entry-content,
+.entry-header { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+.content-area { width: 100% !important; float: none !important; padding: 0 !important; margin: 0 !important; }
+
+/* WP admin bar offset for sticky site-header. */
+@media screen and (min-width: 783px) {
+  body.admin-bar .site-header { top: 32px; }
+}
+@media screen and (max-width: 782px) {
+  body.admin-bar .site-header { top: 46px; }
+}

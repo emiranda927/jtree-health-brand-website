@@ -1,64 +1,58 @@
 <?php
 /**
- * Partial: Site Footer
+ * Partial · Site footer.
  *
  * @package JTreeHealth
  */
-
 defined('ABSPATH') || exit;
 
-$home = esc_url(home_url('/'));
+$home  = esc_url(home_url('/'));
+$brand = JTREE_THEME_URI . '/assets/brand';
 ?>
-
-<footer class="footer">
-  <div class="footer__grid">
-
-    <div>
-      <div class="footer__logo">jtree health<span>.</span></div>
-      <p class="footer__tagline">Adolescent PHP &amp; IOP in Apex, NC. Named for a desert plant — and for a brother we lost too soon.</p>
-      <div class="footer__crisis">
-        <p class="footer__crisis-label">24/7 Crisis Line</p>
-        <p class="footer__crisis-num">988</p>
-      </div>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img
+        src="<?php echo esc_url($brand . '/logo-inverted-cream.png'); ?>"
+        srcset="<?php echo esc_url($brand . '/logo-inverted-cream.png'); ?> 1x, <?php echo esc_url($brand . '/logo-inverted-cream@2x.png'); ?> 2x"
+        alt="Joshua Tree Health">
+      <p>Adolescent PHP and IOP mental-health care, rooted in Apex, NC.</p>
+      <span class="carf-badge">CARF Accredited</span>
     </div>
-
-    <div>
-      <p class="footer__col-title">Programs</p>
-      <ul class="footer__links">
-        <li><a href="<?php echo $home; ?>programs/#php">PHP Program</a></li>
-        <li><a href="<?php echo $home; ?>programs/#iop">IOP Program</a></li>
-        <li><a href="<?php echo $home; ?>programs/#medmgmt">Medication Mgmt</a></li>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="<?php echo $home; ?>programs/#php">Partial hospitalization</a></li>
+        <li><a href="<?php echo $home; ?>programs/#iop">Intensive outpatient</a></li>
+        <li><a href="<?php echo $home; ?>programs/#medmgmt">Medication management</a></li>
+        <li><a href="<?php echo $home; ?>what-we-treat/">What we treat</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>For families</h4>
+      <ul>
+        <li><a href="<?php echo $home; ?>for-parents/">For Parents</a></li>
+        <li><a href="<?php echo $home; ?>for-teens/">For Teens</a></li>
         <li><a href="<?php echo $home; ?>insurance/">Insurance</a></li>
+        <li><a href="<?php echo $home; ?>admissions/">Start the Conversation</a></li>
       </ul>
     </div>
-
-    <div>
-      <p class="footer__col-title">About</p>
-      <ul class="footer__links">
-        <li><a href="<?php echo $home; ?>about/">Our Story</a></li>
-        <li><a href="<?php echo $home; ?>about/#team">Clinical Team</a></li>
-        <li><a href="<?php echo $home; ?>about/#carf">CARF Accreditation</a></li>
-        <li><a href="<?php echo $home; ?>contact/">Careers</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <p class="footer__col-title">Contact</p>
-      <ul class="footer__links">
-        <li><a href="<?php echo $home; ?>admissions/">Start Admissions</a></li>
+    <div class="footer-col">
+      <h4>Reach us</h4>
+      <ul>
         <li><a href="tel:9192764005">(919) 276-4005</a></li>
-        <li><a href="<?php echo $home; ?>contact/">Apex, NC 27502</a></li>
+        <li>Apex, NC 27502</li>
+        <li>PHP: Mon–Fri 9–3</li>
+        <li>IOP: Tue/Wed/Thu 3–6</li>
+        <li><a href="<?php echo $home; ?>crisis/">Crisis resources</a></li>
       </ul>
     </div>
-
   </div>
-
-  <div class="footer__bottom">
-    <p class="footer__copy">&copy; <?php echo date('Y'); ?> JTree Health. All rights reserved.</p>
-    <div class="footer__legal">
-      <a href="<?php echo $home; ?>privacy/">Privacy Policy</a>
-      <a href="<?php echo $home; ?>admissions/">Admissions</a>
-      <a href="<?php echo $home; ?>crisis/">Crisis Help</a>
-    </div>
+  <div class="footer-bottom">
+    <span>&copy; <?php echo esc_html(date('Y')); ?> Joshua Tree Health. All rights reserved.</span>
+    <span>
+      <a href="<?php echo $home; ?>privacy/" style="color:inherit; margin-right:18px;">Privacy</a>
+      <a href="<?php echo $home; ?>accessibility/" style="color:inherit;">Accessibility</a>
+    </span>
   </div>
 </footer>

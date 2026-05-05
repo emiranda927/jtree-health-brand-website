@@ -79,7 +79,8 @@ function jtree_opengraph_meta() {
     $description = 'JTree Health provides PHP and IOP mental health programs for teens ages 10-17 in Apex, NC. CARF Accredited. Call (919) 276-4005.';
     $url         = home_url(add_query_arg(array(), wp_unslash($_SERVER['REQUEST_URI'])));
     $site_name   = 'JTree Health';
-    $image       = JTREE_THEME_URI . '/assets/images/jtree-og-image.jpg';
+    // og-image placeholder — replace before launch with a 1200×630 .jpg.
+    $image       = JTREE_THEME_URI . '/assets/brand/og-image.jpg';
 
     // Page-specific descriptions
     if (is_page('programs')) {
@@ -120,3 +121,67 @@ function jtree_opengraph_meta() {
     echo '<meta name="description" content="' . esc_attr($description) . '" />' . "\n";
 }
 add_action('wp_head', 'jtree_opengraph_meta', 2);
+
+/**
+ * Output favicon set + theme-color (deep green).
+ */
+function jtree_favicon_links() {
+    $base = JTREE_THEME_URI . '/assets/brand';
+    echo '<link rel="icon" type="image/png" sizes="32x32"  href="' . esc_url($base . '/favicon-32.png')  . '" />' . "\n";
+    echo '<link rel="icon" type="image/png" sizes="64x64"  href="' . esc_url($base . '/favicon-64.png')  . '" />' . "\n";
+    echo '<link rel="icon" type="image/png" sizes="128x128" href="' . esc_url($base . '/favicon-128.png') . '" />' . "\n";
+    echo '<link rel="apple-touch-icon" sizes="180x180" href="' . esc_url($base . '/app-icon-180.png') . '" />' . "\n";
+    echo '<meta name="theme-color" content="#183B2E" />' . "\n";
+}
+add_action('wp_head', 'jtree_favicon_links', 1);
+
+/**
+ * `noindex` the thank-you page (post-conversion, never crawl).
+ */
+function jtree_robots_thank_you() {
+    if (is_page('thank-you') || is_page_template('templates/page-thank-you.php')) {
+        echo '<meta name="robots" content="noindex, nofollow" />' . "\n";
+    }
+}
+add_action('wp_head', 'jtree_robots_thank_you', 1);
+
+/**
+ * Set canonical URL + locale on every page.
+ */
+function jtree_canonical_link() {
+    $url = home_url(add_query_arg(array(), wp_unslash($_SERVER['REQUEST_URI'])));
+    echo '<link rel="canonical" href="' . esc_url($url) . '" />' . "\n";
+    echo '<meta http-equiv="content-language" content="en-US" />' . "\n";
+}
+add_action('wp_head', 'jtree_canonical_link', 2);
+
+/**
+ * Exclude /thank-you/ from the WordPress core sitemap (5.5+).
+ */
+function jtree_sitemap_exclude_thanks($args, $object_subtype) {
+    if ($object_subtype === 'page') {
+        $thank_you = get_page_by_path('thank-you');
+        if ($thank_you) {
+            $excluded = isset($args['post__not_in']) ? (array) $args['post__not_in'] : array();
+            $excluded[] = $thank_you->ID;
+            $args['post__not_in'] = $excluded;
+        }
+    }
+    return $args;
+}
+add_filter('wp_sitemaps_posts_query_args', 'jtree_sitemap_exclude_thanks', 10, 2);
+
+/**
+ * Augment the dynamic robots.txt that WordPress serves at /robots.txt.
+ */
+function jtree_robots_txt($output, $public) {
+    if (!$public) return $output; // staging / private
+    $extra  = "\n";
+    $extra .= "User-agent: *\n";
+    $extra .= "Disallow: /thank-you/\n";
+    $extra .= "Disallow: /wp-admin/\n";
+    $extra .= "Allow: /wp-admin/admin-ajax.php\n\n";
+    $extra .= "Sitemap: " . home_url('/wp-sitemap.xml') . "\n";
+    return $output . $extra;
+}
+add_filter('robots_txt', 'jtree_robots_txt', 10, 2);

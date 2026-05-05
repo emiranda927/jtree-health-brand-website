@@ -1,87 +1,61 @@
 <?php
 /**
  * Template Name: For Teens
- * Description: Teen-direct page with casual voice
  *
  * @package JTreeHealth
  */
-
+defined('ABSPATH') || exit;
 get_header();
+
 ?>
 
-<?php get_template_part('templates/partials/crisis-bar'); ?>
+<main id="main">
 
-<!-- Page Header -->
-<section class="jtree-page-header jtree-section--warm-sand jtree-page-header--with-motif">
-  <div class="jtree-container">
-    <span class="jtree-hero__badge">For Teens</span>
-    <h1>You&rsquo;re not broken. You&rsquo;re overwhelmed.</h1>
-    <p class="jtree-lead">And there&rsquo;s a difference. JTree isn&rsquo;t a hospital. It&rsquo;s not a school. It&rsquo;s a place where you can figure things out with people who actually get it.</p>
-  </div>
-</section>
+  <section class="teen-hero">
+    <img class="collage" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-yellow-scribble.png'); ?>" alt="" style="right:24px; top:30px; width: 220px; opacity: 0.85;">
+    <img class="twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="" style="left:8%; top:30%; width:32px;">
+    <img class="twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-outline-yellow.svg'); ?>" alt="" style="right:18%; bottom:10%; width:28px;">
+    <div class="container">
+      <span class="jth-eyebrow">A page for you</span>
+      <h1>It's okay to not be okay.</h1>
+      <p class="jth-body-l" style="margin-top:14px; max-width: 56ch;">If you're reading this, someone — or something — pointed you here. Maybe a parent. Maybe a school counselor. Maybe a feeling you can't quite name. We're glad you're here.</p>
+      <p class="jth-hand" style="margin-top: 24px; transform: rotate(-3deg);">You're not alone in this.</p>
+    </div>
+  </section>
 
-<!-- What JTree is actually like -->
-<section class="jtree-section jtree-section--pale-lavender">
-  <div class="jtree-container">
-    <div class="jtree-container--narrow" style="margin: 0 auto;">
-      <h2>What JTree is actually like.</h2>
-      <p>You show up. You talk &mdash; in groups and one-on-one. You learn skills that actually help when things get hard. You meet other teens who are going through similar stuff. You go home at the end of the day.</p>
-      <p>It&rsquo;s not about being &ldquo;fixed.&rdquo; It&rsquo;s about building tools so you can handle what life throws at you without falling apart.</p>
+  <section class="section">
+    <div class="container" style="max-width: 720px;">
+      <h2 class="jth-h2" style="margin: 0 0 16px;">What we are.</h2>
+      <p class="jth-body-l" style="margin: 0 0 14px;">We're a place where teens come during the day to work on really hard stuff — anxiety, depression, panic, self-harm, the kind of thoughts that don't go away. We're not a hospital. You go home at night.</p>
+      <p class="jth-body-l" style="margin: 0 0 14px;">You'll be in groups with other teens. You'll have a therapist. You'll learn skills you can actually use, like how to come down from a panic spiral or how to ride out an urge.</p>
+      <p class="jth-body-l" style="margin: 0;">We're not going to tell you everything will be fine. We're going to help you build the skills to get through the times when it isn't.</p>
+    </div>
+  </section>
 
-      <h3>A typical day in PHP looks like:</h3>
-      <ul>
-        <li>Morning check-in with your group</li>
-        <li>Group therapy (topics rotate &mdash; anxiety, relationships, coping skills)</li>
-        <li>Individual therapy with your own therapist</li>
-        <li>Lunch break</li>
-        <li>Skills group (DBT, mindfulness, creative expression)</li>
-        <li>Afternoon wrap-up and goal-setting</li>
-      </ul>
-
-      <h3>IOP is after school:</h3>
-      <ul>
-        <li>3 days a week, 3&ndash;6pm</li>
-        <li>Group therapy + skills building</li>
-        <li>Individual sessions during the week</li>
-        <li>You keep going to school and doing your thing</li>
+  <section class="section section-bg-cream-2">
+    <div class="container" style="max-width: 720px;">
+      <h2 class="jth-h2" style="margin: 0 0 16px;">What we're not.</h2>
+      <ul style="font-size: 18px; line-height: 1.7; padding-left: 20px; margin: 0;">
+        <li>We're not your parents. What you say in therapy stays in therapy, with the legal exceptions every clinician has.</li>
+        <li>We're not going to lecture you about phones, or sleep, or your friends, unless you want to talk about it.</li>
+        <li>We're not going to make you talk if you don't want to. Just showing up is enough on day one.</li>
+        <li>We're not going to pretend the world isn't hard right now.</li>
       </ul>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Real talk -->
-<section class="jtree-section jtree-section--pale-sage">
-  <div class="jtree-container">
-    <div class="jtree-container--narrow" style="margin: 0 auto;">
-      <h2>Real talk.</h2>
-      <p>You probably didn&rsquo;t choose to be here. Maybe your parents found this page. Maybe a therapist or school counselor suggested it. Maybe you searched for it yourself at 2am.</p>
-      <p>However you got here &mdash; you&rsquo;re here. And that matters.</p>
-      <p>The teens who come to JTree are dealing with anxiety, depression, OCD, trauma, self-harm, and a lot of other things that make everyday life feel impossible. They&rsquo;re not &ldquo;crazy.&rdquo; They&rsquo;re going through something real, and they need more support than a 50-minute session once a week.</p>
-      <p>That&rsquo;s what we&rsquo;re here for.</p>
+  <section class="section">
+    <div class="container" style="max-width: 720px;">
+      <h2 class="jth-h2" style="margin: 0 0 24px;">If you want to talk.</h2>
+      <p class="jth-body-l" style="margin: 0 0 24px;">No pressure. No big form. You can text or call, or have a parent reach out for you. We'll figure it out from there.</p>
+      <div style="display:flex; gap: 12px; flex-wrap: wrap;">
+        <a class="jth-btn jth-btn-primary jth-btn-lg" href="tel:9192764005">Call (919) 276-4005</a>
+        <a class="jth-btn jth-btn-secondary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Have a parent fill out the form</a>
+      </div>
+      <p class="jth-body-s" style="margin: 32px 0 0;">If you're in a crisis right now — meaning you're thinking about hurting yourself or you don't feel safe — please call or text <strong>988</strong>. They are kind, they are fast, and they answer the phone.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- What other teens say -->
-<section class="jtree-section jtree-section--warm-sand">
-  <div class="jtree-container">
-    <div class="jtree-quote">
-      <p class="jtree-quote__text">I didn&rsquo;t want to go. Now I&rsquo;m glad I did.</p>
-      <p class="jtree-quote__attribution">&mdash; JTree teen, age 15</p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="jtree-section jtree-section--forest">
-  <div class="jtree-container jtree-text-center">
-    <h2>Want to talk to someone?</h2>
-    <p>You can call us, or ask your parent to fill out the form. No pressure. No judgment.</p>
-    <div class="jtree-hero__actions" style="justify-content: center;">
-      <a href="tel:+19192764005" class="jtree-btn jtree-btn--white jtree-btn--lg">Call (919) 276-4005</a>
-      <a href="/admissions/" class="jtree-btn jtree-btn--secondary jtree-btn--lg" style="border-color: var(--jtree-white); color: var(--jtree-white);">Learn About Admissions</a>
-    </div>
-  </div>
-</section>
+</main>
 
 <?php get_footer(); ?>

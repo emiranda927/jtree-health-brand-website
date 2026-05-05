@@ -1,61 +1,46 @@
 <?php
 /**
  * Template Name: Contact
- * Description: Contact page with phone, address, and inquiry form
  *
  * @package JTreeHealth
  */
-
+defined('ABSPATH') || exit;
 get_header();
 ?>
 
-<?php get_template_part('templates/partials/crisis-bar'); ?>
+<main id="main">
 
-<!-- Page Header -->
-<section class="jtree-page-header jtree-section--warm-sand jtree-page-header--with-motif">
-  <div class="jtree-container">
-    <span class="jtree-hero__badge">Contact Us</span>
-    <h1>We&rsquo;re here when you&rsquo;re ready.</h1>
-    <p class="jtree-lead">Call us, fill out the form, or stop by. A real person answers.</p>
-  </div>
-</section>
-
-<!-- Contact Info -->
-<section class="jtree-section jtree-section--pale-lavender">
-  <div class="jtree-container">
-    <div class="jtree-grid jtree-grid--3">
-
-      <div class="jtree-card jtree-text-center">
-        <h3>Phone</h3>
-        <a href="tel:+19192764005" class="jtree-crisis-resource__phone">(919) 276-4005</a>
-        <p>Monday &ndash; Friday, 9am &ndash; 6pm</p>
-      </div>
-
-      <div class="jtree-card jtree-text-center">
-        <h3>Location</h3>
-        <p><strong>Apex, NC</strong></p>
-        <p>Serving the NC Triangle &mdash; Cary, Raleigh, Durham, Chapel Hill, and surrounding communities.</p>
-      </div>
-
-      <div class="jtree-card jtree-text-center">
-        <h3>Email</h3>
-        <p><a href="mailto:info@jtreehealth.com">info@jtreehealth.com</a></p>
-        <p>We respond within one business day.</p>
-      </div>
-
+  <section class="section" style="padding-top: 64px; padding-bottom: 24px;">
+    <div class="container" style="max-width: 880px;">
+      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">Contact</span>
+      <h1 class="jth-display-l" style="font-size: clamp(40px, 5vw, 56px); margin: 0 0 20px;">Reach a real human, <em class="jth-emph">on the first try.</em></h1>
+      <p class="jth-body-l" style="margin: 0; max-width: 60ch;">Phone is fastest. The form is fine too &mdash; we reply within one business day.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Inquiry Form -->
-<section class="jtree-section jtree-section--pale-sage">
-  <div class="jtree-container">
-    <div class="jtree-section-header">
-      <h2>Send Us a Message</h2>
-      <p>Complete the form and we&rsquo;ll reach out within one business day.</p>
+  <section class="section">
+    <div class="container" style="max-width: 880px;">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+        <div class="contact-card" style="padding: 32px;">
+          <h3 style="margin: 0 0 14px;">Call us</h3>
+          <a class="phone" href="tel:9192764005" style="font-size: 28px;">(919) 276-4005</a>
+          <p class="hours">Mon&ndash;Fri &middot; 8 am &ndash; 6 pm ET</p>
+          <p class="jth-body-s" style="margin: 18px 0 0;">After hours? Leave a message and we'll call you back the next business day. In a crisis, call or text <strong>988</strong>.</p>
+        </div>
+        <div class="contact-card" style="padding: 32px;">
+          <h3 style="margin: 0 0 14px;">Visit</h3>
+          <p class="jth-body" style="margin: 0 0 8px;">Apex, NC 27502</p>
+          <p class="jth-body-s" style="margin: 0 0 18px; color: var(--jth-fg-muted);">Street address provided after intake. Parking is on-site and free.</p>
+          <p class="jth-meta" style="margin: 0 0 4px;">PHP: Mon&ndash;Fri 9 am &ndash; 3 pm</p>
+          <p class="jth-meta" style="margin: 0;">IOP: Tue / Wed / Thu 3 &ndash; 6 pm</p>
+        </div>
+      </div>
+      <div style="margin-top: 32px;">
+        <a class="jth-btn jth-btn-primary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+      </div>
     </div>
-    <?php jtree_render_inquiry_form(); ?>
-  </div>
-</section>
+  </section>
+
+</main>
 
 <?php get_footer(); ?>

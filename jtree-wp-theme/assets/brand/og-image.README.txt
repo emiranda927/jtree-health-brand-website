@@ -1,0 +1,15 @@
+og-image.jpg — TODO before launch
+
+The Open Graph image referenced by inc/seo.php is not yet provided.
+Replace this placeholder folder with a 1200×630 .jpg at:
+
+  jtree-wp-theme/assets/brand/og-image.jpg
+
+Suggested composition (see brand kit):
+- Cream background (#F6F4EC)
+- Joshua Tree Health horizontal lockup, centered
+- Primary tagline: "Teen mental-health care, rooted in Apex, NC"
+- Optional: torn desert photo + a twinkle accent
+
+Tools: Figma, Photoshop, or a designer. After replacing, verify with
+https://www.opengraph.xyz/?url=https%3A%2F%2Fjtreehealth.com

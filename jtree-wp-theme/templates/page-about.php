@@ -1,427 +1,115 @@
 <?php
-/** Template Name: About */
+/**
+ * Template Name: About
+ *
+ * @package JTreeHealth
+ */
+defined('ABSPATH') || exit;
 get_header();
+
 ?>
-<style>
-/* ── ABOUT-SPECIFIC ───────────────────────────── */
-.story-grid {
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 6rem;
-  align-items: start;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-.story-body { font-size: 1.05rem; color: rgba(42,42,42,.72); line-height: 1.85; }
-.story-body p + p { margin-top: 1.4rem; }
-.story-body strong { color: var(--forest); font-weight: 700; }
-.story-pull {
-  background: var(--forest);
-  color: #fff;
-  border-radius: 20px;
-  padding: 2.5rem;
-  position: sticky;
-  top: 100px;
-}
-.story-pull__quote {
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  line-height: 1.55;
-  color: rgba(255,255,255,.9);
-  margin-bottom: 1.5rem;
-  font-style: italic;
-}
-.story-pull__attr {
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--lime);
-}
-.story-pull__image {
-  width: 100%;
-  aspect-ratio: 4/3;
-  background: rgba(255,255,255,.06);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  margin-top: 1.5rem;
-  border: 1.5px solid rgba(255,255,255,.08);
-}
-.story-pull__image-label {
-  font-size: .7rem;
-  color: rgba(255,255,255,.3);
-  text-align: center;
-  margin-top: .75rem;
-  letter-spacing: .04em;
-}
 
-/* ── VALUES ───────────────────────────────────── */
-.values-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  max-width: 1280px;
-  margin: 3rem auto 0;
-}
-.value-card {
-  background: rgba(255,255,255,.5);
-  border: 1.5px solid rgba(30,61,52,.1);
-  border-radius: 20px;
-  padding: 2.2rem;
-  transition: transform .4s var(--ease-expo), box-shadow .4s var(--ease-expo), border-color .3s;
-  position: relative;
-  overflow: hidden;
-}
-.value-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 24px 48px rgba(30,61,52,.1);
-  border-color: rgba(30,61,52,.18);
-}
-.value-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 60%, rgba(184,224,74,.08));
-  opacity: 0;
-  transition: opacity .4s var(--ease-expo);
-  pointer-events: none;
-}
-.value-card:nth-child(2)::before {
-  background: linear-gradient(135deg, transparent 60%, rgba(168,159,216,.1));
-}
-.value-card:nth-child(3)::before {
-  background: linear-gradient(135deg, transparent 60%, rgba(44,95,82,.08));
-}
-.value-card:hover::before { opacity: 1; }
+<main id="main">
 
-.value-card__icon {
-  width: 52px; height: 52px;
-  background: var(--pale-lime);
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.5rem;
-  margin-bottom: 1.25rem;
-  border: 1.5px solid rgba(30,61,52,.08);
-  transition: transform .4s var(--ease-expo), background .3s;
-}
-.value-card:hover .value-card__icon {
-  transform: scale(1.1) rotate(-4deg);
-}
-.value-card:nth-child(2) .value-card__icon { background: var(--pale-lav); }
-.value-card:nth-child(3) .value-card__icon { background: var(--pale-sage); }
-.value-card__name {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 1.5rem;
-  color: var(--forest);
-  margin-bottom: .25rem;
-  letter-spacing: -.02em;
-}
-.value-card__tagline {
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--mist);
-  margin-bottom: .85rem;
-}
-.value-card__desc { font-size: .9rem; color: rgba(42,42,42,.65); line-height: 1.7; }
-
-/* ── TEAM ─────────────────────────────────────── */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-.team-card { text-align: center; }
-.team-card__photo {
-  width: 160px; height: 160px;
-  border-radius: 9999px;
-  margin: 0 auto 1.25rem;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 3.5rem;
-  border: 3px solid rgba(30,61,52,.1);
-  transition: transform .4s var(--ease-expo), box-shadow .4s var(--ease-expo);
-}
-.team-card:hover .team-card__photo {
-  transform: scale(1.06);
-  box-shadow: 0 12px 32px rgba(30,61,52,.1);
-}
-.team-card:nth-child(1) .team-card__photo { background: var(--pale-sage); }
-.team-card:nth-child(2) .team-card__photo { background: var(--pale-lav); }
-.team-card:nth-child(3) .team-card__photo { background: var(--pale-lime); }
-.team-card__name  { font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; color: var(--forest); margin-bottom: .2rem; }
-.team-card__role  { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--mist); margin-bottom: .75rem; }
-.team-card__bio   { font-size: .88rem; color: rgba(42,42,42,.6); line-height: 1.65; max-width: 260px; margin: 0 auto; }
-
-/* ── CARF BLOCK ───────────────────────────────── */
-.carf-block {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 3rem;
-  align-items: center;
-}
-.carf-badge-lg {
-  background: var(--lime);
-  border: 3px solid var(--forest);
-  border-radius: 16px;
-  padding: 2rem 2.5rem;
-  text-align: center;
-  box-shadow: 6px 6px 0 var(--forest);
-}
-.carf-badge-lg__text {
-  font-family: var(--font-head);
-  font-weight: 900;
-  font-size: 3rem;
-  color: var(--forest);
-  line-height: 1;
-}
-.carf-badge-lg__sub {
-  font-size: .65rem;
-  font-weight: 700;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--forest);
-  opacity: .65;
-  margin-top: .4rem;
-}
-
-/* ── CLOSING TAGLINE ──────────────────────────── */
-.tagline-section {
-  background: var(--forest);
-  padding: 6rem 2rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.tagline-section blockquote {
-  font-family: var(--font-mono);
-  font-size: clamp(1.3rem, 3vw, 2rem);
-  line-height: 1.5;
-  color: rgba(255,255,255,.9);
-  max-width: 700px;
-  margin: 0 auto 2.5rem;
-  font-style: italic;
-}
-
-/* ── SVG VALUE ICONS ─────────────────────────── */
-.value-card__svg-icon {
-  width: 52px; height: 52px;
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 1.25rem;
-  border: 1.5px solid rgba(30,61,52,.08);
-  transition: transform .4s var(--ease-expo), background .3s;
-}
-.value-card:hover .value-card__svg-icon {
-  transform: scale(1.1) rotate(-4deg);
-}
-
-@media (max-width:1024px) {
-  .story-grid   { grid-template-columns: 1fr; }
-  .story-pull   { position: static; }
-  .values-grid  { grid-template-columns: 1fr; }
-  .team-grid    { grid-template-columns: 1fr 1fr; }
-  .carf-block   { grid-template-columns: 1fr; text-align: center; }
-}
-@media (max-width: 640px) {
-  .team-grid { grid-template-columns: 1fr; }
-}
-</style>
-
-<!-- PAGE HERO -->
-<div class="spike-bg" style="position:relative; overflow:hidden;">
-  <div class="page-hero">
-    <p class="page-hero__eyebrow anim-1">About JTree Health &middot; Founded 2026</p>
-    <h1 class="page-hero__title anim-2">We built JTree because we know<br/>what it costs when care comes too late.</h1>
-    <p class="page-hero__sub anim-3">Named for a desert plant &mdash; and for a brother we lost too soon.</p>
-  </div>
-
-  <!-- Hero floating illustrations -->
-  <!-- Cloud -->
-  <!-- Leaf cluster -->
-
-</div>
-
-<!-- Wave divider: sand to pale-lav -->
-<div class="wave-divider">
-  <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,28 C240,56 480,0 720,28 C960,56 1200,0 1440,28 L1440,56 L0,56 Z" fill="#EAE8F5"/>
-  </svg>
-</div>
-
-<!-- ORIGIN STORY -->
-<section class="section section--lav" style="position:relative; overflow:hidden;">
-  <div class="story-grid">
-    <div class="story-body" data-reveal>
-      <p>JTree Health was named for two things that mean the same thing.</p>
-      <p>The <strong>Joshua Tree</strong> is a desert plant that shouldn't survive. It grows in harsh, unforgiving terrain, where almost nothing else does. Its roots go deep before anything appears above the surface. And when it finally grows, it grows into something unmistakable &mdash; spiky, structural, singular. Nothing else looks like it.</p>
-      <p>The <strong>J is also for Josh</strong>. My brother served in Iraq and came home changed. He struggled with what he brought back, and we lost him in 2022. He was brilliant, funny, and worth saving. I don't think he had access to the right level of care at the right time.</p>
-      <p>I built JTree Health because I know what it costs when a young person doesn't get the right support. And I know that the Triangle has families right now watching their teenager struggle &mdash; past what weekly therapy can handle, not ready for residential, stuck in the middle with nowhere to go.</p>
-      <p>JTree is that place. PHP and IOP for teens ages 10 to 17, in Apex, NC. Structured enough to create real change. Flexible enough to keep your teen at home, in school, and in their life.</p>
-      <p><strong>Like the tree: deep roots. A long timeline. A shape completely its own.</strong></p>
-    </div>
-
-    <div data-reveal="right">
-      <div class="story-pull">
-        <p class="story-pull__quote">"I didn't know if this was the right level of care. It was. They met my son exactly where he was."</p>
-        <p class="story-pull__attr">&mdash; Parent of JTree graduate</p>
-        <div class="story-pull__image">&#x1F469;</div>
-        <p class="story-pull__image-label">Gabriela Miranda (Forter) &mdash; Founder</p>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<!-- Wave divider: pale-lav to sand -->
-<div class="wave-divider">
-  <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,0 L0,28 C360,56 720,0 1080,28 C1260,42 1380,14 1440,28 L1440,0 Z" fill="#EAE8F5"/>
-  </svg>
-</div>
-
-<!-- VALUES -->
-<section class="section" style="position:relative; overflow:hidden;">
-  <div style="max-width:1280px;margin:0 auto 0;" data-reveal>
-    <p class="section-label">Our Values</p>
-    <h2 class="section-head">Three commitments we make to every family.</h2>
-    <p class="section-sub">Our values aren't on a waiting room poster. They're in how we assess honestly, how we show up for families, and how we measure what matters.</p>
-  </div>
-  <div class="values-grid" data-stagger>
-    <div class="value-card" data-stagger-child>
-      <div class="value-card__svg-icon" style="background: var(--pale-lime);">
-        <!-- Grounded: root/plant icon -->
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-          <rect x="13" y="6" width="4" height="14" rx="2" fill="#2C5F52"/>
-          <ellipse cx="15" cy="6" rx="7" ry="5" fill="#B8E04A"/>
-          <ellipse cx="10" cy="8" rx="4" ry="3.5" fill="#2C5F52" opacity=".5"/>
-          <path d="M13 20 Q8 24 5 28" stroke="#1E3D34" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <path d="M17 20 Q22 24 25 28" stroke="#1E3D34" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <path d="M15 20 L15 28" stroke="#1E3D34" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <h3 class="value-card__name">Grounded</h3>
-      <p class="value-card__tagline">We assess honestly. We recommend what's right.</p>
-      <p class="value-card__desc">We don't catastrophize. We don't oversell. We assess honestly and recommend the right level of care &mdash; even when that's not us. We use DBT, CBT, and ACT because they work, not because they sound good in a brochure. We never promise outcomes we can't deliver.</p>
-    </div>
-    <div class="value-card" data-stagger-child>
-      <div class="value-card__svg-icon" style="background: var(--pale-lav);">
-        <!-- Genuine: heart icon -->
-        <svg width="30" height="28" viewBox="0 0 30 28" fill="none">
-          <path d="M15 26 C15 26 2 18 2 9 C2 4.5 5.5 1 10 1 C12.5 1 14.5 2.5 15 4 C15.5 2.5 17.5 1 20 1 C24.5 1 28 4.5 28 9 C28 18 15 26 15 26Z" fill="#A89FD8"/>
-          <ellipse cx="10" cy="9" rx="4" ry="4.5" fill="#EAE8F5" opacity=".5"/>
-          <circle cx="20" cy="9" r="3" fill="#EAE8F5" opacity=".35"/>
-        </svg>
-      </div>
-      <h3 class="value-card__name">Genuine</h3>
-      <p class="value-card__tagline">No corporate distance. No clinical gloss.</p>
-      <p class="value-card__desc">No corporate gloss. No clinical distance. Gaby's story is on the About page because the reason JTree exists matters. Staff bios show real people with real reasons for being here. We don't pretend this work is easy &mdash; for families or for clinicians.</p>
-    </div>
-    <div class="value-card" data-stagger-child>
-      <div class="value-card__svg-icon" style="background: var(--pale-sage);">
-        <!-- Growth-focused: sprouting plant icon -->
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-          <rect x="13.5" y="14" width="3" height="14" rx="1.5" fill="#2C5F52"/>
-          <ellipse cx="11" cy="12" rx="6" ry="9" transform="rotate(20 11 12)" fill="#B8E04A"/>
-          <ellipse cx="20" cy="10" rx="5" ry="8" transform="rotate(-15 20 10)" fill="#B8E04A" opacity=".75"/>
-          <ellipse cx="15" cy="7" rx="4" ry="6.5" fill="#2C5F52" opacity=".4"/>
-          <!-- Growth arrow -->
-          <path d="M22 4 L26 1 L24 6" stroke="#1E3D34" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="15" y1="14" x2="26" y2="1" stroke="#1E3D34" stroke-width="1" opacity=".25" stroke-dasharray="2 2"/>
-        </svg>
-      </div>
-      <h3 class="value-card__name">Growth-focused</h3>
-      <p class="value-card__tagline">We track outcomes. Families see the data.</p>
-      <p class="value-card__desc">Every teen who comes through JTree leaves with measurable change &mdash; skills they can name, a plan they helped create. Outcome data is shared with families weekly. Step-down planning starts on day one. The goal isn't discharge. It's durable progress.</p>
-    </div>
-  </div>
-
-  <!-- Decorative background elements for values section -->
-
-</section>
-
-<!-- Wave divider: sand to pale-sage -->
-<div class="wave-divider">
-  <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,28 C180,0 360,56 540,28 C720,0 900,56 1080,28 C1260,0 1380,42 1440,28 L1440,56 L0,56 Z" fill="#E0EEEA"/>
-  </svg>
-</div>
-
-<!-- TEAM -->
-<section class="section section--sage" style="position:relative; overflow:hidden;">
-  <div style="max-width:1280px;margin:0 auto 3rem;" data-reveal>
-    <p class="section-label">Our Team</p>
-    <h2 class="section-head">The people in the room with your teen.</h2>
-    <p class="section-sub">Licensed clinicians and psychiatrists who chose adolescent mental health — and stay because the work matters.</p>
-  </div>
-  <div class="team-grid" data-stagger>
-    <div class="team-card" data-stagger-child>
-      <div class="team-card__photo">&#x1F469;&#x200D;&#x2695;&#xFE0F;</div>
-      <p class="team-card__name">Caitlyn</p>
-      <p class="team-card__role">Executive Director</p>
-      <p class="team-card__bio">Photo and full bio to be provided. Leads day-to-day clinical operations at JTree Health.</p>
-    </div>
-    <div class="team-card" data-stagger-child>
-      <div class="team-card__photo">&#x1F469;</div>
-      <p class="team-card__name">Gabriela Miranda (Forter)</p>
-      <p class="team-card__role">Founder</p>
-      <p class="team-card__bio">Founder of JTree Health. Sister of Josh. Advocate for adolescent mental health access across the NC Triangle.</p>
-    </div>
-    <div class="team-card" data-stagger-child>
-      <div class="team-card__photo">&#x1F3E5;</div>
-      <p class="team-card__name">Clinical Team</p>
-      <p class="team-card__role">Growing</p>
-      <p class="team-card__bio">Licensed clinicians, psychiatrists, and support staff. Bios added as the team grows.</p>
-    </div>
-  </div>
-
-</section>
-
-<!-- Wave divider: pale-sage to pale-lav -->
-<div class="wave-divider" style="background:var(--pale-lav);">
-  <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,0 L0,28 C240,56 480,0 720,28 C960,56 1200,0 1440,28 L1440,0 Z" fill="#E0EEEA"/>
-  </svg>
-</div>
-
-<!-- CARF -->
-<section class="section section--lav" style="position:relative; overflow:hidden;">
-  <div class="carf-block" data-reveal>
+  <!-- Hero -->
+  <section class="section about-hero" style="position:relative; overflow:hidden;">
+    <img class="collage" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-grid-torn.png'); ?>" alt="" style="right:-20px; top:-20px; width: 220px; opacity:0.85;">
+    <img class="twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-outline-lavender.svg'); ?>" alt="" style="left:32%; top:18%; width:30px;">
     <div>
-      <div class="carf-badge-lg">
-        <p class="carf-badge-lg__text">CARF</p>
-        <p class="carf-badge-lg__sub">Accredited</p>
+      <span class="jth-eyebrow">Our story</span>
+      <h1 class="jth-display-l" style="font-size: clamp(40px, 5vw, 56px); margin: 14px 0 20px;">For my brother Josh.</h1>
+      <p class="jth-body-l" style="margin: 0 0 14px; max-width: 56ch;">In 2022 my brother Josh died. He was 19. He was funny, stubborn, and a deeply good person who couldn't find care that took him seriously enough.</p>
+      <p class="jth-body-l" style="margin: 0; max-width: 56ch;">I started JTree Health because the kind of place I wish he'd had didn't exist near us. So we made it.</p>
+      <p class="jth-hand" style="margin-top: 24px; transform: rotate(-2deg);">— Gabriela</p>
+    </div>
+    <div class="about-portrait">
+      <img src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-torn-desert-photo.png'); ?>" alt="A Joshua tree in the high desert" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+  </section>
+
+  <!-- Brand-name story -->
+  <section class="section section-bg-cream-2">
+    <div class="container" style="max-width:880px;">
+      <span class="jth-eyebrow">Why a Joshua tree</span>
+      <h2 class="jth-h2" style="margin: 12px 0 20px;">A tree that grows in a shape entirely its own.</h2>
+      <p class="jth-body-l" style="margin: 0 0 16px;">Joshua trees grow slowly, sideways as often as up, branching where the wind tells them to branch. Two trees in the same desert never look the same.</p>
+      <p class="jth-body-l" style="margin: 0;">That's what we want for the teens in our care. Not a return to who they were before. A real, grounded version of who they're becoming — in whatever shape that turns out to be.</p>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section">
+    <div class="container">
+      <header class="section-head">
+        <span class="jth-eyebrow">Clinical team</span>
+        <h2 class="jth-h2">Adolescent specialists, every one.</h2>
+      </header>
+      <div class="cards-3">
+        <div class="program-card">
+          <div style="width:72px; height:72px; border-radius: 9999px; background: var(--jth-pale-sage); border: 1px solid var(--jth-rule-strong); display:flex; align-items:center; justify-content:center; font-family: var(--font-editorial); font-size: 28px; color: var(--jth-deep-green);">GM</div>
+          <h3 class="jth-h3">Gabriela Miranda, LCSW</h3>
+          <p class="program-meta">Founder · Clinical Director</p>
+          <p>15 years in adolescent DBT. Former director of a Triangle-area teen IOP.</p>
+        </div>
+        <div class="program-card">
+          <div style="width:72px; height:72px; border-radius: 9999px; background: var(--jth-pale-lavender); border: 1px solid var(--jth-rule-strong); display:flex; align-items:center; justify-content:center; font-family: var(--font-editorial); font-size: 28px; color: var(--jth-deep-green);">MR</div>
+          <h3 class="jth-h3">Marcus Reyes, MD</h3>
+          <p class="program-meta">Child &amp; Adolescent Psychiatrist</p>
+          <p>Triple-board-certified. Believes the teen has a vote in their own treatment.</p>
+        </div>
+        <div class="program-card">
+          <div style="width:72px; height:72px; border-radius: 9999px; background: var(--jth-pale-lime); border: 1px solid var(--jth-rule-strong); display:flex; align-items:center; justify-content:center; font-family: var(--font-editorial); font-size: 28px; color: var(--jth-deep-green);">PO</div>
+          <h3 class="jth-h3">Priya Okafor, LMFT</h3>
+          <p class="program-meta">Family Therapy Lead</p>
+          <p>Trauma-informed family work. Bilingual: English / Spanish.</p>
+        </div>
       </div>
     </div>
-    <div>
-      <p class="section-label">Accreditation</p>
-      <h2 class="section-head">CARF Accredited</h2>
-      <p class="section-sub">JTree Health is accredited by CARF International &mdash; the Commission on Accreditation of Rehabilitation Facilities. This means our programs meet rigorous international standards for quality, safety, and accountability. It's the gold standard in behavioral health. JTree Health has earned it.</p>
+  </section>
+
+  <!-- Values -->
+  <section class="section section-bg-dark" style="position:relative; overflow:hidden;">
+    <img class="collage" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-brush.png'); ?>" alt="" style="left:-30px; top: 40px; width: 200px; opacity:0.7;">
+    <div class="container">
+      <header class="section-head">
+        <span class="jth-eyebrow" style="color: var(--jth-lime-green);">What we believe</span>
+        <h2 class="jth-h2">Care that respects intelligence.</h2>
+      </header>
+      <div class="cards-3">
+        <div class="jth-card-dark" style="background: color-mix(in oklch, var(--jth-deep-green) 90%, white 10%); border: 1px solid color-mix(in oklch, var(--jth-cream) 16%, var(--jth-deep-green) 84%);">
+          <h3 class="jth-h3" style="margin:0 0 10px;">Clinical excellence is the floor.</h3>
+          <p style="margin:0; opacity:0.85;">DBT-informed care delivered by trained, supervised clinicians. CARF-accredited. Boring, in the best way.</p>
+        </div>
+        <div class="jth-card-dark" style="background: color-mix(in oklch, var(--jth-deep-green) 90%, white 10%); border: 1px solid color-mix(in oklch, var(--jth-cream) 16%, var(--jth-deep-green) 84%);">
+          <h3 class="jth-h3" style="margin:0 0 10px;">Teens are not adults in waiting.</h3>
+          <p style="margin:0; opacity:0.85;">We don't talk down. We don't manipulate. We treat your kid like the smart, skeptical person they are.</p>
+        </div>
+        <div class="jth-card-dark" style="background: color-mix(in oklch, var(--jth-deep-green) 90%, white 10%); border: 1px solid color-mix(in oklch, var(--jth-cream) 16%, var(--jth-deep-green) 84%);">
+          <h3 class="jth-h3" style="margin:0 0 10px;">Families are part of the work.</h3>
+          <p style="margin:0; opacity:0.85;">Healing happens in relationship. Parents and siblings are not bystanders here.</p>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-</section>
+  <!-- CARF -->
+  <section class="section section-tight">
+    <div class="container">
+      <div style="display:flex; gap: 24px; align-items:center; padding: 28px; background: var(--jth-pale-sage); border-radius: var(--r-card);">
+        <span class="carf-badge" style="border-color: var(--jth-deep-green); color: var(--jth-deep-green);">CARF Accredited</span>
+        <p class="jth-body-s" style="margin:0; color: var(--jth-charcoal);">Joshua Tree Health is accredited by CARF International. CARF accreditation is an external standard of clinical quality, ethics, and outcomes — not a marketing badge.</p>
+      </div>
+    </div>
+  </section>
 
-<!-- Wave divider: pale-lav to forest -->
-<div class="wave-divider" style="background:var(--forest);">
-  <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,0 L0,28 C360,0 720,56 1080,28 C1260,14 1380,42 1440,28 L1440,0 Z" fill="#EAE8F5"/>
-  </svg>
-</div>
+  <section class="cta-band">
+    <div class="container">
+      <h2>Ready to talk?</h2>
+      <p>One short form, then a real human calls you within a business day.</p>
+      <a class="jth-btn jth-btn-lime jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+    </div>
+  </section>
 
-<!-- TAGLINE -->
-<div class="tagline-section">
-
-  <blockquote data-reveal>"Like the tree: deep roots. A long timeline. A shape completely its own."</blockquote>
-  <a href="<?php echo esc_url(home_url('/admissions/')); ?>" class="btn btn--lime btn--lg" data-reveal>Start the Conversation &rarr;</a>
-</div>
+</main>
 
 <?php get_footer(); ?>

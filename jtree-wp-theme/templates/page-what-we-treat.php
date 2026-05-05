@@ -1,110 +1,55 @@
 <?php
 /**
  * Template Name: What We Treat
- * Description: Conditions treated at JTree Health
  *
  * @package JTreeHealth
  */
-
+defined('ABSPATH') || exit;
 get_header();
+
+$conditions = array(
+    array('id' => 'anxiety',     'name' => 'Anxiety + panic',         'desc' => 'Generalized anxiety, panic disorder, social anxiety, school avoidance.'),
+    array('id' => 'depression',  'name' => 'Depression',              'desc' => 'Major depression, persistent low mood, hopelessness, isolation.'),
+    array('id' => 'ocd',         'name' => 'OCD',                     'desc' => 'Obsessive thoughts and compulsive behaviors. Exposure-based treatment.'),
+    array('id' => 'adhd',        'name' => 'ADHD + emotion dysregulation', 'desc' => 'When ADHD shows up alongside anxiety, depression, or self-regulation struggles.'),
+    array('id' => 'trauma',      'name' => 'Trauma and PTSD',         'desc' => 'Acute and complex trauma. Trauma-informed throughout, with specialty referrals when needed.'),
+    array('id' => 'self-harm',   'name' => 'Self-harm',               'desc' => 'Cutting and other self-injurious behavior. Skills-based approach, no shame.'),
+    array('id' => 'co-occurring','name' => 'Co-occurring concerns',   'desc' => 'Most teens we see are managing more than one of the above at once. We work with the whole picture.'),
+);
 ?>
 
-<?php get_template_part('templates/partials/crisis-bar'); ?>
+<main id="main">
 
-<!-- Page Header -->
-<section class="jtree-page-header jtree-section--warm-sand jtree-page-header--with-motif">
-  <div class="jtree-container">
-    <span class="jtree-hero__badge">Conditions We Treat</span>
-    <h1>We treat what&rsquo;s getting in the way.</h1>
-    <p class="jtree-lead">Our PHP and IOP programs are designed for teens with complex, co-occurring mental health challenges that need more than weekly therapy.</p>
-  </div>
-</section>
-
-<!-- Conditions Grid -->
-<section class="jtree-section jtree-section--pale-lavender">
-  <div class="jtree-container">
-    <div class="jtree-conditions-grid">
-
-      <div class="jtree-condition-card">
-        <span class="jtree-pill jtree-pill--sage">Common</span>
-        <h3>Anxiety</h3>
-        <p>Generalized anxiety, social anxiety, panic disorder, school refusal, and phobias. When worry takes over daily life.</p>
-      </div>
-
-      <div class="jtree-condition-card">
-        <span class="jtree-pill jtree-pill--sage">Common</span>
-        <h3>Depression</h3>
-        <p>Major depressive disorder, persistent depressive disorder, and treatment-resistant depression in adolescents.</p>
-      </div>
-
-      <div class="jtree-condition-card">
-        <span class="jtree-pill jtree-pill--lavender">Specialized</span>
-        <h3>OCD</h3>
-        <p>Obsessive-compulsive disorder with ERP (Exposure and Response Prevention) as a core component of treatment.</p>
-      </div>
-
-      <div class="jtree-condition-card">
-        <span class="jtree-pill jtree-pill--lavender">Specialized</span>
-        <h3>ADHD</h3>
-        <p>Attention-deficit/hyperactivity disorder, especially when co-occurring with anxiety, depression, or behavioral challenges.</p>
-      </div>
-
-      <div class="jtree-condition-card">
-        <span class="jtree-pill jtree-pill--lavender">Specialized</span>
-        <h3>Trauma &amp; PTSD</h3>
-        <p>Post-traumatic stress disorder, complex trauma, and adverse childhood experiences. Trauma-informed care throughout.</p>
-      </div>
-
-      <div class="jtree-condition-card">
-        <span class="jtree-pill jtree-pill--forest">Acute</span>
-        <h3>Self-Harm</h3>
-        <p>Non-suicidal self-injury (NSSI) with safety planning, DBT skills, and family involvement as core treatment elements.</p>
-      </div>
-
-      <div class="jtree-condition-card">
-        <span class="jtree-pill jtree-pill--forest">Acute</span>
-        <h3>Suicidal Ideation</h3>
-        <p>Active and passive suicidal ideation with comprehensive safety planning, risk assessment, and stabilization support.</p>
-      </div>
-
-      <div class="jtree-condition-card">
-        <span class="jtree-pill jtree-pill--lime">Complex</span>
-        <h3>Co-occurring Disorders</h3>
-        <p>Multiple diagnoses presenting together. Our integrated treatment model addresses the whole picture, not just one diagnosis.</p>
-      </div>
-
+  <section class="section" style="padding-top: 64px; padding-bottom: 24px;">
+    <div class="container" style="max-width: 880px;">
+      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">What we treat</span>
+      <h1 class="jth-display-l" style="font-size: clamp(40px, 5vw, 56px); margin: 0 0 20px;">Real teen mental-health concerns, <em class="jth-emph">treated seriously.</em></h1>
+      <p class="jth-body-l" style="margin: 0; max-width: 60ch;">We work with adolescents 10&ndash;17 navigating the conditions below. We do not treat substance use as a primary diagnosis or active eating disorders that require medical stabilization &mdash; we'll point you to the right place if that's what your teen needs.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Our Approach -->
-<section class="jtree-section jtree-section--pale-sage">
-  <div class="jtree-container">
-    <div class="jtree-container--narrow" style="margin: 0 auto;">
-      <h2>Our Treatment Approach</h2>
-      <p>Every teen&rsquo;s treatment plan is individualized, but our programs are built on evidence-based modalities:</p>
-      <ul>
-        <li><strong>Cognitive Behavioral Therapy (CBT)</strong> &mdash; Identifying and restructuring unhelpful thought patterns</li>
-        <li><strong>Dialectical Behavior Therapy (DBT)</strong> &mdash; Distress tolerance, emotional regulation, interpersonal effectiveness</li>
-        <li><strong>Exposure and Response Prevention (ERP)</strong> &mdash; Gold-standard treatment for OCD</li>
-        <li><strong>Trauma-Focused CBT (TF-CBT)</strong> &mdash; Processing trauma in a safe, structured way</li>
-        <li><strong>Family Systems Therapy</strong> &mdash; Because healing happens in the context of relationships</li>
-        <li><strong>Mindfulness and Acceptance-Based Approaches</strong> &mdash; Building present-moment awareness</li>
-      </ul>
+  <section class="section">
+    <div class="container">
+      <div class="cards-3" style="grid-template-columns: repeat(2, 1fr);">
+        <?php foreach ($conditions as $c) : ?>
+          <article class="program-card" id="<?php echo esc_attr($c['id']); ?>">
+            <h2 class="jth-h3" style="margin: 0;"><?php echo esc_html($c['name']); ?></h2>
+            <p style="margin: 0;"><?php echo esc_html($c['desc']); ?></p>
+            <a class="arrow" href="<?php echo esc_url(home_url('/admissions/')); ?>">Talk to admissions &nbsp;&rarr;</a>
+          </article>
+        <?php endforeach; ?>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CTA -->
-<section class="jtree-section jtree-section--forest">
-  <div class="jtree-container jtree-text-center">
-    <h2>Not sure if we treat what your teen is experiencing?</h2>
-    <p>Call us. We&rsquo;ll talk through it and help you find the right fit &mdash; even if it&rsquo;s not us.</p>
-    <div class="jtree-hero__actions" style="justify-content: center;">
-      <a href="tel:+19192764005" class="jtree-btn jtree-btn--white jtree-btn--lg">Call (919) 276-4005</a>
-      <a href="/admissions/" class="jtree-btn jtree-btn--secondary jtree-btn--lg" style="border-color: var(--jtree-white); color: var(--jtree-white);">Submit an Inquiry</a>
+  <section class="cta-band">
+    <div class="container">
+      <h2>Not sure if we're the right fit?</h2>
+      <p>Tell us a little. We'll talk through it together &mdash; and recommend a different program if that's what your teen needs.</p>
+      <a class="jth-btn jth-btn-lime jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
     </div>
-  </div>
-</section>
+  </section>
+
+</main>
 
 <?php get_footer(); ?>

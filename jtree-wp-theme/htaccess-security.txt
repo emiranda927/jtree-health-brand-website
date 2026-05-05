@@ -1,0 +1,53 @@
+# JTree Health — security headers snippet
+# ────────────────────────────────────────────────────────────────────
+# Paste these directives into the WordPress site's .htaccess file
+# (in the WP root, OUTSIDE the `# BEGIN WordPress` / `# END WordPress`
+# managed block — WordPress overwrites that block on every save).
+#
+# These headers target an A grade on securityheaders.com. Cloudflare
+# can also enforce these — having both is fine; duplicates are merged.
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains; preload"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=(), interest-cohort=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+
+  # Content-Security-Policy
+  # ─ default-src 'self' ─ everything from same origin only by default
+  # ─ form-action covers the cross-origin submit to api.jtreehealth.com
+  # ─ script-src allows GTM (replace GTM-XXXXX with your container ID)
+  # ─ frame-ancestors 'none' prevents clickjacking
+  Header always set Content-Security-Policy "\
+    default-src 'self'; \
+    base-uri 'self'; \
+    form-action 'self' https://api.jtreehealth.com; \
+    frame-ancestors 'none'; \
+    img-src 'self' data: https:; \
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; \
+    connect-src 'self' https://api.jtreehealth.com https://www.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net; \
+    style-src 'self' 'unsafe-inline'; \
+    font-src 'self' data:; \
+    object-src 'none'; \
+    upgrade-insecure-requests"
+</IfModule>
+
+# Force HTTPS (Cloudflare also handles this; harmless duplicate)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Block access to sensitive WordPress files
+<FilesMatch "^(wp-config\.php|\.env|composer\.(json|lock)|package\.(json|lock))$">
+  Require all denied
+</FilesMatch>
+
+# Block xmlrpc.php (already disabled in security.php; defense in depth)
+<Files xmlrpc.php>
+  Require all denied
+</Files>

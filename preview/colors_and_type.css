@@ -1,0 +1,396 @@
+/* ──────────────────────────────────────────────────────────────────
+   JTree Health · Colors + Type
+   ───────────────────────────────────────────────────────────────── */
+
+/* ──────────────────────────────────────────────────────────────────
+   All five brand faces served from local files (no Google Fonts).
+   Sora · Fraunces · Inter · JetBrains Mono · Caveat — all variable.
+   ───────────────────────────────────────────────────────────────── */
+
+/* Sora — display & wordmark, geometric humanist sans. */
+@font-face {
+  font-family: "Sora";
+  src: url("./fonts/Sora-VariableFont_wght.ttf") format("truetype-variations"),
+       url("./fonts/Sora-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Fraunces — editorial serif, hero / emotional moments. Axes: SOFT, WONK, opsz, wght. */
+@font-face {
+  font-family: "Fraunces";
+  src: url("./fonts/Fraunces-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype-variations"),
+       url("./fonts/Fraunces-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("./fonts/Fraunces-Italic-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype-variations"),
+       url("./fonts/Fraunces-Italic-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter — UI and body workhorse. Axes: opsz, wght. */
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype-variations"),
+       url("./fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype-variations"),
+       url("./fonts/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* JetBrains Mono — labels, page numbers, metadata. */
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype-variations"),
+       url("./fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./fonts/JetBrainsMono-Italic-VariableFont_wght.ttf") format("truetype-variations"),
+       url("./fonts/JetBrainsMono-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Caveat — hand-lettered accent, used sparingly. */
+@font-face {
+  font-family: "Caveat";
+  src: url("./fonts/Caveat-VariableFont_wght.ttf") format("truetype-variations"),
+       url("./fonts/Caveat-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ─── Color tokens (literal palette — DO NOT EXTEND) ─── */
+  --jth-deep-green:    #183B2E;
+  --jth-lime-green:    #C8E869;
+  --jth-lavender:      #B8A7E6;
+  --jth-cream:         #F6F4EC;
+  --jth-charcoal:      #1D1D1F;
+  --jth-yellow:        #FFD100;
+
+  /* ─── Pale tints (sparingly; cream is default page background) ─── */
+  --jth-pale-lavender: #EAE3F5;
+  --jth-pale-lime:     #EEF6CC;
+  --jth-pale-sage:     #DCE9E2;
+
+  /* ─── Computed surfaces ─── */
+  --jth-cream-2:    color-mix(in oklch, var(--jth-cream) 96%, black 4%);  /* card surface */
+  --jth-cream-3:    color-mix(in oklch, var(--jth-cream) 90%, black 10%); /* nested */
+  --jth-rule:       color-mix(in oklch, var(--jth-charcoal) 14%, var(--jth-cream) 86%);
+  --jth-rule-strong:color-mix(in oklch, var(--jth-charcoal) 28%, var(--jth-cream) 72%);
+  --jth-green-soft: color-mix(in oklch, var(--jth-deep-green) 12%, var(--jth-cream) 88%);
+  --jth-green-hover:color-mix(in oklch, var(--jth-deep-green) 92%, white 8%);
+  --jth-green-press:color-mix(in oklch, var(--jth-deep-green) 86%, black 14%);
+
+  /* ─── Semantic ─── */
+  --jth-bg:         var(--jth-cream);
+  --jth-bg-dark:    var(--jth-deep-green);
+  --jth-fg:         var(--jth-charcoal);
+  --jth-fg-muted:   color-mix(in oklch, var(--jth-charcoal) 65%, var(--jth-cream) 35%);
+  --jth-fg-subtle:  color-mix(in oklch, var(--jth-charcoal) 45%, var(--jth-cream) 55%);
+  --jth-fg-inverse: var(--jth-cream);
+  --jth-brand:      var(--jth-deep-green);
+  --jth-link:       var(--jth-deep-green);
+  --jth-focus:      var(--jth-lime-green);
+  --jth-divider:    color-mix(in oklch, var(--jth-lavender) 50%, var(--jth-cream) 50%);
+
+  /* ─── Type families ─── */
+  --font-display:   "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-editorial: "Fraunces", "Times New Roman", Georgia, serif;
+  --font-body:      "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:      "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-hand:      "Caveat", "Comic Sans MS", cursive;
+
+  /* ─── Type scale (from brand kit) ─── */
+  --fs-display-xl: 72px;    /* Fraunces 600 — hero statements, campaign moments */
+  --fs-display-l:  56px;    /* Fraunces 600 — section openers */
+  --fs-h1:         40px;    /* Sora 700 — page titles */
+  --fs-h2:         32px;    /* Sora 700 — section heads */
+  --fs-h3:         24px;    /* Sora 600 — card titles */
+  --fs-h4:         20px;    /* Sora 600 — small headings */
+  --fs-body-l:     18px;    /* Inter 400 — long-form */
+  --fs-body:       16px;    /* Inter 400 — default */
+  --fs-body-s:     15px;    /* Inter 400 — captions */
+  --fs-label:      13px;    /* JetBrains Mono 500 — eyebrows, tags */
+  --fs-micro:      12px;    /* Inter 400 — fine print */
+
+  /* ─── Spacing (4-pt base) ─── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-7:  32px;
+  --space-8:  40px;
+  --space-9:  56px;
+  --space-10: 72px;
+  --space-11: 96px;
+  --space-12: 128px;
+
+  /* ─── Radii ─── */
+  --r-xs:     4px;
+  --r-sm:     8px;
+  --r-md:     12px;
+  --r-input:  10px;
+  --r-card:   16px;
+  --r-lg:     20px;
+  --r-xl:     28px;
+  --r-pill:   9999px;
+
+  /* ─── Shadows (used sparingly; brand prefers borders) ─── */
+  --sh-sm:    0 1px 2px rgba(24, 59, 46, 0.06);
+  --sh-md:    0 4px 14px rgba(24, 59, 46, 0.08);
+  --sh-focus: 0 0 0 3px color-mix(in oklch, var(--jth-lime-green) 70%, transparent);
+
+  /* ─── Motion ─── */
+  --dur-fast:   140ms;
+  --dur-base:   220ms;
+  --dur-slow:   420ms;
+  --ease-calm:  cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Page defaults — opt in by adding .jth-paper to body
+   ───────────────────────────────────────────────────────────────── */
+
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+
+.jth-paper {
+  background-color: var(--jth-cream);
+  background-image:
+    radial-gradient(rgba(24, 59, 46, 0.025) 1px, transparent 1px),
+    radial-gradient(rgba(24, 59, 46, 0.018) 1px, transparent 1px);
+  background-size: 24px 24px, 7px 7px;
+  background-position: 0 0, 12px 12px;
+  color: var(--jth-charcoal);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Type · semantic classes
+   ───────────────────────────────────────────────────────────────── */
+
+.jth-eyebrow {
+  font-family: var(--font-mono); font-weight: 500;
+  font-size: var(--fs-label); letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--jth-fg-muted);
+}
+
+.jth-display-xl {
+  font-family: var(--font-editorial); font-weight: 600;
+  font-size: var(--fs-display-xl); line-height: 1.04;
+  letter-spacing: -0.02em; color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+  text-wrap: balance;
+}
+.jth-display-l {
+  font-family: var(--font-editorial); font-weight: 600;
+  font-size: var(--fs-display-l); line-height: 1.06;
+  letter-spacing: -0.02em; color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30, "opsz" 96;
+  text-wrap: balance;
+}
+
+.jth-h1 { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h1); line-height: 1.1;  letter-spacing: -0.02em;  color: var(--jth-deep-green); text-wrap: balance; }
+.jth-h2 { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h2); line-height: 1.15; letter-spacing: -0.015em; color: var(--jth-deep-green); text-wrap: balance; }
+.jth-h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h3); line-height: 1.25; letter-spacing: -0.01em;  color: var(--jth-deep-green); }
+.jth-h4 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h4); line-height: 1.35; color: var(--jth-deep-green); }
+
+.jth-body-l { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-body-l); line-height: 1.55; color: var(--jth-charcoal); text-wrap: pretty; }
+.jth-body   { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-body);   line-height: 1.55; color: var(--jth-charcoal); text-wrap: pretty; }
+.jth-body-s { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-body-s); line-height: 1.5;  color: var(--jth-fg-muted); }
+.jth-micro  { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-micro);  line-height: 1.5;  color: var(--jth-fg-muted); }
+
+.jth-label  { font-family: var(--font-mono); font-weight: 500; font-size: var(--fs-label);  letter-spacing: 0.08em; text-transform: uppercase; color: var(--jth-fg-muted); }
+.jth-meta   { font-family: var(--font-mono); font-weight: 400; font-size: var(--fs-label);  letter-spacing: 0.06em; color: var(--jth-fg-muted); }
+
+.jth-hand   { font-family: var(--font-hand); font-weight: 400; font-size: 28px; line-height: 1; color: var(--jth-deep-green); }
+
+.jth-emph   { font-family: var(--font-editorial); font-style: italic; font-variation-settings: "SOFT" 30; }
+
+/* ──────────────────────────────────────────────────────────────────
+   Buttons
+   ───────────────────────────────────────────────────────────────── */
+
+.jth-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--font-display); font-weight: 600; font-size: 16px;
+  letter-spacing: -0.005em;
+  padding: 14px 22px; border-radius: var(--r-pill);
+  border: 1.5px solid transparent; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-calm),
+              color      var(--dur-fast) var(--ease-calm),
+              transform  var(--dur-fast) var(--ease-calm),
+              border-color var(--dur-fast) var(--ease-calm);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.jth-btn:active { transform: translateY(1px); }
+.jth-btn:focus-visible { outline: none; box-shadow: var(--sh-focus); }
+
+.jth-btn-primary { background: var(--jth-deep-green); color: var(--jth-cream); }
+.jth-btn-primary:hover { background: var(--jth-green-hover); }
+.jth-btn-primary:active { background: var(--jth-green-press); }
+
+.jth-btn-lime { background: var(--jth-lime-green); color: var(--jth-deep-green); }
+.jth-btn-lime:hover { background: color-mix(in oklch, var(--jth-lime-green) 90%, black 10%); }
+
+.jth-btn-secondary {
+  background: transparent; color: var(--jth-deep-green);
+  border-color: var(--jth-deep-green);
+}
+.jth-btn-secondary:hover { background: var(--jth-green-soft); }
+
+.jth-btn-ghost { background: transparent; color: var(--jth-deep-green); }
+.jth-btn-ghost:hover { background: var(--jth-cream-3); }
+
+.jth-btn-sm { padding: 9px 16px; font-size: 14px; }
+.jth-btn-lg { padding: 17px 28px; font-size: 17px; }
+
+/* ──────────────────────────────────────────────────────────────────
+   Cards · Pills · Inputs
+   ───────────────────────────────────────────────────────────────── */
+
+.jth-card {
+  background: var(--jth-cream);
+  border: 1px solid var(--jth-rule);
+  border-radius: var(--r-card);
+  padding: var(--space-7);
+}
+.jth-card-tinted { background: var(--jth-cream-2); border: 1px solid var(--jth-rule); border-radius: var(--r-card); padding: var(--space-7); }
+.jth-card-dark   { background: var(--jth-deep-green); color: var(--jth-cream); border-radius: var(--r-card); padding: var(--space-7); }
+.jth-card-dark .jth-h2, .jth-card-dark .jth-h3, .jth-card-dark .jth-h4 { color: var(--jth-cream); }
+
+.jth-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: var(--r-pill);
+  font-family: var(--font-mono); font-weight: 500;
+  font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  background: var(--jth-cream-3); color: var(--jth-deep-green);
+  border: 1px solid var(--jth-rule);
+}
+.jth-pill-lavender { background: var(--jth-pale-lavender); border-color: color-mix(in oklch, var(--jth-lavender) 50%, var(--jth-cream) 50%); }
+.jth-pill-lime     { background: var(--jth-pale-lime);     border-color: color-mix(in oklch, var(--jth-lime-green) 50%, var(--jth-cream) 50%); }
+.jth-pill-sage     { background: var(--jth-pale-sage);     border-color: color-mix(in oklch, var(--jth-deep-green) 30%, var(--jth-cream) 70%); }
+
+.jth-input, .jth-select, .jth-textarea {
+  width: 100%; box-sizing: border-box;
+  font-family: var(--font-body); font-weight: 400; font-size: 16px; color: var(--jth-charcoal);
+  padding: 13px 16px; background: var(--jth-cream);
+  border: 1.5px solid var(--jth-rule); border-radius: var(--r-input);
+  transition: border-color var(--dur-fast) var(--ease-calm), background var(--dur-fast) var(--ease-calm);
+}
+.jth-input:focus, .jth-select:focus, .jth-textarea:focus {
+  outline: none; border-color: var(--jth-deep-green);
+  box-shadow: var(--sh-focus);
+}
+.jth-input::placeholder { color: var(--jth-fg-subtle); }
+.jth-input[aria-invalid="true"], .jth-select[aria-invalid="true"], .jth-textarea[aria-invalid="true"] {
+  border-color: #B8453B;
+}
+
+.jth-field-label {
+  display: block; margin-bottom: 6px;
+  font-family: var(--font-display); font-weight: 500; font-size: 14px; color: var(--jth-charcoal);
+}
+.jth-field-error {
+  display: block; margin-top: 6px;
+  font-family: var(--font-body); font-size: 13px; color: #B8453B;
+}
+.jth-field-help {
+  display: block; margin-top: 6px;
+  font-family: var(--font-body); font-size: 13px; color: var(--jth-fg-muted);
+}
+
+/* Visually hidden honeypot */
+.jth-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+/* ──────────────────────────────────────────────────────────────────
+   Joshie · the mascot
+   The hand-drawn Joshua-tree character. Use one Joshie per composition
+   (max two if it's a "Joshie + tree-friend" moment of pairing).
+   Always pose-appropriate to the surface — see preview/joshie.html.
+   ───────────────────────────────────────────────────────────────── */
+
+.jth-joshie {
+  display: block;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.jth-joshie-sm  { width: 88px; }
+.jth-joshie-md  { width: 160px; }
+.jth-joshie-lg  { width: 240px; }
+.jth-joshie-xl  { width: 360px; }
+
+/* Decorative placement — tucked into a corner of a section. */
+.jth-joshie-tuck {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Subtle idle motion. The brand calls for "calm not springy",
+   so the sway is small and slow. Disabled via prefers-reduced-motion. */
+@keyframes jth-joshie-sway {
+  0%, 100% { transform: translateY(0) rotate(-0.6deg); }
+  50%      { transform: translateY(-3px) rotate(0.6deg); }
+}
+.jth-joshie-sway { animation: jth-joshie-sway 5.6s var(--ease-calm) infinite; transform-origin: 50% 90%; }
+
+/* ──────────────────────────────────────────────────────────────────
+   Crisis bar
+   ───────────────────────────────────────────────────────────────── */
+
+.jth-crisis-bar {
+  background: var(--jth-deep-green); color: var(--jth-cream);
+  text-align: center; padding: 10px 16px;
+  font-family: var(--font-body); font-size: 14px; line-height: 1.4;
+}
+.jth-crisis-bar a { color: var(--jth-cream); text-decoration: underline; text-decoration-color: var(--jth-lime-green); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.jth-crisis-bar strong { color: var(--jth-lime-green); font-weight: 600; }
+
+/* ──────────────────────────────────────────────────────────────────
+   Skip link
+   ───────────────────────────────────────────────────────────────── */
+
+.jth-skip {
+  position: absolute; left: 8px; top: -40px; padding: 8px 12px;
+  background: var(--jth-deep-green); color: var(--jth-cream);
+  font-family: var(--font-display); font-size: 14px; border-radius: 8px;
+  z-index: 100;
+}
+.jth-skip:focus { top: 8px; }
