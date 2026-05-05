@@ -2,6 +2,7 @@
   "name": "jtree-form-api",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Joshua Tree Health — form submission API (Vercel Serverless)",
   "scripts": {
     "dev": "vercel dev",
