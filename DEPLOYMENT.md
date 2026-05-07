@@ -202,17 +202,103 @@ The WP theme at `jtree-wp-theme/` is the single source of truth. To run it local
 
 ---
 
-## Pre-launch open items (waiting on owner / vendor)
+## Outstanding integration work
 
-- [ ] Confirm `jtreehealth.com` is the production domain
-- [ ] Real photography (brand collage carries the heroes today)
-- [ ] `og-image.jpg` (1200×630) — see README in `assets/brand/`
-- [ ] Street address for Schema.org `LocalBusiness`
-- [ ] Ritten API endpoint + token
-- [ ] Resend domain verification (`noreply@jtreehealth.com`)
-- [ ] Google service-account JSON + Sheets share
-- [ ] GA4 property + GTM container IDs
-- [ ] Privacy-policy review by counsel (the placeholder is honest but not legal-reviewed)
+This is the single source of truth for everything that still has to happen before launch (and the few items that can wait until after). Grouped by *who acts*. When a row is done, check the box and date it in the right column.
+
+### Vendor accounts to set up or finish setting up
+
+| # | Item | Why it matters | Status |
+|---|---|---|---|
+| V1 | **Cloudflare Turnstile** — create site, capture **site key** (public) and **secret key** (private) at `dash.cloudflare.com` → Turnstile | Without this the form has only a honeypot. Falls open in code, so safe to defer, but should land before high-traffic launch. | ☐ |
+| V2 | **Cloudflare DNS** — A record for `@`, CNAME for `www` (proxied), CNAME for `api` (DNS-only). SSL "Full (strict)", HSTS on, WAF rule blocking `xmlrpc.php`, Bot Fight Mode on. | DNS is the front door for both WP and the API. Misconfigured DNS = no traffic. | ☐ |
+| V3 | **WP Engine** — provision site, add `jtreehealth.com` + `www`, issue Let's Encrypt SSL, install GeneratePress parent, SFTP up `jtree-wp-theme/`, append `htaccess-security.txt` outside the WP-managed block. | Production WP host. | ☐ |
+| V4 | **Vercel** — import `jtree-form-api` repo, attach `api.jtreehealth.com` custom domain. | Production API host. | ☐ |
+| V5 | **Resend** — verify the sending domain (DKIM, SPF, return-path records in Cloudflare DNS) for `noreply@jtreehealth.com`. | Without DKIM/SPF, lead-confirmation and admissions notification emails go to spam. | ☐ |
+| V6 | **Google service account** — create in GCP, share the Leads spreadsheet with the service-account email as Editor, paste the JSON into Vercel env. | The form API writes to Sheets through this account. No share = "permission denied" on every submission. | ☐ |
+| V7 | **Ritten** (or webhook relay — Keragon, Zapier, Make) — get the contact-creation endpoint URL and an API token. **New consideration:** the receiving config must tolerate a `stage: "partial"` payload that has no `contact` block — only a `session_id`, inquiry signals, and acquisition data. If it errors on those, the API falls back to Sheets, which is fine but loses the CRM trail. | Real CRM beats Sheets long-term. | ☐ |
+| V8 | **GA4 property** — IP anonymization on, Google Signals **off**, Ads Personalization **off**, 14-month retention. | Privacy-respectful analytics baseline. | ☐ |
+| V9 | **GTM container** — install on every page, replace placeholders in `inc/seo.php` (or via the cookie banner plugin's GTM injection path). | Tag management. | ☐ |
+| V10 | **Cookie banner** — pick CookieYes / Complianz / Cookiebot, install plugin, configure to default-deny non-essential cookies. | GDPR/CCPA + enables conditional GTM firing. | ☐ |
+| V11 | **UptimeRobot** — keyword monitor on `https://api.jtreehealth.com/api/health` (1-min interval). | First line of defense against silent API outages. | ☐ |
+
+### Vercel environment variables (Production scope)
+
+Set under Vercel → Project → Settings → Environment Variables. Each one only takes effect on the next deploy.
+
+| Variable | Purpose | Status |
+|---|---|---|
+| `RESEND_API_KEY` | Auth for Resend transactional email | ☐ |
+| `ADMISSIONS_EMAIL` | Where admissions notifications land (e.g., `admissions@jtreehealth.com`) | ☐ |
+| `OWNER_ALERT_EMAIL` | Where the watchdog cron alerts go | ☐ |
+| `CAREERS_EMAIL` | Where career-application emails land. **Optional** — falls back to `ADMISSIONS_EMAIL` if unset. | ☐ |
+| `GOOGLE_SHEETS_ID` | Spreadsheet ID for the Leads sheet | ☐ |
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | Stringified service-account JSON (from V6) | ☐ |
+| `ALLOWED_ORIGIN` | Allowed CORS origin for the form (e.g., `https://jtreehealth.com`) | ☐ |
+| `RITTEN_API_URL` + `RITTEN_API_KEY` | CRM endpoint + bearer token. Leave blank until V7 lands; falls back to Sheets. | ☐ |
+| `TURNSTILE_SECRET` | Cloudflare Turnstile secret key (private). Form-API verifier is gated by this — when blank, the verifier falls open and the form behaves as it did pre-Turnstile. | ☐ |
+
+### WordPress configuration
+
+| # | Item | How | Status |
+|---|---|---|---|
+| W1 | **Turnstile site key in WP** — exposes the public key to `form.js` / `careers.js` so the widget can render. | Either define `JTREE_TURNSTILE_SITE_KEY` in `wp-config.php`, or set the WP option: `update_option('jtree_turnstile_site_key', '0x4AAAAAA...')`. | ☐ |
+| W2 | **Create the 12 core pages** with the right templates (table in §4 above). | WP admin → Pages → Add New, set Page Attributes → Template. Set Home as static front page in Settings → Reading. | ☐ |
+| W3 | **Create the Careers page** — title "Careers", slug `careers`, template **Careers**, status **Draft**. The page renders `[DRAFT]` markers and a fictitious openings list — keep it as Draft until founder rewrites those. | WP admin. | ☐ |
+| W4 | **Create the 4 Parent Guide child pages** under "For Parents" — set parent page to "For Parents", template **Parent Guide**, slugs: `is-this-a-crisis`, `php-vs-iop`, `insurance-and-cost`, `what-the-first-call-is-like`. **Or** comment out the `<section id="resources">` block in `templates/page-for-parents.php` until guide bodies are written. | WP admin + page editor for body copy. | ☐ |
+| W5 | **Service-area pages** (when ready) — title "Teen IOP in &lt;Metro&gt;, NC", template **Service Area**, optional parent page "Service Areas" so URL becomes `/service-areas/teen-iop-<metro>/`. Optional Custom Fields: `metro_name`, `travel_context`. | WP admin + page editor. | ☐ |
+| W6 | **Append security headers** — paste `jtree-wp-theme/htaccess-security.txt` into the WP root `.htaccess` *outside* the `# BEGIN WordPress` / `# END WordPress` managed block. | SFTP. | ☐ |
+| W7 | **Bump `JTREE_THEME_VERSION`** in `functions.php` whenever you ship a JS/CSS change without a full theme reupload. Currently `2.0.0`. | Edit the constant. | ☐ |
+
+### Google Sheets (one-time, manual)
+
+| # | Item | Why | Status |
+|---|---|---|---|
+| S1 | Add header `status` to column **K** of the Leads sheet | Partial-capture writer expects column K. Existing rows leave it blank — read blank as `lead`. | ☐ |
+| S2 | Add header `session_id` to column **L** | Lets admissions correlate a partial → completed lead by sorting on this column. | ☐ |
+| S3 | If anyone has built a pivot/script/Looker view on the sheet, **review and update it** for the new columns | The watchdog cron has been updated to filter partials, but downstream consumers haven't. | ☐ |
+
+### Founder copy still needed
+
+Code is ready for these; only the words are missing.
+
+| # | Item | Where | Status |
+|---|---|---|---|
+| F1 | Careers — hero copy, openings list, application-section intro | `templates/page-careers.php` (search for `[DRAFT — founder edit]`) | ☐ |
+| F2 | Four Parent Guide bodies (W4) | WP page editor for each child page | ☐ |
+| F3 | Service-area pages — pick 2–3 metros, write 200–400 words each | WP page editor for each | ☐ |
+| F4 | `og-image.jpg` — 1200×630, replace `assets/brand/og-image.README.txt` | SFTP into `assets/brand/` | ☐ |
+| F5 | Real photography — teen lifestyle photos for hero treatments (brand collage covers heroes today) | Replace `<img>` references in templates as photos arrive | ☐ |
+| F6 | Real street address for `LocalBusiness` schema | `inc/seo.php` (currently "Apex, NC 27502" without street number) | ☐ |
+| F7 | Privacy policy — counsel review (current copy is honest but not legal-reviewed) | `templates/page-privacy.php` | ☐ |
+| F8 | Confirm `jtreehealth.com` is the production domain | All references in code default to this — replace if different | ☐ |
+
+### Engineering follow-ups (after launch is fine)
+
+| # | Item | Why | Status |
+|---|---|---|---|
+| E1 | Activate Ritten end-to-end once V7 lands | Move CRM destination off Sheets fallback | ☐ |
+| E2 | Verify `inc/seo.php` GTM placeholders are replaced | If using cookie-banner plugin's injection, this may be moot | ☐ |
+| E3 | Smoke-test partial capture on production (interact, abandon, see row appear in Sheets within 10s) | Validates the pagehide beacon path under real CDN conditions | ☐ |
+| E4 | Resume binary upload on careers form | v1 accepts a paste-a-link URL only. Real attachments need multipart parsing + size limits + virus scan. | ☐ |
+| E5 | Stale CLAUDE.md note about `site/preview/` | The repo doc references a parallel preview codebase that no longer exists. Remove the line in `CLAUDE.md` so future contributors don't hunt for it. | ☐ |
+| E6 | Decide whether to track partial-capture rate in GA4 as a custom metric | Today partials write only to Sheets/Ritten — no GA4 event fires. Adding one is a GTM tagging change, not a code change. | ☐ |
+| E7 | Consider Upstash Redis for rate limiting at scale | Current limiter is in-memory per Vercel function instance. Env vars are reserved in `.env.example`. | ☐ |
+| E8 | Add a structured-data validator to CI (Schema.org JSON-LD + FAQPage) | Catches breakage when copy changes diverge from schema | ☐ |
+
+### Touch points to keep an eye on (operational)
+
+These aren't tasks — they're hooks where something external can affect the system. Worth knowing about during incident triage.
+
+| Surface | What to know |
+|---|---|
+| **Leads spreadsheet column order** | The API writes to columns A–L positionally. Reordering columns will silently corrupt data. If you need to add columns, append to the right of L. |
+| **`session_id` value** | Generated client-side per browser tab. Same id is sent on the partial *and* the eventual full submission, so admissions can match a partial → lead by sorting Sheets on column L. |
+| **Watchdog cron filter** | Reads timestamps from column B and status from column K. Partials are excluded from the "no leads in N hours" alert — only `lead` and blank rows count. If you ever rename the status values, update `countRecentLeads` in `lib/sheets.ts`. |
+| **Honeypot** | Both forms have a hidden `hp_field`. Bot fills → silent 200, no row written. Edge case: a real user with assistive tech who fills it gets dropped. The label is `aria-hidden="true"` to minimize this. |
+| **Turnstile fall-open behavior** | Verifier returns `true` when `TURNSTILE_SECRET` is unset. This is intentional for dev/staging. Don't ship to production with the secret unset and assume the captcha is gating anything. |
+| **GA4 `inquiry_submitted`** | Fires only on `/thank-you/`. Partials do **not** fire it by design. Career applications do not fire it either — they're a separate funnel. |
+| **WP + Cloudflare cache** | Clear both after every theme deploy. Versioned by `JTREE_THEME_VERSION` constant — bump it when shipping JS/CSS without changing PHP. |
 
 ## Known limitations
 

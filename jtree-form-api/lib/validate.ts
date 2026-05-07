@@ -134,3 +134,59 @@ export interface PartialLead
   lead_id: string;
   submitted_at: string;
 }
+
+/**
+ * Career application — separate funnel from clinical inquiry. Lighter
+ * schema: name + email + role interest + free-form message. The optional
+ * resume link lets the applicant paste a public Drive / Dropbox / LinkedIn
+ * URL; we don't accept binary uploads in v1.
+ */
+export const CareerApplicationSchema = z.object({
+  applicant_first_name: z
+    .string()
+    .min(1, "First name is required")
+    .max(50),
+  applicant_last_name: z
+    .string()
+    .min(1, "Last name is required")
+    .max(50),
+  applicant_email: z
+    .string()
+    .email("Invalid email address")
+    .max(100),
+  applicant_phone: z
+    .string()
+    .min(1, "Phone number is required")
+    .transform((val) => normalizePhone(val)),
+  role_interest: z
+    .string()
+    .min(1, "Tell us which role you're interested in")
+    .max(80),
+  message: z
+    .string()
+    .max(2000, "Message must be 2000 characters or fewer")
+    .optional()
+    .default(""),
+  resume_url: z
+    .string()
+    .url("Resume link must be a full URL")
+    .max(500)
+    .optional(),
+
+  consent_contact: z
+    .union([z.boolean(), z.literal("true"), z.literal("on")])
+    .transform((val) => val === true || val === "true" || val === "on")
+    .refine((val) => val === true, "Consent to contact is required"),
+
+  cf_turnstile_response: z.string().max(2048).optional(),
+  hp_field: z.string().max(0).optional().default(""),
+});
+
+export type CareerApplicationInput = z.input<typeof CareerApplicationSchema>;
+export type CareerApplicationData = z.output<typeof CareerApplicationSchema>;
+
+export interface CareerApplication
+  extends Omit<CareerApplicationData, "hp_field" | "consent_contact" | "cf_turnstile_response"> {
+  application_id: string;
+  submitted_at: string;
+}

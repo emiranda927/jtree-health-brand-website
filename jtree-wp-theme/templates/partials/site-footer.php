@@ -35,6 +35,7 @@ $brand = JTREE_THEME_URI . '/assets/brand';
         <li><a href="<?php echo $home; ?>for-teens/">For Teens</a></li>
         <li><a href="<?php echo $home; ?>insurance/">Insurance</a></li>
         <li><a href="<?php echo $home; ?>admissions/">Start the Conversation</a></li>
+        <li><a href="<?php echo $home; ?>careers/">Careers</a></li>
       </ul>
     </div>
     <div class="footer-col">

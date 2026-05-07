@@ -643,6 +643,137 @@ body { margin: 0; }
 :target { scroll-margin-top: 120px; }
 
 /* ──────────────────────────────────────────────────────────────────
+   Parent Hub — guide tiles. 2-up on tablet/desktop, single column on
+   mobile. Hairline border, generous padding, hover lift.
+   ───────────────────────────────────────────────────────────────── */
+.jth-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+@media (max-width: 720px) {
+  .jth-hub-grid { grid-template-columns: 1fr; }
+}
+.jth-hub-tile {
+  display: block;
+  padding: 26px 28px;
+  background: var(--jth-cream);
+  border: 1px solid var(--jth-rule);
+  border-radius: 14px;
+  color: var(--jth-fg);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.jth-hub-tile:hover {
+  border-color: var(--jth-rule-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(24, 59, 46, 0.06);
+}
+.jth-hub-tile__eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--jth-fg-subtle);
+}
+.jth-hub-tile p {
+  color: var(--jth-fg-muted); line-height: 1.55;
+}
+.jth-hub-tile__meta {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 12px; letter-spacing: 0.04em; color: var(--jth-deep-green);
+}
+
+/* ─── Parent guide layout (single guide page) ─── */
+.jth-guide-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 880px) {
+  .jth-guide-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+.jth-guide-body { min-width: 0; }
+.jth-prose {
+  font-size: 18px; line-height: 1.7; color: var(--jth-fg);
+  max-width: 64ch;
+}
+.jth-prose h2 {
+  font-family: var(--font-editorial, "Fraunces", serif);
+  font-size: clamp(24px, 2.6vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--jth-deep-green);
+  margin: 40px 0 12px;
+  text-wrap: balance;
+}
+.jth-prose h3 { font-family: var(--font-ui, "Inter", sans-serif); font-weight: 600; font-size: 20px; margin: 28px 0 8px; color: var(--jth-deep-green); }
+.jth-prose p { margin: 0 0 18px; }
+.jth-prose ul, .jth-prose ol { margin: 0 0 18px; padding-left: 22px; }
+.jth-prose li { margin-bottom: 8px; }
+.jth-prose a { color: var(--jth-deep-green); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.jth-prose blockquote {
+  margin: 24px 0; padding: 16px 22px;
+  border-left: 3px solid var(--jth-lavender);
+  background: var(--jth-pale-lavender);
+  font-style: italic; color: var(--jth-charcoal);
+}
+
+.jth-guide-aside {
+  position: sticky; top: 96px;
+  display: grid; gap: 28px;
+}
+@media (max-width: 880px) { .jth-guide-aside { position: static; } }
+.jth-guide-aside__block {
+  padding: 22px;
+  background: var(--jth-cream-2);
+  border: 1px solid var(--jth-rule);
+  border-radius: 14px;
+}
+.jth-guide-aside__cta {
+  background: var(--jth-pale-sage);
+  border-color: color-mix(in oklch, var(--jth-deep-green) 14%, var(--jth-cream) 86%);
+}
+.jth-guide-related {
+  list-style: none; padding: 0; margin: 0;
+}
+.jth-guide-related li {
+  border-top: 1px solid var(--jth-rule);
+  padding: 10px 0;
+}
+.jth-guide-related li:first-child { border-top: 0; padding-top: 0; }
+.jth-guide-related a {
+  color: var(--jth-fg);
+  text-decoration: none;
+  font-size: 15px; line-height: 1.4;
+  display: block;
+  transition: color 0.15s ease;
+}
+.jth-guide-related a:hover { color: var(--jth-deep-green); }
+
+/* ──────────────────────────────────────────────────────────────────
+   Careers list — sparse, editorial, no card-on-card. Thin top rules
+   between roles, generous vertical rhythm.
+   ───────────────────────────────────────────────────────────────── */
+.jth-careers-list {
+  border-top: 1px solid var(--jth-rule);
+}
+.jth-career-card {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--jth-rule);
+}
+.jth-career-card__head { display: flex; flex-direction: column; gap: 4px; }
+.jth-career-card p { color: var(--jth-fg); max-width: 62ch; }
+
+.jth-careers-thanks {
+  margin-top: 12px;
+  padding: 28px 32px;
+  background: var(--jth-pale-sage);
+  border: 1px solid var(--jth-rule);
+  border-radius: 14px;
+}
+
+/* ──────────────────────────────────────────────────────────────────
    Turnstile — only renders when a site key is configured. Empty by
    default. Reserve a little space so the form layout doesn't jump.
    ───────────────────────────────────────────────────────────────── */

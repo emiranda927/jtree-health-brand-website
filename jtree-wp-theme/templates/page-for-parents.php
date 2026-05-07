@@ -6,6 +6,47 @@
  */
 defined('ABSPATH') || exit;
 get_header();
+
+/**
+ * Parent-hub guide tiles. Each guide is a separate WP page assigned the
+ * "Parent Guide" template. Slugs assume `/for-parents/<slug>/` — this only
+ * works if the WP "for-parents" page is set as the parent of each guide
+ * page in the WP admin (Page Attributes → Parent → For Parents).
+ *
+ * [DRAFT — founder edit] — replace titles, summaries, and read times once
+ * the guide pages are written.
+ */
+$home   = home_url('/');
+$guides = array(
+    array(
+        'slug'  => 'for-parents/is-this-a-crisis',
+        'eyebrow' => 'When to act now',
+        'title' => 'Is this a crisis, or are we close?',
+        'desc'  => 'Signs that say "call 988 tonight" vs. signs that say "schedule an evaluation this week."',
+        'time'  => '4 min read',
+    ),
+    array(
+        'slug'  => 'for-parents/php-vs-iop',
+        'eyebrow' => 'Levels of care',
+        'title' => "PHP, IOP, and what's right for your teen",
+        'desc'  => "What 'partial hospitalization' actually means, and how it compares to weekly therapy or IOP.",
+        'time'  => '5 min read',
+    ),
+    array(
+        'slug'  => 'for-parents/insurance-and-cost',
+        'eyebrow' => 'Money + coverage',
+        'title' => 'Insurance, deductibles, and the real cost',
+        'desc'  => 'What we verify before day one, what counts toward your deductible, and what to ask your plan.',
+        'time'  => '6 min read',
+    ),
+    array(
+        'slug'  => 'for-parents/what-the-first-call-is-like',
+        'eyebrow' => 'The first call',
+        'title' => "What our first call is actually like",
+        'desc'  => "No script. A clinician asking what's going on, and listening. About 25 minutes.",
+        'time'  => '3 min read',
+    ),
+);
 ?>
 
 <main id="main">
@@ -29,6 +70,25 @@ get_header();
       </ul>
       <p class="jth-body" style="margin: 0 0 28px;">If you're closer to a crisis than a question, call <strong>988</strong> right now. They are kind, fast, and they answer. We'll be here when you're ready.</p>
       <a class="jth-btn jth-btn-primary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+    </div>
+  </section>
+
+  <section class="section section-bg-cream-2" id="resources">
+    <div class="container" style="max-width: 1080px;">
+      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">Plain-language guides</span>
+      <h2 class="jth-h2" style="margin: 0 0 12px;">Things parents tell us they wish they'd known sooner</h2>
+      <p class="jth-body-l" style="margin: 0 0 32px; max-width: 60ch; color: var(--jth-fg-muted);">No gates. No PDF emails. Read what's useful, skip what isn't.</p>
+
+      <div class="jth-hub-grid">
+        <?php foreach ($guides as $g) : ?>
+          <a class="jth-hub-tile" href="<?php echo esc_url($home . $g['slug'] . '/'); ?>">
+            <span class="jth-hub-tile__eyebrow"><?php echo esc_html($g['eyebrow']); ?></span>
+            <h3 class="jth-h4" style="margin:8px 0 10px;"><?php echo esc_html($g['title']); ?></h3>
+            <p style="margin: 0 0 14px;"><?php echo esc_html($g['desc']); ?></p>
+            <span class="jth-hub-tile__meta"><?php echo esc_html($g['time']); ?> &nbsp;&rarr;</span>
+          </a>
+        <?php endforeach; ?>
+      </div>
     </div>
   </section>
 
