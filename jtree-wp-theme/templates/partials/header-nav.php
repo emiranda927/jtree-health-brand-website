@@ -19,7 +19,8 @@ $brand = JTREE_THEME_URI . '/assets/brand';
       <img
         src="<?php echo esc_url($brand . '/logo-horizontal.png'); ?>"
         srcset="<?php echo esc_url($brand . '/logo-horizontal.png'); ?> 1x, <?php echo esc_url($brand . '/logo-horizontal@2x.png'); ?> 2x"
-        alt="Joshua Tree Health">
+        alt="Joshua Tree Health"
+        width="200" height="88" decoding="async">
     </a>
     <nav class="nav" aria-label="Primary">
       <a href="<?php echo $home; ?>programs/"<?php echo is_page('programs') ? ' aria-current="page"' : ''; ?>>Programs</a>

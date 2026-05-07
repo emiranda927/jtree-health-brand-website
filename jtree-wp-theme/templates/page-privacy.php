@@ -21,7 +21,7 @@ get_header();
   <section class="section">
     <div class="container" style="max-width: 760px; line-height: 1.65;">
 
-      <p class="jth-body-l" style="margin: 0 0 20px;"><strong>This page is a placeholder.</strong> A full privacy policy will replace it before launch. The summary below describes what the website does today.</p>
+      <p class="jth-body-l" style="margin: 0 0 20px;">In plain English: this page describes what data the website collects, where it goes, and what we will and won't do with it. Counsel-reviewed legal language replaces this summary at launch.</p>
 
       <h2 class="jth-h3" style="margin: 32px 0 8px;">What we collect on this site</h2>
       <ul style="padding-left: 20px;">

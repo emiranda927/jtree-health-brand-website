@@ -10,10 +10,11 @@ get_header();
 ?>
 
 <main id="main" class="thanks">
-  <img class="thanks-tree" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/tree-mark-deep-green.png'); ?>" alt="">
-  <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 14px;">We got it</span>
+  <img class="thanks-tree" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/tree-mark-deep-green.png'); ?>" alt="" width="91" height="118" decoding="async" aria-hidden="true">
+  <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 14px;">§ We got it</span>
   <h1 class="jth-h1">Thank you.</h1>
   <p class="lede">Your inquiry is in. An admissions clinician will reach out within one business day. We're glad you took this step.</p>
+  <p class="jth-hand" style="display:inline-block; transform: rotate(-1.5deg); margin: 16px 0 0;">— breathe.</p>
 
   <div class="thanks-timeline">
     <h2>What happens next</h2>

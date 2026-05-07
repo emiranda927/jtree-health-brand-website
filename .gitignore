@@ -38,6 +38,9 @@ service-account*.json
 # Generated images / cache
 assets/cache/
 
+# impeccable live-mode local shim (rewritten every session)
+jtree-wp-theme/_live-inject-shim.html
+
 # OS metadata
 Thumbs.db
 ehthumbs.db

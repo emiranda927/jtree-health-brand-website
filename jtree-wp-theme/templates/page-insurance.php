@@ -21,7 +21,7 @@ get_header();
   <section class="section section-bg-cream-2">
     <div class="container" style="max-width: 880px;">
       <h2 class="jth-h2" style="margin: 0 0 20px;">Plans we're in network with</h2>
-      <div style="display:flex; flex-wrap: wrap; gap: 10px;">
+      <div class="jth-row-pills">
         <span class="jth-pill jth-pill-sage">BlueCross BlueShield (BCBS NC)</span>
         <span class="jth-pill jth-pill-sage">Cigna / Evernorth</span>
         <span class="jth-pill jth-pill-sage">Aetna</span>

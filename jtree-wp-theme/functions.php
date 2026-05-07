@@ -120,6 +120,20 @@ add_filter('generate_do_default_template_action', function($do) {
 });
 
 /**
+ * Disable GeneratePress's sidebar reservation on every static page. Without
+ * this, GP reserves ~264px on the right of the outer .site wrapper for a
+ * sidebar that doesn't render — pushing content off-center. Returning
+ * 'no-sidebar' tells GP not to reserve that space.
+ *
+ * Applied to all pages (including ones that may have lost their template
+ * assignment) and the front page. Posts/archives are unaffected.
+ */
+add_filter('generate_sidebar_layout', function($layout) {
+    if (is_page() || is_front_page() || is_home()) return 'no-sidebar';
+    return $layout;
+});
+
+/**
  * Register page templates.
  */
 function jtree_page_templates($templates) {

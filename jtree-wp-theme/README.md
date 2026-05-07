@@ -55,15 +55,18 @@ jtree-wp-theme/
 │   └── partials/
 │       ├── crisis-bar.php
 │       ├── header-nav.php
-│       ├── footer-cta.php
 │       └── site-footer.php
 ├── assets/
 │   ├── css/
-│   │   └── main.css           # Complete brand design system
+│   │   ├── colors_and_type.css   # Design tokens + @font-face + base type
+│   │   ├── site.css              # Layout, components, shared sections
+│   │   ├── wp-glue.css           # GeneratePress reset glue
+│   │   └── home.css              # Home-page-only composition
 │   ├── js/
-│   │   └── form.js            # Inquiry form (posts to api.jtreehealth.com)
-│   └── images/
-│       └── spike-motif.svg    # JTree spike pattern
+│   │   ├── form.js               # Inquiry form (posts to api.jtreehealth.com)
+│   │   └── nav.js                # Mobile nav toggle
+│   ├── fonts/                    # Locally-bundled variable fonts (no Google Fonts request)
+│   └── brand/                    # Brand assets (logos, collage PNGs, mascot, etc.)
 ├── docs/
 │   ├── analytics-config.md    # GA4 + GTM configuration rules
 │   └── gtm-container.json     # GTM container export template

@@ -59,6 +59,7 @@
   color: var(--jth-deep-green);
   font-variation-settings: "SOFT" 100, "opsz" 144;
 }
+.h-hero h1 .h-hero-period { color: var(--jth-lavender); }
 .h-hero h1 .amp {
   display: inline-block; transform: translateY(2px);
   color: var(--jth-lavender);
@@ -152,17 +153,49 @@
   color: var(--jth-fg-subtle);
   padding-right: 32px; border-right: 1px solid var(--jth-rule);
 }
+/* Trust strip — CARF stays pinned on the left; insurances ride a slow
+   left-to-right marquee (lazy-susan rotation). Pauses on hover. */
 .h-trust-items {
-  display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 24px;
+  overflow: hidden; flex: 1; min-width: 0; max-width: 100%;
   font-family: var(--font-display); font-weight: 500; font-size: 14px;
   letter-spacing: -0.005em; color: var(--jth-fg-muted);
 }
-.h-trust-items .carf {
+.h-trust-items .carf-fixed {
+  flex-shrink: 0; white-space: nowrap;
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 5px 12px; border-radius: 999px;
+  padding: 5px 14px; border-radius: 999px;
   border: 1.5px solid var(--jth-deep-green); color: var(--jth-deep-green);
   font-family: var(--font-mono); font-size: 11px; font-weight: 600;
   letter-spacing: 0.08em; text-transform: uppercase;
+}
+.h-trust-items .carf-fixed::before {
+  content: ""; width: 7px; height: 7px;
+  background: var(--jth-sunflower); border-radius: 50%; flex-shrink: 0;
+}
+.h-trust-items .susan {
+  flex: 1; overflow: hidden; min-width: 0;
+  mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.h-trust-items .susan-track {
+  display: flex; gap: 32px;
+  width: max-content;
+  animation: h-trust-susan 28s linear infinite;
+}
+.h-trust-items .susan-track > span {
+  flex-shrink: 0; white-space: nowrap;
+  color: color-mix(in oklch, var(--jth-deep-green) 80%, var(--jth-cream) 20%);
+}
+.h-trust-items:hover .susan-track { animation-play-state: paused; }
+
+@keyframes h-trust-susan {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .h-trust-items .susan-track { animation: none !important; }
 }
 
 /* ────────────────────────────────────────────────
@@ -200,10 +233,10 @@
   position: absolute; pointer-events: none; user-select: none;
 }
 .h-manifesto-mark.scribble {
-  right: 6%; top: 18%; width: 200px; opacity: 0.85; transform: rotate(8deg);
+  right: 6%; top: 18%; width: 280px; opacity: 1; transform: rotate(8deg);
 }
 .h-manifesto-mark.brush {
-  left: -40px; bottom: 8%; width: 180px; opacity: 0.6; transform: rotate(-8deg);
+  left: -40px; bottom: 8%; width: 240px; opacity: 0.85; transform: rotate(-8deg);
 }
 
 /* ────────────────────────────────────────────────
@@ -225,14 +258,13 @@
 }
 @media (max-width: 880px) { .h-programs-head { grid-template-columns: 1fr; gap: 16px; } }
 .h-programs-head .lead {
-  font-family: var(--font-editorial); font-weight: 500;
-  font-size: clamp(32px, 3.8vw, 48px); line-height: 1.05; letter-spacing: -0.02em;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.12; letter-spacing: -0.005em;
   color: var(--jth-cream);
-  font-variation-settings: "SOFT" 30, "opsz" 96;
   margin: 0;
   text-wrap: balance;
 }
-.h-programs-head .lead em { font-style: italic; color: var(--jth-lime-green); font-variation-settings: "SOFT" 100; }
+.h-programs-head .lead em { font-style: italic; color: var(--jth-lime-green); }
 .h-programs-head .meta {
   font-family: var(--font-mono); font-weight: 500; font-size: 11px;
   letter-spacing: 0.14em; text-transform: uppercase;
@@ -261,13 +293,7 @@
   display: flex; flex-direction: column;
   padding: 32px 28px 28px;
   background: transparent; color: inherit; text-decoration: none;
-  border-left: 1px solid color-mix(in oklch, var(--jth-cream) 18%, var(--jth-deep-green) 82%);
   transition: background var(--dur-base) var(--ease-calm);
-}
-.h-pcard:first-child { border-left: 0; }
-@media (max-width: 880px) {
-  .h-pcard { border-left: 0; border-top: 1px solid color-mix(in oklch, var(--jth-cream) 18%, var(--jth-deep-green) 82%); }
-  .h-pcard:first-child { border-top: 0; }
 }
 .h-pcard:hover { background: color-mix(in oklch, var(--jth-cream) 6%, var(--jth-deep-green) 94%); }
 .h-pcard-num {
@@ -326,13 +352,12 @@
 .h-figures-head .num::before { content: ""; width: 32px; height: 1px; background: var(--jth-deep-green); }
 .h-figures-head h2 {
   margin: 22px 0 0; max-width: 24ch;
-  font-family: var(--font-editorial); font-weight: 500;
-  font-size: clamp(40px, 5vw, 72px); line-height: 1; letter-spacing: -0.025em;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.12; letter-spacing: -0.005em;
   color: var(--jth-deep-green);
-  font-variation-settings: "SOFT" 30, "opsz" 144;
   text-wrap: balance;
 }
-.h-figures-head h2 em { font-style: italic; font-variation-settings: "SOFT" 100; }
+.h-figures-head h2 em { font-style: italic; }
 
 .h-figures-grid {
   max-width: 1240px; margin: 0 auto; padding: 0 32px;
@@ -392,12 +417,12 @@
 .h-process-head .num::before { content: ""; width: 32px; height: 1px; background: var(--jth-deep-green); }
 .h-process-head h2 {
   margin: 0;
-  font-family: var(--font-editorial); font-weight: 500;
-  font-size: clamp(36px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -0.022em;
-  color: var(--jth-deep-green); font-variation-settings: "SOFT" 30, "opsz" 144;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.12; letter-spacing: -0.005em;
+  color: var(--jth-deep-green);
   text-wrap: balance;
 }
-.h-process-head h2 em { font-style: italic; font-variation-settings: "SOFT" 100; }
+.h-process-head h2 em { font-style: italic; }
 .h-process-head p {
   margin: 0; font-size: 17px; line-height: 1.55;
   color: var(--jth-charcoal); max-width: 38ch;
@@ -441,28 +466,30 @@
    QUOTE — full bleed, oversized, with rule
    ──────────────────────────────────────────────── */
 
+/* Quote section — Lavender card-IS-the-section per DESIGN.md §5
+   "Quote Cards: Lavender fill — the card IS the section." */
 .h-quote {
   padding: 140px 0;
-  background: var(--jth-deep-green);
-  color: var(--jth-cream);
+  background: var(--jth-lavender);
+  color: var(--jth-deep-green);
   position: relative; overflow: hidden;
 }
 .h-quote-inner {
   max-width: 1080px; margin: 0 auto; padding: 0 32px;
   position: relative; z-index: 2;
 }
-.h-quote .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--jth-lime-green); display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
-.h-quote .num::before { content: ""; width: 32px; height: 1px; background: var(--jth-lime-green); }
+.h-quote .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--jth-deep-green); display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.h-quote .num::before { content: ""; width: 32px; height: 1px; background: var(--jth-deep-green); }
 .h-quote blockquote {
   margin: 0;
   font-family: var(--font-editorial); font-weight: 400;
   font-size: clamp(40px, 5.4vw, 80px); line-height: 1.04; letter-spacing: -0.025em;
-  color: var(--jth-cream);
+  color: var(--jth-deep-green);
   font-variation-settings: "SOFT" 30, "opsz" 144;
   text-wrap: balance;
 }
 .h-quote blockquote em {
-  font-style: italic; color: var(--jth-lime-green);
+  font-style: italic;
   font-variation-settings: "SOFT" 100;
 }
 .h-quote cite {
@@ -470,15 +497,15 @@
   margin-top: 40px;
   font-style: normal; font-family: var(--font-mono);
   font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: color-mix(in oklch, var(--jth-cream) 70%, var(--jth-deep-green) 30%);
+  color: color-mix(in oklch, var(--jth-deep-green) 70%, var(--jth-lavender) 30%);
 }
-.h-quote cite::before { content: ""; width: 32px; height: 1px; background: color-mix(in oklch, var(--jth-cream) 50%, var(--jth-deep-green) 50%); }
+.h-quote cite::before { content: ""; width: 32px; height: 1px; background: color-mix(in oklch, var(--jth-deep-green) 50%, var(--jth-lavender) 50%); }
 .h-quote-mark {
   position: absolute; pointer-events: none; user-select: none;
 }
-.h-quote-mark.brush { left: -50px; top: 12%; width: 220px; opacity: 0.55; transform: rotate(-12deg); }
-.h-quote-mark.tw1   { right: 8%; top: 18%; width: 32px; }
-.h-quote-mark.tw2   { right: 16%; bottom: 22%; width: 24px; }
+.h-quote-mark.brush { left: -50px; top: 12%; width: 280px; opacity: 0.85; transform: rotate(-12deg); }
+.h-quote-mark.tw1   { right: 8%; top: 18%; width: 44px; }
+.h-quote-mark.tw2   { right: 16%; bottom: 22%; width: 36px; }
 
 /* ────────────────────────────────────────────────
    REFERRALS — providers row
@@ -495,11 +522,11 @@
 .h-refer-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--jth-fg-subtle); display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
 .h-refer-num::before { content: ""; width: 32px; height: 1px; background: var(--jth-deep-green); }
 .h-refer h2 {
-  margin: 0 0 16px; font-family: var(--font-editorial); font-weight: 500;
-  font-size: clamp(32px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.022em;
-  color: var(--jth-deep-green); font-variation-settings: "SOFT" 30, "opsz" 96;
+  margin: 0 0 16px; font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.12; letter-spacing: -0.005em;
+  color: var(--jth-deep-green);
 }
-.h-refer h2 em { font-style: italic; font-variation-settings: "SOFT" 100; }
+.h-refer h2 em { font-style: italic; }
 .h-refer p { margin: 0; font-size: 17px; line-height: 1.55; color: var(--jth-charcoal); max-width: 50ch; }
 .h-refer-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
@@ -523,23 +550,22 @@
 }
 .h-cta h2 {
   margin: 0 0 24px;
-  font-family: var(--font-editorial); font-weight: 500;
-  font-size: clamp(40px, 5.4vw, 80px); line-height: 1.02; letter-spacing: -0.025em;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.12; letter-spacing: -0.005em;
   color: var(--jth-deep-green);
-  font-variation-settings: "SOFT" 30, "opsz" 144;
   text-wrap: balance;
 }
-.h-cta h2 em { font-style: italic; font-variation-settings: "SOFT" 100; }
+.h-cta h2 em { font-style: italic; }
 .h-cta p {
   margin: 0 auto 36px; max-width: 48ch;
   font-family: var(--font-body); font-size: 18px; line-height: 1.55;
   color: var(--jth-charcoal);
 }
 .h-cta-actions { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-.h-cta-mark { position: absolute; pointer-events: none; user-select: none; opacity: 0.7; }
-.h-cta-mark.swash { left: -30px; top: 30%; width: 120px; }
-.h-cta-mark.tape  { right: 6%; top: 18%; width: 100px; transform: rotate(8deg); }
-.h-cta-mark.tw    { right: 14%; bottom: 22%; width: 30px; }
+.h-cta-mark { position: absolute; pointer-events: none; user-select: none; opacity: 0.95; }
+.h-cta-mark.swash { left: -30px; top: 20%; width: 200px; }
+.h-cta-mark.tape  { right: 6%; top: 14%; width: 140px; transform: rotate(8deg); }
+.h-cta-mark.tw    { right: 14%; bottom: 22%; width: 44px; }
 
 /* ────────────────────────────────────────────────
    subtle entrance — once on load

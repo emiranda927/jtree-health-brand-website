@@ -58,8 +58,24 @@ function jtree_schema_jsonld() {
             ),
             'geoRadius' => '50000',
         ),
-        'priceRange'  => '$$',
-        'openingHours' => 'Mo-Fr 09:00-18:00',
+        // priceRange omitted: meaningless for adolescent mental healthcare; use insurance pages instead.
+        // openingHoursSpecification per program; PHP runs Mon–Fri 9–3, IOP Tue/Wed/Thu 3–6.
+        'openingHoursSpecification' => array(
+            array(
+                '@type'   => 'OpeningHoursSpecification',
+                'dayOfWeek' => array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'),
+                'opens'   => '09:00',
+                'closes'  => '15:00',
+                'name'    => 'PHP',
+            ),
+            array(
+                '@type'   => 'OpeningHoursSpecification',
+                'dayOfWeek' => array('Tuesday', 'Wednesday', 'Thursday'),
+                'opens'   => '15:00',
+                'closes'  => '18:00',
+                'name'    => 'IOP',
+            ),
+        ),
         'sameAs'      => array(
             'https://www.facebook.com/jtreehealth',
             'https://www.instagram.com/jtreehealth',
@@ -151,7 +167,7 @@ add_action('wp_head', 'jtree_robots_thank_you', 1);
 function jtree_canonical_link() {
     $url = home_url(add_query_arg(array(), wp_unslash($_SERVER['REQUEST_URI'])));
     echo '<link rel="canonical" href="' . esc_url($url) . '" />' . "\n";
-    echo '<meta http-equiv="content-language" content="en-US" />' . "\n";
+    // Note: <meta http-equiv="content-language"> is deprecated. Rely on <html lang="en">.
 }
 add_action('wp_head', 'jtree_canonical_link', 2);
 

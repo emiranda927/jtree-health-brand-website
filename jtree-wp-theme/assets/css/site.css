@@ -23,13 +23,14 @@ body { margin: 0; }
 /* defined in colors_and_type.css */
 
 /* ─── Header / nav ─── */
+/* Header sticks directly below the crisis bar. Crisis bar is min-height 44px
+   desktop / 56px mobile; header offsets accordingly. */
 .site-header {
-  position: sticky; top: 0; z-index: 30;
-  background: rgba(246, 244, 236, 0.92);
-  backdrop-filter: saturate(140%) blur(8px);
-  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  position: sticky; top: 44px; z-index: 30;
+  background: var(--jth-cream);
   border-bottom: 1px solid var(--jth-rule);
 }
+@media (max-width: 600px) { .site-header { top: 56px; } }
 .site-header-row {
   display: flex; align-items: center; justify-content: space-between;
   gap: 24px; padding: 14px 24px;
@@ -43,14 +44,16 @@ body { margin: 0; }
   display: flex; align-items: center; gap: 6px;
   flex: 1; justify-content: flex-end;
 }
-.nav a {
+/* Plain nav links — exclude the persistent "Start the Conversation" button
+   (.jth-btn) and the phone-link (.nav-phone), which carry their own colors. */
+.nav a:not(.jth-btn):not(.nav-phone) {
   font-family: var(--font-display); font-weight: 500; font-size: 14px;
   color: var(--jth-charcoal); text-decoration: none;
   padding: 8px 12px; border-radius: var(--r-pill);
   transition: background var(--dur-fast) var(--ease-calm), color var(--dur-fast) var(--ease-calm);
 }
-.nav a:hover { background: var(--jth-cream-3); color: var(--jth-deep-green); }
-.nav a[aria-current="page"] {
+.nav a:not(.jth-btn):not(.nav-phone):hover { background: var(--jth-cream-3); color: var(--jth-deep-green); }
+.nav a[aria-current="page"]:not(.jth-btn):not(.nav-phone) {
   color: var(--jth-deep-green);
   background: var(--jth-green-soft);
 }
@@ -342,22 +345,29 @@ body { margin: 0; }
 }
 
 /* ─── Form layout ─── */
+/* Admissions section background — Pale Sage per DESIGN.md §5 (Form-Is-Calmest Rule) */
+.admissions-section { background: var(--jth-pale-sage); padding: 0; }
 .admissions-grid {
   display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px;
   max-width: 1200px; margin: 0 auto;
-  padding: 56px 24px 96px;
+  padding: 80px 24px 112px;
 }
-@media (max-width: 880px) { .admissions-grid { grid-template-columns: 1fr; gap: 32px; } }
+@media (max-width: 880px) { .admissions-grid { grid-template-columns: 1fr; gap: 32px; padding: 56px 24px 80px; } }
 
 .form-card {
   background: var(--jth-cream);
   border: 1px solid var(--jth-rule);
-  border-radius: var(--r-xl);
+  border-radius: var(--r-card);
   padding: 40px;
 }
 @media (max-width: 880px) { .form-card { padding: 28px 22px; } }
 .form-card h1 { margin: 0 0 8px; }
 .form-card .lede { margin: 0 0 28px; color: var(--jth-fg-muted); font-size: 17px; }
+
+/* The form element itself — flow container for field rows + actions */
+.jth-form {
+  display: flex; flex-direction: column; gap: 0;
+}
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
 .form-row.solo { grid-template-columns: 1fr; }
@@ -372,10 +382,10 @@ body { margin: 0; }
 }
 .form-error-banner {
   display: none; margin-top: 16px; padding: 14px 16px;
-  background: color-mix(in oklch, #B8453B 12%, var(--jth-cream) 88%);
-  border: 1.5px solid color-mix(in oklch, #B8453B 50%, var(--jth-cream) 50%);
+  background: color-mix(in oklch, #8B2E2E 12%, var(--jth-cream) 88%);
+  border: 1px solid color-mix(in oklch, #8B2E2E 50%, var(--jth-cream) 50%);
   border-radius: var(--r-md);
-  font-size: 14px; color: #B8453B;
+  font-size: 14px; color: #8B2E2E;
 }
 .form-error-banner.is-visible { display: block; }
 
@@ -385,6 +395,73 @@ body { margin: 0; }
   cursor: pointer;
 }
 .consent-row input { margin-top: 3px; flex-shrink: 0; }
+
+/* ─────────────────────────────────────────────────
+   Layout primitives — hoisted from per-template inline styles
+   so templates stay semantic and design-system rules are enforceable.
+   ───────────────────────────────────────────────── */
+
+/* Aside-then-content split: 0.8fr 1.2fr (used on Programs and similar pages). */
+.jth-grid-aside {
+  display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start;
+}
+.jth-grid-aside--reverse { grid-template-columns: 1.2fr 0.8fr; }
+@media (max-width: 880px) { .jth-grid-aside, .jth-grid-aside--reverse { grid-template-columns: 1fr; gap: 24px; } }
+
+/* Pair: equal two-column (used on Contact). */
+.jth-grid-pair {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+}
+@media (max-width: 880px) { .jth-grid-pair { grid-template-columns: 1fr; gap: 20px; } }
+
+/* Inline button row */
+.jth-row-buttons { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+/* Inline pill row (Programs page condition tags, Insurance carriers, etc.) */
+.jth-row-pills { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* Two-column 50/50 condition cards (What We Treat default). */
+.cards-3.cards-3--two-up { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 720px) { .cards-3.cards-3--two-up { grid-template-columns: 1fr; } }
+
+/* Founder/team aside block (About page) */
+.jth-team-aside {
+  display: flex; gap: 24px; align-items: center;
+  padding: 28px; background: var(--jth-pale-sage); border-radius: var(--r-card);
+}
+@media (max-width: 600px) { .jth-team-aside { flex-direction: column; align-items: flex-start; gap: 16px; } }
+
+/* CARF accreditation block — Field Journal idiom. Section-numbered eyebrow,
+   giant Fraunces "CARF" wordmark on a left rail; statement + caption on the
+   right. Hairline rules above and below; cream paper surface. */
+.carf-aside {
+  display: grid; grid-template-columns: 200px 1fr; gap: 56px; align-items: start;
+  padding: 48px 36px;
+  border-top: 1px solid var(--jth-rule-strong);
+  border-bottom: 1px solid var(--jth-rule-strong);
+}
+.carf-aside__rail { display: flex; flex-direction: column; gap: 12px; }
+.carf-aside__mark {
+  font-family: var(--font-editorial); font-weight: 400;
+  font-size: 56px; line-height: 1; letter-spacing: -0.02em;
+  color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+}
+.carf-aside__body { padding-top: 4px; }
+.carf-aside__statement {
+  font-family: var(--font-editorial); font-weight: 400;
+  font-size: clamp(20px, 1.8vw, 24px); line-height: 1.3; letter-spacing: -0.01em;
+  color: var(--jth-deep-green); margin: 0 0 12px;
+  font-variation-settings: "SOFT" 30, "opsz" 96;
+}
+.carf-aside__statement em { font-style: italic; color: var(--jth-deep-green); }
+.carf-aside__caption {
+  font-family: var(--font-body); font-size: 15px; line-height: 1.6;
+  color: var(--jth-fg-muted); margin: 0; max-width: 56ch;
+}
+@media (max-width: 720px) {
+  .carf-aside { grid-template-columns: 1fr; gap: 24px; padding: 32px 24px; }
+}
 
 /* Sidebar */
 .next-steps {
@@ -438,6 +515,75 @@ body { margin: 0; }
   color: var(--jth-fg-subtle); text-transform: uppercase;
   border: 1px dashed var(--jth-rule-strong);
   position: relative; overflow: hidden;
+}
+
+/* About — Team grid (Vary-The-Trio): Founder feature card + 2 stacked side cards. */
+.about-team {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start;
+}
+@media (max-width: 880px) { .about-team { grid-template-columns: 1fr; gap: 24px; } }
+.about-team__feature {
+  padding: 36px; background: var(--jth-cream-2); border: 1px solid var(--jth-rule);
+  border-radius: var(--r-card);
+}
+.about-team__side { display: flex; flex-direction: column; gap: 20px; }
+.about-team__card {
+  padding: 28px; background: var(--jth-cream); border: 1px solid var(--jth-rule);
+  border-radius: var(--r-card);
+}
+.about-team__avatar {
+  width: 56px; height: 56px; border-radius: 9999px;
+  border: 1px solid var(--jth-rule-strong);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-editorial); font-size: 22px; color: var(--jth-deep-green);
+}
+.about-team__avatar--lg { width: 88px; height: 88px; font-size: 32px; }
+
+/* About — Values: three-up cards on dark green. Each card carries a giant
+   lime § number, statement (Fraunces with em accent), body, and an optional
+   Caveat margin note. Vary-The-Trio honored via the aside on §02. */
+.about-values-section { padding: 96px 24px; }
+.about-values-section .container { max-width: 1240px; margin: 0 auto; }
+.about-values__head { text-align: center; margin-bottom: 72px; }
+.about-values__head .jth-eyebrow { color: var(--jth-lime-green); justify-content: center; }
+.about-values__head h2 {
+  font-family: var(--font-editorial); font-weight: 400;
+  font-size: clamp(36px, 4.4vw, 56px); line-height: 1.05; letter-spacing: -0.02em;
+  color: var(--jth-cream); margin: 12px auto 0; max-width: 24ch;
+  font-variation-settings: "SOFT" 30, "opsz" 96; text-wrap: balance;
+}
+.about-values__grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px;
+  align-items: start;
+}
+@media (max-width: 880px) { .about-values__grid { grid-template-columns: 1fr; gap: 24px; } }
+.about-values__card {
+  padding: 36px 28px;
+  border-top: 1px solid color-mix(in oklch, var(--jth-cream) 30%, var(--jth-deep-green) 70%);
+}
+.about-values__num {
+  display: block; margin-bottom: 24px;
+  font-family: var(--font-editorial); font-size: 56px; font-weight: 300;
+  line-height: 1; color: var(--jth-lime-green);
+}
+.about-values__statement {
+  margin: 0 0 14px;
+  font-family: var(--font-editorial); font-weight: 400;
+  font-size: clamp(22px, 2.2vw, 28px); line-height: 1.18; letter-spacing: -0.012em;
+  color: var(--jth-cream);
+  font-variation-settings: "SOFT" 30, "opsz" 96;
+  text-wrap: balance;
+}
+.about-values__statement em { font-style: italic; color: var(--jth-lime-green); font-variation-settings: "SOFT" 100; }
+.about-values__body {
+  margin: 0;
+  font-family: var(--font-body); font-size: 15px; line-height: 1.6;
+  color: color-mix(in oklch, var(--jth-cream) 80%, var(--jth-deep-green) 20%);
+}
+.about-values__aside {
+  margin: 14px 0 0;
+  font-family: var(--font-hand); font-size: 22px; color: var(--jth-sunflower);
+  display: inline-block; transform: rotate(-2deg);
 }
 
 /* ─── Thank you ─── */

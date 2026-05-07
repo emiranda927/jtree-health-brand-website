@@ -27,15 +27,14 @@ A new-engineer-or-agent briefing for picking up this project cold. Read this end
 website/                          ← this repo (github.com/emiranda927/jtree-health-brand-website)
 ├── DEPLOYMENT.md                 ← end-to-end launch guide (READ THIS for go-live)
 ├── AGENT_HANDOFF.md              ← you are here
-├── preview/                      ← static HTML preview of the design
-│   ├── index.html  about.html  programs.html  admissions.html  thank-you.html
-│   ├── shared.css                ← canonical CSS (source of truth for styling)
-│   └── animations.js             ← IntersectionObserver-driven reveal/stagger/count system
 ├── jtree-wp-theme/               ← WordPress GeneratePress child theme (production)
 │   ├── style.css  functions.php
 │   ├── inc/                      ← security.php, forms.php, seo.php
-│   ├── templates/                ← 12 page-*.php + partials/
-│   ├── assets/                   ← css/main.css (port of shared.css), js/, images/
+│   ├── templates/                ← 12 page-*.php + partials/ (crisis-bar, header-nav, site-footer)
+│   ├── assets/css/               ← colors_and_type.css + site.css + wp-glue.css + home.css
+│   ├── assets/js/                ← form.js (admissions/contact only), nav.js (sitewide)
+│   ├── assets/fonts/             ← locally-bundled variable fonts (no Google Fonts request)
+│   ├── assets/brand/             ← logos, collage PNGs, mascot assets
 │   ├── docs/                     ← analytics-config.md, gtm-container.json
 │   ├── DEPLOY.md                 ← WP-specific deploy checklist
 │   └── README.md
@@ -51,7 +50,7 @@ website/                          ← this repo (github.com/emiranda927/jtree-he
 └── Marketing_v3.pdf              ← marketing materials reference
 ```
 
-**Two parallel codebases for the same UI:** `preview/` is a static HTML mirror of `jtree-wp-theme/`. **When you change copy/markup/styles, update both.** The preview lets the client see changes without a WP install. The WP theme is what ships.
+**Single codebase:** `jtree-wp-theme/` is the production target and the only UI source of truth. Local design review happens via a WordPress local-dev environment (Local by Flywheel, LocalWP, etc.) pointed at the theme directory. The static HTML preview that previously lived at `preview/` was retired — its job is now done by local WP dev plus the impeccable design-system files (`/PRODUCT.md`, `/DESIGN.md`).
 
 ---
 
@@ -60,7 +59,6 @@ website/                          ← this repo (github.com/emiranda927/jtree-he
 | Layer | Tech | Notes |
 |---|---|---|
 | Frontend (production) | WordPress 6.x + GeneratePress parent + JTree child theme | PHP 8.0+ |
-| Frontend (preview) | Static HTML/CSS/JS | `npx serve -p 3456` from `preview/` |
 | API | Vercel serverless functions, TypeScript, Zod | Node 22+ |
 | CRM | Ritten (stub-ready, falls back to Sheets) | See `jtree-form-api/lib/ritten.ts` |
 | Email | Resend | Transactional, `noreply@jtreehealth.com` |
@@ -84,25 +82,25 @@ website/                          ← this repo (github.com/emiranda927/jtree-he
 ## 4. What's done
 
 ### Design + content
-- [x] Brand system applied (colors, type, wave dividers, blob clip-paths)
+- [x] Brand system applied (canonical brand-kit colors, five-typeface stack with locally-bundled variable fonts)
+- [x] Impeccable design system installed: `/PRODUCT.md` (strategic), `/DESIGN.md` (visual), `/.impeccable/design.json` (sidecar). Read both before any UI work.
 - [x] All approved copy from `JTree_Website_Copy_Edit.docx.md` integrated
 - [x] 5 fully-designed pages: Home, Programs, About, Admissions, Thank You
-- [x] Wave divider consistency audit + fixes across preview pages
-- [x] SEO head blocks (robots, canonical, OG, Twitter, JSON-LD) on all preview pages
+- [x] SEO head blocks (robots, canonical, OG, Twitter, JSON-LD) via `inc/seo.php`
 - [x] Schema.org `MedicalBusiness` + `LocalBusiness` JSON-LD via `inc/seo.php`
 - [x] BreadcrumbList JSON-LD on inner pages
 - [x] `noindex` on `/thank-you/`
 
 ### WordPress theme (`jtree-wp-theme/`)
-- [x] Full CSS port from `preview/shared.css` to `assets/css/main.css`
+- [x] Design-system CSS at `assets/css/colors_and_type.css` (tokens + @font-face) + `site.css` (layout/components) + `wp-glue.css` (GP reset) + `home.css` (home-only). Enqueue order in `functions.php`.
 - [x] GeneratePress header suppression (`generate_construct_header` removed via `init` hook)
 - [x] `generate_do_default_template_action` filter so custom templates own layout
-- [x] WP admin bar offset CSS (`top: 32px` desktop, `46px` mobile)
+- [x] WP admin bar offset CSS (`top: 32px` desktop, `46px` mobile) lives in `wp-glue.css`
 - [x] Crisis bar partial (988 + Text HOME 741741)
 - [x] Header nav partial with dropdown + mobile hamburger animation
-- [x] Footer + Footer-CTA partials with wave dividers above and below
+- [x] Site footer partial
 - [x] 5 fully-designed page templates: home, programs, about, admissions, thank-you
-- [x] Form rendered via `jtree_render_inquiry_form()` (`inc/forms.php`) with `jtree-form__*` classes matching the CSS
+- [x] Form rendered via `jtree_render_inquiry_form()` (`inc/forms.php`) with `jth-form` / `jth-input` / `jth-select` / `jth-field-label` / `jth-field-error` classes (matched in `colors_and_type.css` + `site.css`)
 - [x] GA4 `inquiry_submitted` event fires only on `/thank-you/` via `wp_head` priority 1
 - [x] `inc/security.php` hardening (DISALLOW_FILE_EDIT, XML-RPC off, headers, version removal)
 
@@ -175,43 +173,42 @@ website/                          ← this repo (github.com/emiranda927/jtree-he
 
 ## 6. Critical conventions an agent must follow
 
-### Wave dividers
-The site uses SVG wave dividers between sections. The convention is fragile — get it wrong and you get an invisible transition or a wrong-color band:
+### Section dividers
+The default section transition is **whitespace and a background shift**, not an SVG divider. SVG wave dividers between every section are explicitly forbidden by `DESIGN.md` (the *Section-Earns-Divider Rule*) — they flatten section identity and read as generic mental-health-clinic template. Use the provided torn-paper PNGs from `assets/brand/` only when a section change deserves a real moment.
 
-- **Standard wave** (path closes at bottom): `div background = "from" section color`, `SVG fill = "to" section color`
-- **Flipped wave** (path closes at top): swap — the div background must match the **bottom** section's color
+### Section background palette
+Section background classes live in `assets/css/colors_and_type.css` and `site.css` and use canonical brand-kit colors (no drift):
 
-**Section background palette** (from CSS variables in `shared.css`):
-- body / default = `--sand` (#F5F0E8)
-- `.section--lav` = `--pale-lav` (#EAE8F5)
-- `.section--sage` = `--pale-sage` (#E0EEEA)
-- `.section--forest` = `--forest` (#1E3D34)
-- `.quote-section` = `--lavender` (#A89FD8)
-- `.footer-cta` = `--pale-lav`
-- `.footer` = `--forest`
+- body / default = `--jth-cream` (`#F6F4EC`)
+- `.section-bg-pale-lav` = `--jth-pale-lavender` (`#EAE3F5`)
+- `.section-bg-pale-sage` = `--jth-pale-sage` (`#DCE9E2`)
+- `.section-bg-cream-2` = `--jth-cream-2`
+- `.section-bg-dark` = `--jth-deep-green` (`#183B2E`)
+- footer = `--jth-deep-green`
 
-When inserting/moving a wave, verify by counting waves vs. section transitions in DOM.
+### Brand colors (canonical — see `/brand_colors.md` and `/DESIGN.md`)
+The canonical hex is in `/brand_colors.md` at the project root. CSS tokens in `colors_and_type.css` mirror them exactly. Acceptance per FRONT_END_REQUIREMENTS §11.1: drift must stay within 2 sRGB units.
 
-### Brand colors
 ```
---forest:    #1E3D34   (dark accent, footer, headlines on light bg)
---deep-sage: #2C5F52   (secondary dark)
---lavender:  #A89FD8   (quote-section, accents)
---lime:      #B8E04A   (CTA buttons, highlights)
---sand:      #F5F0E8   (body bg)
---pale-lav:  #EAE8F5   (alt section bg)
---pale-lime: #EEF8C8   (small accent areas)
---pale-sage: #E0EEEA   (alt section bg)
+--jth-deep-green:    #183B2E   (primary, body text, default CTA)
+--jth-lime-green:    #C8E869   (teen-facing accent — /for-teens/ only by default)
+--jth-lavender:      #B8A7E6   (quote sections, eyebrow fills, twinkle glyphs)
+--jth-cream:         #F6F4EC   (page background)
+--jth-charcoal:      #1D1D1F   (text on Lime / Sunflower backgrounds)
+--jth-sunflower:     #FFD100   (highlight, focus rings, scribble accent)
+--jth-pale-lavender: #EAE3F5
+--jth-pale-lime:     #EEF6CC
+--jth-pale-sage:     #DCE9E2
 ```
 
-### Two codebases — keep in sync
-Any copy/markup/style change must be applied in **both** `preview/*.html` and `jtree-wp-theme/templates/page-*.php`. The preview's `shared.css` and the theme's `assets/css/main.css` are also kept in sync (the latter is a verbatim port + WP-specific resets). The `preview/animations.js` is mirrored at `jtree-wp-theme/assets/js/animations.js`.
+### Single codebase
+The static `preview/` directory has been retired. `jtree-wp-theme/` is the only UI source of truth. Local design review happens via a WordPress local-dev environment (Local by Flywheel, LocalWP, etc.).
 
 ### WP-specific gotchas
 - GeneratePress's built-in header is suppressed via `remove_action('generate_header', 'generate_construct_header')` in `functions.php`. **Do not re-enable it** — the custom `header-nav.php` partial owns the header.
 - The `generate_do_default_template_action` filter returns `false` for any `is_page_template()` so custom templates fully control layout. **Don't break this filter.**
 - Hrefs in templates use `home_url('/path/')` — never hardcode `.html` paths (a former bug).
-- Form classes are `jtree-form__*` (BEM-ish). The CSS in `main.css` is named to match `inc/forms.php` output. **Don't rename one without the other.**
+- Form classes are `jth-form` / `jth-input` / `jth-select` / `jth-field-label` / `jth-field-error` (the `jth-*` namespace, not BEM `jtree-form__*`). The CSS in `colors_and_type.css` and `site.css` is named to match `inc/forms.php` output. **Don't rename one without the other.**
 
 ### Form / API
 - Submissions go to **`https://api.jtreehealth.com/api/inquiry`** — a separate origin. CORS is locked to `ALLOWED_ORIGIN` env var.
@@ -227,12 +224,8 @@ Any copy/markup/style change must be applied in **both** `preview/*.html` and `j
 
 ## 7. How to run things
 
-### Static preview
-```bash
-cd /Users/emiranda/Projects/jtree-health-brand/website/preview
-npx serve -p 3456
-# Then visit http://localhost:3456/index.html
-```
+### Local WordPress dev
+Use a local WP dev environment (Local by Flywheel, LocalWP, DDEV, etc.). Symlink or copy `jtree-wp-theme/` into the WP `wp-content/themes/` directory of the local site, install GeneratePress as the parent theme, and create the 12 pages assigning the matching templates. See `jtree-wp-theme/README.md` for setup details.
 
 ### Form API tests
 ```bash

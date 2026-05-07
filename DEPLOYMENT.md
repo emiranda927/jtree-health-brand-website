@@ -178,16 +178,7 @@ Code in `jtree-form-api/` was not modified during this front-end pass — the up
 
 ### WP theme local check
 
-This repo has a static UI-kit preview of the same designs, served from `preview/`:
-
-```bash
-python3 -m http.server 3456 --directory preview
-# http://localhost:3456/index.html
-```
-
-Pages there are the source of truth for the visual design. The WP templates port that markup with `home_url()` / `JTREE_THEME_URI` substitutions.
-
-To test the WP theme in actual WordPress, use Local by Flywheel or wp-env:
+The WP theme at `jtree-wp-theme/` is the single source of truth. To run it locally use Local by Flywheel, LocalWP, DDEV, or wp-env:
 1. Spin up a fresh WP site
 2. Install GeneratePress (parent)
 3. Symlink or copy `jtree-wp-theme/` to `wp-content/themes/jtree-wp-theme/`

@@ -9,12 +9,12 @@ get_header();
 
 ?>
 
-<main id="main">
+<main id="main" class="admissions-section">
 
   <section class="admissions-grid">
     <div>
       <div class="form-card">
-        <span class="jth-eyebrow" style="display:inline-block; margin-bottom:12px;">Admissions inquiry</span>
+        <span class="jth-eyebrow" style="display:inline-block; margin-bottom:12px;">§ Admissions / Inquiry form</span>
         <h1 class="jth-h1">Start the Conversation.</h1>
         <p class="lede">Tell us a little, and an admissions clinician will reach out within one business day. No clinical detail required up front.</p>
 
