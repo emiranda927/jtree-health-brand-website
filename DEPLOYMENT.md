@@ -11,6 +11,8 @@ DNS sits at Cloudflare. Analytics is GA4 via GTM.
 
 The form API is a separate origin so the WordPress host never touches lead data. Submissions go straight from the browser to `api.jtreehealth.com`, which fans out to (Ritten **or** Sheets) **and** Resend email.
 
+**Partial-inquiry capture:** when a parent interacts with the form on `/admissions/` but doesn't submit, `form.js` sends a no-PII beacon to `POST /api/inquiry/partial` on page-leave (`pagehide` / `visibilitychange`). The partial carries `session_id`, `teen_age`, `program_interest`, `best_time_to_call`, `how_did_you_hear`, UTM params, and `referrer` — never name/email/phone. It lands in the same Ritten endpoint (with `stage: "partial"`) or the same Sheet (with `status: "partial"`, PII columns blank). Full submissions also carry `session_id` so admissions can correlate a partial → completed lead.
+
 ---
 
 ## Current readiness (2026-05-05)
@@ -141,12 +143,23 @@ The integration is implemented and tested but disabled until credentials land:
 3. Submit a real inquiry — confirm the contact appears in Ritten.
 4. If Ritten's intake schema differs from the default payload (`buildRittenPayload` in `lib/ritten.ts`), adjust field names there and redeploy.
 
+### 7b. Update the Leads spreadsheet header row
+
+Partial-inquiry capture extended the Sheets writer from columns A–J to A–L. Before the next deploy, open the Leads spreadsheet and add two new header cells:
+
+| K | L |
+|---|---|
+| `status` | `session_id` |
+
+Pre-existing rows will leave columns K and L blank; treat blank as `lead` for legacy data. Going forward, every row will be tagged `lead` or `partial` and carry a session id when one is available.
+
 ### 8. Final smoke test
 
 - [ ] `curl https://api.jtreehealth.com/api/health` → 200
 - [ ] Submit `/admissions/` form on production with a real email + phone
-- [ ] Inquiry appears in Ritten **or** Sheets (the configured path)
+- [ ] Inquiry appears in Ritten **or** Sheets (the configured path) tagged `lead`
 - [ ] Resend email lands in `ADMISSIONS_EMAIL` inbox
+- [ ] Open `/admissions/`, change one of the select fields, then close the tab without submitting → a row tagged `partial` with no PII appears in Sheets/Ritten within ~10s
 - [ ] Browser ends on `/thank-you/`, GA4 real-time shows `inquiry_submitted`
 - [ ] securityheaders.com → A grade or better
 - [ ] PageSpeed mobile ≥ 90 on home + admissions
@@ -170,7 +183,7 @@ The integration is implemented and tested but disabled until credentials land:
 ```bash
 cd jtree-form-api
 npm install
-npm test          # 39 vitest specs
+npm test          # 53 vitest specs (39 inquiry + ritten, 14 partial)
 npm run dev       # vercel dev on :3000
 ```
 

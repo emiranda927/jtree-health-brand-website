@@ -34,6 +34,10 @@ function jtree_render_inquiry_form() {
         <label>Leave this field empty<input type="text" name="hp_field" tabindex="-1" autocomplete="off"></label>
       </div>
 
+      <!-- session_id is set by form.js on load so partials and the eventual
+           full submission can be correlated by the admissions team. -->
+      <input type="hidden" name="session_id" id="session_id" value="">
+
       <div class="form-row">
         <div>
           <label class="jth-field-label" for="parent_first_name">Your first name</label>

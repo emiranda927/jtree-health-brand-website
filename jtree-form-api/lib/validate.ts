@@ -70,6 +70,14 @@ export const InquirySchema = z.object({
     .transform((val) => val === true || val === "true" || val === "on")
     .refine((val) => val === true, "Consent to contact is required"),
 
+  // Optional — present only when the form's partial-capture path generated
+  // one in this tab. Lets admissions correlate a partial → completed lead.
+  session_id: z
+    .string()
+    .max(64, "session_id too long")
+    .regex(/^[A-Za-z0-9_-]*$/, "session_id has invalid characters")
+    .optional(),
+
   hp_field: z.string().max(0, "Invalid submission").optional().default(""),
 });
 
@@ -77,6 +85,44 @@ export type InquiryInput = z.input<typeof InquirySchema>;
 export type InquiryData = z.output<typeof InquirySchema>;
 
 export interface Lead extends Omit<InquiryData, "hp_field" | "consent_contact"> {
+  lead_id: string;
+  submitted_at: string;
+  session_id?: string;
+}
+
+/**
+ * Partial inquiry — fires when a parent interacted with the form but didn't
+ * submit. By design, carries NO PII (no name, email, phone): only the
+ * non-identifying interest signals + a session_id + acquisition source.
+ *
+ * Privacy contract: a partial row should never expose who the parent is.
+ * Adding any PII field here is a privacy regression — talk to product first.
+ */
+export const PartialInquirySchema = z.object({
+  session_id: z
+    .string()
+    .min(1, "session_id is required")
+    .max(64, "session_id too long")
+    .regex(/^[A-Za-z0-9_-]+$/, "session_id has invalid characters"),
+
+  teen_age: z.coerce.number().int().min(10).max(17).optional(),
+  program_interest: ProgramInterest.optional(),
+  best_time_to_call: BestTimeToCall.optional(),
+  how_did_you_hear: HowDidYouHear.optional(),
+
+  utm_source: z.string().max(100).optional(),
+  utm_medium: z.string().max(100).optional(),
+  utm_campaign: z.string().max(100).optional(),
+  referrer: z.string().max(500).optional(),
+
+  hp_field: z.string().max(0).optional().default(""),
+});
+
+export type PartialInquiryInput = z.input<typeof PartialInquirySchema>;
+export type PartialInquiryData = z.output<typeof PartialInquirySchema>;
+
+export interface PartialLead
+  extends Omit<PartialInquiryData, "hp_field"> {
   lead_id: string;
   submitted_at: string;
 }

@@ -90,6 +90,7 @@ export default async function handler(
     program_interest: data.program_interest,
     best_time_to_call: data.best_time_to_call,
     how_did_you_hear: data.how_did_you_hear,
+    session_id: data.session_id,
   };
 
   logger.info("Lead received", { lead_id: lead.lead_id });

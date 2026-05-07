@@ -1,11 +1,24 @@
 /**
  * Google Sheets fallback writer.
- * Appends a lead row to the configured spreadsheet.
+ *
+ * Writes inquiries to a single 12-column sheet:
+ *   A: lead_id            G: teen_age            (blank for partials)
+ *   B: submitted_at       H: program_interest
+ *   C: parent_first_name  I: best_time_to_call
+ *   D: parent_last_name   J: how_did_you_hear
+ *   E: parent_email       K: status              ('lead' | 'partial')
+ *   F: parent_phone       L: session_id
+ *
+ * IMPORTANT: the existing sheet must have columns K + L added by hand (header
+ * row: `status`, `session_id`). Pre-existing rows will have those cells blank,
+ * which the admissions team can read as "lead" for legacy data.
  */
 
 import { google } from "googleapis";
-import type { Lead } from "./validate.js";
+import type { Lead, PartialLead } from "./validate.js";
 import { logger } from "./logger.js";
+
+const SHEET_RANGE = "Leads!A:L";
 
 function getAuth() {
   const json = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
@@ -20,7 +33,7 @@ function getAuth() {
   });
 }
 
-export async function appendLeadToSheet(lead: Lead): Promise<void> {
+async function appendRow(row: string[]): Promise<void> {
   const spreadsheetId = process.env.GOOGLE_SHEETS_ID;
   if (!spreadsheetId) {
     throw new Error("GOOGLE_SHEETS_ID not set");
@@ -29,6 +42,15 @@ export async function appendLeadToSheet(lead: Lead): Promise<void> {
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
 
+  await sheets.spreadsheets.values.append({
+    spreadsheetId,
+    range: SHEET_RANGE,
+    valueInputOption: "RAW",
+    requestBody: { values: [row] },
+  });
+}
+
+export async function appendLeadToSheet(lead: Lead): Promise<void> {
   const row = [
     lead.lead_id,
     lead.submitted_at,
@@ -40,18 +62,36 @@ export async function appendLeadToSheet(lead: Lead): Promise<void> {
     lead.program_interest,
     lead.best_time_to_call,
     lead.how_did_you_hear ?? "",
+    "lead",
+    lead.session_id ?? "",
   ];
 
-  await sheets.spreadsheets.values.append({
-    spreadsheetId,
-    range: "Leads!A:J",
-    valueInputOption: "RAW",
-    requestBody: {
-      values: [row],
-    },
-  });
-
+  await appendRow(row);
   logger.info("Lead written to Google Sheets", { lead_id: lead.lead_id });
+}
+
+/**
+ * Append a no-PII partial inquiry. Columns C–F (name/email/phone) are
+ * intentionally blank — partials never carry identity.
+ */
+export async function appendPartialToSheet(partial: PartialLead): Promise<void> {
+  const row = [
+    partial.lead_id,
+    partial.submitted_at,
+    "", // parent_first_name
+    "", // parent_last_name
+    "", // parent_email
+    "", // parent_phone
+    partial.teen_age != null ? String(partial.teen_age) : "",
+    partial.program_interest ?? "",
+    partial.best_time_to_call ?? "",
+    partial.how_did_you_hear ?? "",
+    "partial",
+    partial.session_id,
+  ];
+
+  await appendRow(row);
+  logger.info("Partial written to Google Sheets", { lead_id: partial.lead_id });
 }
 
 /**
@@ -67,9 +107,11 @@ export async function countRecentLeads(windowMs: number): Promise<number> {
   const auth = getAuth();
   const sheets = google.sheets({ version: "v4", auth });
 
+  // Pull timestamps + status so the watchdog only counts true leads, not
+  // partials (which would otherwise inflate the count and silence alerts).
   const result = await sheets.spreadsheets.values.get({
     spreadsheetId,
-    range: "Leads!B:B", // Column B = submitted_at timestamps
+    range: "Leads!B:K",
   });
 
   const rows = result.data.values ?? [];
@@ -78,7 +120,9 @@ export async function countRecentLeads(windowMs: number): Promise<number> {
 
   for (const row of rows) {
     const ts = row[0];
-    if (typeof ts === "string" && ts >= cutoff) {
+    const status = row[9]; // K column relative to B = index 9
+    const isLead = status === "lead" || status === undefined || status === "";
+    if (isLead && typeof ts === "string" && ts >= cutoff) {
       count++;
     }
   }
