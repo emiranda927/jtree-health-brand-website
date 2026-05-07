@@ -641,3 +641,279 @@ body { margin: 0; }
 
 /* ─── Anchor offset (sticky header) ─── */
 :target { scroll-margin-top: 120px; }
+
+/* ──────────────────────────────────────────────────────────────────
+   Parent Hub — guide tiles. 2-up on tablet/desktop, single column on
+   mobile. Hairline border, generous padding, hover lift.
+   ───────────────────────────────────────────────────────────────── */
+.jth-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+@media (max-width: 720px) {
+  .jth-hub-grid { grid-template-columns: 1fr; }
+}
+.jth-hub-tile {
+  display: block;
+  padding: 26px 28px;
+  background: var(--jth-cream);
+  border: 1px solid var(--jth-rule);
+  border-radius: 14px;
+  color: var(--jth-fg);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.jth-hub-tile:hover {
+  border-color: var(--jth-rule-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(24, 59, 46, 0.06);
+}
+.jth-hub-tile__eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--jth-fg-subtle);
+}
+.jth-hub-tile p {
+  color: var(--jth-fg-muted); line-height: 1.55;
+}
+.jth-hub-tile__meta {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 12px; letter-spacing: 0.04em; color: var(--jth-deep-green);
+}
+
+/* ─── Parent guide layout (single guide page) ─── */
+.jth-guide-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 880px) {
+  .jth-guide-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+.jth-guide-body { min-width: 0; }
+.jth-prose {
+  font-size: 18px; line-height: 1.7; color: var(--jth-fg);
+  max-width: 64ch;
+}
+.jth-prose h2 {
+  font-family: var(--font-editorial, "Fraunces", serif);
+  font-size: clamp(24px, 2.6vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--jth-deep-green);
+  margin: 40px 0 12px;
+  text-wrap: balance;
+}
+.jth-prose h3 { font-family: var(--font-ui, "Inter", sans-serif); font-weight: 600; font-size: 20px; margin: 28px 0 8px; color: var(--jth-deep-green); }
+.jth-prose p { margin: 0 0 18px; }
+.jth-prose ul, .jth-prose ol { margin: 0 0 18px; padding-left: 22px; }
+.jth-prose li { margin-bottom: 8px; }
+.jth-prose a { color: var(--jth-deep-green); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.jth-prose blockquote {
+  margin: 24px 0; padding: 16px 22px;
+  border-left: 3px solid var(--jth-lavender);
+  background: var(--jth-pale-lavender);
+  font-style: italic; color: var(--jth-charcoal);
+}
+
+.jth-guide-aside {
+  position: sticky; top: 96px;
+  display: grid; gap: 28px;
+}
+@media (max-width: 880px) { .jth-guide-aside { position: static; } }
+.jth-guide-aside__block {
+  padding: 22px;
+  background: var(--jth-cream-2);
+  border: 1px solid var(--jth-rule);
+  border-radius: 14px;
+}
+.jth-guide-aside__cta {
+  background: var(--jth-pale-sage);
+  border-color: color-mix(in oklch, var(--jth-deep-green) 14%, var(--jth-cream) 86%);
+}
+.jth-guide-related {
+  list-style: none; padding: 0; margin: 0;
+}
+.jth-guide-related li {
+  border-top: 1px solid var(--jth-rule);
+  padding: 10px 0;
+}
+.jth-guide-related li:first-child { border-top: 0; padding-top: 0; }
+.jth-guide-related a {
+  color: var(--jth-fg);
+  text-decoration: none;
+  font-size: 15px; line-height: 1.4;
+  display: block;
+  transition: color 0.15s ease;
+}
+.jth-guide-related a:hover { color: var(--jth-deep-green); }
+
+/* ──────────────────────────────────────────────────────────────────
+   Careers list — sparse, editorial, no card-on-card. Thin top rules
+   between roles, generous vertical rhythm.
+   ───────────────────────────────────────────────────────────────── */
+.jth-careers-list {
+  border-top: 1px solid var(--jth-rule);
+}
+.jth-career-card {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--jth-rule);
+}
+.jth-career-card__head { display: flex; flex-direction: column; gap: 4px; }
+.jth-career-card p { color: var(--jth-fg); max-width: 62ch; }
+
+.jth-careers-thanks {
+  margin-top: 12px;
+  padding: 28px 32px;
+  background: var(--jth-pale-sage);
+  border: 1px solid var(--jth-rule);
+  border-radius: 14px;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Turnstile — only renders when a site key is configured. Empty by
+   default. Reserve a little space so the form layout doesn't jump.
+   ───────────────────────────────────────────────────────────────── */
+.jth-turnstile {
+  margin: 8px 0 16px;
+  min-height: 0;
+}
+.jth-turnstile:not(:empty) {
+  min-height: 65px;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   FAQ accordion — editorial, single-column, hairline-divided.
+   Native <details>/<summary> for keyboard + no-JS accessibility.
+   Shared across /insurance/, /programs/, /what-we-treat/.
+   ───────────────────────────────────────────────────────────────── */
+.jth-faq {
+  border-top: 1px solid var(--jth-rule);
+}
+.jth-faq__item {
+  border-bottom: 1px solid var(--jth-rule);
+  padding: 0;
+}
+.jth-faq__q {
+  list-style: none;
+  cursor: pointer;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px;
+  padding: 22px 4px;
+  font-family: var(--font-editorial, "Fraunces", Georgia, serif);
+  font-weight: 500;
+  font-size: clamp(20px, 2.2vw, 24px);
+  line-height: 1.3;
+  color: var(--jth-deep-green);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  transition: color 0.18s ease;
+}
+.jth-faq__q::-webkit-details-marker { display: none; }
+.jth-faq__q::marker { content: ""; }
+.jth-faq__q:hover { color: var(--jth-charcoal); }
+.jth-faq__q:focus-visible {
+  outline: 2px solid var(--jth-focus);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.jth-faq__q-text { flex: 1; }
+.jth-faq__chevron {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  margin-top: 2px;
+  color: var(--jth-fg-muted);
+  transition: transform 0.22s ease, color 0.18s ease;
+}
+.jth-faq__item[open] > .jth-faq__q .jth-faq__chevron {
+  transform: rotate(180deg);
+  color: var(--jth-deep-green);
+}
+.jth-faq__a {
+  padding: 0 4px 24px;
+  max-width: 62ch;
+}
+.jth-faq__a p {
+  margin: 0;
+  font-family: var(--font-ui, "Inter", system-ui, sans-serif);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--jth-fg);
+}
+
+/* Subtle reveal when an item opens (modern browsers; ignored elsewhere). */
+@media (prefers-reduced-motion: no-preference) {
+  .jth-faq__item[open] > .jth-faq__a {
+    animation: jth-faq-reveal 0.24s ease both;
+  }
+}
+@keyframes jth-faq-reveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .jth-faq__q { padding: 18px 2px; gap: 14px; }
+  .jth-faq__chevron { width: 28px; height: 28px; }
+  .jth-faq__a { padding: 0 2px 20px; }
+  .jth-faq__a p { font-size: 16px; }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Mobile sticky CTA bar — phone + admissions, fixed bottom on small
+   screens. Hidden ≥881px. Bar height + safe-area is added to body
+   bottom-padding so footer/content never sit under it.
+   ───────────────────────────────────────────────────────────────── */
+.jth-mobile-cta { display: none; }
+
+@media (max-width: 880px) {
+  .jth-mobile-cta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: stretch;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 90;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--jth-cream);
+    border-top: 1px solid var(--jth-rule);
+    box-shadow: 0 -6px 18px rgba(24, 59, 46, 0.06);
+  }
+  .jth-mobile-cta__call,
+  .jth-mobile-cta__primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 8px;
+    height: 48px; padding: 0 18px;
+    border-radius: 999px;
+    font-family: var(--font-ui, "Inter", system-ui, sans-serif);
+    font-weight: 600; font-size: 16px; letter-spacing: -0.005em;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  }
+  .jth-mobile-cta__call {
+    background: transparent;
+    color: var(--jth-deep-green);
+    border: 1.5px solid var(--jth-rule-strong);
+    padding: 0 16px;
+  }
+  .jth-mobile-cta__call:hover { background: var(--jth-green-soft); }
+  .jth-mobile-cta__primary {
+    background: var(--jth-deep-green);
+    color: var(--jth-cream);
+    border: 1.5px solid var(--jth-deep-green);
+  }
+  .jth-mobile-cta__primary:hover { background: var(--jth-green-hover); }
+  .jth-mobile-cta a:focus-visible {
+    outline: 2px solid var(--jth-focus);
+    outline-offset: 2px;
+  }
+  /* Lift everything above the bar so the footer never hides under it. */
+  body.jth-paper {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+}

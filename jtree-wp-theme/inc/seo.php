@@ -88,6 +88,110 @@ function jtree_schema_jsonld() {
 add_action('wp_head', 'jtree_schema_jsonld', 1);
 
 /**
+ * Page-specific FAQ content. Each entry is a real Q&A grounded in the page's
+ * copy — answers must match what the page actually says or Google may flag
+ * the rich result. Update both this map and the page when copy changes.
+ *
+ * @return array<string, array<int, array{q:string,a:string}>>
+ */
+function jtree_faq_map() {
+    return array(
+        'insurance' => array(
+            array(
+                'q' => 'Which insurance plans is JTree Health in network with?',
+                'a' => 'We are in network with BlueCross BlueShield (BCBS NC), Cigna / Evernorth, Aetna, UnitedHealthcare / Optum, Tricare, and North Carolina Medicaid.',
+            ),
+            array(
+                'q' => "What if my plan isn't listed?",
+                'a' => 'Call us. We sometimes accept out-of-network on a case-by-case basis, and we can help you understand your single-case-agreement options.',
+            ),
+            array(
+                'q' => 'How does insurance verification work?',
+                'a' => 'After you submit the inquiry form, our admissions team contacts your insurer and confirms PHP or IOP benefits, deductible, and any prior-authorization requirement before your teen starts.',
+            ),
+            array(
+                'q' => 'Will I know what I owe before treatment starts?',
+                'a' => 'Yes. We give you a clear estimate of your out-of-pocket cost before your teen\'s first day, so the cost question is answered before treatment begins.',
+            ),
+        ),
+        'programs' => array(
+            array(
+                'q' => "What's the difference between PHP and IOP?",
+                'a' => 'PHP (Partial Hospitalization) runs Monday through Friday from 9 a.m. to 3 p.m. for teens whose mental-health needs make a typical school day untenable right now. IOP (Intensive Outpatient) runs Tuesday, Wednesday, and Thursday from 3 to 6 p.m. for teens who can stay in school but need more than weekly outpatient therapy.',
+            ),
+            array(
+                'q' => 'What ages does JTree Health treat?',
+                'a' => 'Adolescents ages 10 through 17.',
+            ),
+            array(
+                'q' => 'Is JTree Health an inpatient program?',
+                'a' => 'No. All three programs — PHP, IOP, and medication management — are outpatient. There is no inpatient stay and no 30-day mandate.',
+            ),
+            array(
+                'q' => 'What happens during a day in PHP?',
+                'a' => 'A typical PHP day includes two DBT skills groups, one process group with peers, individual therapy, family sessions every other week, medication-management consults as needed, and academic support so your teen keeps up with school.',
+            ),
+            array(
+                'q' => 'Do you offer medication management?',
+                'a' => 'Yes. Our psychiatry team coordinates with the therapy team for teens in PHP or IOP, and we also offer standalone medication management with 60-minute initial evaluations and 25-minute follow-ups, available via telehealth or in person.',
+            ),
+        ),
+        'what-we-treat' => array(
+            array(
+                'q' => 'What conditions does JTree Health treat?',
+                'a' => 'We treat anxiety and panic, depression, OCD, ADHD with emotion dysregulation, trauma and PTSD, self-harm, and co-occurring concerns in adolescents ages 10 to 17.',
+            ),
+            array(
+                'q' => 'Do you treat substance use or eating disorders?',
+                'a' => 'We do not treat substance use as a primary diagnosis or active eating disorders that require medical stabilization. If that\'s what your teen needs, we will point you to the right place.',
+            ),
+            array(
+                'q' => 'My teen has more than one of these concerns at once. Can you still help?',
+                'a' => 'Yes. Most teens we see are managing more than one concern at the same time. We work with the whole picture rather than treating a single diagnosis in isolation.',
+            ),
+            array(
+                'q' => 'What if JTree Health is not the right fit for my teen?',
+                'a' => 'Tell us a little about what is going on. The admissions team will help you figure out the next step — even if that step is a different program.',
+            ),
+        ),
+    );
+}
+
+/**
+ * Output FAQPage JSON-LD on pages that carry FAQ content. Rich-result
+ * eligible — answers must remain in sync with the visible page copy.
+ */
+function jtree_faq_schema_jsonld() {
+    $map = jtree_faq_map();
+    $slug = null;
+    foreach (array_keys($map) as $candidate) {
+        if (is_page($candidate)) { $slug = $candidate; break; }
+    }
+    if (!$slug) return;
+
+    $entities = array();
+    foreach ($map[$slug] as $qa) {
+        $entities[] = array(
+            '@type'          => 'Question',
+            'name'           => $qa['q'],
+            'acceptedAnswer' => array(
+                '@type' => 'Answer',
+                'text'  => $qa['a'],
+            ),
+        );
+    }
+
+    $schema = array(
+        '@context'   => 'https://schema.org',
+        '@type'      => 'FAQPage',
+        'mainEntity' => $entities,
+    );
+
+    echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>' . "\n";
+}
+add_action('wp_head', 'jtree_faq_schema_jsonld', 3);
+
+/**
  * Output OpenGraph meta tags
  */
 function jtree_opengraph_meta() {

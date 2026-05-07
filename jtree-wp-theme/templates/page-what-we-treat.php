@@ -35,12 +35,20 @@ $conditions = array(
           <article class="program-card" id="<?php echo esc_attr($c['id']); ?>">
             <h2 class="jth-h3" style="margin: 0;"><?php echo esc_html($c['name']); ?></h2>
             <p style="margin: 0;"><?php echo esc_html($c['desc']); ?></p>
-            <a class="arrow" href="<?php echo esc_url(home_url('/admissions/')); ?>">Talk to admissions &nbsp;&rarr;</a>
+            <a class="arrow" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation &nbsp;&rarr;</a>
           </article>
         <?php endforeach; ?>
       </div>
     </div>
   </section>
+
+  <?php
+    set_query_var('faq_slug', 'what-we-treat');
+    set_query_var('faq_eyebrow', 'Common questions');
+    set_query_var('faq_title', 'What families ask first');
+    set_query_var('faq_intro', '');
+    get_template_part('templates/partials/faq');
+  ?>
 
   <section class="cta-band">
     <div class="container">

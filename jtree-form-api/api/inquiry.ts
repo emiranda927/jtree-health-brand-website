@@ -5,6 +5,7 @@ import { checkRateLimit } from "../lib/rateLimit.js";
 import { sendToRitten } from "../lib/ritten.js";
 import { appendLeadToSheet } from "../lib/sheets.js";
 import { sendEmailToAdmissions } from "../lib/email.js";
+import { verifyTurnstile } from "../lib/turnstile.js";
 import { logger } from "../lib/logger.js";
 
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || "https://jtreehealth.com";
@@ -78,6 +79,17 @@ export default async function handler(
     return;
   }
 
+  // 4b. Cloudflare Turnstile verification. Falls open when secret unset
+  // (dev/staging without a keypair) and gates submissions in production.
+  const turnstileOk = await verifyTurnstile(data.cf_turnstile_response, ip);
+  if (!turnstileOk) {
+    res.status(403).json({
+      error: "Verification failed",
+      message: "Please complete the verification challenge and try again.",
+    });
+    return;
+  }
+
   // 5. Build lead
   const lead: Lead = {
     lead_id: `JT-${nanoid(10)}`,
@@ -90,6 +102,7 @@ export default async function handler(
     program_interest: data.program_interest,
     best_time_to_call: data.best_time_to_call,
     how_did_you_hear: data.how_did_you_hear,
+    session_id: data.session_id,
   };
 
   logger.info("Lead received", { lead_id: lead.lead_id });

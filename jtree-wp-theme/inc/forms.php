@@ -34,6 +34,10 @@ function jtree_render_inquiry_form() {
         <label>Leave this field empty<input type="text" name="hp_field" tabindex="-1" autocomplete="off"></label>
       </div>
 
+      <!-- session_id is set by form.js on load so partials and the eventual
+           full submission can be correlated by the admissions team. -->
+      <input type="hidden" name="session_id" id="session_id" value="">
+
       <div class="form-row">
         <div>
           <label class="jth-field-label" for="parent_first_name">Your first name</label>
@@ -126,9 +130,113 @@ function jtree_render_inquiry_form() {
         <span class="jth-field-error" id="err-consent_contact" role="alert"></span>
       </div>
 
+      <!-- Turnstile widget mount point. form.js renders into this only when
+           JTREE_CONFIG.turnstileSiteKey is set; otherwise the div stays empty
+           and the API verifier falls open (no captcha gate). -->
+      <div id="cf-turnstile" class="jth-turnstile" aria-live="polite"></div>
+
       <div class="form-actions">
         <button class="jth-btn jth-btn-primary jth-btn-lg" type="submit">Start the Conversation</button>
         <p class="form-privacy">Your information is protected. We will never share your data with third parties.</p>
+        <div class="form-error-banner" role="alert"></div>
+      </div>
+    </form>
+    <?php
+}
+
+/**
+ * Render the careers application form. Posts to /api/careers/apply.
+ * Field names match CareerApplicationSchema in jtree-form-api/lib/validate.ts.
+ */
+function jtree_render_careers_form() {
+    $roles = apply_filters('jtree_career_roles', array(
+        'Therapist (PHP / IOP)',
+        'BCBA / Clinical Lead',
+        'Psychiatrist / Med Mgmt',
+        'Operations & Admissions',
+        'Open application — other',
+    ));
+    ?>
+    <form id="careers-form" class="jth-form" novalidate>
+
+      <div class="jth-hp" aria-hidden="true">
+        <label>Leave this field empty<input type="text" name="hp_field" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label class="jth-field-label" for="applicant_first_name">First name</label>
+          <input class="jth-input" id="applicant_first_name" name="applicant_first_name" type="text"
+                 autocomplete="given-name" aria-describedby="err-applicant_first_name" required minlength="1" maxlength="50">
+          <span class="jth-field-error" id="err-applicant_first_name" role="alert"></span>
+        </div>
+        <div>
+          <label class="jth-field-label" for="applicant_last_name">Last name</label>
+          <input class="jth-input" id="applicant_last_name" name="applicant_last_name" type="text"
+                 autocomplete="family-name" aria-describedby="err-applicant_last_name" required minlength="1" maxlength="50">
+          <span class="jth-field-error" id="err-applicant_last_name" role="alert"></span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label class="jth-field-label" for="applicant_email">Email</label>
+          <input class="jth-input" id="applicant_email" name="applicant_email" type="email"
+                 autocomplete="email" aria-describedby="err-applicant_email" required>
+          <span class="jth-field-error" id="err-applicant_email" role="alert"></span>
+        </div>
+        <div>
+          <label class="jth-field-label" for="applicant_phone">Phone</label>
+          <input class="jth-input" id="applicant_phone" name="applicant_phone" type="tel"
+                 autocomplete="tel" placeholder="(919) 555-1234"
+                 aria-describedby="err-applicant_phone" required>
+          <span class="jth-field-error" id="err-applicant_phone" role="alert"></span>
+        </div>
+      </div>
+
+      <div class="form-row solo">
+        <label class="jth-field-label" for="role_interest">Role you're interested in</label>
+        <select class="jth-select" id="role_interest" name="role_interest" required>
+          <option value="">Select a role</option>
+          <?php foreach ($roles as $role) : ?>
+            <option value="<?php echo esc_attr($role); ?>"><?php echo esc_html($role); ?></option>
+          <?php endforeach; ?>
+        </select>
+        <span class="jth-field-error" id="err-role_interest" role="alert"></span>
+      </div>
+
+      <div class="form-row solo">
+        <label class="jth-field-label" for="resume_url">Resume / LinkedIn link
+          <span style="color:var(--jth-fg-subtle); font-weight:400;">(optional)</span>
+        </label>
+        <input class="jth-input" id="resume_url" name="resume_url" type="url"
+               placeholder="https://" autocomplete="url"
+               aria-describedby="err-resume_url">
+        <span class="jth-field-error" id="err-resume_url" role="alert"></span>
+      </div>
+
+      <div class="form-row solo">
+        <label class="jth-field-label" for="message">A few words about you
+          <span style="color:var(--jth-fg-subtle); font-weight:400;">(optional)</span>
+        </label>
+        <textarea class="jth-input" id="message" name="message" rows="4" maxlength="2000"
+                  placeholder="What drew you to adolescent mental health, what you're looking for, anything you'd like us to know."></textarea>
+      </div>
+
+      <div class="form-row solo">
+        <label class="consent-row">
+          <input type="checkbox" name="consent_contact" value="true"
+                 aria-describedby="err-consent_contact" required>
+          <span>It's okay to contact me about this application.</span>
+        </label>
+        <span class="jth-field-error" id="err-consent_contact" role="alert"></span>
+      </div>
+
+      <div id="cf-turnstile-careers" class="jth-turnstile" aria-live="polite"></div>
+
+      <div class="form-actions">
+        <button class="jth-btn jth-btn-primary jth-btn-lg" type="submit">Send application</button>
+        <p class="form-privacy">Replies come from <a href="mailto:careers@jtreehealth.com">careers@jtreehealth.com</a>. We don't share applications outside the hiring team.</p>
         <div class="form-error-banner" role="alert"></div>
       </div>
     </form>

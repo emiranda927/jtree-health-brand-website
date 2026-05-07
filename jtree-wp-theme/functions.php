@@ -82,6 +82,7 @@ function jtree_enqueue_scripts() {
         JTREE_THEME_VERSION,
         true
     );
+    $form_handle = null;
     if (is_page(array('admissions', 'contact'))) {
         wp_enqueue_script(
             'jtree-form',
@@ -90,14 +91,46 @@ function jtree_enqueue_scripts() {
             JTREE_THEME_VERSION,
             true
         );
-        // Expose API + thank-you URLs to form.js so they're configurable per env.
-        wp_add_inline_script('jtree-form',
+        $form_handle = 'jtree-form';
+    } elseif (is_page('careers')) {
+        wp_enqueue_script(
+            'jtree-careers',
+            JTREE_THEME_URI . '/assets/js/careers.js',
+            array(),
+            JTREE_THEME_VERSION,
+            true
+        );
+        $form_handle = 'jtree-careers';
+    }
+
+    if ($form_handle) {
+        // Expose API + thank-you URLs (and Turnstile site key, when set).
+        // Turnstile site keys are public — only the secret is sensitive
+        // (lives in Vercel env).
+        $turnstile_site_key = defined('JTREE_TURNSTILE_SITE_KEY')
+            ? JTREE_TURNSTILE_SITE_KEY
+            : (get_option('jtree_turnstile_site_key', '') ?: '');
+        wp_add_inline_script($form_handle,
             'window.JTREE_CONFIG = ' . wp_json_encode(array(
-                'apiUrl'      => apply_filters('jtree_api_url', 'https://api.jtreehealth.com/api/inquiry'),
-                'thankYouUrl' => apply_filters('jtree_thank_you_url', home_url('/thank-you/')),
+                'apiUrl'           => apply_filters('jtree_api_url', 'https://api.jtreehealth.com/api/inquiry'),
+                'thankYouUrl'      => apply_filters('jtree_thank_you_url', home_url('/thank-you/')),
+                'turnstileSiteKey' => apply_filters('jtree_turnstile_site_key', $turnstile_site_key),
             )) . ';',
             'before'
         );
+
+        // Load Turnstile only when a site key is configured. Otherwise the
+        // widget never renders and the API verifier falls open — same UX
+        // as today, no captcha.
+        if (!empty($turnstile_site_key)) {
+            wp_enqueue_script(
+                'cf-turnstile',
+                'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit',
+                array(),
+                null,
+                true
+            );
+        }
     }
 }
 add_action('wp_enqueue_scripts', 'jtree_enqueue_scripts');
@@ -149,6 +182,9 @@ function jtree_page_templates($templates) {
     $templates['templates/page-thank-you.php']     = 'Thank You';
     $templates['templates/page-privacy.php']       = 'Privacy Policy';
     $templates['templates/page-crisis.php']        = 'Crisis Resources';
+    $templates['templates/page-careers.php']       = 'Careers';
+    $templates['templates/page-parent-guide.php']  = 'Parent Guide';
+    $templates['templates/page-service-area.php']  = 'Service Area';
     return $templates;
 }
 add_filter('theme_page_templates', 'jtree_page_templates');
@@ -194,3 +230,6 @@ add_action('generate_before_header', 'jtree_custom_header', 5);
 
 function jtree_custom_footer() { get_template_part('templates/partials/site-footer'); }
 add_action('generate_after_footer', 'jtree_custom_footer');
+
+function jtree_mobile_sticky_cta() { get_template_part('templates/partials/mobile-sticky-cta'); }
+add_action('wp_footer', 'jtree_mobile_sticky_cta', 50);

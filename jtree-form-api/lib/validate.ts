@@ -70,6 +70,22 @@ export const InquirySchema = z.object({
     .transform((val) => val === true || val === "true" || val === "on")
     .refine((val) => val === true, "Consent to contact is required"),
 
+  // Optional — present only when the form's partial-capture path generated
+  // one in this tab. Lets admissions correlate a partial → completed lead.
+  session_id: z
+    .string()
+    .max(64, "session_id too long")
+    .regex(/^[A-Za-z0-9_-]*$/, "session_id has invalid characters")
+    .optional(),
+
+  // Cloudflare Turnstile challenge response. Verified server-side; the
+  // verifier falls open when TURNSTILE_SECRET is unset, so this can stay
+  // optional in the schema.
+  cf_turnstile_response: z
+    .string()
+    .max(2048, "Turnstile token too long")
+    .optional(),
+
   hp_field: z.string().max(0, "Invalid submission").optional().default(""),
 });
 
@@ -78,5 +94,99 @@ export type InquiryData = z.output<typeof InquirySchema>;
 
 export interface Lead extends Omit<InquiryData, "hp_field" | "consent_contact"> {
   lead_id: string;
+  submitted_at: string;
+  session_id?: string;
+}
+
+/**
+ * Partial inquiry — fires when a parent interacted with the form but didn't
+ * submit. By design, carries NO PII (no name, email, phone): only the
+ * non-identifying interest signals + a session_id + acquisition source.
+ *
+ * Privacy contract: a partial row should never expose who the parent is.
+ * Adding any PII field here is a privacy regression — talk to product first.
+ */
+export const PartialInquirySchema = z.object({
+  session_id: z
+    .string()
+    .min(1, "session_id is required")
+    .max(64, "session_id too long")
+    .regex(/^[A-Za-z0-9_-]+$/, "session_id has invalid characters"),
+
+  teen_age: z.coerce.number().int().min(10).max(17).optional(),
+  program_interest: ProgramInterest.optional(),
+  best_time_to_call: BestTimeToCall.optional(),
+  how_did_you_hear: HowDidYouHear.optional(),
+
+  utm_source: z.string().max(100).optional(),
+  utm_medium: z.string().max(100).optional(),
+  utm_campaign: z.string().max(100).optional(),
+  referrer: z.string().max(500).optional(),
+
+  hp_field: z.string().max(0).optional().default(""),
+});
+
+export type PartialInquiryInput = z.input<typeof PartialInquirySchema>;
+export type PartialInquiryData = z.output<typeof PartialInquirySchema>;
+
+export interface PartialLead
+  extends Omit<PartialInquiryData, "hp_field"> {
+  lead_id: string;
+  submitted_at: string;
+}
+
+/**
+ * Career application — separate funnel from clinical inquiry. Lighter
+ * schema: name + email + role interest + free-form message. The optional
+ * resume link lets the applicant paste a public Drive / Dropbox / LinkedIn
+ * URL; we don't accept binary uploads in v1.
+ */
+export const CareerApplicationSchema = z.object({
+  applicant_first_name: z
+    .string()
+    .min(1, "First name is required")
+    .max(50),
+  applicant_last_name: z
+    .string()
+    .min(1, "Last name is required")
+    .max(50),
+  applicant_email: z
+    .string()
+    .email("Invalid email address")
+    .max(100),
+  applicant_phone: z
+    .string()
+    .min(1, "Phone number is required")
+    .transform((val) => normalizePhone(val)),
+  role_interest: z
+    .string()
+    .min(1, "Tell us which role you're interested in")
+    .max(80),
+  message: z
+    .string()
+    .max(2000, "Message must be 2000 characters or fewer")
+    .optional()
+    .default(""),
+  resume_url: z
+    .string()
+    .url("Resume link must be a full URL")
+    .max(500)
+    .optional(),
+
+  consent_contact: z
+    .union([z.boolean(), z.literal("true"), z.literal("on")])
+    .transform((val) => val === true || val === "true" || val === "on")
+    .refine((val) => val === true, "Consent to contact is required"),
+
+  cf_turnstile_response: z.string().max(2048).optional(),
+  hp_field: z.string().max(0).optional().default(""),
+});
+
+export type CareerApplicationInput = z.input<typeof CareerApplicationSchema>;
+export type CareerApplicationData = z.output<typeof CareerApplicationSchema>;
+
+export interface CareerApplication
+  extends Omit<CareerApplicationData, "hp_field" | "consent_contact" | "cf_turnstile_response"> {
+  application_id: string;
   submitted_at: string;
 }
