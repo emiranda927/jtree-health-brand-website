@@ -12,9 +12,9 @@ get_header();
 <main id="main">
 
   <section class="teen-hero">
-    <img class="collage" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-yellow-scribble.png'); ?>" alt="" style="right:24px; top:30px; width: 220px; opacity: 0.85;">
-    <img class="twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="" style="left:8%; top:30%; width:32px;">
-    <img class="twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-outline-yellow.svg'); ?>" alt="" style="right:18%; bottom:10%; width:28px;">
+    <img class="collage" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-yellow-scribble.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true" style="right:24px; top:30px; width: 220px; opacity: 0.85;">
+    <img class="twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="" width="32" height="32" loading="lazy" aria-hidden="true" style="left:8%; top:30%; width:32px;">
+    <img class="twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-outline-yellow.svg'); ?>" alt="" width="28" height="28" loading="lazy" aria-hidden="true" style="right:18%; bottom:10%; width:28px;">
     <div class="container">
       <span class="jth-eyebrow">A page for you</span>
       <h1>It's okay to not be okay.</h1>
@@ -48,8 +48,8 @@ get_header();
     <div class="container" style="max-width: 720px;">
       <h2 class="jth-h2" style="margin: 0 0 24px;">If you want to talk.</h2>
       <p class="jth-body-l" style="margin: 0 0 24px;">No pressure. No big form. You can text or call, or have a parent reach out for you. We'll figure it out from there.</p>
-      <div style="display:flex; gap: 12px; flex-wrap: wrap;">
-        <a class="jth-btn jth-btn-primary jth-btn-lg" href="tel:9192764005">Call (919) 276-4005</a>
+      <div class="jth-row-buttons">
+        <a class="jth-btn jth-btn-lime jth-btn-lg" href="tel:9192764005">Call (919) 276-4005</a>
         <a class="jth-btn jth-btn-secondary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Have a parent fill out the form</a>
       </div>
       <p class="jth-body-s" style="margin: 32px 0 0;">If you're in a crisis right now — meaning you're thinking about hurting yourself or you don't feel safe — please call or text <strong>988</strong>. They are kind, they are fast, and they answer the phone.</p>

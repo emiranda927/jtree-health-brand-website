@@ -10,8 +10,8 @@
 /* Sora — display & wordmark, geometric humanist sans. */
 @font-face {
   font-family: "Sora";
-  src: url("./fonts/Sora-VariableFont_wght.ttf") format("truetype-variations"),
-       url("./fonts/Sora-VariableFont_wght.ttf") format("truetype");
+  src: url("../fonts/Sora-VariableFont_wght.ttf") format("truetype-variations"),
+       url("../fonts/Sora-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 800;
   font-style: normal;
   font-display: swap;
@@ -20,16 +20,16 @@
 /* Fraunces — editorial serif, hero / emotional moments. Axes: SOFT, WONK, opsz, wght. */
 @font-face {
   font-family: "Fraunces";
-  src: url("./fonts/Fraunces-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype-variations"),
-       url("./fonts/Fraunces-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype");
+  src: url("../fonts/Fraunces-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype-variations"),
+       url("../fonts/Fraunces-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Fraunces";
-  src: url("./fonts/Fraunces-Italic-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype-variations"),
-       url("./fonts/Fraunces-Italic-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype");
+  src: url("../fonts/Fraunces-Italic-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype-variations"),
+       url("../fonts/Fraunces-Italic-VariableFont_SOFT_WONK_opsz_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
@@ -38,16 +38,16 @@
 /* Inter — UI and body workhorse. Axes: opsz, wght. */
 @font-face {
   font-family: "Inter";
-  src: url("./fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype-variations"),
-       url("./fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype");
+  src: url("../fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype-variations"),
+       url("../fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("./fonts/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype-variations"),
-       url("./fonts/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype");
+  src: url("../fonts/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype-variations"),
+       url("../fonts/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
@@ -56,16 +56,16 @@
 /* JetBrains Mono — labels, page numbers, metadata. */
 @font-face {
   font-family: "JetBrains Mono";
-  src: url("./fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype-variations"),
-       url("./fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype");
+  src: url("../fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype-variations"),
+       url("../fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 800;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "JetBrains Mono";
-  src: url("./fonts/JetBrainsMono-Italic-VariableFont_wght.ttf") format("truetype-variations"),
-       url("./fonts/JetBrainsMono-Italic-VariableFont_wght.ttf") format("truetype");
+  src: url("../fonts/JetBrainsMono-Italic-VariableFont_wght.ttf") format("truetype-variations"),
+       url("../fonts/JetBrainsMono-Italic-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 800;
   font-style: italic;
   font-display: swap;
@@ -74,8 +74,8 @@
 /* Caveat — hand-lettered accent, used sparingly. */
 @font-face {
   font-family: "Caveat";
-  src: url("./fonts/Caveat-VariableFont_wght.ttf") format("truetype-variations"),
-       url("./fonts/Caveat-VariableFont_wght.ttf") format("truetype");
+  src: url("../fonts/Caveat-VariableFont_wght.ttf") format("truetype-variations"),
+       url("../fonts/Caveat-VariableFont_wght.ttf") format("truetype");
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -88,7 +88,7 @@
   --jth-lavender:      #B8A7E6;
   --jth-cream:         #F6F4EC;
   --jth-charcoal:      #1D1D1F;
-  --jth-yellow:        #FFD100;
+  --jth-sunflower:        #FFD100;
 
   /* ─── Pale tints (sparingly; cream is default page background) ─── */
   --jth-pale-lavender: #EAE3F5;
@@ -121,7 +121,7 @@
   --font-editorial: "Fraunces", "Times New Roman", Georgia, serif;
   --font-body:      "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono:      "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --font-hand:      "Caveat", "Comic Sans MS", cursive;
+  --font-hand:      "Caveat", cursive;
 
   /* ─── Type scale (from brand kit) ─── */
   --fs-display-xl: 72px;    /* Fraunces 600 — hero statements, campaign moments */
@@ -154,16 +154,14 @@
   --r-xs:     4px;
   --r-sm:     8px;
   --r-md:     12px;
-  --r-input:  10px;
+  --r-input:  4px;
   --r-card:   16px;
   --r-lg:     20px;
   --r-xl:     28px;
   --r-pill:   9999px;
 
-  /* ─── Shadows (used sparingly; brand prefers borders) ─── */
-  --sh-sm:    0 1px 2px rgba(24, 59, 46, 0.06);
-  --sh-md:    0 4px 14px rgba(24, 59, 46, 0.08);
-  --sh-focus: 0 0 0 3px color-mix(in oklch, var(--jth-lime-green) 70%, transparent);
+  /* ─── Shadows (Flat-Paper Rule: only --sh-focus is sanctioned) ─── */
+  --sh-focus: 0 0 0 3px color-mix(in oklch, var(--jth-sunflower) 70%, transparent);
 
   /* ─── Motion ─── */
   --dur-fast:   140ms;
@@ -198,14 +196,48 @@ body { margin: 0; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
+/* Global focus-visible ring — Sunflower 2px outline. Applies to every
+   interactive element so keyboard-navigating parents never lose position. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--jth-sunflower);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* ──────────────────────────────────────────────────────────────────
    Type · semantic classes
    ───────────────────────────────────────────────────────────────── */
+
+/* Editorial em-underlines — adds chromatic life without changing text color.
+   Lime on light surfaces, sunflower on lavender (.h-quote / .section-bg-lavender).
+   Targets <em> inside Fraunces display moments site-wide. */
+:where(h1, h2, h3, blockquote, .jth-display-xl, .jth-display-l) em {
+  text-decoration: underline;
+  text-decoration-color: var(--jth-lime-green);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 6px;
+  text-decoration-skip-ink: auto;
+}
+.h-quote em,
+.section-bg-lavender em {
+  text-decoration-color: var(--jth-sunflower);
+}
 
 .jth-eyebrow {
   font-family: var(--font-mono); font-weight: 500;
   font-size: var(--fs-label); letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--jth-fg-muted);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.jth-eyebrow::before {
+  content: "";
+  width: 7px; height: 7px;
+  background: var(--jth-sunflower);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.section-bg-dark .jth-eyebrow::before {
+  background: var(--jth-lime-green);
 }
 
 .jth-display-xl {
@@ -306,10 +338,10 @@ body { margin: 0; }
 .jth-pill-sage     { background: var(--jth-pale-sage);     border-color: color-mix(in oklch, var(--jth-deep-green) 30%, var(--jth-cream) 70%); }
 
 .jth-input, .jth-select, .jth-textarea {
-  width: 100%; box-sizing: border-box;
+  width: 100%; box-sizing: border-box; min-height: 48px;
   font-family: var(--font-body); font-weight: 400; font-size: 16px; color: var(--jth-charcoal);
-  padding: 13px 16px; background: var(--jth-cream);
-  border: 1.5px solid var(--jth-rule); border-radius: var(--r-input);
+  padding: 14px 16px; background: var(--jth-cream);
+  border: 1px solid var(--jth-rule); border-radius: var(--r-input);
   transition: border-color var(--dur-fast) var(--ease-calm), background var(--dur-fast) var(--ease-calm);
 }
 .jth-input:focus, .jth-select:focus, .jth-textarea:focus {
@@ -318,16 +350,17 @@ body { margin: 0; }
 }
 .jth-input::placeholder { color: var(--jth-fg-subtle); }
 .jth-input[aria-invalid="true"], .jth-select[aria-invalid="true"], .jth-textarea[aria-invalid="true"] {
-  border-color: #B8453B;
+  border-color: #8B2E2E;
 }
 
 .jth-field-label {
-  display: block; margin-bottom: 6px;
-  font-family: var(--font-display); font-weight: 500; font-size: 14px; color: var(--jth-charcoal);
+  display: block; margin-bottom: 8px;
+  font-family: var(--font-mono); font-weight: 500; font-size: 13px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--jth-deep-green);
 }
 .jth-field-error {
   display: block; margin-top: 6px;
-  font-family: var(--font-body); font-size: 13px; color: #B8453B;
+  font-family: var(--font-body); font-size: 13px; color: #8B2E2E;
 }
 .jth-field-help {
   display: block; margin-top: 6px;
@@ -376,11 +409,20 @@ body { margin: 0; }
    ───────────────────────────────────────────────────────────────── */
 
 .jth-crisis-bar {
+  position: sticky; top: 0; z-index: 60;
   background: var(--jth-deep-green); color: var(--jth-cream);
   text-align: center; padding: 10px 16px;
-  font-family: var(--font-body); font-size: 14px; line-height: 1.4;
+  min-height: 44px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 500; line-height: 1.4;
+  letter-spacing: 0.04em;
 }
-.jth-crisis-bar a { color: var(--jth-cream); text-decoration: underline; text-decoration-color: var(--jth-lime-green); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+@media (max-width: 600px) { .jth-crisis-bar { min-height: 56px; padding: 12px 16px; font-size: 12px; } }
+.jth-crisis-bar a {
+  color: var(--jth-cream); text-decoration: underline;
+  text-decoration-color: var(--jth-lime-green); text-decoration-thickness: 1.5px; text-underline-offset: 4px;
+  display: inline-flex; align-items: center; min-height: 44px; padding: 4px 6px;
+}
+.jth-crisis-bar a:hover { color: var(--jth-sunflower); text-decoration-color: var(--jth-sunflower); }
 .jth-crisis-bar strong { color: var(--jth-lime-green); font-weight: 600; }
 
 /* ──────────────────────────────────────────────────────────────────

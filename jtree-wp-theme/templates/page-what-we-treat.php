@@ -30,7 +30,7 @@ $conditions = array(
 
   <section class="section">
     <div class="container">
-      <div class="cards-3" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="cards-3 cards-3--two-up">
         <?php foreach ($conditions as $c) : ?>
           <article class="program-card" id="<?php echo esc_attr($c['id']); ?>">
             <h2 class="jth-h3" style="margin: 0;"><?php echo esc_html($c['name']); ?></h2>
@@ -46,7 +46,7 @@ $conditions = array(
     <div class="container">
       <h2>Not sure if we're the right fit?</h2>
       <p>Tell us a little. We'll talk through it together &mdash; and recommend a different program if that's what your teen needs.</p>
-      <a class="jth-btn jth-btn-lime jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+      <a class="jth-btn jth-btn-secondary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
     </div>
   </section>
 

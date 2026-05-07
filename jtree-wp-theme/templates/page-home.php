@@ -24,7 +24,7 @@ get_header();
         <h1>
           Grow in a shape <br>
           that is <em>entirely</em> <br>
-          your own<span style="color: var(--jth-lavender);">.</span>
+          your own<span class="h-hero-period">.</span>
         </h1>
 
         <p class="h-hero-sub">
@@ -42,11 +42,11 @@ get_header();
 
       <div class="h-hero-art h-fade d2">
         <div class="h-hero-art-frame">
-          <img class="h-hero-photo" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-torn-desert-photo.png'); ?>" alt="A Joshua tree on a quiet desert hillside.">
+          <img class="h-hero-photo" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-torn-desert-photo.png'); ?>" alt="A Joshua tree on a quiet desert hillside." width="800" height="1000" fetchpriority="high" decoding="async">
         </div>
-        <img class="h-hero-tape-1" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-tape.png'); ?>" alt="">
-        <img class="h-hero-tape-2" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-tape.png'); ?>" alt="">
-        <img class="h-hero-twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="">
+        <img class="h-hero-tape-1" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-tape.png'); ?>" alt="" width="240" height="80" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="h-hero-tape-2" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-tape.png'); ?>" alt="" width="240" height="80" loading="lazy" decoding="async" aria-hidden="true">
+        <img class="h-hero-twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="" width="40" height="40" loading="lazy" aria-hidden="true">
         <div class="h-hero-caption">
           <span>Fig. 01 / Mojave Desert</span>
           <span>JTree Health · 2026</span>
@@ -61,20 +61,29 @@ get_header();
     <div class="h-trust-row">
       <span class="h-trust-label">Accredited &amp; in-network with</span>
       <div class="h-trust-items">
-        <span class="carf">★ CARF Accredited</span>
-        <span>BlueCross BlueShield</span>
-        <span>Aetna</span>
-        <span>UnitedHealthcare</span>
-        <span>Cigna</span>
-        <span>Medicaid (NC)</span>
+        <span class="carf-fixed">CARF Accredited</span>
+        <div class="susan">
+          <div class="susan-track" aria-hidden="false">
+            <span>BlueCross BlueShield</span>
+            <span>Aetna</span>
+            <span>UnitedHealthcare</span>
+            <span>Cigna</span>
+            <span>Medicaid (NC)</span>
+            <span aria-hidden="true">BlueCross BlueShield</span>
+            <span aria-hidden="true">Aetna</span>
+            <span aria-hidden="true">UnitedHealthcare</span>
+            <span aria-hidden="true">Cigna</span>
+            <span aria-hidden="true">Medicaid (NC)</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ─────────────────────── MANIFESTO ──────────────────────── -->
   <section class="h-manifesto">
-    <img class="h-manifesto-mark scribble" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-yellow-scribble.png'); ?>" alt="">
-    <img class="h-manifesto-mark brush" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-brush.png'); ?>" alt="">
+    <img class="h-manifesto-mark scribble" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-yellow-scribble.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true">
+    <img class="h-manifesto-mark brush" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-brush.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true">
     <div class="h-manifesto-inner">
       <div class="h-manifesto-num">§ 01 &nbsp;·&nbsp; Why we exist</div>
       <blockquote>
@@ -187,9 +196,9 @@ get_header();
 
   <!-- ─────────────────────── QUOTE ───────────────────────────── -->
   <section class="h-quote">
-    <img class="h-quote-mark brush" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-brush.png'); ?>" alt="">
-    <img class="h-quote-mark tw1" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-outline-yellow.svg'); ?>" alt="">
-    <img class="h-quote-mark tw2" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="">
+    <img class="h-quote-mark brush" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-brush.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true">
+    <img class="h-quote-mark tw1" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-outline-yellow.svg'); ?>" alt="" width="40" height="40" loading="lazy" aria-hidden="true">
+    <img class="h-quote-mark tw2" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="" width="32" height="32" loading="lazy" aria-hidden="true">
     <div class="h-quote-inner">
       <div class="num">§ 05 &nbsp;·&nbsp; A note from our founder</div>
       <blockquote>
@@ -216,11 +225,11 @@ get_header();
 
   <!-- ─────────────────────── CTA BAND ────────────────────────── -->
   <section class="h-cta">
-    <img class="h-cta-mark swash" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-swash.png'); ?>" alt="">
-    <img class="h-cta-mark tape" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-tape.png'); ?>" alt="">
-    <img class="h-cta-mark tw" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="">
+    <img class="h-cta-mark swash" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-swash.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true">
+    <img class="h-cta-mark tape" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-tape.png'); ?>" alt="" width="240" height="80" loading="lazy" decoding="async" aria-hidden="true">
+    <img class="h-cta-mark tw" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="" width="40" height="40" loading="lazy" aria-hidden="true">
     <div class="h-cta-inner">
-      <img class="h-cta-tree" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/tree-mark-deep-green.svg'); ?>" alt="">
+      <img class="h-cta-tree" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/tree-mark-deep-green.svg'); ?>" alt="" width="91" height="118" loading="lazy" aria-hidden="true">
       <h2>You don't have to <em>figure this out alone.</em></h2>
       <p>An admissions clinician will reach out within one business day. Your information is protected, and we never share it.</p>
       <div class="h-cta-actions">

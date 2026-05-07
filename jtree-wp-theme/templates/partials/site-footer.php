@@ -14,8 +14,8 @@ $brand = JTREE_THEME_URI . '/assets/brand';
     <div class="footer-brand">
       <img
         src="<?php echo esc_url($brand . '/logo-inverted-cream.png'); ?>"
-        srcset="<?php echo esc_url($brand . '/logo-inverted-cream.png'); ?> 1x, <?php echo esc_url($brand . '/logo-inverted-cream@2x.png'); ?> 2x"
-        alt="Joshua Tree Health">
+        alt="Joshua Tree Health"
+        width="200" height="88" loading="lazy" decoding="async">
       <p>Adolescent PHP and IOP mental-health care, rooted in Apex, NC.</p>
       <span class="carf-badge">CARF Accredited</span>
     </div>

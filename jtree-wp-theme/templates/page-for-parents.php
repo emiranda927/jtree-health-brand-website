@@ -36,7 +36,7 @@ get_header();
     <div class="container">
       <h2>Questions before you fill out a form?</h2>
       <p>Call us. A clinician will pick up &mdash; or call you back the same business day.</p>
-      <a class="jth-btn jth-btn-lime jth-btn-lg" href="tel:9192764005">(919) 276-4005</a>
+      <a class="jth-btn jth-btn-secondary jth-btn-lg" href="tel:9192764005">(919) 276-4005</a>
     </div>
   </section>
 

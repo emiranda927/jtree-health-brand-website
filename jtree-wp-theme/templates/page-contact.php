@@ -20,7 +20,7 @@ get_header();
 
   <section class="section">
     <div class="container" style="max-width: 880px;">
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+      <div class="jth-grid-pair">
         <div class="contact-card" style="padding: 32px;">
           <h3 style="margin: 0 0 14px;">Call us</h3>
           <a class="phone" href="tel:9192764005" style="font-size: 28px;">(919) 276-4005</a>

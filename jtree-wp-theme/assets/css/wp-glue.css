@@ -4,17 +4,27 @@
    Loaded after site.css; isolated so the design system stays pristine.
    ───────────────────────────────────────────────────────────────── */
 
-/* Hide GP default structural elements — our partials own header + footer. */
+/* Hide GP default structural elements — our partials own header + footer.
+   .site-info is GP's "Powered by WordPress" credits banner; our custom
+   site-footer partial provides the footer we want to ship. */
 .site > .site-header,
 .main-navigation,
-.inside-header { display: none !important; }
+.inside-header,
+.site-info,
+.footer-bar,
+footer.site-info { display: none !important; }
 
-/* Strip GP wrappers' default padding so the design system controls layout. */
+/* Strip GP wrappers' default padding so the design system controls layout.
+   The outer page wrapper centering is handled in PHP via the
+   generate_sidebar_layout filter (functions.php) — that's the GP-native way
+   to disable the sidebar reservation. CSS-fighting the outer .site wrapper
+   produces left-aligned regressions; trust the filter. */
 .site-content { padding: 0 !important; }
 .site-main { padding: 0 !important; margin: 0 !important; }
 .entry-content,
 .entry-header { max-width: none !important; padding: 0 !important; margin: 0 !important; }
 .content-area { width: 100% !important; float: none !important; padding: 0 !important; margin: 0 !important; }
+.sidebar, .widget-area { display: none !important; }
 
 /* WP admin bar offset for sticky site-header. */
 @media screen and (min-width: 783px) {
