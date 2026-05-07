@@ -6,9 +6,10 @@
 // parent's identity. Field names match jtree-form-api/lib/validate.ts.
 (function () {
   var CONFIG          = window.JTREE_CONFIG || {};
-  var API_URL         = CONFIG.apiUrl        || 'https://api.jtreehealth.com/api/inquiry';
-  var PARTIAL_URL     = CONFIG.partialApiUrl || (API_URL.replace(/\/$/, '') + '/partial');
-  var THANK_URL       = CONFIG.thankYouUrl   || '/thank-you/';
+  var API_URL         = CONFIG.apiUrl          || 'https://api.jtreehealth.com/api/inquiry';
+  var PARTIAL_URL     = CONFIG.partialApiUrl   || (API_URL.replace(/\/$/, '') + '/partial');
+  var THANK_URL       = CONFIG.thankYouUrl     || '/thank-you/';
+  var TURNSTILE_KEY   = CONFIG.turnstileSiteKey || '';
   var SESSION_KEY     = 'jth_session_id';
   var UTM_KEY         = 'jth_utm';
 
@@ -36,6 +37,31 @@
   }
   var sessionInput = document.getElementById('session_id');
   if (sessionInput) sessionInput.value = sessionId;
+
+  // ── Turnstile widget ─────────────────────────────────────────────
+  // Renders only when a site key is configured. Without a key, the API
+  // verifier falls open and we never load the Cloudflare script — keeps
+  // dev/staging fast and silent. `turnstile.ready` polls internally until
+  // the global is ready, so we don't have to.
+  var turnstileWidgetId = null;
+  function tryRenderTurnstile() {
+    if (!TURNSTILE_KEY) return;
+    var container = document.getElementById('cf-turnstile');
+    if (!container) return;
+    if (!window.turnstile || typeof window.turnstile.render !== 'function') {
+      // Script may not have parsed yet — retry on next tick.
+      window.setTimeout(tryRenderTurnstile, 100);
+      return;
+    }
+    try {
+      turnstileWidgetId = window.turnstile.render(container, {
+        sitekey: TURNSTILE_KEY,
+        theme:   'light',
+        action:  'inquiry',
+      });
+    } catch (_) { /* render failed — submit will fail without a token */ }
+  }
+  tryRenderTurnstile();
 
   // UTM params: prefer the URL we landed on; fall back to a stash from any
   // previous page in this session. Sticky across navigations within the tab.
@@ -185,6 +211,17 @@
     };
     if (data.how_did_you_hear) payload.how_did_you_hear = data.how_did_you_hear;
 
+    // Turnstile token, if a widget is mounted. The API verifier falls open
+    // when no site key is configured, so an absent token is fine in dev.
+    if (TURNSTILE_KEY && window.turnstile && turnstileWidgetId !== null) {
+      var token = window.turnstile.getResponse(turnstileWidgetId);
+      if (!token) {
+        showBanner('Please complete the verification challenge below the form.');
+        return;
+      }
+      payload.cf_turnstile_response = token;
+    }
+
     setBusy(true);
 
     try {
@@ -206,11 +243,17 @@
 
       if (res.status === 429) {
         showBanner('Too many submissions. Please wait a moment and try again.');
+      } else if (res.status === 403) {
+        showBanner('Verification failed. Please retry the challenge below the form.');
       } else if (res.status >= 400 && res.status < 500 && body && Array.isArray(body.errors)) {
         body.errors.forEach(function (e) { if (e && e.field) showError(e.field, e.message || 'Please check this field.'); });
         showBanner('Please fix the highlighted fields and try again.');
       } else {
         showBanner('Something went wrong on our side. Please call us at (919) 276-4005 and we’ll take it from there.');
+      }
+      // Reset Turnstile so the parent can retry without re-loading the page.
+      if (TURNSTILE_KEY && window.turnstile && turnstileWidgetId !== null) {
+        try { window.turnstile.reset(turnstileWidgetId); } catch (_) {}
       }
     } catch (err) {
       showBanner('We couldn’t reach our server. Please call us at (919) 276-4005, or try again in a minute.');

@@ -643,6 +643,18 @@ body { margin: 0; }
 :target { scroll-margin-top: 120px; }
 
 /* ──────────────────────────────────────────────────────────────────
+   Turnstile — only renders when a site key is configured. Empty by
+   default. Reserve a little space so the form layout doesn't jump.
+   ───────────────────────────────────────────────────────────────── */
+.jth-turnstile {
+  margin: 8px 0 16px;
+  min-height: 0;
+}
+.jth-turnstile:not(:empty) {
+  min-height: 65px;
+}
+
+/* ──────────────────────────────────────────────────────────────────
    FAQ accordion — editorial, single-column, hairline-divided.
    Native <details>/<summary> for keyboard + no-JS accessibility.
    Shared across /insurance/, /programs/, /what-we-treat/.

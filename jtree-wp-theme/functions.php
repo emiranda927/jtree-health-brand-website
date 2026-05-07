@@ -90,14 +90,33 @@ function jtree_enqueue_scripts() {
             JTREE_THEME_VERSION,
             true
         );
-        // Expose API + thank-you URLs to form.js so they're configurable per env.
+        // Expose API + thank-you URLs (and Turnstile site key, when set) to
+        // form.js so they're configurable per env. Turnstile site keys are
+        // public — only the secret is sensitive (lives in Vercel env).
+        $turnstile_site_key = defined('JTREE_TURNSTILE_SITE_KEY')
+            ? JTREE_TURNSTILE_SITE_KEY
+            : (get_option('jtree_turnstile_site_key', '') ?: '');
         wp_add_inline_script('jtree-form',
             'window.JTREE_CONFIG = ' . wp_json_encode(array(
-                'apiUrl'      => apply_filters('jtree_api_url', 'https://api.jtreehealth.com/api/inquiry'),
-                'thankYouUrl' => apply_filters('jtree_thank_you_url', home_url('/thank-you/')),
+                'apiUrl'           => apply_filters('jtree_api_url', 'https://api.jtreehealth.com/api/inquiry'),
+                'thankYouUrl'      => apply_filters('jtree_thank_you_url', home_url('/thank-you/')),
+                'turnstileSiteKey' => apply_filters('jtree_turnstile_site_key', $turnstile_site_key),
             )) . ';',
             'before'
         );
+
+        // Load Turnstile only when a site key is configured. Otherwise the
+        // widget never renders and the API verifier falls open — same UX
+        // as today, no captcha.
+        if (!empty($turnstile_site_key)) {
+            wp_enqueue_script(
+                'cf-turnstile',
+                'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit',
+                array(),
+                null,
+                true
+            );
+        }
     }
 }
 add_action('wp_enqueue_scripts', 'jtree_enqueue_scripts');

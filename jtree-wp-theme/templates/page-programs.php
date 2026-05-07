@@ -29,7 +29,7 @@ get_header();
           <h2 class="jth-h2" style="margin: 16px 0 12px;">Partial hospitalization</h2>
           <p class="jth-meta">Mon–Fri · 9 am – 3 pm</p>
           <p class="jth-meta">Ages 10–17</p>
-          <a class="jth-btn jth-btn-primary" style="margin-top: 20px;" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start admissions</a>
+          <a class="jth-btn jth-btn-primary" style="margin-top: 20px;" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
         </aside>
         <div>
           <h3 class="jth-h4" style="margin:0 0 8px;">Who it's for</h3>
@@ -92,7 +92,7 @@ get_header();
           <p class="jth-meta" style="margin-top: 16px;">Tue / Wed / Thu</p>
           <p class="jth-meta">3 – 6 pm</p>
           <p class="jth-meta">Ages 10–17</p>
-          <a class="jth-btn jth-btn-primary" style="margin-top: 20px;" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start admissions</a>
+          <a class="jth-btn jth-btn-primary" style="margin-top: 20px;" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
         </aside>
       </div>
     </div>
@@ -115,7 +115,7 @@ get_header();
         <li>Honest conversations about what medication can and can't do</li>
       </ul>
 
-      <a class="jth-btn jth-btn-primary" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start admissions</a>
+      <a class="jth-btn jth-btn-primary" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
     </div>
   </section>
 

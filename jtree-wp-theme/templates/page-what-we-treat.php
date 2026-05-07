@@ -35,7 +35,7 @@ $conditions = array(
           <article class="program-card" id="<?php echo esc_attr($c['id']); ?>">
             <h2 class="jth-h3" style="margin: 0;"><?php echo esc_html($c['name']); ?></h2>
             <p style="margin: 0;"><?php echo esc_html($c['desc']); ?></p>
-            <a class="arrow" href="<?php echo esc_url(home_url('/admissions/')); ?>">Talk to admissions &nbsp;&rarr;</a>
+            <a class="arrow" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation &nbsp;&rarr;</a>
           </article>
         <?php endforeach; ?>
       </div>

@@ -78,6 +78,14 @@ export const InquirySchema = z.object({
     .regex(/^[A-Za-z0-9_-]*$/, "session_id has invalid characters")
     .optional(),
 
+  // Cloudflare Turnstile challenge response. Verified server-side; the
+  // verifier falls open when TURNSTILE_SECRET is unset, so this can stay
+  // optional in the schema.
+  cf_turnstile_response: z
+    .string()
+    .max(2048, "Turnstile token too long")
+    .optional(),
+
   hp_field: z.string().max(0, "Invalid submission").optional().default(""),
 });
 

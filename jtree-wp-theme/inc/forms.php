@@ -130,6 +130,11 @@ function jtree_render_inquiry_form() {
         <span class="jth-field-error" id="err-consent_contact" role="alert"></span>
       </div>
 
+      <!-- Turnstile widget mount point. form.js renders into this only when
+           JTREE_CONFIG.turnstileSiteKey is set; otherwise the div stays empty
+           and the API verifier falls open (no captcha gate). -->
+      <div id="cf-turnstile" class="jth-turnstile" aria-live="polite"></div>
+
       <div class="form-actions">
         <button class="jth-btn jth-btn-primary jth-btn-lg" type="submit">Start the Conversation</button>
         <p class="form-privacy">Your information is protected. We will never share your data with third parties.</p>

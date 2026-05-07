@@ -69,6 +69,8 @@ gh repo create jtree-health/jtree-wp-theme --private --source=. --push
    - `GOOGLE_SERVICE_ACCOUNT_JSON` — entire service-account JSON, stringified
    - `ALLOWED_ORIGIN` — `https://jtreehealth.com`
    - `RITTEN_API_URL` + `RITTEN_API_KEY` — leave **blank** until Ritten credentials are confirmed
+   - `TURNSTILE_SECRET` — Cloudflare Turnstile secret key. Leave **blank** to fall open in dev/staging; the verifier returns true and the form behaves as it does today (honeypot only). When set, every full inquiry is verified server-side.
+   - In WordPress, expose the matching public site key via either the `JTREE_TURNSTILE_SITE_KEY` PHP constant in `wp-config.php` or the `jtree_turnstile_site_key` option (`update_option`). The widget renders only when this is set.
 3. **Deploy** — `vercel --prod` or push to `main`.
 4. **Verify** — `curl https://<vercel-url>/api/health` → `200 OK`.
 5. **Add custom domain** — Vercel project → Domains → add `api.jtreehealth.com`.

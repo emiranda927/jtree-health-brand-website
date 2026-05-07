@@ -5,6 +5,7 @@ import { checkRateLimit } from "../lib/rateLimit.js";
 import { sendToRitten } from "../lib/ritten.js";
 import { appendLeadToSheet } from "../lib/sheets.js";
 import { sendEmailToAdmissions } from "../lib/email.js";
+import { verifyTurnstile } from "../lib/turnstile.js";
 import { logger } from "../lib/logger.js";
 
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || "https://jtreehealth.com";
@@ -75,6 +76,17 @@ export default async function handler(
   if (data.hp_field && data.hp_field.length > 0) {
     logger.info("Honeypot triggered");
     res.status(200).json({ success: true });
+    return;
+  }
+
+  // 4b. Cloudflare Turnstile verification. Falls open when secret unset
+  // (dev/staging without a keypair) and gates submissions in production.
+  const turnstileOk = await verifyTurnstile(data.cf_turnstile_response, ip);
+  if (!turnstileOk) {
+    res.status(403).json({
+      error: "Verification failed",
+      message: "Please complete the verification challenge and try again.",
+    });
     return;
   }
 
