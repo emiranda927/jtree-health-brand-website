@@ -194,3 +194,6 @@ add_action('generate_before_header', 'jtree_custom_header', 5);
 
 function jtree_custom_footer() { get_template_part('templates/partials/site-footer'); }
 add_action('generate_after_footer', 'jtree_custom_footer');
+
+function jtree_mobile_sticky_cta() { get_template_part('templates/partials/mobile-sticky-cta'); }
+add_action('wp_footer', 'jtree_mobile_sticky_cta', 50);

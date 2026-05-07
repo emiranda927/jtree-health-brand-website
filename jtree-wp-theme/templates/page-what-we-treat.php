@@ -42,6 +42,14 @@ $conditions = array(
     </div>
   </section>
 
+  <?php
+    set_query_var('faq_slug', 'what-we-treat');
+    set_query_var('faq_eyebrow', 'Common questions');
+    set_query_var('faq_title', 'What families ask first');
+    set_query_var('faq_intro', '');
+    get_template_part('templates/partials/faq');
+  ?>
+
   <section class="cta-band">
     <div class="container">
       <h2>Not sure if we're the right fit?</h2>

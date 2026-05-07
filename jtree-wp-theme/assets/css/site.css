@@ -641,3 +641,136 @@ body { margin: 0; }
 
 /* ─── Anchor offset (sticky header) ─── */
 :target { scroll-margin-top: 120px; }
+
+/* ──────────────────────────────────────────────────────────────────
+   FAQ accordion — editorial, single-column, hairline-divided.
+   Native <details>/<summary> for keyboard + no-JS accessibility.
+   Shared across /insurance/, /programs/, /what-we-treat/.
+   ───────────────────────────────────────────────────────────────── */
+.jth-faq {
+  border-top: 1px solid var(--jth-rule);
+}
+.jth-faq__item {
+  border-bottom: 1px solid var(--jth-rule);
+  padding: 0;
+}
+.jth-faq__q {
+  list-style: none;
+  cursor: pointer;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px;
+  padding: 22px 4px;
+  font-family: var(--font-editorial, "Fraunces", Georgia, serif);
+  font-weight: 500;
+  font-size: clamp(20px, 2.2vw, 24px);
+  line-height: 1.3;
+  color: var(--jth-deep-green);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  transition: color 0.18s ease;
+}
+.jth-faq__q::-webkit-details-marker { display: none; }
+.jth-faq__q::marker { content: ""; }
+.jth-faq__q:hover { color: var(--jth-charcoal); }
+.jth-faq__q:focus-visible {
+  outline: 2px solid var(--jth-focus);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.jth-faq__q-text { flex: 1; }
+.jth-faq__chevron {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  margin-top: 2px;
+  color: var(--jth-fg-muted);
+  transition: transform 0.22s ease, color 0.18s ease;
+}
+.jth-faq__item[open] > .jth-faq__q .jth-faq__chevron {
+  transform: rotate(180deg);
+  color: var(--jth-deep-green);
+}
+.jth-faq__a {
+  padding: 0 4px 24px;
+  max-width: 62ch;
+}
+.jth-faq__a p {
+  margin: 0;
+  font-family: var(--font-ui, "Inter", system-ui, sans-serif);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--jth-fg);
+}
+
+/* Subtle reveal when an item opens (modern browsers; ignored elsewhere). */
+@media (prefers-reduced-motion: no-preference) {
+  .jth-faq__item[open] > .jth-faq__a {
+    animation: jth-faq-reveal 0.24s ease both;
+  }
+}
+@keyframes jth-faq-reveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .jth-faq__q { padding: 18px 2px; gap: 14px; }
+  .jth-faq__chevron { width: 28px; height: 28px; }
+  .jth-faq__a { padding: 0 2px 20px; }
+  .jth-faq__a p { font-size: 16px; }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Mobile sticky CTA bar — phone + admissions, fixed bottom on small
+   screens. Hidden ≥881px. Bar height + safe-area is added to body
+   bottom-padding so footer/content never sit under it.
+   ───────────────────────────────────────────────────────────────── */
+.jth-mobile-cta { display: none; }
+
+@media (max-width: 880px) {
+  .jth-mobile-cta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: stretch;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 90;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--jth-cream);
+    border-top: 1px solid var(--jth-rule);
+    box-shadow: 0 -6px 18px rgba(24, 59, 46, 0.06);
+  }
+  .jth-mobile-cta__call,
+  .jth-mobile-cta__primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 8px;
+    height: 48px; padding: 0 18px;
+    border-radius: 999px;
+    font-family: var(--font-ui, "Inter", system-ui, sans-serif);
+    font-weight: 600; font-size: 16px; letter-spacing: -0.005em;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  }
+  .jth-mobile-cta__call {
+    background: transparent;
+    color: var(--jth-deep-green);
+    border: 1.5px solid var(--jth-rule-strong);
+    padding: 0 16px;
+  }
+  .jth-mobile-cta__call:hover { background: var(--jth-green-soft); }
+  .jth-mobile-cta__primary {
+    background: var(--jth-deep-green);
+    color: var(--jth-cream);
+    border: 1.5px solid var(--jth-deep-green);
+  }
+  .jth-mobile-cta__primary:hover { background: var(--jth-green-hover); }
+  .jth-mobile-cta a:focus-visible {
+    outline: 2px solid var(--jth-focus);
+    outline-offset: 2px;
+  }
+  /* Lift everything above the bar so the footer never hides under it. */
+  body.jth-paper {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+}

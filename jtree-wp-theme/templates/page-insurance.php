@@ -45,6 +45,14 @@ get_header();
     </div>
   </section>
 
+  <?php
+    set_query_var('faq_slug', 'insurance');
+    set_query_var('faq_eyebrow', 'Insurance, answered');
+    set_query_var('faq_title', 'What parents ask about coverage');
+    set_query_var('faq_intro', 'The questions families bring to our admissions team most often.');
+    get_template_part('templates/partials/faq');
+  ?>
+
 </main>
 
 <?php get_footer(); ?>

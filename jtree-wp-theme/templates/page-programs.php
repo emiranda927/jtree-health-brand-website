@@ -119,6 +119,14 @@ get_header();
     </div>
   </section>
 
+  <?php
+    set_query_var('faq_slug', 'programs');
+    set_query_var('faq_eyebrow', 'Common questions');
+    set_query_var('faq_title', 'About our programs');
+    set_query_var('faq_intro', '');
+    get_template_part('templates/partials/faq');
+  ?>
+
   <!-- CTA -->
   <section class="cta-band">
     <div class="container">
