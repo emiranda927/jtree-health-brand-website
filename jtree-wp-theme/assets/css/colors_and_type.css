@@ -305,6 +305,22 @@ body { margin: 0; }
 }
 .jth-btn-secondary:hover { background: var(--jth-green-soft); }
 
+/* Contextual override: when a .jth-btn-secondary sits on a known dark surface
+   (.cta-band or .section-bg-dark), promote it to a Lime fill so it stays
+   visible. The default "transparent + deep-green text + deep-green border"
+   goes invisible against deep green. */
+.cta-band .jth-btn-secondary,
+.section-bg-dark .jth-btn-secondary {
+  background: var(--jth-lime-green);
+  color: var(--jth-deep-green);
+  border-color: var(--jth-lime-green);
+}
+.cta-band .jth-btn-secondary:hover,
+.section-bg-dark .jth-btn-secondary:hover {
+  background: var(--jth-cream);
+  border-color: var(--jth-cream);
+}
+
 .jth-btn-ghost { background: transparent; color: var(--jth-deep-green); }
 .jth-btn-ghost:hover { background: var(--jth-cream-3); }
 

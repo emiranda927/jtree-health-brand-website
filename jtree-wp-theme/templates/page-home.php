@@ -11,9 +11,9 @@ get_header();
 
 <main id="main">
 
-  <!-- ─────────────────────────── HERO ─────────────────────────── -->
-  <section class="h-hero">
-    <div class="h-hero-grid">
+  <!-- ─────────────────────────── HERO — kinetic split-flap ─────────────────────────── -->
+  <section class="h-hero h-hero--kinetic">
+    <div class="h-hero-grid h-hero-grid--single">
 
       <div class="h-hero-text h-fade">
         <div class="h-hero-kicker">
@@ -21,10 +21,15 @@ get_header();
           <span>Teen mental health · Apex, NC</span>
         </div>
 
-        <h1>
-          Grow in a shape <br>
-          that is <em>entirely</em> <br>
-          your own<span class="h-hero-period">.</span>
+        <h1 class="h-hero-headline">
+          <span class="h-hero-fixed">Grow in a shape that is</span>
+          <span class="h-hero-flap">
+            <span class="h-hero-flap-spacer">entirely your own</span>
+            <span aria-hidden="true">entirely your own</span>
+            <span aria-hidden="true">messy and yours</span>
+            <span aria-hidden="true">still becoming</span>
+            <span aria-hidden="true">shaped by you</span>
+          </span><span class="h-hero-period">.</span>
         </h1>
 
         <p class="h-hero-sub">
@@ -37,19 +42,6 @@ get_header();
           <a class="jth-btn jth-btn-primary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
           <a class="jth-btn jth-btn-ghost jth-btn-lg" href="<?php echo esc_url(home_url('/programs/')); ?>">Explore Programs →</a>
           <span class="meta">Reply within 1 business day</span>
-        </div>
-      </div>
-
-      <div class="h-hero-art h-fade d2">
-        <div class="h-hero-art-frame">
-          <img class="h-hero-photo" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-torn-desert-photo.png'); ?>" alt="A Joshua tree on a quiet desert hillside." width="800" height="1000" fetchpriority="high" decoding="async">
-        </div>
-        <img class="h-hero-tape-1" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-tape.png'); ?>" alt="" width="240" height="80" loading="lazy" decoding="async" aria-hidden="true">
-        <img class="h-hero-tape-2" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-tape.png'); ?>" alt="" width="240" height="80" loading="lazy" decoding="async" aria-hidden="true">
-        <img class="h-hero-twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="" width="40" height="40" loading="lazy" aria-hidden="true">
-        <div class="h-hero-caption">
-          <span>Fig. 01 / Mojave Desert</span>
-          <span>JTree Health · 2026</span>
         </div>
       </div>
 
@@ -80,16 +72,20 @@ get_header();
     </div>
   </div>
 
-  <!-- ─────────────────────── MANIFESTO ──────────────────────── -->
+  <!-- ─────────────────────── MANIFESTO — pale lavender + Joshie ── -->
   <section class="h-manifesto">
-    <img class="h-manifesto-mark scribble" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-yellow-scribble.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true">
-    <img class="h-manifesto-mark brush" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-brush.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true">
     <div class="h-manifesto-inner">
-      <div class="h-manifesto-num">§ 01 &nbsp;·&nbsp; Why we exist</div>
+      <span class="jth-eyebrow">§ 01 / Why we exist</span>
       <blockquote>
         Adolescence is not a problem to be solved. It's a desert to be <em>navigated</em> —
         slowly, in honest weather, with people who know the terrain.
       </blockquote>
+    </div>
+    <div class="h-manifesto-joshie" aria-hidden="true">
+      <img
+        src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/joshie/joshie-curled-up-resting.png'); ?>"
+        srcset="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/joshie/joshie-curled-up-resting.png'); ?> 1x, <?php echo esc_url(JTREE_THEME_URI . '/assets/brand/joshie/joshie-curled-up-resting@3x.png'); ?> 3x"
+        alt="" width="200" height="200" loading="lazy" decoding="async">
     </div>
   </section>
 
@@ -194,13 +190,10 @@ get_header();
     </div>
   </section>
 
-  <!-- ─────────────────────── QUOTE ───────────────────────────── -->
+  <!-- ─────────────────────── QUOTE — clean editorial ─────────── -->
   <section class="h-quote">
-    <img class="h-quote-mark brush" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-brush.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true">
-    <img class="h-quote-mark tw1" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-outline-yellow.svg'); ?>" alt="" width="40" height="40" loading="lazy" aria-hidden="true">
-    <img class="h-quote-mark tw2" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="" width="32" height="32" loading="lazy" aria-hidden="true">
     <div class="h-quote-inner">
-      <div class="num">§ 05 &nbsp;·&nbsp; A note from our founder</div>
+      <span class="jth-eyebrow">§ 05 / A note from our founder</span>
       <blockquote>
         Resilience isn't about escaping the desert. It's about <em>building the roots</em> to thrive within it.
       </blockquote>
@@ -223,18 +216,22 @@ get_header();
     </div>
   </section>
 
-  <!-- ─────────────────────── CTA BAND ────────────────────────── -->
+  <!-- ─────────────────────── CTA BAND — Joshie + tree friend ─── -->
   <section class="h-cta">
-    <img class="h-cta-mark swash" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-swash.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true">
-    <img class="h-cta-mark tape" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-tape.png'); ?>" alt="" width="240" height="80" loading="lazy" decoding="async" aria-hidden="true">
-    <img class="h-cta-mark tw" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="" width="40" height="40" loading="lazy" aria-hidden="true">
     <div class="h-cta-inner">
-      <img class="h-cta-tree" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/tree-mark-deep-green.svg'); ?>" alt="" width="91" height="118" loading="lazy" aria-hidden="true">
-      <h2>You don't have to <em>figure this out alone.</em></h2>
+      <span class="jth-eyebrow">§ 06 / Start when you're ready</span>
+      <h2>You don't have to figure this out <em>alone.</em></h2>
       <p>An admissions clinician will reach out within one business day. Your information is protected, and we never share it.</p>
       <div class="h-cta-actions">
         <a class="jth-btn jth-btn-primary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
         <a class="jth-btn jth-btn-ghost jth-btn-lg" href="tel:9192764005">(919) 276-4005</a>
+      </div>
+      <div class="h-cta-joshie">
+        <img
+          src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/joshie/joshie-with-tree-friend.png'); ?>"
+          srcset="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/joshie/joshie-with-tree-friend.png'); ?> 1x, <?php echo esc_url(JTREE_THEME_URI . '/assets/brand/joshie/joshie-with-tree-friend@3x.png'); ?> 3x"
+          alt="The Joshua Tree Health mascot standing beside a tree friend"
+          width="360" height="320" loading="lazy" decoding="async">
       </div>
     </div>
   </section>

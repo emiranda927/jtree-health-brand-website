@@ -132,7 +132,62 @@ get_header();
     <div class="container">
       <h2>Not sure which level is right?</h2>
       <p>Tell us a little about what's going on. The admissions team will help you figure out the next step — even if that step isn't us.</p>
-      <a class="jth-btn jth-btn-secondary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+      <!-- impeccable-variants-start 1974e329 -->
+      <div data-impeccable-variants="1974e329" data-impeccable-variant-count="3" style="display: contents">
+        <!-- Original -->
+        <div data-impeccable-variant="original">
+          <a class="jth-btn jth-btn-secondary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+        </div>
+        <!-- Variants: insert below this line -->
+        <style data-impeccable-css="1974e329">
+          /* V1 — Cream-fill solid. Highest contrast on dark. */
+          @scope ([data-impeccable-variant="1"]) {
+            :scope > a {
+              background: var(--jth-cream); color: var(--jth-deep-green);
+              border: 0; padding: 16px 32px; border-radius: 9999px;
+              font-family: var(--font-display); font-weight: 600; font-size: 17px;
+              text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+              transition: background 140ms cubic-bezier(0.22, 1, 0.36, 1);
+            }
+            :scope > a:hover { background: var(--jth-lime-green); }
+            :scope > a:focus-visible { outline: 2px solid var(--jth-sunflower); outline-offset: 2px; }
+          }
+          /* V2 — Cream outline + cream text. Quieter, still legible. */
+          @scope ([data-impeccable-variant="2"]) {
+            :scope > a {
+              background: transparent; color: var(--jth-cream);
+              border: 1.5px solid var(--jth-cream); padding: 16px 32px; border-radius: 9999px;
+              font-family: var(--font-display); font-weight: 600; font-size: 17px;
+              text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+              transition: background 140ms cubic-bezier(0.22, 1, 0.36, 1), color 140ms cubic-bezier(0.22, 1, 0.36, 1);
+            }
+            :scope > a:hover { background: var(--jth-cream); color: var(--jth-deep-green); }
+            :scope > a:focus-visible { outline: 2px solid var(--jth-sunflower); outline-offset: 2px; }
+          }
+          /* V3 — Lime-fill solid. Most attention-grabbing on dark. */
+          @scope ([data-impeccable-variant="3"]) {
+            :scope > a {
+              background: var(--jth-lime-green); color: var(--jth-deep-green);
+              border: 0; padding: 16px 32px; border-radius: 9999px;
+              font-family: var(--font-display); font-weight: 600; font-size: 17px;
+              text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+              transition: background 140ms cubic-bezier(0.22, 1, 0.36, 1);
+            }
+            :scope > a:hover { background: var(--jth-cream); }
+            :scope > a:focus-visible { outline: 2px solid var(--jth-sunflower); outline-offset: 2px; }
+          }
+        </style>
+        <div data-impeccable-variant="1">
+          <a class="v1-cta-on-dark" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+        </div>
+        <div data-impeccable-variant="2" style="display: none">
+          <a class="v2-cta-on-dark" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+        </div>
+        <div data-impeccable-variant="3" style="display: none">
+          <a class="v3-cta-on-dark" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+        </div>
+      </div>
+      <!-- impeccable-variants-end 1974e329 -->
     </div>
   </section>
 
