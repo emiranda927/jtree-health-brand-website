@@ -10,13 +10,83 @@
 @media (max-width: 880px) { .home-v2 .container { padding: 0 20px; } }
 
 /* ────────────────────────────────────────────────
-   HERO — editorial spread
+   HERO — editorial spread (kinetic split-flap variant)
    ──────────────────────────────────────────────── */
 
 .h-hero {
   position: relative;
   padding: 72px 0 96px;
   overflow: hidden;
+  isolation: isolate;
+}
+/* Soft Joshua-tree desert wash behind the hero. The image is pale + low
+   contrast, but a thin cream gradient over it tightens type readability
+   without losing the painted feel. The image sits behind everything via
+   z-index: -1 + the section's isolation context. */
+.h-hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg,
+      color-mix(in oklch, var(--jth-cream) 70%, transparent) 0%,
+      color-mix(in oklch, var(--jth-cream) 30%, transparent) 35%,
+      color-mix(in oklch, var(--jth-cream) 30%, transparent) 65%,
+      color-mix(in oklch, var(--jth-cream) 70%, transparent) 100%
+    ),
+    url("../brand/hero-background.webp") no-repeat center / cover;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Single-column kinetic hero: drop the photo column, give the type room. */
+.h-hero-grid--single {
+  grid-template-columns: 1fr !important;
+  gap: 48px !important;
+}
+.h-hero-grid--single .h-hero-text { max-width: none; }
+.h-hero--kinetic .h-hero-art { display: none !important; }
+
+/* Kinetic headline: the ending phrase rotates through 4 possibilities
+   ("entirely your own" → "messy and yours" → "still becoming" → "shaped by you")
+   on a slow 16-second loop (4s per word). */
+.h-hero-headline {
+  font-family: var(--font-editorial); font-weight: 500;
+  font-size: clamp(48px, 7vw, 96px); line-height: 1.04; letter-spacing: -0.025em;
+  color: var(--jth-deep-green); margin: 0 0 28px;
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+  text-wrap: balance;
+}
+.h-hero-headline .h-hero-fixed { display: block; }
+.h-hero-headline .h-hero-flap {
+  display: inline-block; position: relative; vertical-align: top;
+}
+.h-hero-headline .h-hero-flap-spacer { visibility: hidden; font-style: italic; }
+.h-hero-headline .h-hero-flap > span:not(.h-hero-flap-spacer) {
+  position: absolute; left: 0; top: 0; white-space: nowrap;
+  font-style: italic; color: var(--jth-deep-green);
+  text-decoration: underline; text-decoration-color: var(--jth-lime-green);
+  text-decoration-thickness: 6px; text-underline-offset: 8px;
+  opacity: 0; transform: translateY(40%);
+  animation: h-hero-flap 16s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.h-hero-headline .h-hero-flap > span:nth-of-type(2) { animation-delay: 0s; }
+.h-hero-headline .h-hero-flap > span:nth-of-type(3) { animation-delay: 4s; }
+.h-hero-headline .h-hero-flap > span:nth-of-type(4) { animation-delay: 8s; }
+.h-hero-headline .h-hero-flap > span:nth-of-type(5) { animation-delay: 12s; }
+
+@keyframes h-hero-flap {
+  0%   { opacity: 0; transform: translateY(40%); }
+  4%   { opacity: 1; transform: translateY(0); }
+  22%  { opacity: 1; transform: translateY(0); }
+  26%  { opacity: 0; transform: translateY(-40%); }
+  100% { opacity: 0; transform: translateY(-40%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .h-hero-headline .h-hero-flap > span:nth-of-type(2) {
+    animation: none !important; opacity: 1; transform: none;
+  }
+  .h-hero-headline .h-hero-flap > span:nth-of-type(n+3) { display: none; }
 }
 .h-hero::before {
   /* soft horizontal rule below the nav anchoring the spread */
@@ -202,41 +272,59 @@
    MANIFESTO — pull-quote style intro
    ──────────────────────────────────────────────── */
 
+/* Manifesto — pale lavender section with Joshie peeking from the corner.
+   "Why we exist" lives in the brand's calm voice tonally; a small resting
+   Joshie in the bottom-right floats gently as a personality touch. */
 .h-manifesto {
-  position: relative; padding: 120px 0;
-  overflow: hidden;
+  padding: 140px 0;
+  /* Vertical wash: nearly-cream at the top (catches the hero painting's
+     fade-to-cream overlay), pale-lavender at the bottom — section flows
+     from hero into its committed color instead of starting on it. */
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--jth-pale-lavender) 7%, var(--jth-cream) 93%) 0%,
+    color-mix(in oklch, var(--jth-pale-lavender) 60%, var(--jth-cream) 40%) 100%
+  );
+  position: relative; overflow: hidden;
 }
 .h-manifesto-inner {
-  max-width: 1080px; margin: 0 auto; padding: 0 32px;
+  max-width: 880px; margin: 0 auto; padding: 0 32px;
   position: relative; z-index: 2;
 }
-.h-manifesto-num {
-  font-family: var(--font-mono); font-size: 11px;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--jth-fg-subtle);
-  margin-bottom: 24px;
+.h-manifesto-joshie {
+  position: absolute; right: 4%; bottom: -8px;
+  width: 200px; pointer-events: none; user-select: none;
+  z-index: 1;
+  animation: h-manifesto-float 6s ease-in-out infinite;
+}
+.h-manifesto-joshie img { width: 100%; height: auto; display: block; }
+
+@keyframes h-manifesto-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+@media (max-width: 880px) {
+  .h-manifesto-joshie { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .h-manifesto-joshie { animation: none; }
+}
+.h-manifesto .jth-eyebrow {
+  color: var(--jth-deep-green);
+  margin-bottom: 28px;
 }
 .h-manifesto blockquote {
   margin: 0; padding: 0;
   font-family: var(--font-editorial); font-weight: 400;
-  font-size: clamp(32px, 4.4vw, 56px);
-  line-height: 1.12; letter-spacing: -0.018em;
+  font-size: clamp(28px, 3.6vw, 48px); line-height: 1.18; letter-spacing: -0.012em;
   color: var(--jth-deep-green);
-  font-variation-settings: "SOFT" 30, "opsz" 96;
+  font-variation-settings: "SOFT" 30, "opsz" 144;
   text-wrap: balance;
 }
 .h-manifesto blockquote em {
-  font-style: italic;
-  font-variation-settings: "SOFT" 100, "opsz" 96;
-}
-.h-manifesto-mark {
-  position: absolute; pointer-events: none; user-select: none;
-}
-.h-manifesto-mark.scribble {
-  right: 6%; top: 18%; width: 280px; opacity: 1; transform: rotate(8deg);
-}
-.h-manifesto-mark.brush {
-  left: -40px; bottom: 8%; width: 240px; opacity: 0.85; transform: rotate(-8deg);
+  font-style: italic; color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 100, "opsz" 144;
 }
 
 /* ────────────────────────────────────────────────
@@ -405,7 +493,7 @@
 
 .h-process {
   padding: 120px 0;
-  background: var(--jth-cream-2);
+  background: var(--jth-pale-sage);
   position: relative; overflow: hidden;
 }
 .h-process-head {
@@ -478,34 +566,32 @@
   max-width: 1080px; margin: 0 auto; padding: 0 32px;
   position: relative; z-index: 2;
 }
-.h-quote .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--jth-deep-green); display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
-.h-quote .num::before { content: ""; width: 32px; height: 1px; background: var(--jth-deep-green); }
+.h-quote .jth-eyebrow {
+  color: var(--jth-deep-green);
+  margin-bottom: 28px;
+}
 .h-quote blockquote {
-  margin: 0;
+  margin: 0; padding: 0; max-width: 22ch;
   font-family: var(--font-editorial); font-weight: 400;
-  font-size: clamp(40px, 5.4vw, 80px); line-height: 1.04; letter-spacing: -0.025em;
+  font-size: clamp(36px, 5vw, 72px); line-height: 1.05; letter-spacing: -0.022em;
   color: var(--jth-deep-green);
   font-variation-settings: "SOFT" 30, "opsz" 144;
   text-wrap: balance;
 }
 .h-quote blockquote em {
-  font-style: italic;
+  font-style: italic; color: var(--jth-deep-green);
+  text-decoration: underline; text-decoration-color: var(--jth-sunflower);
+  text-decoration-thickness: 6px; text-underline-offset: 10px;
   font-variation-settings: "SOFT" 100;
 }
 .h-quote cite {
   display: flex; align-items: center; gap: 14px;
   margin-top: 40px;
   font-style: normal; font-family: var(--font-mono);
-  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: color-mix(in oklch, var(--jth-deep-green) 70%, var(--jth-lavender) 30%);
+  font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--jth-deep-green); opacity: 0.7;
 }
-.h-quote cite::before { content: ""; width: 32px; height: 1px; background: color-mix(in oklch, var(--jth-deep-green) 50%, var(--jth-lavender) 50%); }
-.h-quote-mark {
-  position: absolute; pointer-events: none; user-select: none;
-}
-.h-quote-mark.brush { left: -50px; top: 12%; width: 280px; opacity: 0.85; transform: rotate(-12deg); }
-.h-quote-mark.tw1   { right: 8%; top: 18%; width: 44px; }
-.h-quote-mark.tw2   { right: 16%; bottom: 22%; width: 36px; }
+.h-quote cite::before { content: ""; width: 32px; height: 1px; background: var(--jth-deep-green); opacity: 0.5; }
 
 /* ────────────────────────────────────────────────
    REFERRALS — providers row
@@ -534,38 +620,40 @@
    CTA BAND — full-bleed, oversized
    ──────────────────────────────────────────────── */
 
+/* CTA — centered Pale Sage section. Headline + body + CTAs above, then
+   the Joshie + tree friend illustration sits below them as the visual
+   anchor: "you're not alone" rendered as the mascot having company. */
 .h-cta {
-  padding: 140px 0;
-  background: var(--jth-cream);
+  padding: 96px 32px 120px;
+  background: var(--jth-pale-sage);
   text-align: center;
   position: relative; overflow: hidden;
-  border-top: 1px solid var(--jth-rule);
 }
 .h-cta-inner {
-  max-width: 880px; margin: 0 auto; padding: 0 32px;
+  max-width: 720px; margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center;
   position: relative; z-index: 2;
 }
-.h-cta-tree {
-  width: 64px; height: auto; margin: 0 auto 32px; display: block;
+.h-cta .jth-eyebrow {
+  margin-bottom: 24px; color: var(--jth-deep-green);
 }
 .h-cta h2 {
-  margin: 0 0 24px;
-  font-family: var(--font-display); font-weight: 700;
-  font-size: clamp(28px, 3.4vw, 40px); line-height: 1.12; letter-spacing: -0.005em;
+  margin: 0 0 16px;
+  font-family: var(--font-editorial); font-weight: 400;
+  font-size: clamp(36px, 4.4vw, 56px); line-height: 1.08; letter-spacing: -0.02em;
   color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30, "opsz" 144;
   text-wrap: balance;
 }
-.h-cta h2 em { font-style: italic; }
+.h-cta h2 em { font-style: italic; color: var(--jth-deep-green); }
 .h-cta p {
-  margin: 0 auto 36px; max-width: 48ch;
-  font-family: var(--font-body); font-size: 18px; line-height: 1.55;
-  color: var(--jth-charcoal);
+  margin: 0 auto 36px; max-width: 52ch;
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  color: var(--jth-fg-muted);
 }
-.h-cta-actions { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-.h-cta-mark { position: absolute; pointer-events: none; user-select: none; opacity: 0.95; }
-.h-cta-mark.swash { left: -30px; top: 20%; width: 200px; }
-.h-cta-mark.tape  { right: 6%; top: 14%; width: 140px; transform: rotate(8deg); }
-.h-cta-mark.tw    { right: 14%; bottom: 22%; width: 44px; }
+.h-cta-actions { display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.h-cta-joshie { margin: 48px auto 0; max-width: 360px; }
+.h-cta-joshie img { width: 100%; height: auto; display: block; }
 
 /* ────────────────────────────────────────────────
    subtle entrance — once on load
