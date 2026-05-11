@@ -12,6 +12,15 @@ define('JTREE_THEME_VERSION', '2.0.0');
 define('JTREE_THEME_DIR', get_stylesheet_directory());
 define('JTREE_THEME_URI', get_stylesheet_directory_uri());
 
+/**
+ * GTM Container ID. Empty value = no analytics injected (good for local dev
+ * unless overridden by an mu-plugin). GTM internally fires the GA4 Google Tag
+ * (with measurement ID G-8M90ZXZ1NW) and the GA4 Event tag for inquiry_submitted.
+ * Privacy guardrails enforced in GA4 admin: Google Signals off, retention 14mo,
+ * no Ads personalization. Cookie consent mode wired separately when banner lands.
+ */
+define('JTREE_GTM_ID', 'GTM-WGCMNLXH');
+
 require_once JTREE_THEME_DIR . '/inc/security.php';
 require_once JTREE_THEME_DIR . '/inc/forms.php';
 require_once JTREE_THEME_DIR . '/inc/seo.php';
@@ -213,14 +222,41 @@ function jtree_body_class($classes) {
 add_filter('body_class', 'jtree_body_class');
 
 /**
- * GA4 conversion: push `inquiry_submitted` only on the thank-you page,
- * before any GTM config so it lands in the first dataLayer batch.
+ * Google Tag Manager — head snippet (loads gtm.js on every page).
+ * Skipped if JTREE_GTM_ID is empty — keeps local dev pages out of GTM.
  */
-function jtree_thank_you_dataLayer() {
-    if (!is_page_template('templates/page-thank-you.php') && !is_page('thank-you')) return;
-    echo "<script>window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'inquiry_submitted'});</script>\n";
+function jtree_gtm_head() {
+    if (!defined('JTREE_GTM_ID') || !JTREE_GTM_ID) return;
+    $id = esc_js(JTREE_GTM_ID);
+    echo "<!-- Google Tag Manager -->\n";
+    echo "<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','{$id}');</script>\n";
+    echo "<!-- End Google Tag Manager -->\n";
 }
-add_action('wp_head', 'jtree_thank_you_dataLayer', 1);
+add_action('wp_head', 'jtree_gtm_head', 1);
+
+/**
+ * GTM noscript fallback — fires right after <body> opens via wp_body_open hook.
+ * Lets users with JS disabled still register a pageview.
+ */
+function jtree_gtm_noscript() {
+    if (!defined('JTREE_GTM_ID') || !JTREE_GTM_ID) return;
+    $id = esc_attr(JTREE_GTM_ID);
+    echo "<!-- Google Tag Manager (noscript) -->\n";
+    echo "<noscript><iframe src=\"https://www.googletagmanager.com/ns.html?id={$id}\" height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe></noscript>\n";
+    echo "<!-- End Google Tag Manager (noscript) -->\n";
+}
+add_action('wp_body_open', 'jtree_gtm_noscript');
+
+/**
+ * GA4 conversion: push `inquiry_submitted` to the dataLayer on /thank-you/.
+ * GTM's `CE - inquiry_submitted` trigger listens for this and fires the GA4 Event tag.
+ */
+function jtree_thank_you_event() {
+    if (!is_page_template('templates/page-thank-you.php') && !is_page('thank-you')) return;
+    if (!defined('JTREE_GTM_ID') || !JTREE_GTM_ID) return;
+    echo "<script>window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'inquiry_submitted',event_category:'form',event_label:'inquiry_form'});</script>\n";
+}
+add_action('wp_head', 'jtree_thank_you_event', 2);
 
 /**
  * Header / footer partials.
