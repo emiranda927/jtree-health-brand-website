@@ -1,0 +1,138 @@
+/*
+ * /what-we-treat/ — page-specific styles.
+ * Conditions grid: mono numeral + Fraunces title + quiet read-more text link,
+ * plus a shared softer CTA below the grid (replaces the per-card aggressive button).
+ */
+
+.wwt-conditions {
+  padding: 96px 24px;
+  background: var(--jth-cream);
+}
+
+.wwt-conditions__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 56px) clamp(32px, 5vw, 72px);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .wwt-conditions__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wwt-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 24px 24px;
+  background: var(--jth-cream);
+  border: 1px solid color-mix(in oklch, var(--jth-deep-green) 12%, var(--jth-cream));
+  border-radius: var(--r-card);
+}
+
+.wwt-card--wide {
+  grid-column: span 2;
+  background: color-mix(in oklch, var(--jth-pale-sage) 60%, var(--jth-cream));
+  border-color: color-mix(in oklch, var(--jth-deep-green) 18%, var(--jth-cream));
+}
+
+@media (max-width: 720px) {
+  .wwt-card--wide {
+    grid-column: span 1;
+  }
+}
+
+.wwt-card__num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in oklch, var(--jth-deep-green) 70%, var(--jth-cream));
+  margin-bottom: 4px;
+}
+
+.wwt-card__title {
+  font-family: var(--font-editorial);
+  font-weight: 500;
+  font-size: clamp(22px, 2.6vw, 28px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--jth-deep-green);
+  margin: 0;
+}
+
+.wwt-card__title em {
+  font-style: italic;
+  color: var(--jth-deep-green);
+  background-image: linear-gradient(
+    transparent 62%,
+    color-mix(in oklch, var(--jth-lime-green) 70%, transparent) 62%,
+    color-mix(in oklch, var(--jth-lime-green) 70%, transparent) 92%,
+    transparent 92%
+  );
+  padding: 0 1px;
+}
+
+.wwt-card__desc {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: color-mix(in oklch, var(--jth-charcoal) 85%, var(--jth-cream));
+  margin: 0;
+  max-width: 52ch;
+}
+
+.wwt-card__readmore {
+  margin-top: auto;
+  padding-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in oklch, var(--jth-deep-green) 75%, var(--jth-cream));
+  text-decoration: none;
+  align-self: flex-start;
+  border-bottom: 1px solid color-mix(in oklch, var(--jth-deep-green) 35%, var(--jth-cream));
+  padding-bottom: 2px;
+  transition: color 140ms, border-color 140ms;
+}
+
+.wwt-card__readmore:hover {
+  color: var(--jth-deep-green);
+  border-color: var(--jth-deep-green);
+}
+
+.wwt-shared-cta {
+  margin: 56px auto 0;
+  max-width: 720px;
+  text-align: center;
+  padding: 28px 32px;
+  background: color-mix(in oklch, var(--jth-pale-lavender) 35%, var(--jth-cream));
+  border-radius: var(--r-lg);
+}
+
+.wwt-shared-cta__copy {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: color-mix(in oklch, var(--jth-charcoal) 85%, var(--jth-cream));
+  margin: 0 0 14px;
+}
+
+.wwt-shared-cta__btn {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--jth-cream);
+  background: var(--jth-deep-green);
+  border-radius: 9999px;
+  padding: 12px 24px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.wwt-shared-cta__btn:hover {
+  background: var(--jth-green-hover);
+}

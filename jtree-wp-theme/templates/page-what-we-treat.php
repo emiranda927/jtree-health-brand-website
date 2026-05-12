@@ -28,16 +28,25 @@ $conditions = array(
     </div>
   </section>
 
-  <section class="section">
+  <section class="wwt-conditions">
     <div class="container">
-      <div class="cards-3 cards-3--two-up">
-        <?php foreach ($conditions as $c) : ?>
-          <article class="program-card" id="<?php echo esc_attr($c['id']); ?>">
-            <h2 class="jth-h3" style="margin: 0;"><?php echo esc_html($c['name']); ?></h2>
-            <p style="margin: 0;"><?php echo esc_html($c['desc']); ?></p>
-            <a class="arrow" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation &nbsp;&rarr;</a>
+      <div class="wwt-conditions__grid">
+        <?php $jt_idx = 0; foreach ($conditions as $c) :
+          $jt_idx++;
+          $jt_is_wide = ($c['id'] === 'co-occurring');
+          $jt_card_class = 'wwt-card' . ($jt_is_wide ? ' wwt-card--wide' : '');
+        ?>
+          <article class="<?php echo esc_attr($jt_card_class); ?>" id="<?php echo esc_attr($c['id']); ?>">
+            <div class="wwt-card__num">№ <?php echo sprintf('%02d', $jt_idx); ?></div>
+            <h2 class="wwt-card__title"><?php echo esc_html($c['name']); ?></h2>
+            <p class="wwt-card__desc"><?php echo esc_html($c['desc']); ?></p>
+            <a class="wwt-card__readmore" href="<?php echo esc_url(home_url('/admissions/') . '#about-' . $c['id']); ?>">Tell us about your teen &nbsp;&rarr;</a>
           </article>
         <?php endforeach; ?>
+      </div>
+      <div class="wwt-shared-cta">
+        <p class="wwt-shared-cta__copy">Not sure which of these fits your teen? You don't have to know. We'll talk it through with you.</p>
+        <a class="wwt-shared-cta__btn" href="<?php echo esc_url(home_url('/admissions/')); ?>">Reach out</a>
       </div>
     </div>
   </section>

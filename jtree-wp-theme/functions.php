@@ -8,7 +8,7 @@
 
 defined('ABSPATH') || exit;
 
-define('JTREE_THEME_VERSION', '2.0.0');
+define('JTREE_THEME_VERSION', '2.0.2');
 define('JTREE_THEME_DIR', get_stylesheet_directory());
 define('JTREE_THEME_URI', get_stylesheet_directory_uri());
 
@@ -73,6 +73,16 @@ function jtree_enqueue_styles() {
         wp_enqueue_style(
             'jtree-home',
             JTREE_THEME_URI . '/assets/css/home.css',
+            array('jtree-site'),
+            JTREE_THEME_VERSION
+        );
+    }
+
+    // What We Treat — editorial conditions grid.
+    if (is_page_template('templates/page-what-we-treat.php')) {
+        wp_enqueue_style(
+            'jtree-what-we-treat',
+            JTREE_THEME_URI . '/assets/css/what-we-treat.css',
             array('jtree-site'),
             JTREE_THEME_VERSION
         );
