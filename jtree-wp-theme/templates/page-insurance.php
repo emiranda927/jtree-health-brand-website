@@ -14,7 +14,7 @@ get_header();
     <div class="container" style="max-width: 880px;">
       <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">Insurance</span>
       <h1 class="jth-display-l" style="font-size: clamp(40px, 5vw, 56px); margin: 0 0 20px;">In-network coverage, <em class="jth-emph">verified before day one.</em></h1>
-      <p class="jth-body-l" style="margin: 0; max-width: 60ch;">We hold contracts with the major commercial plans serving the Triangle. We verify your specific benefits before your teen's first day, so the cost question is answered before treatment starts.</p>
+      <p class="jth-body-l" style="margin: 0;">We hold contracts with the major commercial plans serving the Triangle. We verify your specific benefits before your teen's first day, so the cost question is answered before treatment starts.</p>
     </div>
   </section>
 

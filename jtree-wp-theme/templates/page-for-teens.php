@@ -15,10 +15,10 @@ get_header();
     <img class="collage" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-yellow-scribble.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true" style="right:24px; top:30px; width: 220px; opacity: 0.85;">
     <img class="twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-plus-lavender.svg'); ?>" alt="" width="32" height="32" loading="lazy" aria-hidden="true" style="left:8%; top:30%; width:32px;">
     <img class="twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-outline-yellow.svg'); ?>" alt="" width="28" height="28" loading="lazy" aria-hidden="true" style="right:18%; bottom:10%; width:28px;">
-    <div class="container">
+    <div class="container" style="max-width: 720px;">
       <span class="jth-eyebrow">A page for you</span>
       <h1>It's okay to not be okay.</h1>
-      <p class="jth-body-l" style="margin-top:14px; max-width: 56ch;">If you're reading this, someone — or something — pointed you here. Maybe a parent. Maybe a school counselor. Maybe a feeling you can't quite name. We're glad you're here.</p>
+      <p class="jth-body-l" style="margin-top:14px;">If you're reading this, someone — or something — pointed you here. Maybe a parent. Maybe a school counselor. Maybe a feeling you can't quite name. We're glad you're here.</p>
       <p class="jth-hand" style="margin-top: 24px; transform: rotate(-3deg);">You're not alone in this.</p>
     </div>
   </section>
