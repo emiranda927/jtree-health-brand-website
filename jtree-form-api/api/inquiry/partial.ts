@@ -16,18 +16,8 @@ import { PartialInquirySchema, type PartialLead } from "../../lib/validate.js";
 import { checkRateLimit } from "../../lib/rateLimit.js";
 import { sendPartialToRitten } from "../../lib/ritten.js";
 import { appendPartialToSheet } from "../../lib/sheets.js";
+import { applyCorsHeaders } from "../../lib/cors.js";
 import { logger } from "../../lib/logger.js";
-
-const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || "https://jtreehealth.com";
-
-function getCorsHeaders() {
-  return {
-    "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Max-Age": "86400",
-  };
-}
 
 function getClientIp(req: VercelRequest): string {
   const forwarded = req.headers["x-forwarded-for"];
@@ -41,10 +31,7 @@ export default async function handler(
   req: VercelRequest,
   res: VercelResponse
 ): Promise<void> {
-  const cors = getCorsHeaders();
-  for (const [key, value] of Object.entries(cors)) {
-    res.setHeader(key, value);
-  }
+  applyCorsHeaders(req, res);
 
   if (req.method === "OPTIONS") {
     res.status(204).end();
