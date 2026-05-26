@@ -115,6 +115,20 @@
 }
 .h-hero-kicker strong { color: var(--jth-deep-green); font-weight: 600; }
 
+/* Mobile: kicker overflows narrow viewports because flex won't wrap and
+   the two spans + leading rule are too wide together. Wrap, drop the rule,
+   and tighten the gap so both segments stay readable. */
+@media (max-width: 600px) {
+  .h-hero-kicker {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    margin-bottom: 28px;
+  }
+  .h-hero-kicker::before { display: none; }
+}
+
 .h-hero h1 {
   margin: 0 0 28px;
   font-family: var(--font-editorial); font-weight: 500;
@@ -266,6 +280,46 @@
 
 @media (prefers-reduced-motion: reduce) {
   .h-trust-items .susan-track { animation: none !important; }
+}
+
+/* Mobile: the horizontal layout + masked marquee collapses to almost no
+   visible content on a narrow viewport. Re-stack vertically and replace
+   the marquee with a wrapped pill row so all carriers are always visible. */
+@media (max-width: 600px) {
+  .h-trust-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px;
+  }
+  .h-trust-label {
+    border-right: 0;
+    padding-right: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--jth-rule);
+    width: 100%;
+  }
+  .h-trust-items {
+    flex-wrap: wrap;
+    width: 100%;
+    overflow: visible;
+    gap: 10px 16px;
+  }
+  .h-trust-items .susan {
+    flex: 1 1 100%;
+    overflow: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .h-trust-items .susan-track {
+    flex-wrap: wrap;
+    width: auto;
+    gap: 6px 14px;
+    animation: none;
+  }
+  /* The duplicate (aria-hidden) spans only exist to make the marquee loop
+     seamlessly; without a marquee they're noise. */
+  .h-trust-items .susan-track > span[aria-hidden="true"] { display: none; }
 }
 
 /* ────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 <?php
 /**
- * JTree Health — GeneratePress child theme functions.
+ * Joshua Tree Health — GeneratePress child theme functions.
  *
  * @package JTreeHealth
  * @since 2.0.0

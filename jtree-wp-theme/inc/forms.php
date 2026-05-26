@@ -1,6 +1,6 @@
 <?php
 /**
- * JTree Health · Inquiry form markup.
+ * Joshua Tree Health · Inquiry form markup.
  *
  * Renders the inquiry form using design-system `.jth-input` / `.jth-select`
  * classes. Submission is handled by /assets/js/form.js, which POSTs to
@@ -86,8 +86,8 @@ function jtree_render_inquiry_form() {
           <select class="jth-select" id="program_interest" name="program_interest"
                   aria-describedby="err-program_interest" required>
             <option value="">Select a program</option>
-            <option value="PHP">PHP — Partial hospitalization</option>
-            <option value="IOP">IOP — Intensive outpatient</option>
+            <option value="IOP">IOP &mdash; Intensive outpatient</option>
+            <option value="PHP">PHP &mdash; Partial hospitalization (coming soon)</option>
             <option value="Not sure">Not sure yet</option>
           </select>
           <span class="jth-field-error" id="err-program_interest" role="alert"></span>
@@ -150,10 +150,8 @@ function jtree_render_inquiry_form() {
  */
 function jtree_render_careers_form() {
     $roles = apply_filters('jtree_career_roles', array(
-        'Therapist (PHP / IOP)',
-        'BCBA / Clinical Lead',
-        'Psychiatrist / Med Mgmt',
-        'Operations & Admissions',
+        'Therapist (Associate or Fully Licensed)',
+        'Qualified Professional (QP)',
         'Open application — other',
     ));
     ?>

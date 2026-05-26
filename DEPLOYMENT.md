@@ -5,7 +5,7 @@ Two repos ship together:
 | Repo | Hosts | Domain |
 |---|---|---|
 | `jtree-form-api/` | Vercel (serverless) | `api.jtreehealth.com` |
-| `jtree-wp-theme/` | WP Engine (WordPress) | `jtreehealth.com`, `www.jtreehealth.com` |
+| `jtree-wp-theme/` | Flywheel (WordPress, Tiny plan) | `jtreehealth.com`, `www.jtreehealth.com` |
 
 DNS sits at Cloudflare. Analytics is GA4 via GTM.
 
@@ -81,8 +81,8 @@ In the Cloudflare zone for `jtreehealth.com`:
 
 | Type | Name | Value | Proxy |
 |---|---|---|---|
-| A | `@` | WP Engine site IP | Proxied |
-| CNAME | `www` | `<env>.wpengine.com` (per WP Engine instructions) | Proxied |
+| A | `@` | Flywheel site IP (shown in the Flywheel dashboard → site → Domains → "Add a domain") | Proxied |
+| CNAME | `www` | `<sitename>.flywheelsites.com` (per Flywheel's "Add a domain" instructions) | Proxied |
 | CNAME | `api` | `cname.vercel-dns.com` | **DNS only** (Vercel handles its own TLS) |
 
 Then under **SSL/TLS**:
@@ -96,14 +96,18 @@ Under **Security → WAF**:
 - Add a custom rule blocking `xmlrpc.php` requests
 - Bot Fight Mode: **on**
 
-### 4. WP Engine
+### 4. Flywheel
 
-1. **Provision** a new site (Production environment).
-2. **Add domain** in the User Portal: `jtreehealth.com` + `www.jtreehealth.com`.
-3. **Issue Let's Encrypt SSL** for both.
-4. **Install** the GeneratePress parent theme on the WP install.
-5. **Upload** `jtree-wp-theme/` to `wp-content/themes/jtree-wp-theme/` via SFTP, then activate it.
-6. **Append the security headers snippet** from `jtree-wp-theme/htaccess-security.txt` to the WP root `.htaccess`. Paste *outside* the `# BEGIN WordPress` / `# END WordPress` managed block — WordPress overwrites that block on every save.
+Eliseo is on the **Tiny plan** ($15/mo, 1 site, 5k visits, 5 GB storage). Steps:
+
+1. **Provision** a new site in the Flywheel dashboard. Pick a temporary site name — the working URL will be `<sitename>.flywheelsites.com` until DNS cuts over.
+2. **Add domain** in the Flywheel dashboard → site → Domains: `jtreehealth.com` + `www.jtreehealth.com`. Flywheel will show the A-record IP and CNAME target to use in Cloudflare.
+3. **Issue Let's Encrypt SSL** for both (one-click from the Domains tab once DNS resolves to Flywheel).
+4. **Install** the GeneratePress parent theme on the WP install (Appearance → Themes → Add New).
+5. **Upload** `jtree-wp-theme/` to `wp-content/themes/jtree-wp-theme/`. Two paths:
+   - **Easiest:** open the local site in the Local desktop app → click "Connect to Flywheel" → push. This syncs theme + database in one shot.
+   - **Manual:** SFTP using the credentials in the Flywheel dashboard → site → Advanced → SFTP. Upload to `wp-content/themes/jtree-wp-theme/`, then activate from the WP admin.
+6. **Append the security headers snippet** from `jtree-wp-theme/htaccess-security.txt` to the WP root `.htaccess` (edit via SFTP). Paste *outside* the `# BEGIN WordPress` / `# END WordPress` managed block — WordPress overwrites that block on every save.
 7. **Create pages and assign templates** — see the table in `jtree-wp-theme/DEPLOY.md`. Each page needs slug + template:
 
    | Slug | Template |
@@ -212,7 +216,7 @@ This is the single source of truth for everything that still has to happen befor
 |---|---|---|---|
 | V1 | **Cloudflare Turnstile** — create site, capture **site key** (public) and **secret key** (private) at `dash.cloudflare.com` → Turnstile | Without this the form has only a honeypot. Falls open in code, so safe to defer, but should land before high-traffic launch. | ☐ |
 | V2 | **Cloudflare DNS** — A record for `@`, CNAME for `www` (proxied), CNAME for `api` (DNS-only). SSL "Full (strict)", HSTS on, WAF rule blocking `xmlrpc.php`, Bot Fight Mode on. | DNS is the front door for both WP and the API. Misconfigured DNS = no traffic. | ☐ |
-| V3 | **WP Engine** — provision site, add `jtreehealth.com` + `www`, issue Let's Encrypt SSL, install GeneratePress parent, SFTP up `jtree-wp-theme/`, append `htaccess-security.txt` outside the WP-managed block. | Production WP host. | ☐ |
+| V3 | **Flywheel (Tiny plan, already paid)** — create site in Flywheel dashboard, add `jtreehealth.com` + `www`, issue Let's Encrypt SSL, install GeneratePress parent, push `jtree-wp-theme/` (Local "Connect to Flywheel" or SFTP), append `htaccess-security.txt` outside the WP-managed block. | Production WP host. | ☐ |
 | V4 | **Vercel** — import `jtree-form-api` repo, attach `api.jtreehealth.com` custom domain. | Production API host. | ☐ |
 | V5 | **Resend** — verify the sending domain (DKIM, SPF, return-path records in Cloudflare DNS) for `noreply@jtreehealth.com`. | Without DKIM/SPF, lead-confirmation and admissions notification emails go to spam. | ☐ |
 | V6 | **Google service account** — create in GCP, share the Leads spreadsheet with the service-account email as Editor, paste the JSON into Vercel env. | The form API writes to Sheets through this account. No share = "permission denied" on every submission. | ☐ |

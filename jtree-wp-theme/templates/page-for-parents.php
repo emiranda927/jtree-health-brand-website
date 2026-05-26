@@ -6,47 +6,6 @@
  */
 defined('ABSPATH') || exit;
 get_header();
-
-/**
- * Parent-hub guide tiles. Each guide is a separate WP page assigned the
- * "Parent Guide" template. Slugs assume `/for-parents/<slug>/` — this only
- * works if the WP "for-parents" page is set as the parent of each guide
- * page in the WP admin (Page Attributes → Parent → For Parents).
- *
- * [DRAFT — founder edit] — replace titles, summaries, and read times once
- * the guide pages are written.
- */
-$home   = home_url('/');
-$guides = array(
-    array(
-        'slug'  => 'for-parents/is-this-a-crisis',
-        'eyebrow' => 'When to act now',
-        'title' => 'Is this a crisis, or are we close?',
-        'desc'  => 'Signs that say "call 988 tonight" vs. signs that say "schedule an evaluation this week."',
-        'time'  => '4 min read',
-    ),
-    array(
-        'slug'  => 'for-parents/php-vs-iop',
-        'eyebrow' => 'Levels of care',
-        'title' => "PHP, IOP, and what's right for your teen",
-        'desc'  => "What 'partial hospitalization' actually means, and how it compares to weekly therapy or IOP.",
-        'time'  => '5 min read',
-    ),
-    array(
-        'slug'  => 'for-parents/insurance-and-cost',
-        'eyebrow' => 'Money + coverage',
-        'title' => 'Insurance, deductibles, and the real cost',
-        'desc'  => 'What we verify before day one, what counts toward your deductible, and what to ask your plan.',
-        'time'  => '6 min read',
-    ),
-    array(
-        'slug'  => 'for-parents/what-the-first-call-is-like',
-        'eyebrow' => 'The first call',
-        'title' => "What our first call is actually like",
-        'desc'  => "No script. A clinician asking what's going on, and listening. About 25 minutes.",
-        'time'  => '3 min read',
-    ),
-);
 ?>
 
 <main id="main">
@@ -63,7 +22,7 @@ $guides = array(
     <div class="container" style="max-width: 880px;">
       <h2 class="jth-h2" style="margin: 0 0 16px;">What to expect from us</h2>
       <ul style="font-size: 18px; line-height: 1.7; padding-left: 20px; margin: 0 0 24px;">
-        <li><strong>One business day to a real conversation.</strong> An admissions clinician calls you &mdash; not a sales person, not a scheduler.</li>
+        <li><strong>2 to 4 business hours to a real conversation.</strong> An admissions clinician calls you, not a scheduler.</li>
         <li><strong>No surprise costs.</strong> We verify insurance before your teen's first day. If we're not in network with your plan, we'll tell you up front.</li>
         <li><strong>You stay in the loop.</strong> Family sessions are part of every program, not an add-on.</li>
         <li><strong>Honesty about fit.</strong> If we're not the right level of care, we'll tell you who is.</li>
@@ -73,22 +32,30 @@ $guides = array(
     </div>
   </section>
 
-  <section class="section section-bg-cream-2" id="resources">
-    <div class="container" style="max-width: 1080px;">
-      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">Plain-language guides</span>
-      <h2 class="jth-h2" style="margin: 0 0 12px;">Things parents tell us they wish they'd known sooner</h2>
-      <p class="jth-body-l" style="margin: 0 0 32px; max-width: 60ch; color: var(--jth-fg-muted);">No gates. No PDF emails. Read what's useful, skip what isn't.</p>
+  <section class="section section-bg-cream-2">
+    <div class="container" style="max-width: 760px;">
+      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">Where you fit in</span>
+      <h2 class="jth-h2" style="margin: 0 0 16px;">Most fights with your teen aren't about the topic. They're about the pattern.</h2>
+      <p class="jth-body-l" style="margin: 0 0 16px;">One of the modules in our 12-week IOP is called <em>Walking the Middle Path</em>. A full week of it is dedicated to parent-teen escalation patterns and how to repair after a rupture &mdash; because that loop is what most families are actually stuck in, not the curfew or the homework or the phone.</p>
+      <p class="jth-body-l" style="margin: 0 0 16px;">We teach your teen to notice the early signs in their own body that escalation is starting. We also teach them validation, repair, and how to stay regulated when a parent is dysregulated. Then we bring you into family sessions every two weeks to practice the other side of that loop.</p>
+      <p class="jth-body-l" style="margin: 0;">You don't have to be the perfect parent. You just have to be in the room.</p>
+    </div>
+  </section>
 
-      <div class="jth-hub-grid">
-        <?php foreach ($guides as $g) : ?>
-          <a class="jth-hub-tile" href="<?php echo esc_url($home . $g['slug'] . '/'); ?>">
-            <span class="jth-hub-tile__eyebrow"><?php echo esc_html($g['eyebrow']); ?></span>
-            <h3 class="jth-h4" style="margin:8px 0 10px;"><?php echo esc_html($g['title']); ?></h3>
-            <p style="margin: 0 0 14px;"><?php echo esc_html($g['desc']); ?></p>
-            <span class="jth-hub-tile__meta"><?php echo esc_html($g['time']); ?> &nbsp;&rarr;</span>
-          </a>
-        <?php endforeach; ?>
-      </div>
+  <section class="section">
+    <div class="container" style="max-width: 760px;">
+      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">What your teen actually learns</span>
+      <h2 class="jth-h2" style="margin: 0 0 16px;">Twelve weeks of skills, in plain English.</h2>
+      <p class="jth-body" style="margin: 0 0 16px;">The IOP follows a 12-week arc rooted in Dialectical Behavior Therapy (DBT) and polyvagal theory. It builds on itself, week by week:</p>
+      <ul style="font-size: 18px; line-height: 1.7; padding-left: 20px; margin: 0 0 24px;">
+        <li><strong>Weeks 1&ndash;2</strong> &middot; Understanding why their nervous system reacts the way it does. Mindfulness as a starting skill, not a buzzword.</li>
+        <li><strong>Weeks 3&ndash;4</strong> &middot; Distress tolerance: what to do in the moment a panic spiral or an urge to self-harm hits. (TIPP, self-soothe, radical acceptance.)</li>
+        <li><strong>Weeks 5&ndash;7</strong> &middot; Emotion regulation: catching feelings earlier, doing the opposite of an unhelpful urge, taking care of sleep and food because they affect mood.</li>
+        <li><strong>Weeks 8&ndash;9</strong> &middot; Interpersonal effectiveness: how to ask for what you need, how to say no, how to repair a friendship after conflict.</li>
+        <li><strong>Weeks 10&ndash;12</strong> &middot; Walking the middle path, including the parent-teen week described above.</li>
+        <li><strong>Graduation</strong> &middot; A personal regulation plan (the early warning signs and skills that work for <em>this</em> teen) and a letter to their future self.</li>
+      </ul>
+      <p class="jth-body-s" style="margin: 0; color: var(--jth-fg-muted);">If a skill name sounds clinical, that's because it is. The reason we name them is so your teen can come home and tell you "I used TIPP today" &mdash; and you can know what they mean.</p>
     </div>
   </section>
 
@@ -96,7 +63,7 @@ $guides = array(
     <div class="container">
       <h2>Questions before you fill out a form?</h2>
       <p>Call us. A clinician will pick up &mdash; or call you back the same business day.</p>
-      <a class="jth-btn jth-btn-secondary jth-btn-lg" href="tel:9192764005">(919) 276-4005</a>
+      <a class="jth-btn jth-btn-secondary jth-btn-lg" href="tel:9193355053">(919) 335-5053</a>
     </div>
   </section>
 

@@ -14,9 +14,10 @@ get_header();
   <section class="admissions-grid">
     <div>
       <div class="form-card">
-        <span class="jth-eyebrow" style="display:inline-block; margin-bottom:12px;">§ Admissions / Inquiry form</span>
+        <span class="jth-eyebrow" style="display:inline-block; margin-bottom:12px;">&sect; Admissions</span>
         <h1 class="jth-h1">Start the Conversation.</h1>
-        <p class="lede">Tell us a little, and an admissions clinician will reach out within one business day. No clinical detail required up front.</p>
+        <p class="lede">Tell us a little about your teen. An admissions clinician will call you back within 2 to 4 business hours &mdash; no clinical detail needed up front. We'll work that out together.</p>
+        <p class="jth-body-s" style="margin: 8px 0 24px; color: var(--jth-fg-muted);">In-network with BlueCross BlueShield, Cigna, Aetna, and Tricare. We verify your coverage before your teen's first day.</p>
 
         <?php jtree_render_inquiry_form(); ?>
       </div>
@@ -27,17 +28,17 @@ get_header();
         <span class="jth-eyebrow">What happens next</span>
         <h2>Three short steps.</h2>
         <ol>
-          <li><b>You submit this form.</b> Two minutes, no medical detail required.</li>
-          <li><b>We call within one business day.</b> A real admissions clinician — not a sales person.</li>
-          <li><b>Together, we plan a start.</b> If we're a fit, we verify insurance and set a date. If we're not, we point you to who is.</li>
+          <li><b>Fill out the form.</b> Two minutes. Just enough so we can call you back ready.</li>
+          <li><b>We call you within 2 to 4 business hours.</b> A real admissions clinician, not a sales call.</li>
+          <li><b>If we're a fit, we start within the week.</b> We verify insurance, set a date, and walk you through what to expect. If we're not the right fit, we'll point you to who is.</li>
         </ol>
       </div>
 
       <div class="contact-card">
         <h3>Or talk to us now</h3>
-        <a class="phone" href="tel:9192764005">(919) 276-4005</a>
-        <p class="hours">Mon–Fri · 8 am – 6 pm ET</p>
-        <p class="jth-body-s" style="margin: 12px 0 0;">After hours? Leave a message and we'll call you back the next business day. In a crisis, call <strong>988</strong>.</p>
+        <a class="phone" href="tel:9193355053">(919) 335-5053</a>
+        <p class="hours">Mon&ndash;Fri &middot; 9 am &ndash; 5 pm ET</p>
+        <p class="jth-body-s" style="margin: 12px 0 0;">After hours? Leave a message and we'll call you back the next business day. In a crisis, call or text <a href="tel:988"><strong>988</strong></a>.</p>
       </div>
     </aside>
   </section>

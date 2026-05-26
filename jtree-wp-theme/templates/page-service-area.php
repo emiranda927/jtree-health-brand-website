@@ -76,13 +76,13 @@ $travel     = !empty($page_meta['travel_context'][0])
         <a class="jth-hub-tile" href="<?php echo esc_url(home_url('/programs/#iop')); ?>">
           <span class="jth-hub-tile__eyebrow">IOP</span>
           <h3 class="jth-h4" style="margin:8px 0 10px;">Intensive outpatient</h3>
-          <p style="margin: 0 0 14px;">Tue / Wed / Thu, 3 to 6 p.m. Skills group, individual therapy, optional med-management coordination.</p>
+          <p style="margin: 0 0 14px;">In-person + virtual group blocks across the week (Mon, Tue, Thu, Sat). Skills group, individual therapy, family sessions.</p>
           <span class="jth-hub-tile__meta">See IOP details &nbsp;&rarr;</span>
         </a>
         <a class="jth-hub-tile" href="<?php echo esc_url(home_url('/insurance/')); ?>">
           <span class="jth-hub-tile__eyebrow">Insurance</span>
           <h3 class="jth-h4" style="margin:8px 0 10px;">In-network coverage</h3>
-          <p style="margin: 0 0 14px;">BCBS NC, Cigna / Evernorth, Aetna, UnitedHealthcare / Optum, Tricare, NC Medicaid. We verify before day one.</p>
+          <p style="margin: 0 0 14px;">BCBS NC, Cigna / Evernorth, Aetna, and Tricare. We verify before day one.</p>
           <span class="jth-hub-tile__meta">See insurance details &nbsp;&rarr;</span>
         </a>
         <a class="jth-hub-tile" href="<?php echo esc_url(home_url('/what-we-treat/')); ?>">

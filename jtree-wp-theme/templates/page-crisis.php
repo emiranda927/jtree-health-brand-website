@@ -14,7 +14,8 @@ get_header();
     <div class="container" style="max-width: 760px;">
       <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">If you or your teen is in crisis</span>
       <h1 class="jth-h1" style="margin: 0 0 16px;">Get help right now.</h1>
-      <p class="jth-body-l" style="margin: 0;">If you or your teen is in immediate danger, call <strong>911</strong>. Otherwise, the resources below are free, confidential, and available 24/7.</p>
+      <p class="jth-body-l" style="margin: 0 0 12px;">If you or your teen is in immediate danger, call <strong>911</strong>. Otherwise, the resources below are free, confidential, and available 24/7.</p>
+      <p class="jth-body" style="margin: 0; color: var(--jth-fg-muted);">Joshua Tree Health is not a 24/7 crisis line. We are an outpatient program. Please use the resources below when seconds matter; we will be here when you are ready to plan next steps.</p>
     </div>
   </section>
 

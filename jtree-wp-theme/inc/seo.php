@@ -1,6 +1,6 @@
 <?php
 /**
- * JTree Health - SEO: Schema.org & OpenGraph
+ * Joshua Tree Health - SEO: Schema.org & OpenGraph
  *
  * @package JTreeHealth
  * @since 1.0.0
@@ -15,12 +15,13 @@ function jtree_schema_jsonld() {
     $schema = array(
         '@context'    => 'https://schema.org',
         '@type'       => 'MedicalBusiness',
-        'name'        => 'JTree Health',
+        'name'        => 'Joshua Tree Health',
         'description' => 'Adolescent PHP (Partial Hospitalization) and IOP (Intensive Outpatient) mental health programs for teens ages 10-17 in Apex, NC.',
         'url'         => home_url('/'),
-        'telephone'   => '(919) 276-4005',
+        'telephone'   => '(919) 335-5053',
         'address'     => array(
             '@type'           => 'PostalAddress',
+            'streetAddress'   => '800 West Williams St., STE 203',
             'addressLocality' => 'Apex',
             'addressRegion'   => 'NC',
             'postalCode'      => '27502',
@@ -35,18 +36,8 @@ function jtree_schema_jsonld() {
         'availableService' => array(
             array(
                 '@type'       => 'MedicalTherapy',
-                'name'        => 'Partial Hospitalization Program (PHP)',
-                'description' => '5 days a week, 9am-3pm intensive structured mental health support for teens.',
-            ),
-            array(
-                '@type'       => 'MedicalTherapy',
                 'name'        => 'Intensive Outpatient Program (IOP)',
-                'description' => '3 days a week, 3-6pm after-school intensive outpatient therapy for teens.',
-            ),
-            array(
-                '@type'       => 'MedicalTherapy',
-                'name'        => 'Medication Management',
-                'description' => 'Psychiatric evaluation and medication monitoring alongside PHP or IOP.',
+                'description' => 'Intensive outpatient therapy for adolescents ages 10-17, delivered in-person and virtually across multiple time blocks per week. 12-week DBT and polyvagal program.',
             ),
         ),
         'areaServed'  => array(
@@ -59,21 +50,22 @@ function jtree_schema_jsonld() {
             'geoRadius' => '50000',
         ),
         // priceRange omitted: meaningless for adolescent mental healthcare; use insurance pages instead.
-        // openingHoursSpecification per program; PHP runs Mon–Fri 9–3, IOP Tue/Wed/Thu 3–6.
+        // openingHoursSpecification: IOP group blocks. In-person afternoons Mon/Tue/Thu 4-7 PM;
+        // virtual mornings Tue/Thu/Sat 9 AM-12 PM. PHP omitted until launch.
         'openingHoursSpecification' => array(
             array(
-                '@type'   => 'OpeningHoursSpecification',
-                'dayOfWeek' => array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'),
-                'opens'   => '09:00',
-                'closes'  => '15:00',
-                'name'    => 'PHP',
+                '@type'     => 'OpeningHoursSpecification',
+                'dayOfWeek' => array('Monday', 'Tuesday', 'Thursday'),
+                'opens'     => '16:00',
+                'closes'    => '19:00',
+                'name'      => 'IOP (in-person)',
             ),
             array(
-                '@type'   => 'OpeningHoursSpecification',
-                'dayOfWeek' => array('Tuesday', 'Wednesday', 'Thursday'),
-                'opens'   => '15:00',
-                'closes'  => '18:00',
-                'name'    => 'IOP',
+                '@type'     => 'OpeningHoursSpecification',
+                'dayOfWeek' => array('Tuesday', 'Thursday', 'Saturday'),
+                'opens'     => '09:00',
+                'closes'    => '12:00',
+                'name'      => 'IOP (virtual)',
             ),
         ),
         'sameAs'      => array(
@@ -98,8 +90,8 @@ function jtree_faq_map() {
     return array(
         'insurance' => array(
             array(
-                'q' => 'Which insurance plans is JTree Health in network with?',
-                'a' => 'We are in network with BlueCross BlueShield (BCBS NC), Cigna / Evernorth, Aetna, UnitedHealthcare / Optum, Tricare, and North Carolina Medicaid.',
+                'q' => 'Which insurance plans is Joshua Tree Health in network with?',
+                'a' => 'We are in network with BlueCross BlueShield (BCBS NC), Cigna / Evernorth, Aetna, and Tricare.',
             ),
             array(
                 'q' => "What if my plan isn't listed?",
@@ -116,30 +108,46 @@ function jtree_faq_map() {
         ),
         'programs' => array(
             array(
-                'q' => "What's the difference between PHP and IOP?",
-                'a' => 'PHP (Partial Hospitalization) runs Monday through Friday from 9 a.m. to 3 p.m. for teens whose mental-health needs make a typical school day untenable right now. IOP (Intensive Outpatient) runs Tuesday, Wednesday, and Thursday from 3 to 6 p.m. for teens who can stay in school but need more than weekly outpatient therapy.',
+                'q' => 'Which programs does Joshua Tree Health offer?',
+                'a' => 'Our Intensive Outpatient Program (IOP) is open today, with in-person afternoon groups in Apex (Mon, Tue, Thu, 4-7 PM) and virtual morning groups (Tue, Thu, Sat, 9 AM-12 PM). Each teen attends three group blocks per week. A Partial Hospitalization Program (PHP) is launching soon, running Monday through Friday from 9 a.m. to 3 p.m. Both are outpatient — your teen sleeps at home.',
             ),
             array(
-                'q' => 'What ages does JTree Health treat?',
+                'q' => "What's the difference between PHP and IOP?",
+                'a' => 'IOP (Intensive Outpatient) is after-school care for teens who can stay in school but need more than a weekly therapist. PHP (Partial Hospitalization, launching soon at Joshua Tree Health) is a five-day-a-week daytime program for teens whose mental-health needs make a typical school day untenable right now.',
+            ),
+            array(
+                'q' => 'What ages does Joshua Tree Health treat?',
                 'a' => 'Adolescents ages 10 through 17.',
             ),
             array(
-                'q' => 'Is JTree Health an inpatient program?',
-                'a' => 'No. All three programs — PHP, IOP, and medication management — are outpatient. There is no inpatient stay and no 30-day mandate.',
+                'q' => 'Is Joshua Tree Health an inpatient program?',
+                'a' => 'No. Both IOP and the upcoming PHP are outpatient. There is no inpatient stay and no 30-day mandate; your teen sleeps in their own bed.',
             ),
             array(
                 'q' => 'What happens during a day in PHP?',
-                'a' => 'A typical PHP day includes two DBT skills groups, one process group with peers, individual therapy, family sessions every other week, medication-management consults as needed, and academic support so your teen keeps up with school.',
+                'a' => "When PHP opens, a typical day will include two DBT skills groups, one process group with peers, individual therapy, family sessions every other week, nervous-system regulation work, and academic support so your teen keeps up with school.",
             ),
             array(
-                'q' => 'Do you offer medication management?',
-                'a' => 'Yes. Our psychiatry team coordinates with the therapy team for teens in PHP or IOP, and we also offer standalone medication management with 60-minute initial evaluations and 25-minute follow-ups, available via telehealth or in person.',
+                'q' => 'What does a typical IOP group block look like?',
+                'a' => 'Every IOP session follows the same predictable arc, so your teen always knows what is coming next: check-in and diary cards, opening mindfulness, psychoeducation on the day\'s skill, interactive skill practice, processing and integration, a group activity, and check-out and diary cards. Each block runs 3 hours, either in-person in Apex or virtually.',
+            ),
+            array(
+                'q' => 'How long is the IOP program?',
+                'a' => 'Twelve weeks. The arc moves from nervous-system foundations and mindfulness, into distress tolerance, emotion regulation, interpersonal effectiveness, and finally walking the middle path — which includes a dedicated week on parent-teen escalation patterns and repair. Teens close out with a personal regulation plan and a letter to their future self.',
+            ),
+            array(
+                'q' => 'How are parents involved in IOP?',
+                'a' => 'Parents are part of the work, not bystanders. Your teen has a family session every two weeks, and the last module of the program (Walking the Middle Path) is dedicated to parent-teen escalation patterns, repair after conflict, and co-regulation. We teach families that most fights are about the pattern, not the topic.',
+            ),
+            array(
+                'q' => 'What happens after my teen finishes IOP?',
+                'a' => "Toward the end of the 12 weeks, every teen builds a personal regulation plan: their early warning signs, the skills that work for them, and who they reach out to when things get hard. We talk about this as relapse prevention — not because struggle disappears, but because they leave with a plan for when it returns.",
             ),
         ),
         'what-we-treat' => array(
             array(
-                'q' => 'What conditions does JTree Health treat?',
-                'a' => 'We treat anxiety and panic, depression, OCD, ADHD with emotion dysregulation, trauma and PTSD, self-harm, and co-occurring concerns in adolescents ages 10 to 17.',
+                'q' => 'What conditions does Joshua Tree Health treat?',
+                'a' => 'We treat anxiety and panic, depression, OCD, ADHD with emotion dysregulation, trauma and PTSD, self-harm, Autism Level 1, school avoidance, and co-occurring concerns in adolescents ages 10 to 17.',
             ),
             array(
                 'q' => 'Do you treat substance use or eating disorders?',
@@ -150,8 +158,20 @@ function jtree_faq_map() {
                 'a' => 'Yes. Most teens we see are managing more than one concern at the same time. We work with the whole picture rather than treating a single diagnosis in isolation.',
             ),
             array(
-                'q' => 'What if JTree Health is not the right fit for my teen?',
-                'a' => 'Tell us a little about what is going on. The admissions team will help you figure out the next step — even if that step is a different program.',
+                'q' => 'What if Joshua Tree Health is not the right fit for my teen?',
+                'a' => 'Tell us a little about what is going on. The admissions team will help you figure out the next step, even if that step is a different program.',
+            ),
+            array(
+                'q' => 'What is DBT?',
+                'a' => 'DBT stands for Dialectical Behavior Therapy. It teaches four sets of practical skills: mindfulness (noticing what is happening without reacting), distress tolerance (getting through hard moments without making them worse), emotion regulation (catching feelings earlier and working with them), and interpersonal effectiveness (asking for what you need and handling conflict). It was originally developed for adults with intense emotional reactivity and has strong evidence for adolescents.',
+            ),
+            array(
+                'q' => 'What is polyvagal theory, in plain language?',
+                'a' => 'Polyvagal theory is a way of understanding how the nervous system reacts to stress. It describes three states: feeling safe and connected, feeling anxious or activated (fight or flight), and feeling shut down or numb. We teach teens to notice which state they are in and use specific skills to help their body return to safety. It is not a replacement for DBT; we use them together.',
+            ),
+            array(
+                'q' => 'What is the Safe and Sound Protocol (SSP)?',
+                'a' => 'SSP is a listening-based intervention that supports nervous-system regulation. A teen listens to specially-filtered music in short sessions, typically over a few weeks. It is one of several tools we use alongside DBT when clinically indicated; it is not a standalone treatment.',
             ),
         ),
     );
@@ -196,29 +216,29 @@ add_action('wp_head', 'jtree_faq_schema_jsonld', 3);
  */
 function jtree_opengraph_meta() {
     $title       = wp_get_document_title();
-    $description = 'JTree Health provides PHP and IOP mental health programs for teens ages 10-17 in Apex, NC. CARF Accredited. Call (919) 276-4005.';
+    $description = 'Joshua Tree Health provides PHP and IOP mental health programs for teens ages 10-17 in Apex, NC. CARF Accredited. Call (919) 335-5053.';
     $url         = home_url(add_query_arg(array(), wp_unslash($_SERVER['REQUEST_URI'])));
-    $site_name   = 'JTree Health';
+    $site_name   = 'Joshua Tree Health';
     // og-image placeholder — replace before launch with a 1200×630 .jpg.
     $image       = JTREE_THEME_URI . '/assets/brand/og-image.jpg';
 
     // Page-specific descriptions
     if (is_page('programs')) {
-        $description = 'PHP and IOP mental health programs for teens ages 10-17 at JTree Health in Apex, NC.';
+        $description = 'PHP and IOP mental health programs for teens ages 10-17 at Joshua Tree Health in Apex, NC.';
     } elseif (is_page('about')) {
-        $description = 'Learn about JTree Health — adolescent PHP and IOP in Apex, NC. Founded 2026.';
+        $description = 'Learn about Joshua Tree Health — adolescent PHP and IOP in Apex, NC. Founded 2026.';
     } elseif (is_page('admissions')) {
-        $description = 'Start the admissions process at JTree Health. Free intake assessment. Most families start within 3-5 business days.';
+        $description = 'Start the conversation with Joshua Tree Health. Fill out the form and we\'ll call you within 2-4 business hours. Adolescent PHP and IOP in Apex, NC.';
     } elseif (is_page('contact')) {
-        $description = 'Contact JTree Health at (919) 276-4005. Adolescent mental health IOP and PHP in Apex, NC.';
+        $description = 'Contact Joshua Tree Health at (919) 335-5053. Adolescent mental health IOP and PHP in Apex, NC.';
     } elseif (is_page('insurance')) {
-        $description = 'JTree Health accepts BCBS, Cigna, Aetna, UHC, and Tricare. We handle insurance verification for you.';
+        $description = 'Joshua Tree Health accepts BCBS, Cigna, Aetna, and Tricare. We handle insurance verification for you.';
     } elseif (is_page('what-we-treat')) {
-        $description = 'JTree Health treats anxiety, depression, OCD, ADHD, trauma, PTSD, self-harm, and co-occurring disorders in teens.';
+        $description = 'Joshua Tree Health treats anxiety, depression, OCD, ADHD, trauma, PTSD, self-harm, and co-occurring disorders in teens.';
     } elseif (is_page('for-parents')) {
-        $description = 'Information for parents considering PHP or IOP for their teen. JTree Health in Apex, NC.';
+        $description = 'Information for parents considering PHP or IOP for their teen. Joshua Tree Health in Apex, NC.';
     } elseif (is_page('for-teens')) {
-        $description = 'You\'re not broken. You\'re overwhelmed. Learn what JTree Health is actually like for teens.';
+        $description = 'You\'re not broken. You\'re overwhelmed. Learn what Joshua Tree Health is actually like for teens.';
     } elseif (is_page('crisis')) {
         $description = 'Crisis resources: 988 Suicide & Crisis Lifeline, Crisis Text Line. If your teen is in danger, call 911.';
     }

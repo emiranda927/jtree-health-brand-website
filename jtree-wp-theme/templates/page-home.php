@@ -33,15 +33,13 @@ get_header();
         </h1>
 
         <p class="h-hero-sub">
-          Joshua Tree Health is an adolescent <strong>PHP &amp; IOP</strong> for teens ages
-          10&#8211;17 — trauma-informed DBT delivered with respect for your kid's
-          intelligence and skepticism. We don't fix anyone. We help them build roots.
+          Joshua Tree Health is an adolescent <strong>PHP and IOP</strong> program in Apex, NC, for teens ages 10&#8211;17. DBT, family work, and nervous-system support, delivered with respect for your kid's intelligence and skepticism. We help your teen build the roots to thrive.
         </p>
 
         <div class="h-hero-ctas">
           <a class="jth-btn jth-btn-primary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
-          <a class="jth-btn jth-btn-ghost jth-btn-lg" href="<?php echo esc_url(home_url('/programs/')); ?>">Explore Programs →</a>
-          <span class="meta">Reply within 1 business day</span>
+          <a class="jth-btn jth-btn-ghost jth-btn-lg" href="<?php echo esc_url(home_url('/programs/')); ?>">Explore Programs &rarr;</a>
+          <span class="meta">Reply within 2&ndash;4 business hours</span>
         </div>
       </div>
 
@@ -58,14 +56,12 @@ get_header();
           <div class="susan-track" aria-hidden="false">
             <span>BlueCross BlueShield</span>
             <span>Aetna</span>
-            <span>UnitedHealthcare</span>
             <span>Cigna</span>
-            <span>Medicaid (NC)</span>
+            <span>Tricare</span>
             <span aria-hidden="true">BlueCross BlueShield</span>
             <span aria-hidden="true">Aetna</span>
-            <span aria-hidden="true">UnitedHealthcare</span>
             <span aria-hidden="true">Cigna</span>
-            <span aria-hidden="true">Medicaid (NC)</span>
+            <span aria-hidden="true">Tricare</span>
           </div>
         </div>
       </div>
@@ -93,37 +89,30 @@ get_header();
   <section class="h-programs">
     <div class="h-programs-head">
       <div>
-        <p class="meta">§ 02 &nbsp;·&nbsp; Programs</p>
-        <h2 class="lead">Three levels of structured support, <em>shaped to fit a school week.</em></h2>
+        <p class="meta">&sect; 02 &nbsp;&middot;&nbsp; Programs</p>
+        <h2 class="lead">Structured outpatient care, <em>shaped to fit a school week.</em></h2>
       </div>
       <p class="h-programs-body">
         No inpatient stay required. Every program is built around the rhythms of family
-        life — pickup lines, dinner, homework — so your teen can keep being a teen
+        life &mdash; pickup lines, dinner, homework &mdash; so your teen can keep being a teen
         while doing real work.
       </p>
     </div>
 
     <div class="h-programs-grid">
-      <a class="h-pcard" href="<?php echo esc_url(home_url('/programs/')); ?>#php">
-        <div class="h-pcard-num">№ 01 &nbsp;·&nbsp; PHP</div>
-        <h3 class="h-pcard-title">Partial Hospitalization</h3>
-        <div class="h-pcard-schedule">Mon–Fri · 9 am – 3 pm · 6–8 wks</div>
-        <p class="h-pcard-body">Five-day-a-week structure for teens needing the most support — group, individual, family work, and school accommodations woven through the day.</p>
-        <span class="h-pcard-arrow">Learn about PHP &nbsp;→</span>
-      </a>
       <a class="h-pcard" href="<?php echo esc_url(home_url('/programs/')); ?>#iop">
-        <div class="h-pcard-num">№ 02 &nbsp;·&nbsp; IOP</div>
+        <div class="h-pcard-num">&#8470; 01 &nbsp;&middot;&nbsp; IOP</div>
         <h3 class="h-pcard-title">Intensive Outpatient</h3>
-        <div class="h-pcard-schedule">Tue / Wed / Thu · 3–6 pm · 8–12 wks</div>
+        <div class="h-pcard-schedule">In-person + virtual &middot; multiple times per week &middot; 12 weeks</div>
         <p class="h-pcard-body">After-school care for teens who can stay enrolled in school. Skills group, individual therapy, and family sessions on a regular cadence.</p>
-        <span class="h-pcard-arrow">Learn about IOP &nbsp;→</span>
+        <span class="h-pcard-arrow">Learn about IOP &nbsp;&rarr;</span>
       </a>
-      <a class="h-pcard" href="<?php echo esc_url(home_url('/programs/')); ?>#medmgmt">
-        <div class="h-pcard-num">№ 03 &nbsp;·&nbsp; Med Mgmt</div>
-        <h3 class="h-pcard-title">Medication Management</h3>
-        <div class="h-pcard-schedule">By appointment · 30–45 min</div>
-        <p class="h-pcard-body">Psychiatry from a clinician who actually knows your teen. We coordinate with your existing prescriber when that's the right call.</p>
-        <span class="h-pcard-arrow">Learn about Med Mgmt &nbsp;→</span>
+      <a class="h-pcard" href="<?php echo esc_url(home_url('/programs/')); ?>#php">
+        <div class="h-pcard-num">&#8470; 02 &nbsp;&middot;&nbsp; PHP <span style="background:var(--jth-sunflower); color:var(--jth-charcoal); padding:2px 8px; border-radius:99px; font-size:11px; margin-left:8px; vertical-align:middle;">Coming soon</span></div>
+        <h3 class="h-pcard-title">Partial Hospitalization</h3>
+        <div class="h-pcard-schedule">Mon&ndash;Fri &middot; 9 am &ndash; 3 pm</div>
+        <p class="h-pcard-body">Launching at Joshua Tree Health: a five-day-a-week structure for teens needing the most support, including group, individual, and family work plus school accommodations woven through the day.</p>
+        <span class="h-pcard-arrow">Learn about PHP &nbsp;&rarr;</span>
       </a>
     </div>
   </section>
@@ -131,29 +120,29 @@ get_header();
   <!-- ─────────────────────── FIGURES / STATS ────────────────── -->
   <section class="h-figures">
     <div class="h-figures-head">
-      <div class="num">§ 03 &nbsp;·&nbsp; By the numbers</div>
-      <h2>Measured care, <em>not slogans.</em></h2>
+      <div class="num">&sect; 03 &nbsp;&middot;&nbsp; By the numbers</div>
+      <h2>What you can <em>count on.</em></h2>
     </div>
     <div class="h-figures-grid">
       <div class="h-fig">
-        <div class="h-fig-num">82<span class="pct">%</span></div>
-        <div class="h-fig-label">Distress reduction</div>
-        <p class="h-fig-body">Of teens report a clinically meaningful drop in distress at discharge.</p>
+        <div class="h-fig-num">10&ndash;17</div>
+        <div class="h-fig-label">Ages we serve</div>
+        <p class="h-fig-body">We don't see adults. Every clinician here is trained for adolescent work.</p>
       </div>
       <div class="h-fig">
-        <div class="h-fig-num">9.4<span class="frac">/10</span></div>
-        <div class="h-fig-label">Parent satisfaction</div>
-        <p class="h-fig-body">Average rating of the care team across the past year of admissions.</p>
+        <div class="h-fig-num">2&ndash;4<span class="frac"> hr</span></div>
+        <div class="h-fig-label">Reply window</div>
+        <p class="h-fig-body">From the moment you submit the inquiry form to the moment an admissions clinician calls you back.</p>
       </div>
       <div class="h-fig">
-        <div class="h-fig-num">10–17</div>
-        <div class="h-fig-label">Ages served</div>
-        <p class="h-fig-body">We don't see adults. Every clinician on staff is teen-trained.</p>
+        <div class="h-fig-num">0</div>
+        <div class="h-fig-label">Inpatient stays required</div>
+        <p class="h-fig-body">Our IOP keeps teens at home, in school, and sleeping in their own bed. No 30-day mandate, no residential.</p>
       </div>
       <div class="h-fig">
-        <div class="h-fig-num">2<span class="frac"> wks</span></div>
-        <div class="h-fig-label">Inquiry → start</div>
-        <p class="h-fig-body">Typical time from your first call to the day your teen begins programming.</p>
+        <div class="h-fig-num">CARF</div>
+        <div class="h-fig-label">Accreditation</div>
+        <p class="h-fig-body">CARF accreditation is an external standard of clinical quality, ethics, and outcomes. Not a marketing badge.</p>
       </div>
     </div>
   </section>
@@ -165,27 +154,27 @@ get_header();
         <div class="num">§ 04 &nbsp;·&nbsp; How it works</div>
         <h2>Three steps. <em>We do the heavy lifting.</em></h2>
       </div>
-      <p>From the first call to your teen's first day — we walk it with you. No sales tactics, no pressure, no jargon.</p>
+      <p>From the first call to your teen's first day, we walk it with you. No sales tactics, no jargon.</p>
     </div>
 
     <div class="h-process-grid">
       <div class="h-step">
         <div class="h-step-num">01</div>
-        <h3>Tell us a little</h3>
-        <p>A two-minute form or a short call. No clinical detail required, no awkward intake script.</p>
+        <h3>Fill out the form</h3>
+        <p>Two minutes. No clinical detail needed up front, no awkward intake script.</p>
         <span class="duration">~ 2 min</span>
       </div>
       <div class="h-step">
         <div class="h-step-num">02</div>
-        <h3>A real conversation</h3>
-        <p>An admissions clinician (a real human, not a scheduler) calls you within one business day. We listen first.</p>
-        <span class="duration">Within 1 business day</span>
+        <h3>We call you back</h3>
+        <p>A real admissions clinician, not a scheduler. We listen first.</p>
+        <span class="duration">2&ndash;4 business hours</span>
       </div>
       <div class="h-step">
         <div class="h-step-num">03</div>
-        <h3>A plan, together</h3>
-        <p>If we're the right fit, we set a start date and verify your insurance. If we aren't, we'll point you to who is.</p>
-        <span class="duration">~ 2 weeks to start</span>
+        <h3>Start within the week</h3>
+        <p>If we're the right fit, we verify insurance and set a date. If we aren't, we'll point you to who is.</p>
+        <span class="duration">~ 1 week to start</span>
       </div>
     </div>
   </section>
@@ -195,9 +184,9 @@ get_header();
     <div class="h-quote-inner">
       <span class="jth-eyebrow">§ 05 / A note from our founder</span>
       <blockquote>
-        Resilience isn't about escaping the desert. It's about <em>building the roots</em> to thrive within it.
+        I built Joshua Tree Health because the kind of care I wish my brother Josh had didn't exist near us. So we made it &mdash; <em>for the families coming next.</em>
       </blockquote>
-      <cite>Gabriela Miranda &nbsp;/&nbsp; Founder &amp; Clinical Director</cite>
+      <cite>Gabriela Miranda &nbsp;/&nbsp; Founder</cite>
     </div>
   </section>
 
@@ -211,7 +200,7 @@ get_header();
       </div>
       <div class="h-refer-actions">
         <a class="jth-btn jth-btn-primary jth-btn-lg" href="#">Refer a patient</a>
-        <a class="jth-btn jth-btn-secondary jth-btn-lg" href="tel:9192764005">Call (919) 276-4005</a>
+        <a class="jth-btn jth-btn-secondary jth-btn-lg" href="tel:9193355053">Call (919) 335-5053</a>
       </div>
     </div>
   </section>
@@ -219,12 +208,12 @@ get_header();
   <!-- ─────────────────────── CTA BAND — Joshie + tree friend ─── -->
   <section class="h-cta">
     <div class="h-cta-inner">
-      <span class="jth-eyebrow">§ 06 / Start when you're ready</span>
+      <span class="jth-eyebrow">&sect; 07 / Start when you're ready</span>
       <h2>You don't have to figure this out <em>alone.</em></h2>
-      <p>An admissions clinician will reach out within one business day. Your information is protected, and we never share it.</p>
+      <p>An admissions clinician will call you back within 2 to 4 business hours. Your information is protected, and we never share it.</p>
       <div class="h-cta-actions">
         <a class="jth-btn jth-btn-primary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
-        <a class="jth-btn jth-btn-ghost jth-btn-lg" href="tel:9192764005">(919) 276-4005</a>
+        <a class="jth-btn jth-btn-ghost jth-btn-lg" href="tel:9193355053">(919) 335-5053</a>
       </div>
       <div class="h-cta-joshie">
         <img

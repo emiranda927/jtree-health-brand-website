@@ -15,7 +15,7 @@ $brand = JTREE_THEME_URI . '/assets/brand';
 
 <header class="site-header">
   <div class="site-header-row">
-    <a class="brand" href="<?php echo $home; ?>" aria-label="JTree Health home">
+    <a class="brand" href="<?php echo $home; ?>" aria-label="Joshua Tree Health home">
       <img
         src="<?php echo esc_url($brand . '/logo-horizontal.png'); ?>"
         srcset="<?php echo esc_url($brand . '/logo-horizontal.png'); ?> 1x, <?php echo esc_url($brand . '/logo-horizontal@2x.png'); ?> 2x"
@@ -29,7 +29,7 @@ $brand = JTREE_THEME_URI . '/assets/brand';
       <a href="<?php echo $home; ?>what-we-treat/"<?php echo is_page('what-we-treat') ? ' aria-current="page"' : ''; ?>>What We Treat</a>
       <a href="<?php echo $home; ?>about/"<?php echo is_page('about') ? ' aria-current="page"' : ''; ?>>About</a>
       <a href="<?php echo $home; ?>insurance/"<?php echo is_page('insurance') ? ' aria-current="page"' : ''; ?>>Insurance</a>
-      <a class="nav-phone" href="tel:9192764005" aria-label="Call (919) 276-4005">(919) 276-4005</a>
+      <a class="nav-phone" href="tel:9193355053" aria-label="Call (919) 335-5053">(919) 335-5053</a>
       <a class="jth-btn jth-btn-primary jth-btn-sm nav-cta" href="<?php echo $home; ?>admissions/"<?php echo is_page('admissions') ? ' aria-current="page"' : ''; ?>>Start the Conversation</a>
     </nav>
     <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">

@@ -432,7 +432,24 @@ body { margin: 0; }
   font-family: var(--font-mono); font-size: 13px; font-weight: 500; line-height: 1.4;
   letter-spacing: 0.04em;
 }
-@media (max-width: 600px) { .jth-crisis-bar { min-height: 56px; padding: 12px 16px; font-size: 12px; } }
+@media (max-width: 600px) {
+  /* Crisis bar on mobile: let the text flow naturally as one paragraph.
+     The real bug was per-anchor min-height: 44px making each link a tall
+     block that forced ugly 4-line wrapping. Keep the bar's own 56px min-
+     height (the sticky site-header below depends on this exact value),
+     just unstick the anchors so the text reads as one centered paragraph. */
+  .jth-crisis-bar {
+    padding: 10px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .jth-crisis-bar a {
+    min-height: 0;
+    padding: 2px 6px;
+    display: inline;
+  }
+}
 .jth-crisis-bar a {
   color: var(--jth-cream); text-decoration: underline;
   text-decoration-color: var(--jth-lime-green); text-decoration-thickness: 1.5px; text-underline-offset: 4px;

@@ -1,6 +1,6 @@
 <?php
 /**
- * JTree Health - Security Hardening
+ * Joshua Tree Health - Security Hardening
  *
  * @package JTreeHealth
  * @since 1.0.0

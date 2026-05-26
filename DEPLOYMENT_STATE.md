@@ -1,4 +1,4 @@
-# JTree Health — Deployment State (2026-05-11)
+# JTree Health — Deployment State (2026-05-26)
 
 Snapshot for picking up the launch work in a new Claude session. Use this alongside `FRONT_END_REQUIREMENTS.md` (designer brief) and `site/AGENT_HANDOFF.md` (project architecture).
 
@@ -19,9 +19,9 @@ Snapshot for picking up the launch work in a new Claude session. Use this alongs
 | Local WP rendering | ✅ All 12 pages render at `http://jtree-local.local/` |
 | Brand kit | ✅ At workspace root (`brand kit images/`, `jth_logo_assets_v4/`, `brand_colors.md`) |
 | Front-end requirements doc | ✅ `FRONT_END_REQUIREMENTS.md` at workspace root |
-| WP Engine production site | ❌ Not provisioned |
+| Flywheel production site | ❌ Not provisioned (Eliseo on Tiny plan — site needs to be created) |
 | Cloudflare hardening | ❌ Not done (SSL Full strict, HSTS, WAF, Bot Fight) |
-| Production DNS records | ❌ Not done (`@`, `www` → WP Engine; `api` → Vercel custom domain) |
+| Production DNS records | ❌ Not done (`@`, `www` → Flywheel; `api` → Vercel custom domain) |
 | Vercel `ALLOWED_ORIGIN` | ⚠️ Currently `http://jtree-health.local` for testing — must flip to `https://jtreehealth.com` before launch |
 | Cookie consent banner | ❌ Not installed |
 | GA4 key-event flag | ⏳ Event fires + shows in Realtime; mark-as-key-event deferred until GA4 processes events (~24 hrs) |
@@ -45,7 +45,7 @@ Snapshot for picking up the launch work in a new Claude session. Use this alongs
 | Squarespace (domain registrar) | Gabriela owns; Eliseo has access | domains.squarespace.com |
 | GA4 | `eliseo@jtreehealth.com` | analytics.google.com; Measurement ID `G-8M90ZXZ1NW` |
 | GTM | `eliseo@jtreehealth.com` | tagmanager.google.com; Container ID `GTM-WGCMNLXH` |
-| WP Engine | **not yet signed up** | — |
+| Flywheel (WP host) | Eliseo on **Tiny plan** — site not yet provisioned | getflywheel.com (Local Connect can push from the Local desktop app) |
 
 ### Vercel env vars currently set (production)
 
@@ -64,7 +64,7 @@ Snapshot for picking up the launch work in a new Claude session. Use this alongs
 - **Front-end** (WP theme): `site/jtree-wp-theme/` — GeneratePress child theme. Renders all 12 page templates.
 - **Form API**: `site/jtree-form-api/` — Vercel serverless. POST `/api/inquiry` → validates → routes to Sheets (since Ritten not yet configured) AND Resend. CORS gated to `ALLOWED_ORIGIN`.
 - **Local dev**: WordPress in Local app at site `jtree-local`, URL `http://jtree-local.local/`. Theme is symlinked from `site/jtree-wp-theme/` so edits are live.
-- **Production hosting**: TBD WP Engine for the website; Vercel already hosts the API.
+- **Production hosting**: Flywheel (Tiny plan) for the website; Vercel already hosts the API.
 - **DNS**: Cloudflare zone, nameservers `nova.ns.cloudflare.com` + `darl.ns.cloudflare.com`.
 
 ---
@@ -98,9 +98,9 @@ Gabriela owns the Squarespace domain. Eliseo has access but acquisition entity s
 
 When picking up:
 
-1. **WP Engine signup + provision** (~60–90 min, $25/mo). The next big technical step. After this, the production site has a real URL we can point DNS at.
-2. **Upload theme to WP Engine** + create the 12 pages with template assignments (mirror of what's been done locally).
-3. **Production DNS at Cloudflare**: `A @` and `CNAME www` → WP Engine IP/host; `CNAME api` → `cname.vercel-dns.com`.
+1. **Provision the Flywheel site** (~30 min — Tiny plan already paid for). Create a new site in the Flywheel dashboard with a temporary `<sitename>.flywheelsites.com` URL. After this, the production site has a real URL we can point DNS at.
+2. **Push theme to Flywheel** + create the 12 pages with template assignments (mirror of what's been done locally). Easiest path: open the Local site in the Local desktop app → click "Connect to Flywheel" → push. Alternative: SFTP `jtree-wp-theme/` into `wp-content/themes/` using credentials from the Flywheel dashboard.
+3. **Production DNS at Cloudflare**: `A @` and `CNAME www` → Flywheel target (per the "Add domain" instructions in Flywheel's dashboard, typically `<sitename>.flywheelsites.com`); `CNAME api` → `cname.vercel-dns.com`.
 4. **Vercel custom domain**: add `api.jtreehealth.com` to the Vercel project.
 5. **Switch `ALLOWED_ORIGIN`** in Vercel from `http://jtree-health.local` to `https://jtreehealth.com`. Redeploy.
 6. **Cloudflare hardening**: SSL Full (strict), HSTS, "Always use HTTPS", WAF managed ruleset, Bot Fight Mode, custom rule blocking `xmlrpc.php`.
@@ -138,12 +138,12 @@ Paste this as your first message in a new Claude Code session opened at `/Users/
 > - Cloudflare DNS owned by me, nameservers switched
 > - GA4 + GTM configured (`G-8M90ZXZ1NW` / `GTM-WGCMNLXH`), event firing, wired in theme and pushed to GitHub
 > - Local WP rendering all 12 pages
-> - **Not yet done**: WP Engine signup + provision, production DNS records (root/www→WP Engine, api→Vercel), Cloudflare hardening, cookie banner, `ALLOWED_ORIGIN` switch from local to production, final smoke test
+> - **Not yet done**: Flywheel site provision (Tiny plan paid for), production DNS records (root/www→Flywheel, api→Vercel), Cloudflare hardening, cookie banner, `ALLOWED_ORIGIN` switch from local to production, final smoke test
 >
 > Memory files already capture preferences (autonomous runs once a numbered sequence is agreed, plain language, designer handoff, etc.).
 >
-> Next step I want to tackle: **[WP Engine signup / Cardinal email / something else]** — fill in whichever.
+> Next step I want to tackle: **[Flywheel site provision / Cardinal email / something else]** — fill in whichever.
 
 ---
 
-*Last updated: 2026-05-11. Update this file if you make significant changes between sessions.*
+*Last updated: 2026-05-26. Update this file if you make significant changes between sessions.*

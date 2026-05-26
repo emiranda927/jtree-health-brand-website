@@ -4,7 +4,7 @@ End-to-end deployment guide for the GeneratePress child theme. For the full laun
 
 ## Prerequisites
 
-- WP Engine site provisioned (or other WP host with PHP 8.0+, WordPress 6.x)
+- Flywheel site provisioned on the Tiny plan (or other WP host with PHP 8.0+, WordPress 6.x)
 - GeneratePress parent theme installed and activated
 - SFTP / SSH credentials for the host
 - `https://api.jtreehealth.com` already deployed (see `../jtree-form-api/README.md`)
@@ -17,20 +17,20 @@ wp-content/themes/jtree-wp-theme/      ← this directory's contents
 
 Two upload methods:
 
-### A. WP Engine SFTP (recommended for first push)
+### A. Local desktop app → "Connect to Flywheel" (recommended for first push)
+
+The local site is already running in Local. Open it, click **Connect to Host** in the Local sidebar, sign in to Flywheel, and pick the destination site. Local will push theme files + database in one shot. Best path for both the first push and ongoing iteration if you're editing through Local.
+
+### B. SFTP (use for one-off file uploads or when not using Local)
 
 ```bash
-# Use WP Engine's User Portal → Sites → SFTP credentials
-sftp <user>@<env>.sftp.wpengine.com
-cd sites/<env>/wp-content/themes/
+# Get credentials from the Flywheel dashboard → site → Advanced → SFTP
+sftp <user>@<host>.flywheelsites.com
+cd wp-content/themes/
 put -r jtree-wp-theme
 ```
 
-### B. GitHub → WP Engine GitHub Action (recommended for ongoing)
-
-1. Push this directory to a GitHub repo
-2. Add WP Engine deploy keys per https://wpengine.com/support/git/
-3. Configure the WP Engine GitHub action with the theme path
+Flywheel does not have a native GitHub Action like WP Engine. If you want git-based deploys, options are: (1) keep editing locally and re-push via Local, (2) use a third-party deploy tool like DeployHQ or Buddy that supports SFTP targets, or (3) push directly via SFTP from a CI step.
 
 ## Activate
 
@@ -77,9 +77,9 @@ If the API URL changes, update `assets/js/form.js`. Do not move form handling in
 
 ### DNS & SSL (Cloudflare)
 - [ ] `jtreehealth.com` zone added
-- [ ] A/AAAA or CNAME records pointing root + `www` at WP Engine
+- [ ] A/AAAA or CNAME records pointing root + `www` at Flywheel (target shown in Flywheel dashboard → site → Domains)
 - [ ] CNAME `api.jtreehealth.com` → `cname.vercel-dns.com`
-- [ ] WP Engine: domain added in User Portal, "Let's Encrypt" SSL issued
+- [ ] Flywheel: domain added in dashboard → site → Domains, "Let's Encrypt" SSL issued
 - [ ] Vercel: `api.jtreehealth.com` added under Project → Domains
 - [ ] Cloudflare SSL mode = **Full (strict)**, "Always Use HTTPS" enabled
 - [ ] HSTS preload checked at https://hstspreload.org/
@@ -91,7 +91,7 @@ If the API URL changes, update `assets/js/form.js`. Do not move form handling in
 
 ### Security
 - [ ] securityheaders.com scan ≥ A grade
-- [ ] `wp-login.php` brute-force protection enabled (WP Engine default + 2FA on admin accounts)
+- [ ] `wp-login.php` brute-force protection enabled (Flywheel default + 2FA on admin accounts)
 - [ ] XML-RPC blocked (test: `POST /xmlrpc.php` returns 403/empty)
 - [ ] No WP version in source view
 - [ ] File editor disabled in wp-admin (`DISALLOW_FILE_EDIT` set in `inc/security.php`)
@@ -110,7 +110,7 @@ If the API URL changes, update `assets/js/form.js`. Do not move form handling in
 - [ ] Search Console verified, sitemap submitted
 
 ### Content
-- [ ] Phone `(919) 276-4005` correct site-wide
+- [ ] Phone `(919) 335-5053` correct site-wide
 - [ ] Apex, NC address correct
 - [ ] Insurance carrier list current
 - [ ] Crisis bar 988 / Text HOME to 741741 verified
@@ -119,7 +119,7 @@ If the API URL changes, update `assets/js/form.js`. Do not move form handling in
 ### Performance
 - [ ] PageSpeed Insights mobile score ≥ 90
 - [ ] Images compressed (WebP where supported)
-- [ ] Brotli/Gzip on at WP Engine + Cloudflare
+- [ ] Brotli/Gzip on at Flywheel + Cloudflare
 - [ ] Browser caching headers set
 
 ## Post-launch

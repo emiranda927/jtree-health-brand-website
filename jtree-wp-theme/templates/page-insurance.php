@@ -25,9 +25,7 @@ get_header();
         <span class="jth-pill jth-pill-sage">BlueCross BlueShield (BCBS NC)</span>
         <span class="jth-pill jth-pill-sage">Cigna / Evernorth</span>
         <span class="jth-pill jth-pill-sage">Aetna</span>
-        <span class="jth-pill jth-pill-sage">UnitedHealthcare / Optum</span>
         <span class="jth-pill jth-pill-sage">Tricare</span>
-        <span class="jth-pill jth-pill-sage">Medicaid (NC)</span>
       </div>
       <p class="jth-body-s" style="margin: 24px 0 0;">Don't see your plan? Call us &mdash; we sometimes accept out-of-network on a case-by-case basis, and we can help you understand your single-case-agreement options.</p>
     </div>

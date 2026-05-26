@@ -249,14 +249,14 @@
         body.errors.forEach(function (e) { if (e && e.field) showError(e.field, e.message || 'Please check this field.'); });
         showBanner('Please fix the highlighted fields and try again.');
       } else {
-        showBanner('Something went wrong on our side. Please call us at (919) 276-4005 and we’ll take it from there.');
+        showBanner('Something went wrong on our side. Please call us at (919) 335-5053 and we’ll take it from there.');
       }
       // Reset Turnstile so the parent can retry without re-loading the page.
       if (TURNSTILE_KEY && window.turnstile && turnstileWidgetId !== null) {
         try { window.turnstile.reset(turnstileWidgetId); } catch (_) {}
       }
     } catch (err) {
-      showBanner('We couldn’t reach our server. Please call us at (919) 276-4005, or try again in a minute.');
+      showBanner('We couldn’t reach our server. Please call us at (919) 335-5053, or try again in a minute.');
     } finally {
       setBusy(false);
     }

@@ -21,7 +21,14 @@ get_header();
   <section class="section">
     <div class="container" style="max-width: 760px; line-height: 1.65;">
 
-      <p class="jth-body-l" style="margin: 0 0 20px;">In plain English: this page describes what data the website collects, where it goes, and what we will and won't do with it. Counsel-reviewed legal language replaces this summary at launch.</p>
+      <p class="jth-body-l" style="margin: 0 0 12px;"><strong>The short version:</strong></p>
+      <ul style="padding-left: 20px; margin: 0 0 28px; font-size: 18px; line-height: 1.7;">
+        <li>We collect the fields you submit on the admissions form, plus anonymous analytics (no city, no IP).</li>
+        <li>We do not sell your data, and we do not use ad-network tracking pixels.</li>
+        <li>The form data goes directly to our admissions team. The website itself never stores it.</li>
+        <li>Once your teen is in care, a separate HIPAA-protected system holds the clinical record.</li>
+      </ul>
+      <p class="jth-body-s" style="margin: 0 0 28px; color: var(--jth-fg-muted);">Counsel-reviewed legal language replaces this summary at launch.</p>
 
       <h2 class="jth-h3" style="margin: 32px 0 8px;">What we collect on this site</h2>
       <ul style="padding-left: 20px;">
@@ -39,7 +46,7 @@ get_header();
       </ul>
 
       <h2 class="jth-h3" style="margin: 32px 0 8px;">Where the form data goes</h2>
-      <p>When you submit the admissions form, the data is sent directly to our admissions API at <code>api.jtreehealth.com</code>. From there it is delivered to (a) our CRM and (b) our admissions team's inbox via Resend. The website host (WordPress) never stores your submission.</p>
+      <p>When you submit the admissions form, the data is sent directly to our admissions API at <code>api.jtreehealth.com</code>. From there it is delivered to (a) our CRM and (b) our admissions team's inbox. The public website itself never stores your submission.</p>
 
       <h2 class="jth-h3" style="margin: 32px 0 8px;">HIPAA and clinical records</h2>
       <p>The inquiry form is not protected health information (PHI) under HIPAA &mdash; it's an intake request, not a clinical record. Once your teen is in our care, separate HIPAA-protected systems hold their clinical record. That system is described in the Notice of Privacy Practices you receive at admission.</p>
@@ -48,7 +55,7 @@ get_header();
       <p>You can ask us to delete your inquiry data at any time before your teen is admitted. After admission, clinical-record retention is governed by NC and federal law (typically 10 years for adult records and 12 years past majority for minors).</p>
 
       <h2 class="jth-h3" style="margin: 32px 0 8px;">Contact</h2>
-      <p>Questions about your data? Call <a href="tel:9192764005">(919) 276-4005</a> or email <a href="mailto:privacy@jtreehealth.com">privacy@jtreehealth.com</a>.</p>
+      <p>Questions about your data? Call <a href="tel:9193355053">(919) 335-5053</a> or email <a href="mailto:privacy@jtreehealth.com">privacy@jtreehealth.com</a>.</p>
 
     </div>
   </section>

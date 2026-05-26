@@ -44,12 +44,35 @@ get_header();
     </div>
   </section>
 
+  <section class="section section-bg-pale-lav">
+    <div class="container" style="max-width: 720px; text-align: center;">
+      <blockquote style="font-size: clamp(28px, 4vw, 40px); font-family: var(--jth-serif, Georgia, serif); line-height: 1.25; margin: 0 0 16px;">You are not broken. <em>Your nervous system is trying to protect you.</em></blockquote>
+      <p class="jth-body-s" style="margin: 0; color: var(--jth-fg-muted);">&mdash; The first thing we teach in IOP, Day 1.</p>
+    </div>
+  </section>
+
   <section class="section">
+    <div class="container" style="max-width: 720px;">
+      <h2 class="jth-h2" style="margin: 0 0 16px;">What 12 weeks looks like for you.</h2>
+      <p class="jth-body-l" style="margin: 0 0 16px;">IOP runs for 12 weeks. You'll pick three group blocks each week from a rotation that includes in-person afternoons in Apex (Mon, Tue, Thu) and virtual mornings from home (Tue, Thu, Sat). Wednesday and Friday are individual + family days. Every session has the same shape so you know what's coming next: a check-in, some quiet mindfulness, learning a new skill, practicing it, processing what came up, and a check-out.</p>
+      <p class="jth-body-l" style="margin: 0 0 16px;">The skills build on each other:</p>
+      <ul style="font-size: 17px; line-height: 1.7; padding-left: 20px; margin: 0 0 16px;">
+        <li><strong>First, how your body works.</strong> Why panic feels the way it does. Why shutting down isn't a choice. Why your brain reacts before you can think.</li>
+        <li><strong>Then, what to do in the moment.</strong> How to come down from a panic spiral. How to ride out an urge instead of acting on it.</li>
+        <li><strong>Then, how to handle the feelings before they get huge.</strong> Catching them earlier. Sleep, food, and movement as actual tools, not nagging.</li>
+        <li><strong>Then, how to be in relationships without losing yourself.</strong> Asking for what you need. Saying no. Repairing a friendship after a fight.</li>
+        <li><strong>Finally, how to deal with the people at home.</strong> Including how to stay calm when a parent isn't. (We work with them too.)</li>
+      </ul>
+      <p class="jth-body-l" style="margin: 0;">By the end, you'll have written yourself a regulation plan and a letter to the future you. Whatever happens next, you'll have a map.</p>
+    </div>
+  </section>
+
+  <section class="section section-bg-cream-2">
     <div class="container" style="max-width: 720px;">
       <h2 class="jth-h2" style="margin: 0 0 24px;">If you want to talk.</h2>
       <p class="jth-body-l" style="margin: 0 0 24px;">No pressure. No big form. You can text or call, or have a parent reach out for you. We'll figure it out from there.</p>
       <div class="jth-row-buttons">
-        <a class="jth-btn jth-btn-lime jth-btn-lg" href="tel:9192764005">Call (919) 276-4005</a>
+        <a class="jth-btn jth-btn-lime jth-btn-lg" href="tel:9193355053">Call (919) 335-5053</a>
         <a class="jth-btn jth-btn-secondary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Have a parent fill out the form</a>
       </div>
       <p class="jth-body-s" style="margin: 32px 0 0;">If you're in a crisis right now — meaning you're thinking about hurting yourself or you don't feel safe — please call or text <strong>988</strong>. They are kind, they are fast, and they answer the phone.</p>

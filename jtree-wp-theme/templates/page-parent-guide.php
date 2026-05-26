@@ -71,7 +71,7 @@ $siblings = $parent_id
 
         <div class="jth-guide-aside__block jth-guide-aside__cta">
           <p style="margin: 0 0 12px; font-family: var(--font-editorial, 'Fraunces', serif); font-size: 22px; line-height: 1.3; color: var(--jth-deep-green);">When you're ready, we're here.</p>
-          <p style="margin: 0 0 18px; color: var(--jth-fg-muted); font-size: 15px; line-height: 1.55;">A clinician — not a sales person — will call you back the same business day.</p>
+          <p style="margin: 0 0 18px; color: var(--jth-fg-muted); font-size: 15px; line-height: 1.55;">An admissions clinician will call you back within 2 to 4 business hours.</p>
           <a class="jth-btn jth-btn-primary" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
         </div>
       </aside>

@@ -6,18 +6,35 @@ A new-engineer-or-agent briefing for picking up this project cold. Read this end
 
 ## 1. What this is
 
-**JTree Health** is an adolescent PHP/IOP mental health clinic in Apex, NC. The website is a brand-site + lead-capture funnel. Founder Gabriela Miranda built JTree after losing her brother Josh in 2022 — that personal origin sets the brand voice.
+**JTree Health** is an adolescent IOP (and soon PHP) mental-health clinic in Apex, NC, rebranding from **Simply Teens Outpatient** in mid-June 2026. The website is a brand-site + lead-capture funnel. Founder **Gabriela Miranda** (MBA Stanford, MPA Harvard Kennedy School — owner / operator, not a clinician) built JTree in memory of her brother Josh, an Iraq War veteran who died in 2023 after years of struggle with PTSD and addiction. Josh found peace in Joshua Tree National Park; the practice is named for both him and the desert tree that grows in some of the harshest conditions on earth. That personal origin sets the brand voice.
+
+The acquisition is structured as a clean handoff: Tina Kinnan (founder of Simply Teens) is selling the practice to Gabriela. Most of the existing clinical team — Caitlyn Dowdy (Executive Director, MS, LCMHCS), Beth Bertram (Program Manager, LCSW), Alayna West (Mental Health Therapist, MA, LCMHCA), Corissa Phannenstill (Qualified Professional), plus three supervised interns — is staying through the transition.
 
 **Brand voice rules (non-negotiable):**
 - Warm, plain, direct. Human-grounded register.
-- Primary CTA site-wide: **"Start the Conversation"**
-- Never use "world-class," clinical jargon, or corporate gloss.
+- Primary CTA site-wide: **"Start the Conversation"** (teen-facing pages use "Talk to someone" instead).
+- Form-response promise is standardized to **"within 2 to 4 business hours"** everywhere it appears.
+- Never use "world-class," "cutting-edge," "passionate about," "transformative," "journey to wellness," or any of the AI-pattern phrases catalogued in this project. Don't make promises we can't keep (no specific group-size caps, no fabricated outcome stats).
+- The Josh-origin surfaces in exactly two sanctioned places: the home page founder quote (§ 05) and the /about/ page hero. Tone is reflective, not heavy.
 
-**Audience:** parents/guardians of teens 10–17. Secondary: teens themselves.
+**Audience:** parents/guardians of teens 10–17. Secondary: teens themselves (own page: /for-teens/). Tertiary: clinical referrers.
 
-**Phone:** (919) 276-4005 · **Address:** Apex, NC 27502 (street address pending)
-**In-network:** BCBS, Cigna/Evernorth, Aetna, UHC/Optum, Tricare
-**Hours:** PHP Mon–Fri 9am–3pm; IOP Tue/Wed/Thu 3–6pm
+**Phone:** (919) 335-5053 · **Address:** 800 West Williams St., STE 203, Apex, NC 27502
+**In-network:** BCBS, Cigna/Evernorth, Aetna, Tricare. (UHC and NC Medicaid intentionally not listed — both were claimed in earlier drafts but the founder decided to omit until contracts are confirmed.)
+**Hours (current site copy reflects the post-rebrand summer schedule starting mid-June 2026):**
+- **IOP (open today):**
+  - In-person group blocks in Apex: Monday, Tuesday, Thursday 4:00–7:00 PM
+  - Virtual group blocks: Tuesday, Thursday, Saturday 9:00 AM–12:00 PM
+  - Each teen attends three blocks per week (mix of in-person and virtual)
+  - Individual + family therapy: Wednesday and Friday (no groups)
+  - The earlier school-year schedule (Mon–Thu 3:15–6:30 PM) is no longer reflected anywhere in site copy; confirm with founder if it returns as the default at school's start in fall.
+- **PHP (launching Fall 2026):** Mon–Fri 9 AM–3 PM. Labeled "Coming soon" everywhere it appears on the site.
+- **Office hours (phone/email):** Mon–Fri 9 AM–5 PM ET.
+- **Response commitment:** form submissions get a callback within 2–4 business hours.
+
+**Accreditation:** CARF-accredited and state-licensed in NC. The accreditation transfers with the entity acquisition (verify timing with CARF before launch claims).
+
+**Clinical model:** DBT, polyvagal theory, Safe and Sound Protocol (SSP), STARR Commonwealth trauma programs, resilience-based therapies. LGBTQ+-affirming, neurodivergent-friendly.
 
 ---
 
@@ -65,7 +82,7 @@ website/                          ← this repo (github.com/emiranda927/jtree-he
 | Storage | Google Sheets (lead fallback) | Service account auth |
 | Rate limit | In-memory per Vercel instance | Upstash Redis env vars reserved for swap |
 | DNS / WAF | Cloudflare | Full-strict SSL |
-| Hosting (web) | WP Engine | Recommended; any PHP host works |
+| Hosting (web) | Flywheel (Tiny plan) | Owned by WP Engine; same managed-WP stack. Any PHP 8.0+ host works |
 | Hosting (API) | Vercel | `api.jtreehealth.com` |
 | Analytics | GA4 via GTM | Privacy-first config, see `docs/analytics-config.md` |
 
@@ -85,10 +102,10 @@ website/                          ← this repo (github.com/emiranda927/jtree-he
 - [x] Brand system applied (canonical brand-kit colors, five-typeface stack with locally-bundled variable fonts)
 - [x] Impeccable design system installed: `/PRODUCT.md` (strategic), `/DESIGN.md` (visual), `/.impeccable/design.json` (sidecar). Read both before any UI work.
 - [x] All approved copy from `JTree_Website_Copy_Edit.docx.md` integrated
-- [x] 5 fully-designed pages: Home, Programs, About, Admissions, Thank You
+- [x] **Full site-wide copy refresh complete (May 2026).** All 12 page templates now have real copy aligned with the rebrand: Home, Programs, About, Admissions, Thank You, For Parents, For Teens, What We Treat, Insurance, Contact, Crisis, Privacy. Plus Careers and Service Area templates. The DBT IOP Curriculum (12-week arc, 6 modules, named DBT skills) is integrated into /programs/ and /for-parents/. The verbatim curriculum line *"You are not broken. Your nervous system is trying to protect you."* is the anchor on /for-teens/.
 - [x] SEO head blocks (robots, canonical, OG, Twitter, JSON-LD) via `inc/seo.php`
-- [x] Schema.org `MedicalBusiness` + `LocalBusiness` JSON-LD via `inc/seo.php`
-- [x] BreadcrumbList JSON-LD on inner pages
+- [x] Schema.org `MedicalBusiness` JSON-LD via `inc/seo.php` with confirmed street address, single live service (IOP), correct opening hours
+- [x] FAQPage JSON-LD on `/insurance/`, `/programs/`, `/what-we-treat/` — 20 total Q&As, eligible for rich results
 - [x] `noindex` on `/thank-you/`
 
 ### WordPress theme (`jtree-wp-theme/`)
@@ -99,7 +116,7 @@ website/                          ← this repo (github.com/emiranda927/jtree-he
 - [x] Crisis bar partial (988 + Text HOME 741741)
 - [x] Header nav partial with dropdown + mobile hamburger animation
 - [x] Site footer partial
-- [x] 5 fully-designed page templates: home, programs, about, admissions, thank-you
+- [x] All 12 production page templates have real copy + voice-checked content
 - [x] Form rendered via `jtree_render_inquiry_form()` (`inc/forms.php`) with `jth-form` / `jth-input` / `jth-select` / `jth-field-label` / `jth-field-error` classes (matched in `colors_and_type.css` + `site.css`)
 - [x] GA4 `inquiry_submitted` event fires only on `/thank-you/` via `wp_head` priority 1
 - [x] `inc/security.php` hardening (DISALLOW_FILE_EDIT, XML-RPC off, headers, version removal)
@@ -128,37 +145,33 @@ website/                          ← this repo (github.com/emiranda927/jtree-he
 
 ## 5. What's TODO
 
-### A. Stub pages (engineering work)
-7 page templates exist as stubs (60–130 lines each, vs. 300–700 for designed pages). They have placeholder content — not designed, not approved by client.
-
-| Template | File | Status |
-|---|---|---|
-| For Parents | `templates/page-for-parents.php` | Stub — needs design + copy |
-| For Teens | `templates/page-for-teens.php` | Stub — needs design + copy |
-| What We Treat | `templates/page-what-we-treat.php` | Stub — needs design + copy |
-| Insurance | `templates/page-insurance.php` | Stub — needs design + copy |
-| Contact | `templates/page-contact.php` | Stub — needs design + copy |
-| Crisis Resources | `templates/page-crisis.php` | Stub — needs design + copy |
-| Privacy Policy | `templates/page-privacy.php` | Stub — needs legal copy |
-
-**Decision pending:** launch with these hidden from primary nav, or block launch until all 12 are done. Currently linked in nav.
+### A. Copy review still pending (founder sign-off)
+All 12 pages now have real copy. Gabriela hasn't done a final voice-check pass. Specific spots worth her eye:
+- Home founder quote (§ 05) — the Josh-origin line. Lands as written; she may want to refine.
+- /about/ Founder section — uses verified bio from corporate site (Stanford, Harvard). Worth confirming framing.
+- /about/ Clinical team cards — real bios pulled from the existing Simply Teens site. Titles may shift post-acquisition.
+- /careers/ — copy adapted from the LinkedIn-style job description; she may want to add or trim specifics.
+- /privacy/ — flagged in copy as "counsel-reviewed legal language replaces this summary at launch." Need a real legal review before go-live.
 
 ### B. Pre-launch dependencies (waiting on owner / vendor — not engineering)
-- [ ] **Confirm domain** — `jtreehealth.com` is a placeholder throughout. Real domain may differ.
-- [ ] **Logo SVG** — pending freelancer
+- [x] ~~Confirm domain~~ — confirmed `jtreehealth.com`. Corporate site lives at jtreehealth.com today (Squarespace); the new clinical site will replace it.
+- [ ] **Logo SVG** — pending freelancer (current PNG assets are placeholders)
 - [ ] **Real photos** — pending client (currently using placeholder treatments)
 - [ ] **`og-image.jpg`** — 1200×630, for Open Graph preview cards
-- [ ] **Street address** — for Schema.org `LocalBusiness` (currently city-only)
+- [x] ~~Street address~~ — confirmed: 800 West Williams St., STE 203, Apex, NC 27502. Already wired into schema, footer, contact page.
+- [ ] **CARF accreditation transfer** — confirm with CARF that accreditation transfers cleanly with the entity acquisition before the site's CARF claim goes live.
+- [ ] **UHC and NC Medicaid contracts** — currently omitted from in-network claims on the site. If contracts close, add back.
+- [ ] **IOP schedule reconciliation** — site copy currently describes the school-year schedule (Mon–Thu 3:15–6:30 PM). Effective mid-June 2026, the schedule shifts to the summer model (Mon/Wed/Thu/Fri evenings + Tue/Thu virtual mornings + Saturday virtual). Update copy + schema in sync with whichever schedule is live at the moment of launch.
 - [ ] **Ritten API endpoint + token** — integration code is ready, just needs `RITTEN_API_URL` + `RITTEN_API_KEY` env vars
-- [ ] **Resend domain verification** — for `noreply@jtreehealth.com` (DKIM/SPF records into Cloudflare)
-- [ ] **Google service account JSON** — needs Sheets edit access
-- [ ] **GA4 Measurement ID + GTM Container ID** — replace placeholders in `inc/seo.php`
+- [x] ~~Resend domain verification~~ — done; emails arrive from `noreply@jtreehealth.com`
+- [x] ~~Google service account JSON~~ — done; service account has Sheets edit access
+- [x] ~~GA4 Measurement ID + GTM Container ID~~ — done: `G-8M90ZXZ1NW` / `GTM-WGCMNLXH`, wired and firing
 
 ### C. Deployment steps (see `DEPLOYMENT.md` for full sequence)
 - [ ] Cloudflare zone + nameserver change at registrar
 - [ ] Vercel project import + env vars + custom domain
-- [ ] WP Engine site provision + GeneratePress install + theme upload
-- [ ] DNS records pointing root + www at WP Engine; api at Vercel
+- [ ] Flywheel site provision (Tiny plan paid for) + GeneratePress install + theme upload
+- [ ] DNS records pointing root + www at Flywheel; api at Vercel
 - [ ] SSL Full (strict) + HSTS + WAF
 - [ ] GA4 + GTM property creation + ID injection
 - [ ] Cookie banner plugin install (CookieYes / Complianz / Cookiebot)
@@ -229,7 +242,7 @@ Use a local WP dev environment (Local by Flywheel, LocalWP, DDEV, etc.). Symlink
 
 ### Form API tests
 ```bash
-cd /Users/emiranda/Projects/jtree-health-brand/website/jtree-form-api
+cd /Users/eliseo/Projects/jtree-health-website/site/jtree-form-api
 npm install
 npm test          # vitest, 39 tests
 npm run dev       # vercel dev on :3000
@@ -241,7 +254,7 @@ Set `.env` from `.env.example`. With `RITTEN_API_URL` empty, Sheets fallback pat
 ### Deploy
 See `DEPLOYMENT.md` for the full sequence. TL;DR:
 - Form API: push to GitHub `main` → Vercel auto-deploys
-- WP theme: SFTP first push to WP Engine, then GitHub action for ongoing
+- WP theme: easiest first push is via Local desktop app → "Connect to Flywheel" → push. For ongoing edits, SFTP from the Flywheel dashboard works (Flywheel doesn't have a native GitHub action like WP Engine).
 
 ---
 
@@ -249,20 +262,24 @@ See `DEPLOYMENT.md` for the full sequence. TL;DR:
 
 | Decision | Why it matters | Default if not asked |
 |---|---|---|
-| Final domain | Affects every config | Continue using `jtreehealth.com` placeholder |
-| Stub pages — finish or hide? | Launch readiness | Hide from nav at launch, finish post-launch |
+| ~~Final domain~~ | ✅ Resolved — `jtreehealth.com` confirmed | — |
+| ~~Stub pages — finish or hide?~~ | ✅ Resolved — all 12 pages now have real copy | — |
 | Ritten launch coupling | Block launch on Ritten? | Launch with Sheets-only, add Ritten when ready |
 | Cookie banner choice | GDPR/CCPA compliance | CookieYes free tier |
 | GitHub repo visibility | Public vs. private | Private (current setting) |
+| ~~IOP schedule version at launch~~ | ✅ Resolved — site now reflects the post-rebrand summer schedule (in-person Mon/Tue/Thu afternoons + virtual Tue/Thu/Sat mornings, with Wed/Fri reserved for individual + family) | — |
+| ~~Brand-name in body copy~~ | ✅ Resolved — full "Joshua Tree Health" used throughout body copy and schema | — |
+| Schedule revert at fall (school year)? | The school-year schedule (Mon–Thu 3:15–6:30 PM after school) may return when schools resume in fall. Site currently describes the summer schedule only. | Confirm with founder ahead of fall whether the schedule changes back or stays in the summer rotation. |
+| Clinical-model elements to surface beyond /careers/ | /careers/ already names STARR Commonwealth + Resilience-Based + LGBTQ+-affirming + neurodivergent-friendly. Other parent/teen pages don't yet. | Founder said "don't worry about the STARR stuff" — leave as-is unless that changes. LGBTQ+-affirming and neurodivergent-friendly may still be worth adding to /what-we-treat/ and /for-teens/ as parent-trust signals. |
 
 ---
 
 ## 9. Pointers, not gospel
 
-- **Conversation transcripts** that produced this work: `/Users/emiranda/.claude/projects/-Users-emiranda-Projects-jtree-health-brand-website/*.jsonl`. You usually don't need to read these — this doc plus the code is the source of truth. Reach for them only if you need to reconstruct *why* a specific decision was made.
-- **Memory files**: `/Users/emiranda/.claude/projects/-Users-emiranda-Projects-jtree-health-brand-website/memory/` — `MEMORY.md`, `project_overview.md`, `project_copy_review.md`. Short, mostly subset of this doc.
+- **Conversation transcripts** that produced this work: `/Users/eliseo/.claude/projects/-Users-eliseo-Projects-jtree-health-website/*.jsonl`. You usually don't need to read these — this doc plus the code is the source of truth. Reach for them only if you need to reconstruct *why* a specific decision was made.
+- **Memory files**: `/Users/eliseo/.claude/projects/-Users-eliseo-Projects-jtree-health-website/memory/` — `MEMORY.md` is the index; individual memory files document long-running preferences and project state.
 - **The user is the founder's spouse** (Eliseo Miranda). Not a coder by trade. Communicate in plain language; don't dump terminal output unless asked. Confirm before destructive ops.
 
 ---
 
-*Last updated: 2026-05-03. If you make significant changes, update this doc.*
+*Last updated: 2026-05-26. If you make significant changes, update this doc.*
