@@ -101,6 +101,15 @@ function jtree_enqueue_scripts() {
         JTREE_THEME_VERSION,
         true
     );
+    // Scroll-reveal: IntersectionObserver-based fade-up on .jth-reveal
+    // elements. Sitewide, vanilla, no dependencies, ~750 bytes.
+    wp_enqueue_script(
+        'jtree-reveal',
+        JTREE_THEME_URI . '/assets/js/reveal.js',
+        array(),
+        JTREE_THEME_VERSION,
+        true
+    );
     $form_handle = null;
     if (is_page(array('admissions', 'contact'))) {
         wp_enqueue_script(

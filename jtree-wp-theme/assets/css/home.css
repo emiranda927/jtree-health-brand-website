@@ -425,9 +425,12 @@
   margin: 0;
 }
 
+/* Two cards (IOP + PHP) on an asymmetric grid: the live program gets the
+   wider column so the section reads as a recommendation, not a balanced
+   menu. Breaks the "three identical cards" template feel. */
 .h-programs-grid {
   max-width: 1240px; margin: 0 auto; padding: 0 32px;
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  display: grid; grid-template-columns: 1.25fr 1fr; gap: 0;
 }
 @media (max-width: 880px) { .h-programs-grid { grid-template-columns: 1fr; } }
 
@@ -436,8 +439,42 @@
   padding: 32px 28px 28px;
   background: transparent; color: inherit; text-decoration: none;
   transition: background var(--dur-base) var(--ease-calm);
+  position: relative;
 }
 .h-pcard:hover { background: color-mix(in oklch, var(--jth-cream) 6%, var(--jth-deep-green) 94%); }
+/* Live program: hairline lime rail on the left edge + "Open today" eyebrow
+   so the active offering reads first. */
+.h-pcard--live { padding-left: 32px; }
+.h-pcard--live::before {
+  content: ""; position: absolute; left: 0; top: 32px; bottom: 28px;
+  width: 2px; background: var(--jth-lime-green);
+}
+.h-pcard__status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-weight: 500; font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--jth-lime-green);
+  margin-bottom: 10px;
+}
+.h-pcard__status::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--jth-lime-green);
+  /* "Live program" breathing pulse. Slow (4.8s cycle) and opacity-only —
+     this is a clinical mental-health site, not a notification badge.
+     The pulse signals "actively running" without ever drawing the eye. */
+  animation: jth-status-breathe 4.8s ease-in-out infinite;
+}
+@keyframes jth-status-breathe {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .h-pcard__status::before { animation: none; }
+}
+@media (max-width: 880px) {
+  .h-pcard--live { padding-left: 28px; }
+  .h-pcard--live::before { top: 28px; bottom: 24px; }
+}
 .h-pcard-num {
   font-family: var(--font-mono); font-weight: 500; font-size: 11px;
   letter-spacing: 0.14em; text-transform: uppercase;

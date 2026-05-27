@@ -28,34 +28,34 @@ $openings = array(
 
 <main id="main">
 
-  <section class="section" style="padding-top: 64px; padding-bottom: 24px;">
-    <div class="container" style="max-width: 880px;">
-      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">Careers</span>
-      <h1 class="jth-display-l" style="font-size: clamp(40px, 5vw, 56px); margin: 0 0 20px;">Build something <em class="jth-emph">honest</em> with us.</h1>
-      <p class="jth-body-l" style="margin: 0 0 16px; max-width: 60ch;">Joshua Tree Health is an adolescent behavioral-health program in Apex, NC, growing through the rebrand from Simply Teens Outpatient and the launch of our PHP this fall. The clinician who joins us now becomes a foundational part of that growth.</p>
-      <p class="jth-body-l" style="margin: 0; max-width: 60ch;">We're hiring people who care more about teens than they do about census.</p>
+  <section class="section section--intro">
+    <div class="container container--narrow">
+      <span class="jth-eyebrow">Careers</span>
+      <h1 class="jth-display-l">Build something <em class="jth-emph">honest</em> with us.</h1>
+      <p class="jth-body-l jth-lede jth-mb-4">Joshua Tree Health is an adolescent behavioral-health program in Apex, NC, growing through the rebrand from Simply Teens Outpatient and the launch of our PHP this fall. The clinician who joins us now becomes a foundational part of that growth.</p>
+      <p class="jth-body-l jth-lede">We're hiring people who care more about teens than they do about census.</p>
     </div>
   </section>
 
   <section class="section section-bg-cream-2">
-    <div class="container" style="max-width: 880px;">
-      <h2 class="jth-h2" style="margin: 0 0 16px;">How we work, clinically.</h2>
-      <p class="jth-body-l" style="margin: 0 0 16px;">Our model is grounded in <strong>DBT, polyvagal theory, the Safe and Sound Protocol, STARR Commonwealth trauma programs, and resilience-based therapies</strong>. We're CARF-accredited and state-licensed.</p>
-      <p class="jth-body-l" style="margin: 0;">We are LGBTQ+-affirming and neurodivergent-friendly, and every clinical decision is built around what's actually best for the young person in front of us.</p>
+    <div class="container container--narrow">
+      <h2 class="jth-h2 jth-mb-4">How we work, clinically.</h2>
+      <p class="jth-body-l jth-mb-4">Our model is grounded in <strong>DBT, polyvagal theory, the Safe and Sound Protocol, STARR Commonwealth trauma programs, and resilience-based therapies</strong>. We're CARF-accredited and state-licensed.</p>
+      <p class="jth-body-l">We are LGBTQ+-affirming and neurodivergent-friendly, and every clinical decision is built around what's actually best for the young person in front of us.</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container" style="max-width: 880px;">
-      <h2 class="jth-h2" style="margin: 0 0 24px;">Open roles</h2>
+    <div class="container container--narrow">
+      <h2 class="jth-h2 jth-mb-6">Open roles</h2>
       <div class="jth-careers-list">
         <?php foreach ($openings as $job) : ?>
           <article class="jth-career-card">
             <div class="jth-career-card__head">
-              <h3 class="jth-h4" style="margin:0;"><?php echo esc_html($job['role']); ?></h3>
-              <p class="jth-meta" style="margin: 6px 0 0;"><?php echo wp_kses_post($job['commitment']); ?></p>
+              <h3 class="jth-h4 jth-career-card__title"><?php echo esc_html($job['role']); ?></h3>
+              <p class="jth-meta jth-career-card__commit"><?php echo wp_kses_post($job['commitment']); ?></p>
             </div>
-            <p style="margin: 12px 0 0;"><?php echo esc_html($job['summary']); ?></p>
+            <p class="jth-career-card__summary"><?php echo esc_html($job['summary']); ?></p>
           </article>
         <?php endforeach; ?>
       </div>
@@ -63,9 +63,9 @@ $openings = array(
   </section>
 
   <section class="section section-bg-cream-2">
-    <div class="container" style="max-width: 880px;">
-      <h2 class="jth-h2" style="margin: 0 0 20px;">What the role entails (Therapist)</h2>
-      <ul style="font-size: 18px; line-height: 1.7; padding-left: 20px; margin: 0 0 32px;">
+    <div class="container container--narrow">
+      <h2 class="jth-h2 jth-mb-5">What the role entails (Therapist)</h2>
+      <ul class="jth-list jth-mb-7">
         <li>Carry a caseload of 8 clients; up to 25 clinical hours per week</li>
         <li>Run IOP groups as part of a multidisciplinary team</li>
         <li>Provide individual and family sessions (Wednesdays and Fridays in our schedule)</li>
@@ -77,8 +77,8 @@ $openings = array(
         <li>Up to 40 hours per week total, including all direct client hours and admin time</li>
       </ul>
 
-      <h2 class="jth-h2" style="margin: 0 0 20px;">What you bring</h2>
-      <ul style="font-size: 18px; line-height: 1.7; padding-left: 20px; margin: 0 0 32px;">
+      <h2 class="jth-h2 jth-mb-5">What you bring</h2>
+      <ul class="jth-list jth-mb-7">
         <li>NC licensure (LCSW, LPC, LMFT) in good standing, or associate license, or QP credential</li>
         <li>Clinical experience in individual and group therapy; assessments; treatment planning</li>
         <li>Familiarity with DBT and trauma-informed care</li>
@@ -87,8 +87,8 @@ $openings = array(
         <li>At least one year of adolescent experience is a plus</li>
       </ul>
 
-      <h2 class="jth-h2" style="margin: 0 0 20px;">What we offer</h2>
-      <ul style="font-size: 18px; line-height: 1.7; padding-left: 20px; margin: 0;">
+      <h2 class="jth-h2 jth-mb-5">What we offer</h2>
+      <ul class="jth-list jth-mb-0">
         <li>W-2 employment with health, dental, and vision</li>
         <li>Short-term disability</li>
         <li>Weekly case consultation</li>
@@ -101,19 +101,19 @@ $openings = array(
   </section>
 
   <section class="section" id="apply">
-    <div class="container" style="max-width: 720px;">
-      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">Apply</span>
-      <h2 class="jth-h2" style="margin: 0 0 16px;">Tell us about you.</h2>
-      <p class="jth-body-l" style="margin: 0 0 24px; max-width: 60ch; color: var(--jth-fg-muted);">Short and honest beats long and polished. You can fill out the form below, or email your resume and a few lines about what brings you here to <a href="mailto:gabriela@jtreehealth.com">gabriela@jtreehealth.com</a>.</p>
+    <div class="container container--tight">
+      <span class="jth-eyebrow">Apply</span>
+      <h2 class="jth-h2 jth-mb-4">Tell us about you.</h2>
+      <p class="jth-body-l jth-lede jth-text-muted jth-mb-6">Short and honest beats long and polished. You can fill out the form below, or email your resume and a few lines about what brings you here to <a href="mailto:gabriela@jtreehealth.com">gabriela@jtreehealth.com</a>.</p>
 
       <?php if (function_exists('jtree_render_careers_form')) jtree_render_careers_form(); ?>
 
       <div id="careers-thankyou" class="jth-careers-thanks" hidden>
-        <h2 class="jth-h2" style="margin: 0 0 12px;">Thanks &mdash; we'll be in touch.</h2>
-        <p class="jth-body-l" style="margin: 0; max-width: 56ch;">We read every application personally. You'll hear from us within a week.</p>
+        <h2 class="jth-h2 jth-mb-3">Thanks &mdash; we'll be in touch.</h2>
+        <p class="jth-body-l jth-careers-thanks__body">We read every application personally. You'll hear from us within a week.</p>
       </div>
 
-      <p class="jth-body-s" style="margin: 32px 0 0; color: var(--jth-fg-muted);">Joshua Tree Health is an equal-opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees.</p>
+      <p class="jth-body-s jth-mt-8 jth-text-muted">Joshua Tree Health is an equal-opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees.</p>
     </div>
   </section>
 

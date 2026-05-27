@@ -18,6 +18,12 @@ body { margin: 0; }
   margin: 0 auto;
   padding: 0 24px;
 }
+/* Width modifiers — narrower reading widths for prose-heavy pages.
+   Use the modifier on a .container, not as a replacement. */
+.container--tight  { max-width: 720px; }   /* /for-teens — tightest reading line */
+.container--prose  { max-width: 760px; }   /* /about, /crisis, /privacy */
+.container--narrow { max-width: 880px; }   /* /contact, /programs intro, etc. */
+.container--page   { max-width: 1080px; }  /* /service-area, /parent-guide grids */
 
 /* ─── Crisis bar ─── */
 /* defined in colors_and_type.css */
@@ -138,9 +144,22 @@ body { margin: 0; }
 /* ─── Section ─── */
 .section { padding: 80px 24px; position: relative; }
 .section-tight { padding: 56px 24px; }
-.section-bg-cream-2 { background: var(--jth-cream-2); }
-.section-bg-sage    { background: var(--jth-pale-sage); }
-.section-bg-dark    { background: var(--jth-deep-green); color: var(--jth-cream); }
+/* Page-hero / intro section: shorter top padding because the crisis-bar
+   + sticky header already eats vertical space above. Bottom padding is
+   compressed to set up the section that follows. */
+.section--intro { padding: 64px 24px 24px; }
+.section--intro-tight { padding: 56px 24px 16px; }
+/* Use after .section--intro when the next block should feel continuous. */
+.section--continuation { padding-top: 24px; }
+/* DESIGN.md "emotional moment" spacing — 140px vertical padding. */
+.section-spacious { padding: 140px 24px; }
+
+.section-bg-cream-2  { background: var(--jth-cream-2); }
+.section-bg-sage     { background: var(--jth-pale-sage); }
+.section-bg-pale-sage{ background: var(--jth-pale-sage); }
+.section-bg-pale-lav { background: var(--jth-pale-lavender); }
+.section-bg-pale-lime{ background: var(--jth-pale-lime); }
+.section-bg-dark     { background: var(--jth-deep-green); color: var(--jth-cream); }
 .section-bg-dark .jth-h2, .section-bg-dark .jth-h3, .section-bg-dark h2, .section-bg-dark h3 {
   color: var(--jth-cream);
 }
@@ -148,7 +167,6 @@ body { margin: 0; }
   display: flex; flex-direction: column; gap: 12px;
   max-width: 720px; margin-bottom: 40px;
 }
-.section-head .jth-eyebrow { display: inline-block; }
 
 /* ─── Trust strip ─── */
 .trust {
@@ -343,6 +361,15 @@ body { margin: 0; }
   border: 1px solid color-mix(in oklch, var(--jth-cream) 30%, var(--jth-deep-green) 70%);
   color: var(--jth-cream); font-family: var(--font-display); font-weight: 500; font-size: 13px;
 }
+/* "(coming soon)" annotation inside footer links. */
+.footer-soon {
+  opacity: 0.7;
+  font-size: 11px;
+}
+/* Privacy + Accessibility links in the footer-bottom row.
+   Inherit the cream-tinted neutral so they read as fine print. */
+.footer-legal a { color: inherit; }
+.footer-legal a + a { margin-left: 18px; }
 
 /* ─── Form layout ─── */
 /* Admissions section background — Pale Sage per DESIGN.md §5 (Form-Is-Calmest Rule) */
@@ -363,6 +390,7 @@ body { margin: 0; }
 @media (max-width: 880px) { .form-card { padding: 28px 22px; } }
 .form-card h1 { margin: 0 0 8px; }
 .form-card .lede { margin: 0 0 28px; color: var(--jth-fg-muted); font-size: 17px; }
+.form-card__sub { margin: 8px 0 24px; }
 
 /* The form element itself — flow container for field rows + actions */
 .jth-form {
@@ -382,10 +410,10 @@ body { margin: 0; }
 }
 .form-error-banner {
   display: none; margin-top: 16px; padding: 14px 16px;
-  background: color-mix(in oklch, #8B2E2E 12%, var(--jth-cream) 88%);
-  border: 1px solid color-mix(in oklch, #8B2E2E 50%, var(--jth-cream) 50%);
+  background: color-mix(in oklch, var(--jth-error) 12%, var(--jth-cream) 88%);
+  border: 1px solid color-mix(in oklch, var(--jth-error) 50%, var(--jth-cream) 50%);
   border-radius: var(--r-md);
-  font-size: 14px; color: #8B2E2E;
+  font-size: 14px; color: var(--jth-error);
 }
 .form-error-banner.is-visible { display: block; }
 
@@ -395,6 +423,66 @@ body { margin: 0; }
   cursor: pointer;
 }
 .consent-row input { margin-top: 3px; flex-shrink: 0; }
+
+/* ─────────────────────────────────────────────────
+   Editorial content primitives — paragraph lede, body list, hand-tape
+   note. Hoisted from per-template inline styles so the same pattern
+   means the same thing on every page.
+   ───────────────────────────────────────────────── */
+
+/* Lede paragraph: sits under a page H1, intro-section copy.
+   Inherits size/line-height from .jth-body-l; lede adds the reading-width
+   cap and the no-margin reset that hero-intro layouts depend on. */
+.jth-lede {
+  margin: 0;
+  max-width: 60ch;
+}
+.jth-lede--narrow { max-width: 56ch; }
+
+/* Body list — editorial typography for the long-prose <ul>/<ol> that
+   appears on /programs, /for-parents, /careers, /insurance, /privacy.
+   The base body font is 16px but lists in these contexts read at 18px. */
+.jth-list {
+  font-size: 18px;
+  line-height: 1.7;
+  padding-left: 20px;
+  margin: 0 0 24px;
+}
+.jth-list--sm { font-size: 17px; }
+.jth-list li { margin-bottom: 6px; }
+.jth-list li:last-child { margin-bottom: 0; }
+
+/* Hand-lettered margin note (Caveat). Off-axis rotation makes it read as
+   tape-on-paper. Use sparingly — DESIGN.md "Rotation-Is-Tape Rule". */
+.jth-hand--tape       { display: inline-block; margin-top: 24px; transform: rotate(-2deg); }
+.jth-hand--tape-light { display: inline-block; transform: rotate(-1.5deg); }
+.jth-hand--tape-strong{ display: inline-block; transform: rotate(-3deg); }
+.jth-hand--tape-tight { display: inline-block; margin-top: 12px; transform: rotate(-1.5deg); }
+
+/* Bottom-margin utility scale, used for the H2/H3/H4 → next-element
+   spacing that templates were declaring inline. Named with --space-N
+   to match the spacing tokens in colors_and_type.css. */
+.jth-mb-0 { margin-bottom: 0; }
+.jth-mb-1 { margin-bottom: 4px; }
+.jth-mb-2 { margin-bottom: 8px; }
+.jth-mb-3 { margin-bottom: 12px; }
+.jth-mb-4 { margin-bottom: 16px; }
+.jth-mb-5 { margin-bottom: 20px; }
+.jth-mb-6 { margin-bottom: 24px; }
+.jth-mb-7 { margin-bottom: 32px; }
+.jth-mt-0 { margin-top: 0; }
+.jth-mt-3 { margin-top: 12px; }
+.jth-mt-4 { margin-top: 16px; }
+.jth-mt-5 { margin-top: 20px; }
+.jth-mt-6 { margin-top: 24px; }
+.jth-mt-7 { margin-top: 32px; }
+.jth-mt-8 { margin-top: 40px; }
+
+/* Text-color utilities. Use only when the wrapping context can't carry
+   the muted color via a semantic class (e.g. inside .jth-prose). */
+.jth-text-muted  { color: var(--jth-fg-muted); }
+.jth-text-subtle { color: var(--jth-fg-subtle); }
+.jth-text-center { text-align: center; }
 
 /* ─────────────────────────────────────────────────
    Layout primitives — hoisted from per-template inline styles
@@ -419,6 +507,13 @@ body { margin: 0; }
 
 /* Inline pill row (Programs page condition tags, Insurance carriers, etc.) */
 .jth-row-pills { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* Sticky/standalone aside used on Programs (IOP + PHP detail blocks).
+   Eyebrow + pill + title + meta lines + CTA, stacked. */
+.jth-program-aside { display: block; }
+.jth-program-aside__title { margin: 16px 0 12px; }
+.jth-program-aside p { margin: 0; }
+.jth-program-aside .jth-meta + .jth-meta { margin-top: 2px; }
 
 /* Two-column 50/50 condition cards (What We Treat default). */
 .cards-3.cards-3--two-up { grid-template-columns: repeat(2, 1fr); }
@@ -489,6 +584,7 @@ body { margin: 0; }
   background: var(--jth-cream); border: 1px solid var(--jth-rule);
   border-radius: var(--r-card);
 }
+.contact-card--lg { margin-top: 0; padding: 32px; }
 .contact-card h3 { margin: 0 0 10px; font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--jth-deep-green); }
 .contact-card a { color: var(--jth-deep-green); }
 .contact-card .phone {
@@ -496,10 +592,15 @@ body { margin: 0; }
   font-family: var(--font-display); font-weight: 700; font-size: 24px;
   color: var(--jth-deep-green); text-decoration: none; letter-spacing: -0.01em;
 }
+.contact-card .phone--lg { font-size: 28px; }
 .contact-card .hours {
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
   color: var(--jth-fg-muted); text-transform: uppercase;
 }
+.contact-card__hint { margin: 0 0 18px; color: var(--jth-fg-muted); }
+.contact-card__schedule { margin: 0 0 4px; }
+.contact-card__schedule--last { margin-bottom: 0; }
+.contact-card__soon { opacity: 0.7; }
 
 /* ─── About ─── */
 .about-hero {
@@ -507,6 +608,17 @@ body { margin: 0; }
   padding: 80px 24px;
 }
 @media (max-width: 880px) { .about-hero { grid-template-columns: 1fr; } }
+/* Composed hero: clipped, lets the collage/twinkle sit absolutely. */
+.about-hero--composed { position: relative; overflow: hidden; }
+.about-hero__collage {
+  position: absolute; right: -20px; top: -20px;
+  width: 220px; opacity: 0.85;
+  pointer-events: none; user-select: none;
+}
+.about-hero__twinkle {
+  position: absolute; left: 32%; top: 18%; width: 30px;
+  pointer-events: none; user-select: none;
+}
 .about-portrait {
   width: 100%; aspect-ratio: 4/5; border-radius: var(--r-xl);
   background: var(--jth-cream-3);
@@ -516,6 +628,7 @@ body { margin: 0; }
   border: 1px dashed var(--jth-rule-strong);
   position: relative; overflow: hidden;
 }
+.about-portrait__img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* About — Team grid (Vary-The-Trio): Founder feature card + 2 stacked side cards. */
 .about-team {
@@ -538,6 +651,27 @@ body { margin: 0; }
   font-family: var(--font-editorial); font-size: 22px; color: var(--jth-deep-green);
 }
 .about-team__avatar--lg { width: 88px; height: 88px; font-size: 32px; }
+.about-team__avatar--sage     { background: var(--jth-pale-sage); }
+.about-team__avatar--lavender { background: var(--jth-pale-lavender); }
+.about-team__avatar--lime     { background: var(--jth-pale-lime); }
+.about-team__name { margin: 16px 0 4px; }
+.about-team__name--sm { margin: 12px 0 2px; }
+.about-team__role { margin: 0 0 14px; }
+.about-team__role--sm { margin: 0 0 8px; }
+.about-team__bio { margin: 0 0 14px; max-width: 50ch; }
+.about-team__bio--sm { margin: 0; }
+.about-team__hand { margin: 12px 0 0; }
+.about-team__interns {
+  margin: 28px 0 0; max-width: 68ch; color: var(--jth-fg-muted);
+}
+
+/* Composed dark section with bleed collage (Three Commitments). */
+.about-values-section--composed { position: relative; overflow: hidden; }
+.about-values-section__collage {
+  position: absolute; left: -30px; top: 40px;
+  width: 200px; opacity: 0.7;
+  pointer-events: none; user-select: none;
+}
 
 /* About — Values: three-up cards on dark green. Each card carries a giant
    lime § number, statement (Fraunces with em accent), body, and an optional
@@ -616,6 +750,10 @@ body { margin: 0; }
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 700; font-size: 12px;
 }
+.thanks__eyebrow { margin-bottom: 14px; }
+.thanks__hand { margin-top: 16px; }
+.thanks__call-prompt { margin: 32px auto 8px; max-width: 480px; }
+.thanks__crisis-note { margin: 48px auto 0; max-width: 480px; }
 
 /* ─── For Teens (different register) ─── */
 .teen-hero {
@@ -623,6 +761,15 @@ body { margin: 0; }
   padding: 80px 24px;
   background: var(--jth-pale-lime);
 }
+.teen-hero--composed {} /* reserved for future overrides; clip + position already on .teen-hero */
+.teen-hero__collage {
+  position: absolute; right: 24px; top: 30px;
+  width: 220px; opacity: 0.85;
+  pointer-events: none; user-select: none;
+}
+.teen-hero__twinkle { pointer-events: none; user-select: none; }
+.teen-hero__twinkle--a { position: absolute; left: 8%; top: 30%; width: 32px; }
+.teen-hero__twinkle--b { position: absolute; right: 18%; bottom: 10%; width: 28px; }
 .teen-hero h1 {
   font-family: var(--font-editorial); font-weight: 600;
   font-size: clamp(40px, 6vw, 64px); line-height: 1.05;
@@ -633,6 +780,21 @@ body { margin: 0; }
 }
 .teen-hero p { font-size: 18px; line-height: 1.55; }
 
+/* Editorial pull-quote that lives inside a page section (not the .quote
+   testimonial pattern). Used on /for-teens 'You are not broken'. */
+.jth-page-quote {
+  font-family: var(--font-editorial); font-weight: 500;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.25; letter-spacing: -0.01em;
+  color: var(--jth-deep-green);
+  font-variation-settings: "SOFT" 30, "opsz" 96;
+  text-wrap: balance;
+  margin: 0 0 16px;
+}
+.jth-page-quote em {
+  font-style: italic;
+}
+
 /* ─── Decorative twinkles in markup ─── */
 .twinkle {
   position: absolute; pointer-events: none; user-select: none;
@@ -641,6 +803,32 @@ body { margin: 0; }
 
 /* ─── Anchor offset (sticky header) ─── */
 :target { scroll-margin-top: 120px; }
+
+/* ──────────────────────────────────────────────────────────────────
+   Scroll reveal — gentle fade + lift as elements enter the viewport.
+   Transform/opacity only (GPU-safe). The .is-visible class is added
+   by reveal.js via IntersectionObserver. Falls back gracefully:
+   - No JS: elements stay visible (we set opacity 1 if .no-js parent
+     or if IntersectionObserver isn't supported — handled by reveal.js)
+   - Reduced motion: instant reveal, no transform.
+   ───────────────────────────────────────────────────────────────── */
+.jth-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 720ms var(--ease-calm),
+              transform 720ms var(--ease-calm);
+  will-change: opacity, transform;
+}
+.jth-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.jth-reveal--delay-1.is-visible { transition-delay: 80ms; }
+.jth-reveal--delay-2.is-visible { transition-delay: 160ms; }
+.jth-reveal--delay-3.is-visible { transition-delay: 240ms; }
+@media (prefers-reduced-motion: reduce) {
+  .jth-reveal { opacity: 1; transform: none; transition: none; }
+}
 
 /* ──────────────────────────────────────────────────────────────────
    Parent Hub — guide tiles. 2-up on tablet/desktop, single column on
@@ -662,12 +850,16 @@ body { margin: 0; }
   border-radius: 14px;
   color: var(--jth-fg);
   text-decoration: none;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color var(--dur-base) var(--ease-calm),
+              background var(--dur-base) var(--ease-calm),
+              transform var(--dur-base) var(--ease-calm);
 }
+/* DESIGN.md Flat-Paper Rule: no decorative box-shadows. Communicate
+   hover via a stronger border + a tint shift on the cream surface. */
 .jth-hub-tile:hover {
   border-color: var(--jth-rule-strong);
+  background: var(--jth-cream-2);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(24, 59, 46, 0.06);
 }
 .jth-hub-tile__eyebrow {
   display: inline-block;
@@ -675,6 +867,8 @@ body { margin: 0; }
   font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--jth-fg-subtle);
 }
+.jth-hub-tile__title { margin: 8px 0 10px; }
+.jth-hub-tile__body  { margin: 0 0 14px; color: var(--jth-fg-muted); line-height: 1.55; }
 .jth-hub-tile p {
   color: var(--jth-fg-muted); line-height: 1.55;
 }
@@ -734,6 +928,24 @@ body { margin: 0; }
   background: var(--jth-pale-sage);
   border-color: color-mix(in oklch, var(--jth-deep-green) 14%, var(--jth-cream) 86%);
 }
+.jth-guide-aside__lede {
+  margin: 0 0 12px;
+  font-family: var(--font-editorial); font-size: 22px;
+  line-height: 1.3; color: var(--jth-deep-green);
+}
+.jth-guide-aside__sub {
+  margin: 0 0 18px;
+  color: var(--jth-fg-muted);
+  font-size: 15px; line-height: 1.55;
+}
+.jth-guide-back { margin: 0 0 16px; }
+.jth-guide-back__link { color: inherit; text-decoration: none; }
+.jth-guide-back__link:hover { color: var(--jth-deep-green); }
+.jth-guide-updated {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--jth-rule);
+}
 .jth-guide-related {
   list-style: none; padding: 0; margin: 0;
 }
@@ -747,7 +959,7 @@ body { margin: 0; }
   text-decoration: none;
   font-size: 15px; line-height: 1.4;
   display: block;
-  transition: color 0.15s ease;
+  transition: color var(--dur-fast) var(--ease-calm);
 }
 .jth-guide-related a:hover { color: var(--jth-deep-green); }
 
@@ -763,6 +975,9 @@ body { margin: 0; }
   border-bottom: 1px solid var(--jth-rule);
 }
 .jth-career-card__head { display: flex; flex-direction: column; gap: 4px; }
+.jth-career-card__title { margin: 0; }
+.jth-career-card__commit { margin: 6px 0 0; }
+.jth-career-card__summary { margin: 12px 0 0; }
 .jth-career-card p { color: var(--jth-fg); max-width: 62ch; }
 
 .jth-careers-thanks {
@@ -772,6 +987,23 @@ body { margin: 0; }
   border: 1px solid var(--jth-rule);
   border-radius: 14px;
 }
+.jth-careers-thanks__body { margin: 0; max-width: 56ch; }
+
+/* ─── Crisis page card stack ─── */
+.jth-crisis-list {
+  display: flex; flex-direction: column; gap: 16px;
+}
+.jth-crisis-card__title { margin: 0 0 6px; }
+.jth-crisis-card__meta  { margin: 0 0 12px; }
+.jth-crisis-card__body  { margin: 0 0 14px; }
+.jth-crisis-card__body--last { margin-bottom: 0; }
+
+/* ─── Long-prose pages (Privacy, Terms) — H2 + intro + paragraph rhythm
+   without the heavyweight .jth-prose grid used on Parent Guide. ─── */
+.jth-prose-page { line-height: 1.65; }
+.jth-prose-page__h { margin: 32px 0 8px; }
+.jth-prose-page__list { padding-left: 20px; }
+.jth-prose-page__list li { margin-bottom: 6px; }
 
 /* ──────────────────────────────────────────────────────────────────
    Turnstile — only renders when a site key is configured. Empty by
@@ -810,7 +1042,7 @@ body { margin: 0; }
   color: var(--jth-deep-green);
   letter-spacing: -0.01em;
   text-wrap: balance;
-  transition: color 0.18s ease;
+  transition: color var(--dur-base) var(--ease-calm);
 }
 .jth-faq__q::-webkit-details-marker { display: none; }
 .jth-faq__q::marker { content: ""; }
@@ -827,7 +1059,7 @@ body { margin: 0; }
   width: 32px; height: 32px;
   margin-top: 2px;
   color: var(--jth-fg-muted);
-  transition: transform 0.22s ease, color 0.18s ease;
+  transition: transform var(--dur-base) var(--ease-calm), color var(--dur-base) var(--ease-calm);
 }
 .jth-faq__item[open] > .jth-faq__q .jth-faq__chevron {
   transform: rotate(180deg);
@@ -881,8 +1113,9 @@ body { margin: 0; }
     z-index: 90;
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
     background: var(--jth-cream);
-    border-top: 1px solid var(--jth-rule);
-    box-shadow: 0 -6px 18px rgba(24, 59, 46, 0.06);
+    /* DESIGN.md Flat-Paper Rule: separation via a stronger top border,
+       not a decorative shadow. */
+    border-top: 1.5px solid var(--jth-rule-strong);
   }
   .jth-mobile-cta__call,
   .jth-mobile-cta__primary {
@@ -893,7 +1126,9 @@ body { margin: 0; }
     font-family: var(--font-ui, "Inter", system-ui, sans-serif);
     font-weight: 600; font-size: 16px; letter-spacing: -0.005em;
     text-decoration: none;
-    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    transition: background var(--dur-base) var(--ease-calm),
+                color var(--dur-base) var(--ease-calm),
+                border-color var(--dur-base) var(--ease-calm);
   }
   .jth-mobile-cta__call {
     background: transparent;

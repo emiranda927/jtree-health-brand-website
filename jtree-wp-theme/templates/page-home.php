@@ -16,12 +16,12 @@ get_header();
     <div class="h-hero-grid h-hero-grid--single">
 
       <div class="h-hero-text h-fade">
-        <div class="h-hero-kicker">
+        <div class="h-hero-kicker jth-reveal">
           <span><strong>Issue №01</strong></span>
           <span>Teen mental health · Apex, NC</span>
         </div>
 
-        <h1 class="h-hero-headline">
+        <h1 class="h-hero-headline jth-reveal jth-reveal--delay-1">
           <span class="h-hero-fixed">Grow in a shape that is</span>
           <span class="h-hero-flap">
             <span class="h-hero-flap-spacer">entirely your own</span>
@@ -37,7 +37,14 @@ get_header();
         </p>
 
         <div class="h-hero-ctas">
-          <a class="jth-btn jth-btn-primary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+          <a class="jth-btn jth-btn-primary jth-btn-lg jth-btn-arrow" href="<?php echo esc_url(home_url('/admissions/')); ?>">
+            Start the Conversation
+            <span class="jth-btn-arrow__icon" aria-hidden="true">
+              <svg viewBox="0 0 14 14" fill="none" focusable="false">
+                <path d="M3.5 7h7M7 3.5l3.5 3.5L7 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
           <a class="jth-btn jth-btn-ghost jth-btn-lg" href="<?php echo esc_url(home_url('/programs/')); ?>">Explore Programs &rarr;</a>
           <span class="meta">Reply within 2&ndash;4 business hours</span>
         </div>
@@ -100,7 +107,8 @@ get_header();
     </div>
 
     <div class="h-programs-grid">
-      <a class="h-pcard" href="<?php echo esc_url(home_url('/programs/')); ?>#iop">
+      <a class="h-pcard h-pcard--live" href="<?php echo esc_url(home_url('/programs/')); ?>#iop">
+        <span class="h-pcard__status">Open today</span>
         <div class="h-pcard-num">&#8470; 01 &nbsp;&middot;&nbsp; IOP</div>
         <h3 class="h-pcard-title">Intensive Outpatient</h3>
         <div class="h-pcard-schedule">In-person + virtual &middot; multiple times per week &middot; 12 weeks</div>
@@ -108,7 +116,7 @@ get_header();
         <span class="h-pcard-arrow">Learn about IOP &nbsp;&rarr;</span>
       </a>
       <a class="h-pcard" href="<?php echo esc_url(home_url('/programs/')); ?>#php">
-        <div class="h-pcard-num">&#8470; 02 &nbsp;&middot;&nbsp; PHP <span style="background:var(--jth-sunflower); color:var(--jth-charcoal); padding:2px 8px; border-radius:99px; font-size:11px; margin-left:8px; vertical-align:middle;">Coming soon</span></div>
+        <div class="h-pcard-num">&#8470; 02 &nbsp;&middot;&nbsp; PHP <span class="jth-pill jth-pill-soon jth-pill-tag">Coming soon</span></div>
         <h3 class="h-pcard-title">Partial Hospitalization</h3>
         <div class="h-pcard-schedule">Mon&ndash;Fri &middot; 9 am &ndash; 3 pm</div>
         <p class="h-pcard-body">Launching at Joshua Tree Health: a five-day-a-week structure for teens needing the most support, including group, individual, and family work plus school accommodations woven through the day.</p>
@@ -183,10 +191,10 @@ get_header();
   <section class="h-quote">
     <div class="h-quote-inner">
       <span class="jth-eyebrow">§ 05 / A note from our founder</span>
-      <blockquote>
+      <blockquote class="jth-reveal">
         I built Joshua Tree Health because the kind of care I wish my brother Josh had didn't exist near us. So we made it &mdash; <em>for the families coming next.</em>
       </blockquote>
-      <cite>Gabriela Miranda &nbsp;/&nbsp; Founder</cite>
+      <cite class="jth-reveal jth-reveal--delay-1">Gabriela Miranda &nbsp;/&nbsp; Founder</cite>
     </div>
   </section>
 
@@ -199,7 +207,7 @@ get_header();
         <p>Pediatricians, school counselors, outpatient therapists — we make it easy. One call, a warm handoff, ongoing communication with the referring clinician.</p>
       </div>
       <div class="h-refer-actions">
-        <a class="jth-btn jth-btn-primary jth-btn-lg" href="#">Refer a patient</a>
+        <a class="jth-btn jth-btn-primary jth-btn-lg" href="<?php echo esc_url(home_url('/contact/')); ?>">Refer a patient</a>
         <a class="jth-btn jth-btn-secondary jth-btn-lg" href="tel:9193355053">Call (919) 335-5053</a>
       </div>
     </div>

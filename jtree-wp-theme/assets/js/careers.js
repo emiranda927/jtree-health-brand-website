@@ -34,6 +34,8 @@
   function setBusy(busy) {
     submit.disabled = busy;
     submit.textContent = busy ? 'Sending…' : 'Send application';
+    submit.classList.toggle('is-loading', busy);
+    if (busy) submit.setAttribute('aria-busy', 'true'); else submit.removeAttribute('aria-busy');
   }
 
   // Turnstile widget — same falls-open contract as the inquiry form.

@@ -23,7 +23,7 @@ $brand = JTREE_THEME_URI . '/assets/brand';
       <h4>Programs</h4>
       <ul>
         <li><a href="<?php echo $home; ?>programs/#iop">Intensive outpatient</a></li>
-        <li><a href="<?php echo $home; ?>programs/#php">Partial hospitalization <span style="opacity:0.7; font-size:11px;">(coming soon)</span></a></li>
+        <li><a href="<?php echo $home; ?>programs/#php">Partial hospitalization <span class="footer-soon">(coming soon)</span></a></li>
         <li><a href="<?php echo $home; ?>what-we-treat/">What we treat</a></li>
       </ul>
     </div>
@@ -50,9 +50,9 @@ $brand = JTREE_THEME_URI . '/assets/brand';
   </div>
   <div class="footer-bottom">
     <span>&copy; <?php echo esc_html(date('Y')); ?> Joshua Tree Health. All rights reserved.</span>
-    <span>
-      <a href="<?php echo $home; ?>privacy/" style="color:inherit; margin-right:18px;">Privacy</a>
-      <a href="<?php echo $home; ?>accessibility/" style="color:inherit;">Accessibility</a>
+    <span class="footer-legal">
+      <a href="<?php echo $home; ?>privacy/">Privacy</a>
+      <a href="<?php echo $home; ?>accessibility/">Accessibility</a>
     </span>
   </div>
 </footer>

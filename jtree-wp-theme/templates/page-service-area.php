@@ -39,11 +39,11 @@ $travel     = !empty($page_meta['travel_context'][0])
 
 <main id="main">
 
-  <section class="section" style="padding-top: 64px; padding-bottom: 24px;">
-    <div class="container" style="max-width: 880px;">
-      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">Service area</span>
-      <h1 class="jth-display-l" style="font-size: clamp(36px, 4.6vw, 52px); margin: 0 0 18px;"><?php the_title(); ?></h1>
-      <p class="jth-body-l" style="margin: 0; max-width: 60ch;">
+  <section class="section section--intro">
+    <div class="container container--narrow">
+      <span class="jth-eyebrow">Service area</span>
+      <h1 class="jth-display-l jth-display-l--sm"><?php the_title(); ?></h1>
+      <p class="jth-body-l jth-lede">
         <?php echo esc_html($travel); ?> Adolescent PHP and IOP for ages 10&ndash;17, in network with the major Triangle insurance plans.
       </p>
     </div>
@@ -52,7 +52,7 @@ $travel     = !empty($page_meta['travel_context'][0])
   <!-- Metro-specific middle: edited in the WP page editor. Founder writes
        drive context, school partners, local concerns. -->
   <section class="section section-bg-cream-2">
-    <div class="container" style="max-width: 880px;">
+    <div class="container container--narrow">
       <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
         <div class="jth-prose">
           <?php the_content(); ?>
@@ -64,31 +64,31 @@ $travel     = !empty($page_meta['travel_context'][0])
   <!-- Standardized "what we offer" — reads as a summary, links to the
        full programs / insurance pages for depth. -->
   <section class="section">
-    <div class="container" style="max-width: 1080px;">
-      <h2 class="jth-h2" style="margin: 0 0 24px;">What's available <?php echo $metro_name ? 'for ' . esc_html($metro_name) . ' families' : 'here'; ?></h2>
+    <div class="container container--page">
+      <h2 class="jth-h2 jth-mb-6">What's available <?php echo $metro_name ? 'for ' . esc_html($metro_name) . ' families' : 'here'; ?></h2>
       <div class="jth-hub-grid">
         <a class="jth-hub-tile" href="<?php echo esc_url(home_url('/programs/#php')); ?>">
           <span class="jth-hub-tile__eyebrow">PHP</span>
-          <h3 class="jth-h4" style="margin:8px 0 10px;">Partial hospitalization</h3>
-          <p style="margin: 0 0 14px;">Mon&ndash;Fri, 9 a.m. to 3 p.m. Two DBT skills groups, one process group, individual + family therapy, academic support.</p>
+          <h3 class="jth-h4 jth-hub-tile__title">Partial hospitalization</h3>
+          <p class="jth-hub-tile__body">Mon&ndash;Fri, 9 a.m. to 3 p.m. Two DBT skills groups, one process group, individual + family therapy, academic support.</p>
           <span class="jth-hub-tile__meta">See PHP details &nbsp;&rarr;</span>
         </a>
         <a class="jth-hub-tile" href="<?php echo esc_url(home_url('/programs/#iop')); ?>">
           <span class="jth-hub-tile__eyebrow">IOP</span>
-          <h3 class="jth-h4" style="margin:8px 0 10px;">Intensive outpatient</h3>
-          <p style="margin: 0 0 14px;">In-person + virtual group blocks across the week (Mon, Tue, Thu, Sat). Skills group, individual therapy, family sessions.</p>
+          <h3 class="jth-h4 jth-hub-tile__title">Intensive outpatient</h3>
+          <p class="jth-hub-tile__body">In-person + virtual group blocks across the week (Mon, Tue, Thu, Sat). Skills group, individual therapy, family sessions.</p>
           <span class="jth-hub-tile__meta">See IOP details &nbsp;&rarr;</span>
         </a>
         <a class="jth-hub-tile" href="<?php echo esc_url(home_url('/insurance/')); ?>">
           <span class="jth-hub-tile__eyebrow">Insurance</span>
-          <h3 class="jth-h4" style="margin:8px 0 10px;">In-network coverage</h3>
-          <p style="margin: 0 0 14px;">BCBS NC, Cigna / Evernorth, Aetna, and Tricare. We verify before day one.</p>
+          <h3 class="jth-h4 jth-hub-tile__title">In-network coverage</h3>
+          <p class="jth-hub-tile__body">BCBS NC, Cigna / Evernorth, Aetna, and Tricare. We verify before day one.</p>
           <span class="jth-hub-tile__meta">See insurance details &nbsp;&rarr;</span>
         </a>
         <a class="jth-hub-tile" href="<?php echo esc_url(home_url('/what-we-treat/')); ?>">
           <span class="jth-hub-tile__eyebrow">Conditions</span>
-          <h3 class="jth-h4" style="margin:8px 0 10px;">What we treat</h3>
-          <p style="margin: 0 0 14px;">Anxiety, depression, OCD, ADHD with emotion dysregulation, trauma, self-harm, and co-occurring concerns.</p>
+          <h3 class="jth-h4 jth-hub-tile__title">What we treat</h3>
+          <p class="jth-hub-tile__body">Anxiety, depression, OCD, ADHD with emotion dysregulation, trauma, self-harm, and co-occurring concerns.</p>
           <span class="jth-hub-tile__meta">See full list &nbsp;&rarr;</span>
         </a>
       </div>

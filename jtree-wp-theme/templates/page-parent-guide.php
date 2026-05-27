@@ -31,18 +31,18 @@ $siblings = $parent_id
 
 <main id="main">
 
-  <section class="section" style="padding-top: 56px; padding-bottom: 16px;">
-    <div class="container" style="max-width: 880px;">
-      <p class="jth-meta" style="margin: 0 0 16px;">
-        <a href="<?php echo esc_url($parent_url); ?>" style="color: inherit; text-decoration: none;">&larr; <?php echo esc_html($parent_title); ?></a>
+  <section class="section section--intro-tight">
+    <div class="container container--narrow">
+      <p class="jth-meta jth-guide-back">
+        <a class="jth-guide-back__link" href="<?php echo esc_url($parent_url); ?>">&larr; <?php echo esc_html($parent_title); ?></a>
       </p>
-      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">Parent guide</span>
-      <h1 class="jth-display-l" style="font-size: clamp(36px, 4.5vw, 52px); margin: 0 0 8px;"><?php the_title(); ?></h1>
+      <span class="jth-eyebrow">Parent guide</span>
+      <h1 class="jth-display-l jth-display-l--sm jth-mb-2"><?php the_title(); ?></h1>
     </div>
   </section>
 
-  <section class="section" style="padding-top: 24px;">
-    <div class="container jth-guide-grid" style="max-width: 1080px;">
+  <section class="section section--continuation">
+    <div class="container container--page jth-guide-grid">
       <article class="jth-guide-body">
         <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
           <div class="jth-prose">
@@ -50,7 +50,7 @@ $siblings = $parent_id
           </div>
         <?php endwhile; endif; ?>
 
-        <p class="jth-meta" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--jth-rule);">
+        <p class="jth-meta jth-guide-updated">
           Last updated <?php echo esc_html(get_the_modified_date('F j, Y')); ?>.
         </p>
       </article>
@@ -58,7 +58,7 @@ $siblings = $parent_id
       <aside class="jth-guide-aside">
         <?php if (!empty($siblings)) : ?>
           <div class="jth-guide-aside__block">
-            <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 10px;">Related</span>
+            <span class="jth-eyebrow">Related</span>
             <ul class="jth-guide-related">
               <?php foreach ($siblings as $s) : ?>
                 <li>
@@ -70,8 +70,8 @@ $siblings = $parent_id
         <?php endif; ?>
 
         <div class="jth-guide-aside__block jth-guide-aside__cta">
-          <p style="margin: 0 0 12px; font-family: var(--font-editorial, 'Fraunces', serif); font-size: 22px; line-height: 1.3; color: var(--jth-deep-green);">When you're ready, we're here.</p>
-          <p style="margin: 0 0 18px; color: var(--jth-fg-muted); font-size: 15px; line-height: 1.55;">An admissions clinician will call you back within 2 to 4 business hours.</p>
+          <p class="jth-guide-aside__lede">When you're ready, we're here.</p>
+          <p class="jth-guide-aside__sub">An admissions clinician will call you back within 2 to 4 business hours.</p>
           <a class="jth-btn jth-btn-primary" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
         </div>
       </aside>

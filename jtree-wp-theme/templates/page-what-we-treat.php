@@ -20,11 +20,11 @@ $conditions = array(
 
 <main id="main">
 
-  <section class="section" style="padding-top: 64px; padding-bottom: 24px;">
-    <div class="container" style="max-width: 880px;">
-      <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;">What we treat</span>
-      <h1 class="jth-display-l" style="font-size: clamp(40px, 5vw, 56px); margin: 0 0 20px;">Real teen mental-health concerns, <em class="jth-emph">treated seriously.</em></h1>
-      <p class="jth-body-l" style="margin: 0; max-width: 60ch;">We work with adolescents 10&ndash;17 navigating the conditions below. We do not treat substance use as a primary diagnosis or active eating disorders that require medical stabilization &mdash; we'll point you to the right place if that's what your teen needs.</p>
+  <section class="section section--intro">
+    <div class="container container--narrow">
+      <span class="jth-eyebrow">What we treat</span>
+      <h1 class="jth-display-l">Real teen mental-health concerns, <em class="jth-emph">treated seriously.</em></h1>
+      <p class="jth-body-l jth-lede">We work with adolescents 10&ndash;17 navigating the conditions below. We do not treat substance use as a primary diagnosis or active eating disorders that require medical stabilization &mdash; we'll point you to the right place if that's what your teen needs.</p>
     </div>
   </section>
 

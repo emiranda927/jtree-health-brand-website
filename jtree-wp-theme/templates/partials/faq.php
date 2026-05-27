@@ -26,11 +26,11 @@ $map = jtree_faq_map();
 if (empty($map[$slug])) return;
 ?>
 <section class="section section-bg-cream-2 jth-faq-section" aria-labelledby="faq-<?php echo esc_attr($slug); ?>-title">
-  <div class="container" style="max-width: 760px;">
-    <span class="jth-eyebrow" style="display:inline-block; margin-bottom: 12px;"><?php echo esc_html($eyebrow); ?></span>
-    <h2 id="faq-<?php echo esc_attr($slug); ?>-title" class="jth-h2" style="margin: 0 0 <?php echo $intro ? '12' : '24'; ?>px;"><?php echo esc_html($title); ?></h2>
+  <div class="container container--prose">
+    <span class="jth-eyebrow"><?php echo esc_html($eyebrow); ?></span>
+    <h2 id="faq-<?php echo esc_attr($slug); ?>-title" class="jth-h2 <?php echo $intro ? 'jth-mb-3' : 'jth-mb-6'; ?>"><?php echo esc_html($title); ?></h2>
     <?php if ($intro) : ?>
-      <p class="jth-body-l" style="margin: 0 0 28px; max-width: 60ch; color: var(--jth-fg-muted);"><?php echo esc_html($intro); ?></p>
+      <p class="jth-body-l jth-lede jth-text-muted jth-mb-7"><?php echo esc_html($intro); ?></p>
     <?php endif; ?>
 
     <div class="jth-faq">

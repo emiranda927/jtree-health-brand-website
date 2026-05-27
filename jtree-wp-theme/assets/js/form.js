@@ -100,6 +100,11 @@
   function setBusy(busy) {
     submit.disabled = busy;
     submit.textContent = busy ? 'Sending…' : 'Start the Conversation';
+    // Visual + a11y: shimmer skeleton on the button surface, plus aria-busy
+    // so screen readers announce the loading state without us inventing
+    // a separate live region.
+    submit.classList.toggle('is-loading', busy);
+    if (busy) submit.setAttribute('aria-busy', 'true'); else submit.removeAttribute('aria-busy');
   }
 
   // ── Partial-capture state ────────────────────────────────────────

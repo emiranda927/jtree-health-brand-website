@@ -12,29 +12,29 @@ get_header();
 <main id="main">
 
   <!-- Hero -->
-  <section class="section about-hero" style="position:relative; overflow:hidden;">
-    <img class="collage" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-grid-torn.png'); ?>" alt="" width="220" height="220" loading="lazy" decoding="async" aria-hidden="true" style="right:-20px; top:-20px; width: 220px; opacity:0.85;">
-    <img class="twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-outline-lavender.svg'); ?>" alt="" width="30" height="30" loading="lazy" aria-hidden="true" style="left:32%; top:18%; width:30px;">
+  <section class="section about-hero about-hero--composed">
+    <img class="collage about-hero__collage" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-purple-grid-torn.png'); ?>" alt="" width="220" height="220" loading="lazy" decoding="async" aria-hidden="true">
+    <img class="twinkle about-hero__twinkle" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/twinkle-outline-lavender.svg'); ?>" alt="" width="30" height="30" loading="lazy" aria-hidden="true">
     <div>
-      <span class="jth-eyebrow">&sect; 01 / Our story</span>
-      <h1 class="jth-display-l" style="font-size: clamp(40px, 5vw, 56px); margin: 14px 0 20px;">For my brother Josh.</h1>
-      <p class="jth-body-l" style="margin: 0 0 14px; max-width: 56ch;">My brother Josh died in 2023, after years of fighting battles that started long before anyone helped him fight them.</p>
-      <p class="jth-body-l" style="margin: 0 0 14px; max-width: 56ch;">He found peace in Joshua Tree National Park, in the quiet of the desert, in the resilience of a tree that grows in some of the harshest conditions on earth.</p>
-      <p class="jth-body-l" style="margin: 0; max-width: 56ch;">I started Joshua Tree Health for the kids who deserve real help earlier than he got it.</p>
-      <p class="jth-hand" style="margin-top: 24px; transform: rotate(-2deg);">&mdash; Gabriela</p>
+      <span class="jth-eyebrow jth-reveal">&sect; 01 / Our story</span>
+      <h1 class="jth-display-l jth-reveal jth-reveal--delay-1">For my brother Josh.</h1>
+      <p class="jth-body-l jth-lede--narrow jth-mb-4 jth-reveal jth-reveal--delay-2">My brother Josh died in 2023, after years of fighting battles that started long before anyone helped him fight them.</p>
+      <p class="jth-body-l jth-lede--narrow jth-mb-4 jth-reveal jth-reveal--delay-2">He found peace in Joshua Tree National Park, in the quiet of the desert, in the resilience of a tree that grows in some of the harshest conditions on earth.</p>
+      <p class="jth-body-l jth-lede--narrow jth-reveal jth-reveal--delay-3">I started Joshua Tree Health for the kids who deserve real help earlier than he got it.</p>
+      <p class="jth-hand jth-hand--tape jth-reveal jth-reveal--delay-3">&mdash; Gabriela</p>
     </div>
     <div class="about-portrait">
-      <img src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-torn-desert-photo.png'); ?>" alt="A Joshua tree in the high desert" width="800" height="1000" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover;">
+      <img class="about-portrait__img" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-torn-desert-photo.png'); ?>" alt="A Joshua tree in the high desert" width="800" height="1000" loading="lazy" decoding="async">
     </div>
   </section>
 
   <!-- Brand-name story -->
   <section class="section section-bg-cream-2">
-    <div class="container" style="max-width:880px;">
+    <div class="container container--narrow">
       <span class="jth-eyebrow">&sect; 02 / Why a Joshua tree</span>
-      <h2 class="jth-h2" style="margin: 12px 0 20px;">A tree that grows in a shape entirely its own.</h2>
-      <p class="jth-body-l" style="margin: 0 0 16px;">Joshua trees grow slowly, sideways as often as up, branching where the wind tells them to branch. Two trees in the same desert never look the same.</p>
-      <p class="jth-body-l" style="margin: 0;">That's what we want for the teens in our care. Not a return to who they were before. A real, grounded version of who they're becoming &mdash; in whatever shape that turns out to be.</p>
+      <h2 class="jth-h2 jth-mb-5">A tree that grows in a shape entirely its own.</h2>
+      <p class="jth-body-l jth-mb-4">Joshua trees grow slowly, sideways as often as up, branching where the wind tells them to branch. Two trees in the same desert never look the same.</p>
+      <p class="jth-body-l jth-mb-0">That's what we want for the teens in our care. Not a return to who they were before. A real, grounded version of who they're becoming &mdash; in whatever shape that turns out to be.</p>
     </div>
   </section>
 
@@ -42,11 +42,11 @@ get_header();
        Establishes her role before the Clinical Team section so the division
        between business leadership and clinical leadership is clear. -->
   <section class="section section-bg-pale-lav">
-    <div class="container" style="max-width: 760px;">
+    <div class="container container--prose">
       <span class="jth-eyebrow">&sect; 03 / Founder</span>
-      <h2 class="jth-h2" style="margin: 12px 0 20px;">Gabriela Miranda.</h2>
-      <p class="jth-body-l" style="margin: 0 0 16px;">Gabriela founded Joshua Tree Health to build the kind of care her brother Josh didn't have. She brings a background in healthcare investing, AI, and operations &mdash; an MBA from Stanford, a Master in Public Administration from Harvard Kennedy School, and a long-running focus on expanding access to mental-health care for underserved communities.</p>
-      <p class="jth-body" style="margin: 0; color: var(--jth-fg-muted);">Gabriela owns the practice and runs the business side. The clinical work is led by Caitlyn and the team below.</p>
+      <h2 class="jth-h2 jth-mb-5">Gabriela Miranda.</h2>
+      <p class="jth-body-l jth-mb-4">Gabriela founded Joshua Tree Health to build the kind of care her brother Josh didn't have. She brings a background in healthcare investing, AI, and operations &mdash; an MBA from Stanford, a Master in Public Administration from Harvard Kennedy School, and a long-running focus on expanding access to mental-health care for underserved communities.</p>
+      <p class="jth-body jth-text-muted">Gabriela owns the practice and runs the business side. The clinical work is led by Caitlyn and the team below.</p>
     </div>
   </section>
 
@@ -61,41 +61,41 @@ get_header();
       </header>
       <div class="about-team">
         <article class="about-team__feature">
-          <div class="about-team__avatar about-team__avatar--lg" style="background: var(--jth-pale-sage);">CD</div>
-          <h3 class="jth-h3" style="margin: 16px 0 4px;">Caitlyn Dowdy, MS, LCMHCS</h3>
-          <p class="program-meta" style="margin: 0 0 14px;">Executive Director</p>
-          <p style="margin: 0 0 14px; max-width: 50ch;">Over a decade in mental health. Trained in DBT, CBT, trauma-focused CBT, and Adlerian work. M.S. in Clinical Mental Health Counseling from Johns Hopkins. Caitlyn runs day-to-day clinical operations.</p>
-          <p class="jth-hand" style="transform: rotate(-1.5deg); margin: 12px 0 0;">&mdash; usually the person who scopes your teen's care plan.</p>
+          <div class="about-team__avatar about-team__avatar--lg about-team__avatar--sage">CD</div>
+          <h3 class="jth-h3 about-team__name">Caitlyn Dowdy, MS, LCMHCS</h3>
+          <p class="program-meta about-team__role">Executive Director</p>
+          <p class="about-team__bio">Over a decade in mental health. Trained in DBT, CBT, trauma-focused CBT, and Adlerian work. M.S. in Clinical Mental Health Counseling from Johns Hopkins. Caitlyn runs day-to-day clinical operations.</p>
+          <p class="jth-hand jth-hand--tape-light about-team__hand">&mdash; usually the person who scopes your teen's care plan.</p>
         </article>
         <div class="about-team__side">
           <article class="about-team__card">
-            <div class="about-team__avatar" style="background: var(--jth-pale-lavender);">BB</div>
-            <h3 class="jth-h4" style="margin: 12px 0 2px;">Beth Bertram, LCSW</h3>
-            <p class="program-meta" style="margin: 0 0 8px;">Program Manager</p>
-            <p class="jth-body-s" style="margin: 0;">Intensive DBT training; leads our multifamily groups. Background as a forensic interviewer and intensive in-home therapist. Affirms all identities.</p>
+            <div class="about-team__avatar about-team__avatar--lavender">BB</div>
+            <h3 class="jth-h4 about-team__name about-team__name--sm">Beth Bertram, LCSW</h3>
+            <p class="program-meta about-team__role about-team__role--sm">Program Manager</p>
+            <p class="jth-body-s about-team__bio about-team__bio--sm">Intensive DBT training; leads our multifamily groups. Background as a forensic interviewer and intensive in-home therapist. Affirms all identities.</p>
           </article>
           <article class="about-team__card">
-            <div class="about-team__avatar" style="background: var(--jth-pale-lime);">AW</div>
-            <h3 class="jth-h4" style="margin: 12px 0 2px;">Alayna West, MA, LCMHCA</h3>
-            <p class="program-meta" style="margin: 0 0 8px;">Mental Health Therapist</p>
-            <p class="jth-body-s" style="margin: 0;">DBT, CBT, trauma-informed care, mindfulness. Specializes in LGBTQIA+ affirming and neurodivergent-affirming care.</p>
+            <div class="about-team__avatar about-team__avatar--lime">AW</div>
+            <h3 class="jth-h4 about-team__name about-team__name--sm">Alayna West, MA, LCMHCA</h3>
+            <p class="program-meta about-team__role about-team__role--sm">Mental Health Therapist</p>
+            <p class="jth-body-s about-team__bio about-team__bio--sm">DBT, CBT, trauma-informed care, mindfulness. Specializes in LGBTQIA+ affirming and neurodivergent-affirming care.</p>
           </article>
           <article class="about-team__card">
-            <div class="about-team__avatar" style="background: var(--jth-pale-sage);">CP</div>
-            <h3 class="jth-h4" style="margin: 12px 0 2px;">Corissa Phannenstill, BA</h3>
-            <p class="program-meta" style="margin: 0 0 8px;">Qualified Professional</p>
-            <p class="jth-body-s" style="margin: 0;">Background in domestic-violence advocacy and crisis text counseling. Pursuing LCSW. Acts as a steady presence between sessions.</p>
+            <div class="about-team__avatar about-team__avatar--sage">CP</div>
+            <h3 class="jth-h4 about-team__name about-team__name--sm">Corissa Phannenstill, BA</h3>
+            <p class="program-meta about-team__role about-team__role--sm">Qualified Professional</p>
+            <p class="jth-body-s about-team__bio about-team__bio--sm">Background in domestic-violence advocacy and crisis text counseling. Pursuing LCSW. Acts as a steady presence between sessions.</p>
           </article>
         </div>
       </div>
-      <p class="jth-body-s" style="margin: 28px 0 0; max-width: 68ch; color: var(--jth-fg-muted);">Our team also includes three supervised mental-health interns &mdash; Ashley Bass-Mitchell, Analee Dubbs, and Katlyn Jones &mdash; working under the licensed clinicians above.</p>
+      <p class="jth-body-s about-team__interns">Our team also includes three supervised mental-health interns &mdash; Ashley Bass-Mitchell, Analee Dubbs, and Katlyn Jones &mdash; working under the licensed clinicians above.</p>
     </div>
   </section>
 
   <!-- Three commitments — Operational framing per approved copy doc.
        Reads as what we DO, not what we BELIEVE. Voice flourishes preserved. -->
-  <section class="section section-bg-dark about-values-section" style="position:relative; overflow:hidden;">
-    <img class="collage" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-brush.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true" style="left:-30px; top: 40px; width: 200px; opacity:0.7;">
+  <section class="section section-bg-dark about-values-section about-values-section--composed">
+    <img class="collage about-values-section__collage" src="<?php echo esc_url(JTREE_THEME_URI . '/assets/brand/collage-lime-brush.png'); ?>" alt="" width="320" height="160" loading="lazy" decoding="async" aria-hidden="true">
     <div class="container">
       <header class="about-values__head">
         <span class="jth-eyebrow">&sect; 05 / Three commitments</span>
@@ -142,7 +142,14 @@ get_header();
     <div class="container">
       <h2>Ready to talk?</h2>
       <p>One short form, then a real human calls you back within 2 to 4 business hours.</p>
-      <a class="jth-btn jth-btn-secondary jth-btn-lg" href="<?php echo esc_url(home_url('/admissions/')); ?>">Start the Conversation</a>
+      <a class="jth-btn jth-btn-secondary jth-btn-lg jth-btn-arrow" href="<?php echo esc_url(home_url('/admissions/')); ?>">
+        Start the Conversation
+        <span class="jth-btn-arrow__icon" aria-hidden="true">
+          <svg viewBox="0 0 14 14" fill="none" focusable="false">
+            <path d="M3.5 7h7M7 3.5l3.5 3.5L7 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
     </div>
   </section>
 

@@ -108,7 +108,7 @@ function jtree_render_inquiry_form() {
         </div>
         <div>
           <label class="jth-field-label" for="how_did_you_hear">How did you find us?
-            <span style="color:var(--jth-fg-subtle); font-weight:400;">(optional)</span>
+            <span class="jth-field-optional">(optional)</span>
           </label>
           <select class="jth-select" id="how_did_you_hear" name="how_did_you_hear">
             <option value="">Select one</option>
@@ -205,7 +205,7 @@ function jtree_render_careers_form() {
 
       <div class="form-row solo">
         <label class="jth-field-label" for="resume_url">Resume / LinkedIn link
-          <span style="color:var(--jth-fg-subtle); font-weight:400;">(optional)</span>
+          <span class="jth-field-optional">(optional)</span>
         </label>
         <input class="jth-input" id="resume_url" name="resume_url" type="url"
                placeholder="https://" autocomplete="url"
@@ -215,7 +215,7 @@ function jtree_render_careers_form() {
 
       <div class="form-row solo">
         <label class="jth-field-label" for="message">A few words about you
-          <span style="color:var(--jth-fg-subtle); font-weight:400;">(optional)</span>
+          <span class="jth-field-optional">(optional)</span>
         </label>
         <textarea class="jth-input" id="message" name="message" rows="4" maxlength="2000"
                   placeholder="What drew you to adolescent mental health, what you're looking for, anything you'd like us to know."></textarea>
