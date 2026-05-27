@@ -19,31 +19,60 @@
   overflow: hidden;
   isolation: isolate;
 }
-/* Soft Joshua-tree desert wash behind the hero. The image is pale + low
-   contrast, but a thin cream gradient over it tightens type readability
-   without losing the painted feel. The image sits behind everything via
-   z-index: -1 + the section's isolation context. */
+/* Joshua-tree + teens hero photo. Anchored right so the tree + teens stay
+   visible at every viewport width; the empty sky on the left becomes the
+   safe area for the kinetic headline. A horizontal cream wash protects
+   text readability on the left, fading to transparent past ~60% so the
+   photo's saturation + golden-hour detail render unobstructed on the right.
+   Sits behind everything via z-index: -1 + the section's isolation context. */
 .h-hero::after {
   content: "";
   position: absolute; inset: 0;
   background:
-    linear-gradient(180deg,
-      color-mix(in oklch, var(--jth-cream) 70%, transparent) 0%,
-      color-mix(in oklch, var(--jth-cream) 30%, transparent) 35%,
-      color-mix(in oklch, var(--jth-cream) 30%, transparent) 65%,
-      color-mix(in oklch, var(--jth-cream) 70%, transparent) 100%
+    /* Left → right cream wash: protects text in the left half. */
+    linear-gradient(90deg,
+      color-mix(in oklch, var(--jth-cream) 88%, transparent) 0%,
+      color-mix(in oklch, var(--jth-cream) 55%, transparent) 35%,
+      transparent 62%
     ),
-    url("../brand/hero-background.webp") no-repeat center / cover;
+    /* Subtle bottom anchor so the section reads as grounded, not floating. */
+    linear-gradient(180deg,
+      transparent 0%,
+      transparent 70%,
+      color-mix(in oklch, var(--jth-cream) 28%, transparent) 100%
+    ),
+    url("../brand/hero-background.webp") no-repeat right center / cover;
   z-index: -1;
   pointer-events: none;
 }
 
-/* Single-column kinetic hero: drop the photo column, give the type room. */
+/* Mobile: text and image fight for the same horizontal space, so heavy
+   up the cream wash to a near-solid scrim and reposition the image so the
+   tree silhouette + teens remain visible behind the headline. The photo
+   reads as atmospheric warmth instead of a competing visual layer. */
+@media (max-width: 880px) {
+  .h-hero::after {
+    background:
+      linear-gradient(180deg,
+        color-mix(in oklch, var(--jth-cream) 78%, transparent) 0%,
+        color-mix(in oklch, var(--jth-cream) 62%, transparent) 60%,
+        color-mix(in oklch, var(--jth-cream) 78%, transparent) 100%
+      ),
+      url("../brand/hero-background.webp") no-repeat 70% center / cover;
+  }
+}
+
+/* Single-column kinetic hero: drop the photo column, give the type room.
+   Constrain the text block to the left half on desktop so the headline
+   doesn't wrap into the Joshua tree on the right side of the photo. */
 .h-hero-grid--single {
   grid-template-columns: 1fr !important;
   gap: 48px !important;
 }
-.h-hero-grid--single .h-hero-text { max-width: none; }
+.h-hero-grid--single .h-hero-text { max-width: 720px; }
+@media (max-width: 880px) {
+  .h-hero-grid--single .h-hero-text { max-width: none; }
+}
 .h-hero--kinetic .h-hero-art { display: none !important; }
 
 /* Kinetic headline: the ending phrase rotates through 4 possibilities
