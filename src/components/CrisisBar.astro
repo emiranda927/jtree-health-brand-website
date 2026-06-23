@@ -1,0 +1,63 @@
+---
+// Persistent, calm safety strip — always reachable, never alarming.
+---
+<div class="crisisbar">
+  <div class="container-x crisisbar__inner">
+    <span class="crisisbar__dot" aria-hidden="true"></span>
+    <p class="crisisbar__text">
+      If you or your teen is in crisis, call or text
+      <a href="tel:988" class="crisisbar__link">988</a>
+      <span class="crisisbar__sep">·</span>
+      text <span class="crisisbar__strong">HOME</span> to
+      <a href="sms:741741" class="crisisbar__link">741741</a>
+    </p>
+  </div>
+</div>
+
+<style>
+  .crisisbar {
+    background: var(--color-deep-green-900, #0c1f18);
+    color: var(--color-cream);
+    position: relative;
+    z-index: 60;
+  }
+  .crisisbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    min-height: 38px;
+    padding-block: 0.4rem;
+  }
+  .crisisbar__dot {
+    width: 7px; height: 7px; border-radius: 999px;
+    background: var(--color-lime);
+    box-shadow: 0 0 0 0 rgba(200, 232, 105, 0.7);
+    animation: crisispulse 2.6s ease-in-out infinite;
+    flex: none;
+  }
+  @keyframes crisispulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(200, 232, 105, 0.0); }
+    50% { box-shadow: 0 0 0 4px rgba(200, 232, 105, 0.18); }
+  }
+  .crisisbar__text {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    color: rgba(246, 244, 236, 0.82);
+    text-align: center;
+  }
+  .crisisbar__strong { color: var(--color-cream); font-weight: 600; }
+  .crisisbar__link {
+    color: var(--color-lime);
+    font-weight: 600;
+    border-bottom: 1px solid rgba(200, 232, 105, 0.35);
+    transition: border-color var(--dur) var(--ease-soft);
+  }
+  .crisisbar__link:hover { border-color: var(--color-lime); }
+  .crisisbar__sep { opacity: 0.4; margin-inline: 0.15em; }
+  @media (max-width: 540px) {
+    .crisisbar__sep, .crisisbar__text :where(.crisisbar__sep) { }
+    .crisisbar__text { font-size: 0.72rem; }
+  }
+</style>

@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+
+const why = [
+  { title: 'Clinical excellence, no bureaucracy', body: 'Small caseloads, real autonomy, and the time to actually do the work well.' },
+  { title: 'A team that stays', body: 'Low turnover, genuine support, and colleagues who chose this work on purpose.' },
+  { title: 'Integrated care', body: 'Therapists and psychiatrists on the same team, in the same conversation — every week.' },
+  { title: 'Mission you can feel', body: 'Every day is in service of teens and families when it matters most. That’s the whole job.' },
+];
+---
+<Base
+  title="Careers | Joshua Tree Health"
+  description="Join Joshua Tree Health in Apex, NC. Clinical excellence without bureaucracy, integrated care, and a team that stays. We're always looking for great clinicians."
+>
+  <PageHero
+    eyebrow="Careers"
+    title="Do the work that matters.<br>Stay because <em>it does</em>."
+    sub="We're building the kind of adolescent mental health practice we'd want for our own families. If that's the work you got into this for, let's talk."
+    primaryCta={{ label: 'Apply now', href: '#apply' }}
+  />
+
+  <section class="section" aria-labelledby="why-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Why JTree</p>
+        <h2 class="section-title font-display" id="why-title">A practice built for clinicians, too.</h2>
+      </div>
+      <div class="grid-2" data-reveal-group>
+        {why.map((w) => (
+          <article class="info-card info-card--hover" data-reveal-item>
+            <h3 class="info-card__title">{w.title}</h3>
+            <p class="info-card__body">{w.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section surface-cream-deep" id="apply" aria-labelledby="apply-title">
+    <div class="container-x careers-apply">
+      <div class="careers-apply__intro" data-reveal>
+        <p class="eyebrow">Apply</p>
+        <h2 class="section-title font-display" id="apply-title">Tell us about you.</h2>
+        <p class="section-sub">Even if you don't see a posted role, we'd love to hear from you. A real person reads every application — not a bot.</p>
+        <p class="form__note" style="margin-top:1rem;">Prefer email? <a href="mailto:careers@jtreehealth.com">careers@jtreehealth.com</a></p>
+      </div>
+
+      <div class="careers-apply__formwrap card" data-reveal data-reveal-delay="0.08">
+        <form class="form" id="careers-form" novalidate>
+          <div class="form-error-banner" role="alert" aria-live="assertive"></div>
+          <div class="form__row form__row--2">
+            <div class="field field--req">
+              <label for="applicant_first_name">First name</label>
+              <input id="applicant_first_name" name="applicant_first_name" type="text" autocomplete="given-name" required />
+              <span class="jth-field-error" id="err-applicant_first_name"></span>
+            </div>
+            <div class="field field--req">
+              <label for="applicant_last_name">Last name</label>
+              <input id="applicant_last_name" name="applicant_last_name" type="text" autocomplete="family-name" required />
+              <span class="jth-field-error" id="err-applicant_last_name"></span>
+            </div>
+          </div>
+          <div class="form__row form__row--2">
+            <div class="field field--req">
+              <label for="applicant_email">Email</label>
+              <input id="applicant_email" name="applicant_email" type="email" autocomplete="email" required />
+              <span class="jth-field-error" id="err-applicant_email"></span>
+            </div>
+            <div class="field field--req">
+              <label for="applicant_phone">Phone</label>
+              <input id="applicant_phone" name="applicant_phone" type="tel" autocomplete="tel" required />
+              <span class="jth-field-error" id="err-applicant_phone"></span>
+            </div>
+          </div>
+          <div class="field field--req">
+            <label for="role_interest">Which role interests you?</label>
+            <input id="role_interest" name="role_interest" type="text" placeholder="e.g. Therapist, Psychiatrist, Admissions" required />
+            <span class="jth-field-error" id="err-role_interest"></span>
+          </div>
+          <div class="field">
+            <label for="resume_url">Resume or LinkedIn link</label>
+            <input id="resume_url" name="resume_url" type="url" placeholder="https://…" />
+            <span class="jth-field-error" id="err-resume_url"></span>
+          </div>
+          <div class="field">
+            <label for="message">Anything you'd like us to know?</label>
+            <textarea id="message" name="message" placeholder="A short note is plenty."></textarea>
+          </div>
+          <label class="form__consent field--req">
+            <input type="checkbox" name="consent_contact" value="true" required />
+            <span>I agree to be contacted by JTree Health about this application.</span>
+          </label>
+          <span class="jth-field-error" id="err-consent_contact"></span>
+          <div class="hp" aria-hidden="true">
+            <label for="hp_field">Leave this field empty</label>
+            <input id="hp_field" name="hp_field" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          {turnstileKey && <div id="cf-turnstile" class="cf-turnstile-box"></div>}
+          <button type="submit" class="btn form__submit">Submit application <span class="btn__arrow">→</span></button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+{turnstileKey && (
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline></script>
+)}
+<script>
+  import '../lib/careers';
+</script>
+
+<style>
+  .careers-apply { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 1rem + 3vw, 3.5rem); align-items: start; }
+  .careers-apply__formwrap { padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
+  @media (min-width: 880px) { .careers-apply { grid-template-columns: 1fr 1.05fr; } }
+</style>

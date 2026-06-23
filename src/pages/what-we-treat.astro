@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+const conditions = [
+  { title: 'Anxiety & panic', body: 'Overwhelming worry, panic attacks, and the avoidance that grows around them.' },
+  { title: 'Depression', body: 'Low mood, hopelessness, withdrawal, and the heaviness that makes daily life hard.' },
+  { title: 'Trauma & PTSD', body: 'The lasting weight of frightening or painful experiences, met with trauma-informed care.' },
+  { title: 'Self-harm & safety', body: 'Self-harming behaviors and safety concerns — held with structure, not stigma.' },
+  { title: 'Suicidal ideation', body: 'Stabilized suicidal thoughts that need more than weekly therapy, without 24-hour care.' },
+  { title: 'School avoidance', body: 'School refusal and the anxiety, perfectionism, or burnout underneath it.' },
+  { title: 'Emotional dysregulation', body: 'Big emotions and impulsive reactions — and the skills to ride them out.' },
+  { title: 'OCD & related', body: 'Intrusive thoughts and compulsions that have taken up too much room.' },
+  { title: 'Grief & loss', body: 'Loss, life change, and the grief that doesn’t follow a straight line.' },
+];
+
+const modalities = [
+  { title: 'DBT', body: 'Dialectical behavior therapy — practical skills for distress, emotion, and relationships.' },
+  { title: 'CBT', body: 'Cognitive behavioral therapy to untangle the thoughts that drive the spiral.' },
+  { title: 'Trauma-informed', body: 'Care that assumes a story behind the behavior — and never re-traumatizes.' },
+  { title: 'Family systems', body: 'Because a teen heals faster when the whole family is part of the work.' },
+];
+---
+<Base
+  title="What We Treat — Adolescent mental health | Joshua Tree Health"
+  description="Anxiety, depression, trauma, self-harm, school avoidance and more. Evidence-based PHP & IOP for teens ages 10–17 in Apex, NC."
+>
+  <PageHero
+    eyebrow="What we treat"
+    title="The struggles we help teens<br>move <em>through</em>."
+    sub="We're built for adolescent mental health — the everyday battles and the harder crises. If your teen is struggling, there's a good chance we can help."
+    primaryCta={{ label: 'Start the Conversation', href: '/admissions' }}
+    secondaryCta={{ label: 'Talk to our team', href: '/contact' }}
+  />
+
+  <section class="section" aria-labelledby="conditions-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">We work with teens experiencing</p>
+        <h2 class="section-title font-display" id="conditions-title">Real struggles. Real, structured help.</h2>
+      </div>
+      <div class="grid-3" data-reveal-group>
+        {conditions.map((c) => (
+          <article class="info-card info-card--hover" data-reveal-item>
+            <h3 class="info-card__title">{c.title}</h3>
+            <p class="info-card__body">{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section surface-cream-deep" aria-labelledby="approach-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Our approach</p>
+        <h2 class="section-title font-display" id="approach-title">Evidence-based, and genuinely human.</h2>
+        <p class="section-sub">Every plan blends proven modalities with real respect for the teen in the room. We treat people, not diagnoses.</p>
+      </div>
+      <div class="grid-4" data-reveal-group>
+        {modalities.map((m) => (
+          <article class="info-card" data-reveal-item>
+            <h3 class="info-card__title">{m.title}</h3>
+            <p class="info-card__body">{m.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Fit">
+    <div class="container-x">
+      <div class="callout surface-green" data-reveal>
+        <div class="callout__text">
+          <h2 class="section-title font-display">Not sure we're the right fit?</h2>
+          <p class="section-sub">That's exactly what an admissions call is for. We'll talk it through — and if we're not the right level of care, we'll tell you honestly and help you find what is.</p>
+        </div>
+        <a href="/admissions" class="btn btn--on-dark callout__cta">Start the Conversation <span class="btn__arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+</Base>

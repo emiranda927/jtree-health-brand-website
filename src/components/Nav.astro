@@ -1,0 +1,221 @@
+---
+const links = [
+  { label: 'Programs', href: '/programs' },
+  { label: 'What We Treat', href: '/what-we-treat' },
+  { label: 'For Teens', href: '/for-teens' },
+  { label: 'For Parents', href: '/for-parents' },
+  { label: 'About', href: '/about' },
+];
+const mobileExtra = [
+  { label: 'Insurance', href: '/insurance' },
+  { label: 'Service Area', href: '/service-area' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Careers', href: '/careers' },
+];
+const { pathname } = Astro.url;
+const isActive = (href: string) => pathname === href || pathname === href + '/';
+---
+<header class="nav" data-nav>
+  <div class="container-x nav__inner">
+    <a href="/" class="nav__brand" aria-label="Joshua Tree Health — home">
+      <img src="/brand/logo-horizontal.svg" alt="Joshua Tree Health" class="nav__logo" width="190" height="34" />
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {links.map((l) => (
+        <a href={l.href} class:list={['nav__link', { 'is-active': isActive(l.href) }]}>{l.label}</a>
+      ))}
+    </nav>
+
+    <div class="nav__actions">
+      <a href="tel:+19193355053" class="nav__phone" aria-label="Call 919 335 5053">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
+          <path d="M6.5 4h3l1.5 4-2 1.2a12 12 0 0 0 5.6 5.6l1.2-2 4 1.5v3a2 2 0 0 1-2.2 2A16.8 16.8 0 0 1 4.5 6.2 2 2 0 0 1 6.5 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+        <span>(919) 335-5053</span>
+      </a>
+      <a href="/admissions" class="btn nav__cta">Get Started</a>
+      <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile panel -->
+  <div class="mobile" id="mobile-menu" data-menu hidden>
+    <nav class="mobile__links" aria-label="Mobile">
+      {[...links, ...mobileExtra].map((l) => (
+        <a href={l.href} class:list={['mobile__link', { 'is-active': isActive(l.href) }]}>{l.label}</a>
+      ))}
+    </nav>
+    <div class="mobile__footer">
+      <a href="/admissions" class="btn btn--lime mobile__cta">Start the Conversation</a>
+      <a href="tel:+19193355053" class="mobile__phone">Call (919) 335-5053</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    transition: background-color var(--dur) var(--ease-soft), box-shadow var(--dur) var(--ease-soft), backdrop-filter var(--dur);
+  }
+  .nav.is-scrolled {
+    background: rgba(246, 244, 236, 0.82);
+    backdrop-filter: saturate(140%) blur(14px);
+    box-shadow: 0 1px 0 rgba(24, 59, 46, 0.07), 0 8px 24px -18px rgba(24, 59, 46, 0.4);
+  }
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 72px;
+  }
+  .nav__brand { display: inline-flex; align-items: center; flex: none; }
+  .nav__logo { height: 32px; width: auto; }
+
+  .nav__links { display: none; align-items: center; gap: 0.35rem; }
+  .nav__link {
+    position: relative;
+    padding: 0.5rem 0.8rem;
+    font-family: var(--font-head);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-pine);
+    border-radius: var(--radius-pill);
+    transition: color var(--dur) var(--ease-soft), background-color var(--dur) var(--ease-soft);
+  }
+  .nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0.8rem; right: 0.8rem; bottom: 0.32rem;
+    height: 2px; border-radius: 2px;
+    background: var(--color-lime-deep);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur) var(--ease-soft);
+  }
+  .nav__link:hover { color: var(--color-deep-green); }
+  .nav__link:hover::after,
+  .nav__link.is-active::after { transform: scaleX(1); }
+  .nav__link.is-active { color: var(--color-deep-green); }
+
+  .nav__actions { display: flex; align-items: center; gap: 0.75rem; }
+  .nav__phone {
+    display: none;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.01em;
+    color: var(--color-sage);
+    transition: color var(--dur) var(--ease-soft);
+  }
+  .nav__phone:hover { color: var(--color-deep-green); }
+  .nav__cta { padding: 0.7em 1.25em; }
+
+  .nav__toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px; height: 44px;
+    padding: 0 10px;
+    background: transparent;
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-pill);
+  }
+  .nav__toggle span {
+    display: block; height: 2px; width: 100%;
+    background: var(--color-deep-green);
+    border-radius: 2px;
+    transition: transform var(--dur) var(--ease-soft), opacity var(--dur) var(--ease-soft);
+  }
+  .nav.menu-open .nav__toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav.menu-open .nav__toggle span:nth-child(2) { opacity: 0; }
+  .nav.menu-open .nav__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile panel */
+  .mobile {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(86vw, 380px);
+    background: var(--color-cream);
+    border-left: 1px solid var(--color-line);
+    box-shadow: var(--shadow-lg);
+    padding: 6rem 1.6rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transform: translateX(100%);
+    transition: transform 0.42s var(--ease-emphasis);
+    z-index: 45;
+    overflow-y: auto;
+  }
+  .mobile[hidden] { display: flex; }
+  .nav.menu-open .mobile { transform: translateX(0); }
+  .mobile__links { display: flex; flex-direction: column; gap: 0.2rem; }
+  .mobile__link {
+    font-family: var(--font-head);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-deep-green);
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .mobile__link.is-active { color: var(--color-lime-deep); }
+  .mobile__footer { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+  .mobile__cta { width: 100%; padding: 1em; }
+  .mobile__phone {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-sage);
+  }
+
+  .nav__scrim {
+    position: fixed; inset: 0;
+    background: rgba(12, 31, 24, 0.4);
+    opacity: 0; pointer-events: none;
+    transition: opacity var(--dur) var(--ease-soft);
+    z-index: 44;
+  }
+  .nav.menu-open .nav__scrim { opacity: 1; pointer-events: auto; }
+
+  @media (min-width: 960px) {
+    .nav__links { display: flex; }
+    .nav__phone { display: inline-flex; }
+    .nav__toggle { display: none; }
+  }
+</style>
+
+<div class="nav__scrim" data-menu-scrim aria-hidden="true"></div>
+
+<script>
+  const header = document.querySelector('[data-nav]');
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const scrim = document.querySelector('[data-menu-scrim]');
+  const panel = document.querySelector('[data-menu]');
+
+  function setMenu(open: boolean) {
+    if (!header || !toggle) return;
+    header.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+    const lenis = (window as unknown as { __lenis?: { stop: () => void; start: () => void } }).__lenis;
+    if (lenis) { open ? lenis.stop() : lenis.start(); }
+  }
+
+  toggle?.addEventListener('click', () => {
+    setMenu(!header?.classList.contains('menu-open'));
+  });
+  scrim?.addEventListener('click', () => setMenu(false));
+  panel?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false);
+  });
+</script>

@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+const carriers = ['Blue Cross Blue Shield', 'Cigna', 'Aetna', 'UnitedHealthcare', 'Tricare'];
+const steps = [
+  { n: '01', t: 'Share your insurance', b: 'Tell us your plan when we talk — that’s all we need to get started.' },
+  { n: '02', t: 'We verify benefits', b: 'Our team confirms your coverage and what to expect, before day one.' },
+  { n: '03', t: 'You get a clear picture', b: 'No surprise bills. You’ll know where you stand before your teen begins.' },
+];
+const faqs = [
+  { q: 'What if you’re out-of-network with my plan?', a: 'We’ll still verify your out-of-network benefits and walk you through your options honestly. Many plans reimburse a portion of out-of-network care.' },
+  { q: 'Do you offer self-pay?', a: 'Yes. If insurance isn’t the right path for your family, we’ll give you transparent self-pay pricing — no hidden fees.' },
+  { q: 'Will I get a surprise bill?', a: 'No. We verify your benefits up front and tell you what to expect before your teen starts. That’s the whole point of doing it first.' },
+];
+---
+<Base
+  title="Insurance & Cost | Joshua Tree Health"
+  description="Joshua Tree Health is in-network with BCBS, Cigna, Aetna, UnitedHealthcare, and Tricare. We verify your benefits before you start — no surprise bills."
+>
+  <PageHero
+    eyebrow="Insurance & cost"
+    title="Covered by most major plans.<br>We <em>verify it</em> up front."
+    sub="We're in-network with the big carriers, and we check your benefits before your teen starts — so there are no surprises."
+    primaryCta={{ label: 'Check your coverage', href: '/admissions' }}
+  />
+
+  <section class="section" aria-labelledby="carriers-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">In-network</p>
+        <h2 class="section-title font-display" id="carriers-title">Plans we work with.</h2>
+      </div>
+      <div class="carriers" data-reveal-group>
+        {carriers.map((c) => <div class="carrier" data-reveal-item>{c}</div>)}
+      </div>
+      <p class="form__note" data-reveal style="margin-top:1.5rem;">Don't see your plan? We'll still verify your out-of-network benefits — just ask.</p>
+    </div>
+  </section>
+
+  <section class="section surface-cream-deep" aria-labelledby="ins-steps-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">How we handle it</p>
+        <h2 class="section-title font-display" id="ins-steps-title">We do the paperwork. You get clarity.</h2>
+      </div>
+      <ol class="process__steps" data-reveal-group>
+        {steps.map((s) => (
+          <li class="step" data-reveal-item>
+            <span class="step__num">{s.n}</span>
+            <h3 class="step__title">{s.t}</h3>
+            <p class="step__body">{s.b}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ins-faq-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Common questions</p>
+        <h2 class="section-title font-display" id="ins-faq-title">The money questions, answered.</h2>
+      </div>
+      <div class="faq" data-reveal>
+        {faqs.map((f) => (
+          <details class="faq__item">
+            <summary>{f.q}</summary>
+            <p class="faq__answer">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .carriers { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  .carrier {
+    font-family: var(--font-head); font-weight: 600; font-size: 1.05rem;
+    color: var(--color-deep-green);
+    background: var(--color-cream-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 0.8rem 1.4rem;
+  }
+</style>
