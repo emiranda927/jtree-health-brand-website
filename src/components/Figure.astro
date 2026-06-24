@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  tone?: 'cream' | 'lavender' | 'lime';
+  class?: string;
+}
+const { src, alt, tone = 'cream', class: className = '' } = Astro.props;
+const toneClass = tone === 'lavender' ? 'figure--lavender' : tone === 'lime' ? 'figure--lime' : '';
+---
+<figure class={`figure ${toneClass} ${className}`.trim()}>
+  <Image
+    src={src}
+    alt={alt}
+    widths={[420, 640, 900]}
+    sizes="(min-width: 880px) 44vw, 92vw"
+    class="figure__img"
+  />
+</figure>

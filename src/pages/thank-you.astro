@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+const next = [
+  { n: '01', t: 'We review your note', b: 'A real member of our admissions team reads it — not a bot.' },
+  { n: '02', t: 'We call you', b: 'Within one business day, at the number you gave us.' },
+  { n: '03', t: 'We find the fit', b: 'Together we figure out the right next step for your teen.' },
+];
+---
+<Base
+  title="Thank you | Joshua Tree Health"
+  description="Thanks for reaching out to Joshua Tree Health. We'll call you within one business day."
+>
+  <PageHero
+    center
+    eyebrow="Request received"
+    title="Thanks — we'll be in <em>touch</em>."
+    sub="We've got your request, and someone from our admissions team will call you within one business day. Take a breath. You've done the hard part."
+    primaryCta={{ label: 'Back to home', href: '/' }}
+    secondaryCta={{ label: 'Explore programs', href: '/programs' }}
+  />
+
+  <section class="section section--tight" aria-label="What happens next">
+    <div class="container-x">
+      <ol class="process__steps" data-reveal-group>
+        {next.map((s) => (
+          <li class="step" data-reveal-item>
+            <span class="step__num">{s.n}</span>
+            <h2 class="step__title">{s.t}</h2>
+            <p class="step__body">{s.b}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Crisis">
+    <div class="container-x">
+      <div class="callout surface-green" data-reveal>
+        <div class="callout__text">
+          <h2 class="section-title font-display">Need help right now?</h2>
+          <p class="section-sub">If your teen is in crisis and can't wait for our call, you don't have to either. Call or text 988 any time, day or night.</p>
+        </div>
+        <a href="tel:988" class="btn btn--on-dark callout__cta">Call or text 988</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  // Fire the GA4 conversion only when we arrived from a real submission.
+  (function () {
+    var fired = false;
+    try { fired = sessionStorage.getItem('jth_inquiry_done') === '1'; } catch (e) {}
+    if (!fired) return;
+    try { sessionStorage.removeItem('jth_inquiry_done'); } catch (e) {}
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'inquiry_submitted' });
+  })();
+</script>
+
+<style>
+  .section--tight { padding-block: clamp(2.5rem, 2rem + 3vw, 4rem); }
+</style>

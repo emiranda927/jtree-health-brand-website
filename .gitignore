@@ -1,46 +1,22 @@
-# macOS
-.DS_Store
-
-# IDE / editor
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Dependencies
-node_modules/
-
-# Build output
+# build output
 dist/
-.next/
+.output/
 .vercel/
 
-# Environment variables
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# env
 .env
+.env.production
 .env.local
-.env.*.local
 
-# Logs
-*.log
+# logs
 npm-debug.log*
+*.log
 
-# Test coverage
-coverage/
-*.lcov
-
-# Local credential files
-*.pem
-service-account*.json
-
-# WP Engine / SFTP artifacts
-.wpe/
-
-# Generated images / cache
-assets/cache/
-
-# impeccable live-mode local shim (rewritten every session)
-jtree-wp-theme/_live-inject-shim.html
-
-# OS metadata
-Thumbs.db
-ehthumbs.db
+# macOS
+.DS_Store

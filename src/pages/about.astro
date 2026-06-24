@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { Image } from 'astro:assets';
+import gabyImg from '../assets/images/Gaby-founder-headshot.JPG';
+
+const values = [
+  { name: 'Grounded', body: 'We assess honestly. We recommend what’s right — even when it’s not the easy answer.' },
+  { name: 'Genuine', body: 'No corporate distance. No clinical gloss. Just real people doing real work.' },
+  { name: 'Growth-focused', body: 'We track outcomes, and families see the data. Progress you can actually measure.' },
+];
+---
+<Base
+  title="About — Named for a desert plant, and a brother | Joshua Tree Health"
+  description="Why Joshua Tree Health exists: adolescent PHP & IOP in Apex, NC, named for a desert plant — and for a brother lost too soon. Grounded, genuine, growth-focused."
+>
+  <PageHero
+    eyebrow="About Joshua Tree Health"
+    title="We built JTree because we know what it costs when <em>care comes too late</em>."
+    sub="Named for a desert plant — and for a brother we lost too soon."
+  />
+
+  <!-- Origin story -->
+  <section class="section" aria-labelledby="story-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Our story</p>
+        <h2 class="section-title font-display" id="story-title">Why we're named the way we are.</h2>
+      </div>
+      <div class="prose" data-reveal>
+        <p class="lead">The Joshua tree grows slowly, in a shape entirely its own — deep roots, a long timeline, and a silhouette you'd recognize anywhere.</p>
+        <p>It survives the desert not by rushing, but by holding on. That's how we think about adolescence, and about healing: not as a problem to be solved on someone else's schedule, but as a desert to be navigated — with the right support, and enough time.</p>
+        <p>We're also named for <strong>Josh</strong> — a brother lost too soon, when care moved too slowly to reach him in time. Joshua Tree Health exists so that other families don't have to wait. So that help arrives quickly, fits around real life, and treats a teen like a person worth knowing — never a case to be processed.</p>
+        <p>That's the whole reason we're here. No corporate gloss. No clinical distance. Just the kind of care we wish had been there.</p>
+        <p class="lead">Like the tree: deep roots. A long timeline. A shape completely its own.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="section" aria-labelledby="founder-title">
+    <div class="container-x">
+      <div class="split founder">
+        <figure class="founder__media" data-reveal>
+          <Image src={gabyImg} alt="Gabriela Forter, founder of Joshua Tree Health" widths={[420, 640, 900]} sizes="(min-width: 880px) 44vw, 92vw" class="founder__img" />
+          <figcaption class="founder__cap">Gabriela Forter · Founder</figcaption>
+        </figure>
+        <div data-reveal data-reveal-delay="0.08">
+          <p class="eyebrow">The founder</p>
+          <h2 class="section-title font-display" id="founder-title">Built from what was missing.</h2>
+          <p class="section-sub">Gabriela founded Joshua Tree Health to build the kind of care her brother Josh didn't have — care that reaches families in time, treats teens like people, and doesn't make you fight the system to get it.</p>
+          <p class="founder__bio">She brings a background in healthcare investing, AI, and operations — an MBA from Stanford and a Master in Public Administration from Harvard Kennedy School — and a long-running focus on expanding access to mental-health care for communities that have gone without it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section surface-cream-deep" aria-labelledby="values-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">What we stand for</p>
+        <h2 class="section-title font-display" id="values-title">Three commitments we make to every family.</h2>
+        <p class="section-sub">Our values aren't a waiting-room poster. They're in how we assess, how we show up, and how we measure what matters.</p>
+      </div>
+      <div class="grid-3" data-reveal-group>
+        {values.map((v) => (
+          <article class="info-card" data-reveal-item>
+            <p class="value-tag">{v.name}</p>
+            <p class="info-card__body">{v.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section" aria-labelledby="team-title">
+    <div class="container-x">
+      <div class="split">
+        <div data-reveal>
+          <p class="eyebrow">Our team</p>
+          <h2 class="section-title font-display" id="team-title">The people in the room with your teen.</h2>
+          <p class="section-sub">Licensed clinicians and psychiatrists who chose adolescent mental health on purpose — and stay because the work matters. Low turnover, high trust, the same faces week after week.</p>
+        </div>
+        <div class="carf-card card" data-reveal data-reveal-delay="0.08">
+          <p class="eyebrow eyebrow--plain">Accreditation</p>
+          <p class="carf-card__title font-display">CARF accredited.</p>
+          <p class="carf-card__body">CARF accreditation is the gold standard in behavioral health — an independent, rigorous review of safety, ethics, and quality of care. Joshua Tree Health has earned it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="quote surface-lavender" aria-label="Parent testimonial">
+    <div class="container-x">
+      <div class="pullquote">
+        <span class="pullquote__mark" aria-hidden="true">“</span>
+        <p class="pullquote__text" data-reveal>I didn't know if this was the right level of care. It was. They met my son exactly where he was.</p>
+        <p class="pullquote__cite" data-reveal data-reveal-delay="0.08">Parent of a JTree Health teen</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .value-tag { font-family: var(--font-head); font-weight: 600; font-size: 1.3rem; color: var(--color-deep-green); }
+  .carf-card { padding: clamp(1.6rem, 1rem + 2vw, 2.4rem); display: flex; flex-direction: column; gap: 0.8rem; }
+  .carf-card__title { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.2rem); color: var(--color-deep-green); }
+  .carf-card__body { color: var(--color-ink-soft); line-height: 1.6; }
+
+  .founder__media { margin: 0; }
+  .founder__img { width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); aspect-ratio: 4 / 5; object-fit: cover; object-position: 40% 28%; }
+  .founder__cap { margin-top: 0.9rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-sage); }
+  .founder__bio { margin-top: 1.1rem; color: var(--color-ink-soft); line-height: 1.65; }
+</style>

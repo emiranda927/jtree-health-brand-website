@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+const expect = [
+  { title: 'Weekly family sessions', body: "You're not on the outside looking in. Family work is part of the plan, every week." },
+  { title: 'Real updates', body: 'You’ll know how your teen is doing — in plain language, not clinical jargon.' },
+  { title: 'A measurable plan', body: 'Clear goals and progress you can actually see, from week one.' },
+  { title: 'Honest recommendations', body: "If we're not the right level of care, we'll tell you — and help you find what is." },
+];
+
+const faqs = [
+  { q: 'How involved will I be?', a: 'Deeply. Family sessions happen weekly, and you’ll always know what’s happening with your teen’s care. Healing lasts longer when the whole family is part of it.' },
+  { q: 'Will my teen fall behind in school?', a: 'PHP includes on-site academic support, and IOP is built around the school day so your teen keeps attending class. We protect their education, not just their treatment.' },
+  { q: 'Is this covered by insurance?', a: 'We’re in-network with BCBS, Cigna, Aetna, UHC, and Tricare, and we verify your benefits before you start — so there are no surprises.' },
+  { q: 'How fast can my teen start?', a: 'Usually within 3–5 business days of your first call. There’s no waitlist.' },
+  { q: 'What if PHP or IOP isn’t the right fit?', a: 'We’ll say so honestly and help you find the right level of care, even if it’s somewhere other than here.' },
+];
+---
+<Base
+  title="For Parents — What to expect | Joshua Tree Health"
+  description="What working with Joshua Tree Health actually looks like for parents: weekly family sessions, real updates, insurance verified up front, and no waitlist."
+>
+  <PageHero
+    eyebrow="For parents"
+    title="You're carrying a lot.<br>Let us carry <em>some of it</em>."
+    sub="When your teen is struggling, you're struggling too. Here's what working with us actually looks like — and how we keep you in the loop the whole way."
+    primaryCta={{ label: 'Start the Conversation', href: '/admissions' }}
+    secondaryCta={{ label: 'See our programs', href: '/programs' }}
+  />
+
+  <section class="section" aria-labelledby="expect-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">What to expect</p>
+        <h2 class="section-title font-display" id="expect-title">Four things we commit to, every time.</h2>
+      </div>
+      <div class="grid-4" data-reveal-group>
+        {expect.map((e) => (
+          <article class="info-card" data-reveal-item>
+            <h3 class="info-card__title">{e.title}</h3>
+            <p class="info-card__body">{e.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section surface-cream-deep" aria-labelledby="parent-faq-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Questions parents ask</p>
+        <h2 class="section-title font-display" id="parent-faq-title">The things you're actually wondering.</h2>
+      </div>
+      <div class="faq" data-reveal>
+        {faqs.map((f) => (
+          <details class="faq__item">
+            <summary>{f.q}</summary>
+            <p class="faq__answer">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

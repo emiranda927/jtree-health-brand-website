@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string; // may contain <em> / <br>
+  sub?: string;
+  variant?: 'cream' | 'green';
+  center?: boolean;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+}
+const { eyebrow, title, sub, variant = 'cream', center = false, primaryCta, secondaryCta } = Astro.props;
+const cls = ['page-hero', variant === 'green' && 'page-hero--green', center && 'page-hero--center']
+  .filter(Boolean)
+  .join(' ');
+---
+<section class={cls}>
+  <div class="container-x">
+    <div class="page-hero__inner" data-reveal>
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1 class="page-hero__title font-display" set:html={title}></h1>
+      {sub && <p class="page-hero__sub">{sub}</p>}
+      {(primaryCta || secondaryCta) && (
+        <div class="page-hero__actions">
+          {primaryCta && <a href={primaryCta.href} class="btn">{primaryCta.label} <span class="btn__arrow">→</span></a>}
+          {secondaryCta && <a href={secondaryCta.href} class="btn btn--ghost">{secondaryCta.label}</a>}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
