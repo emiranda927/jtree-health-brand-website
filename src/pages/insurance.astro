@@ -1,0 +1,163 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+const carriers = [
+  'Blue Cross Blue Shield of NC',
+  'Aetna',
+  'UnitedHealthcare / Optum',
+  'Cigna / Evernorth',
+  'Tricare',
+];
+
+const terms = [
+  {
+    t: 'Copay',
+    b: 'A flat, fixed amount you pay per session, determined by your plan.',
+  },
+  {
+    t: 'Coinsurance',
+    b: 'A percentage of the service cost you pay after your deductible is met.',
+  },
+  {
+    t: 'Deductible',
+    b: 'The amount you pay out of pocket before your insurance starts covering services.',
+  },
+];
+
+const insurerQuestions = [
+  'Is Joshua Tree Health in network with my specific plan?',
+  'Does my plan cover Partial Hospitalization (PHP) or Intensive Outpatient (IOP) programs?',
+  'What is my deductible, and how much of it have I met?',
+  'Am I responsible for a copay or coinsurance for these services?',
+  'What billing codes will be used? (We can provide these on request.)',
+];
+
+const howWeHelp = [
+  'Check your benefits before care begins',
+  'Walk you through what your plan covers for PHP and IOP specifically',
+  'Answer questions about copays, deductibles, and what to expect at billing',
+  'Help you understand your coverage before you commit to anything',
+];
+
+const faqs = [
+  {
+    q: 'How is PHP or IOP billed differently from regular therapy?',
+    a: 'PHP and IOP programs are billed differently from weekly outpatient therapy. That is one of the most common points of confusion for families, so we walk you through how your specific plan applies to our programs before you commit to anything.',
+  },
+  {
+    q: 'What if you are out of network with my plan?',
+    a: 'We will still check your out-of-network benefits and walk you through your options honestly. Many plans reimburse a portion of out-of-network care.',
+  },
+  {
+    q: 'Will I get a surprise bill?',
+    a: 'No. We check your benefits before care begins and tell you what to expect, so you understand your coverage before your teen starts.',
+  },
+];
+---
+<Base
+  title="Insurance — Joshua Tree Health"
+  description="Joshua Tree Health is in-network with BCBS NC, Aetna, UnitedHealthcare/Optum, Cigna/Evernorth, and Tricare. We check your benefits and explain your coverage before care begins."
+>
+  <PageHero
+    title="In-network care. Clear next steps."
+    sub="We work with major insurance providers and will help you understand your coverage before care begins."
+    primaryCta={{ label: 'Check Your Coverage', href: '/admissions' }}
+  />
+
+  <!-- ===== WHAT IN-NETWORK MEANS ===== -->
+  <section class="section" aria-labelledby="terms-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <h2 class="section-title font-display" id="terms-title">Understanding how your insurance works.</h2>
+        <p class="section-sub">A few terms come up again and again when families call about coverage. Here is what each one means in plain language.</p>
+      </div>
+      <div class="grid-3" data-reveal-group>
+        {terms.map((term) => (
+          <div class="info-card" data-reveal-item>
+            <h3 class="info-card__title">{term.t}</h3>
+            <p class="info-card__body">{term.b}</p>
+          </div>
+        ))}
+      </div>
+      <p class="prose" data-reveal style="margin-top:2rem;max-width:60ch;">
+        PHP and IOP programs are billed differently from outpatient therapy. We will walk you through how your specific plan applies to our programs before you commit to anything.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== IN-NETWORK INSURERS ===== -->
+  <section class="section surface-cream-deep" aria-labelledby="carriers-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">In-network</p>
+        <h2 class="section-title font-display" id="carriers-title">We're in-network with:</h2>
+      </div>
+      <div class="carriers" data-reveal-group>
+        {carriers.map((c) => <div class="carrier" data-reveal-item>{c}</div>)}
+      </div>
+      <p class="section-sub" data-reveal style="margin-top:1.5rem;">If you don't see your plan here, we'll still check your out-of-network benefits and walk you through your options.</p>
+    </div>
+  </section>
+
+  <!-- ===== QUESTIONS TO ASK YOUR INSURER ===== -->
+  <section class="section" aria-labelledby="questions-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <h2 class="section-title font-display" id="questions-title">Questions to ask your insurer.</h2>
+        <p class="section-sub">If you'd like to check things yourself before you call us, these are the questions to ask.</p>
+      </div>
+      <ul class="checklist" data-reveal>
+        {insurerQuestions.map((q) => <li>{q}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== HOW WE HELP ===== -->
+  <section class="section surface-cream-deep" aria-labelledby="help-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <h2 class="section-title font-display" id="help-title">How we help.</h2>
+        <p class="section-sub">You don't have to sort this out alone. Our admissions team will:</p>
+      </div>
+      <ul class="checklist" data-reveal>
+        {howWeHelp.map((item) => <li>{item}</li>)}
+      </ul>
+      <div class="section-head section-head--center" data-reveal style="margin-top:2.5rem;">
+        <a class="btn" href="/admissions">Check Your Coverage<span class="btn__arrow">→</span></a>
+        <p class="section-sub" style="margin-top:1rem;">
+          <a class="link-arrow" href="tel:+19193355053">Call (919) 335-5053</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section" aria-labelledby="ins-faq-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <h2 class="section-title font-display" id="ins-faq-title">Common questions about coverage.</h2>
+      </div>
+      <div class="faq" data-reveal>
+        {faqs.map((f) => (
+          <details class="faq__item">
+            <summary>{f.q}</summary>
+            <div class="faq__answer">{f.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .carriers { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  .carrier {
+    font-family: var(--font-head); font-weight: 600; font-size: 1.05rem;
+    color: var(--color-deep-green);
+    background: var(--color-cream-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    padding: 0.8rem 1.4rem;
+  }
+</style>

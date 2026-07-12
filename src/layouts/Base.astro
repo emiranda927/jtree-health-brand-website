@@ -1,0 +1,145 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/sora';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/caveat';
+import '../styles/global.css';
+import CrisisBar from '../components/CrisisBar.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  bodyClass?: string;
+}
+
+const {
+  title = 'Joshua Tree Health — Adolescent PHP & IOP in Apex, NC',
+  description = 'Trauma-informed PHP and IOP mental health programs for teens ages 10–17 in Apex, NC. No waitlist. In-network with major insurers. Start the conversation.',
+  ogImage = '/og-image.jpg',
+  bodyClass = '',
+} = Astro.props;
+
+const site = Astro.site ?? 'https://www.jtreehealth.com';
+const canonical = new URL(Astro.url.pathname, site);
+const ogImageUrl = new URL(ogImage, site).href;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['MedicalBusiness', 'MentalHealthCenter'],
+  name: 'Joshua Tree Health',
+  description:
+    'Trauma-informed PHP and IOP mental health programs for teens ages 10–17 in Apex, NC.',
+  url: 'https://www.jtreehealth.com',
+  telephone: '+1-919-335-5053',
+  email: 'hello@jtreehealth.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '800 West Williams St, STE 203',
+    addressLocality: 'Apex',
+    addressRegion: 'NC',
+    postalCode: '27502',
+    addressCountry: 'US',
+  },
+  areaServed: ['Apex', 'Cary', 'Raleigh', 'Durham', 'Chapel Hill'],
+  medicalSpecialty: 'Psychiatric',
+};
+
+// Public config (env-driven; safe to expose). Defaults match the live setup.
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID || 'GTM-WGCMNLXH';
+const INQUIRY_API = import.meta.env.PUBLIC_INQUIRY_API_URL || 'https://api.jtreehealth.com/api/inquiry';
+const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+const jtreeConfig = {
+  apiUrl: INQUIRY_API,
+  partialApiUrl: INQUIRY_API.replace(/\/$/, '') + '/partial',
+  careersApiUrl: INQUIRY_API.replace(/\/api\/inquiry$/, '/api/careers/apply'),
+  thankYouUrl: '/thank-you/',
+  turnstileSiteKey: TURNSTILE_SITE_KEY,
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/brand/favicon-64.png" />
+    <link rel="apple-touch-icon" href="/brand/app-icon-180.png" />
+    <meta name="theme-color" content="#183b2e" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonical.href} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} is:inline />
+
+    <!-- No-FOUC: flag JS + reduced-motion before first paint -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('has-js');
+        try {
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            d.classList.add('reduced-motion');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Consent Mode v2 default (deny until accepted) + site config -->
+    <script is:inline set:html={`window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};var c=null;try{c=localStorage.getItem('jth_consent');}catch(e){}window.gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:c==='granted'?'granted':'denied',wait_for_update:500});window.JTREE_CONFIG=${JSON.stringify(jtreeConfig)};`} />
+
+    <!-- Google Tag Manager -->
+    <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`} />
+  </head>
+  <body class={bodyClass}>
+    <noscript set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`} />
+    <a href="#main" class="skip-link">Skip to content</a>
+    <CrisisBar />
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <div class="grain grain--fixed" aria-hidden="true"></div>
+    <CookieConsent />
+
+    <script>
+      import { initMotion } from '../lib/motion';
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => initMotion(), { once: true });
+      } else {
+        initMotion();
+      }
+    </script>
+
+    <style is:global>
+      .skip-link {
+        position: fixed;
+        top: 0.5rem;
+        left: 0.5rem;
+        z-index: 100;
+        padding: 0.6rem 1rem;
+        background: var(--color-deep-green);
+        color: var(--color-cream);
+        border-radius: var(--radius-pill);
+        font-size: 0.85rem;
+        font-weight: 600;
+        transform: translateY(-150%);
+        transition: transform var(--dur) var(--ease-soft);
+      }
+      .skip-link:focus { transform: translateY(0); }
+    </style>
+  </body>
+</html>

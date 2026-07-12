@@ -1,0 +1,28 @@
+{
+  "name": "jtree-health",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3",
+    "@fontsource-variable/caveat": "^5",
+    "@fontsource-variable/fraunces": "^5",
+    "@fontsource-variable/inter": "^5",
+    "@fontsource-variable/jetbrains-mono": "^5",
+    "@fontsource-variable/sora": "^5",
+    "astro": "^5",
+    "gsap": "^3",
+    "lenis": "^1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4",
+    "tailwindcss": "^4"
+  }
+}

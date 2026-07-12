@@ -1,0 +1,126 @@
+---
+const year = 2026;
+const explore = [
+  { label: 'What We Treat', href: '/what-we-treat' },
+  { label: 'What We Offer', href: '/what-we-offer' },
+  { label: 'For Parents', href: '/for-parents' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Learning Hub', href: '/learning-hub' },
+];
+const care = [
+  { label: 'Admissions', href: '/admissions' },
+  { label: 'Insurance', href: '/insurance' },
+  { label: 'Service Area', href: '/service-area' },
+  { label: 'Refer a Patient', href: '/refer' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Careers', href: '/careers' },
+];
+---
+<footer class="footer surface-green">
+  <div class="container-x">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/brand/logo-inverted-cream.svg" alt="Joshua Tree Health" class="footer__logo" width="210" height="40" />
+        <p class="footer__tagline">
+          Adolescent PHP &amp; IOP in Apex, NC.
+        </p>
+        <p class="footer__crisis">
+          In crisis? Call or text <a href="tel:988">988</a>, or text HOME to <a href="sms:741741">741741</a>.
+        </p>
+      </div>
+
+      <nav class="footer__col" aria-label="Explore">
+        <h3 class="footer__heading">Explore</h3>
+        {explore.map((l) => <a href={l.href} class="footer__link">{l.label}</a>)}
+      </nav>
+
+      <nav class="footer__col" aria-label="Get care">
+        <h3 class="footer__heading">Get care</h3>
+        {care.map((l) => <a href={l.href} class="footer__link">{l.label}</a>)}
+      </nav>
+
+      <div class="footer__col footer__contact">
+        <h3 class="footer__heading">Visit</h3>
+        <address class="footer__address">
+          800 West Williams St, STE 203<br />
+          Apex, NC 27502
+        </address>
+        <a href="tel:+19193355053" class="footer__link footer__link--strong">(919) 335-5053</a>
+        <a href="mailto:hello@jtreehealth.com" class="footer__link">hello@jtreehealth.com</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© {year} Joshua Tree Health, Inc. All rights reserved.</p>
+      <div class="footer__legal">
+        <a href="/privacy">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="/crisis">Crisis Resources</a>
+        <span aria-hidden="true">·</span>
+        <span>CARF Accredited</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { padding-block: clamp(3.5rem, 2rem + 6vw, 6rem) 2.5rem; position: relative; overflow: hidden; }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem 2rem;
+  }
+  .footer__logo { height: 34px; width: auto; margin-bottom: 1.2rem; }
+  .footer__tagline {
+    color: var(--color-cream-dim);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    max-width: 34ch;
+  }
+  .footer__crisis { margin-top: 1rem; font-size: 0.86rem; color: rgba(246, 244, 236, 0.62); }
+  .footer__crisis a { color: var(--color-lime); border-bottom: 1px solid rgba(200, 232, 105, 0.3); }
+
+  .footer__col { display: flex; flex-direction: column; gap: 0.7rem; }
+  .footer__heading {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-lime);
+    margin-bottom: 0.3rem;
+  }
+  .footer__link {
+    color: var(--color-cream-dim);
+    font-size: 0.98rem;
+    width: fit-content;
+    transition: color var(--dur) var(--ease-soft);
+  }
+  .footer__link:hover { color: var(--color-cream); }
+  .footer__link--strong { color: var(--color-cream); font-weight: 600; }
+  .footer__address { font-style: normal; color: var(--color-cream-dim); font-size: 0.98rem; line-height: 1.6; margin-bottom: 0.2rem; }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: clamp(2.5rem, 2rem + 3vw, 4rem);
+    padding-top: 1.8rem;
+    border-top: 1px solid rgba(246, 244, 236, 0.14);
+    font-size: 0.82rem;
+    color: rgba(246, 244, 236, 0.55);
+  }
+  .footer__legal { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+  .footer__legal a { transition: color var(--dur) var(--ease-soft); }
+  .footer__legal a:hover { color: var(--color-cream); }
+
+  @media (min-width: 640px) {
+    .footer__grid { grid-template-columns: 1.6fr 1fr 1fr; }
+    .footer__brand { grid-column: 1 / -1; }
+  }
+  @media (min-width: 900px) {
+    .footer__grid { grid-template-columns: 2.2fr 1fr 1fr 1.4fr; }
+    .footer__brand { grid-column: auto; }
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+
+const conditions = [
+  { title: 'Anxiety & panic', body: 'Overwhelming worry, panic attacks, and the avoidance that builds up around them.' },
+  { title: 'Depression', body: 'Low mood, hopelessness, withdrawal, and the heaviness that makes daily life hard.' },
+  { title: 'Trauma & PTSD', body: 'The lasting weight of frightening or painful experiences, met with trauma-informed care.' },
+  { title: 'Self-harm & safety', body: 'Self-harming behaviors and safety concerns, addressed with structure and without judgment.' },
+  { title: 'Suicidal ideation', body: 'Suicidal thoughts that need more support than weekly therapy, but don’t require hospitalization.' },
+  { title: 'School avoidance', body: 'School refusal and the anxiety, perfectionism, or burnout underneath it.' },
+  { title: 'Emotional dysregulation', body: 'Big emotions and impulsive reactions, and the skills to manage them.' },
+  { title: 'OCD & related', body: 'Intrusive thoughts and compulsions that have taken up too much room.' },
+  { title: 'Grief & loss', body: 'Loss, life change, and grief that doesn’t follow a straight line.' },
+];
+---
+<Base
+  title="What We Treat — Joshua Tree Health"
+  description="Anxiety, depression, trauma, self-harm, school avoidance and more — evidence-based PHP and IOP care for teens ages 10–17 in Apex, NC."
+>
+  <PageHero
+    title="The struggles we help teens move <em>through</em>."
+    sub="We work with adolescents through everyday struggles and harder crises alike. If your teen is having a hard time, there's a good chance we can help."
+    primaryCta={{ label: 'Start the Conversation', href: '/admissions' }}
+    secondaryCta={{ label: 'Reach Out', href: '/contact' }}
+  />
+
+  <!-- ===== INTRO ===== -->
+  <section class="section" aria-labelledby="intro-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <h2 class="section-title font-display" id="intro-title">From everyday struggles to harder crises.</h2>
+        <p class="section-sub">Teens go through all kinds of things that start getting in the way of daily life. The anxiety that makes it impossible to go to school. The low mood that turns into weeks of withdrawal. The big emotional reactions that nobody — including your teen — can predict or explain. The intrusive thoughts that have taken up too much room. The grief that doesn't follow a straight line.</p>
+        <p class="section-sub">First, we'll understand what's going on. Then we'll know how to help.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONDITION CARDS ===== -->
+  <section class="section surface-cream-deep" aria-labelledby="conditions-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">What we work with</p>
+        <h2 class="section-title font-display" id="conditions-title">Common struggles. Structured help.</h2>
+      </div>
+      <div class="grid-3" data-reveal-group>
+        {conditions.map((c) => (
+          <article class="info-card info-card--hover" data-reveal-item>
+            <h3 class="info-card__title">{c.title}</h3>
+            <p class="info-card__body">{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APPROACH SUMMARY ===== -->
+  <section class="section" aria-labelledby="approach-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Our approach</p>
+        <h2 class="section-title font-display" id="approach-title">Evidence-based, and human.</h2>
+        <p class="section-sub">Every plan is built around the teen in the room, not just the diagnosis. We treat the whole person.</p>
+        <a href="/what-we-offer/our-approach" class="link-arrow">See our full approach →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CLOSING CTA ===== -->
+  <section class="section" aria-labelledby="fit-title">
+    <div class="container-x">
+      <div class="callout surface-green" data-reveal>
+        <div class="callout__text">
+          <h2 class="section-title font-display" id="fit-title">Not sure we're the right fit?</h2>
+          <p class="section-sub">That's exactly what an admissions call is for. We'll talk it through, and if we're not the right level of care, we'll tell you and help you find what is.</p>
+        </div>
+        <a href="/admissions" class="btn btn--on-dark callout__cta">Start the Conversation <span class="btn__arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+</Base>
