@@ -1,6 +1,7 @@
 ---
-// Deny-by-default cookie consent. Updates Google Consent Mode v2 on accept.
-// Pairs with the consent default set in Base.astro <head>.
+// Opt-out cookie notice: analytics run by default (Consent Mode default set in
+// Base.astro <head>); Decline updates Consent Mode to denied and persists the
+// choice, which the Base.astro default honors on later visits.
 ---
 <div class="cc" id="cookie-consent" role="dialog" aria-label="Cookie consent" hidden>
   <p class="cc__text">
