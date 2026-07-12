@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+<Base
+  title="Blog — Joshua Tree Health"
+  description="Articles for parents and teens from Joshua Tree Health are on the way. In the meantime, reach out with any questions and we'll respond within one business day."
+>
+  <PageHero
+    title="Blog"
+    sub="Articles for parents and teens are on the way."
+  />
+
+  <!-- ===== COMING SOON ===== -->
+  <section class="section" aria-labelledby="blog-soon-title">
+    <div class="container-x">
+      <div class="prose" data-reveal>
+        <h2 class="section-title font-display" id="blog-soon-title">We're still writing.</h2>
+        <p class="lead">
+          We're putting together clear, practical articles for parents and teens
+          navigating adolescent mental health care. They aren't ready to share yet,
+          so there's nothing here to read just now.
+        </p>
+        <p>
+          In the meantime, if you have a question about our programs, insurance, or
+          whether Joshua Tree is the right fit for your teen, please reach out. We
+          respond to every inquiry within one business day. You can
+          <a href="/contact">send us a message</a> any time, and someone on our
+          team will get back to you.
+        </p>
+        <p>
+          <a class="link-arrow" href="/learning-hub">Back to the Learning Hub</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

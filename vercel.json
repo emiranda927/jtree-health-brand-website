@@ -3,9 +3,18 @@
   "framework": "astro",
   "redirects": [
     { "source": "/parent-guide", "destination": "/for-parents", "permanent": true },
-    { "source": "/home", "destination": "/", "permanent": true }
+    { "source": "/home", "destination": "/", "permanent": true },
+    { "source": "/for-teens", "destination": "/what-we-treat", "permanent": true },
+    { "source": "/programs", "destination": "/what-we-offer", "permanent": true }
   ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "jtree-health-site.vercel.app" }],
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [

@@ -1,0 +1,214 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+
+// Primary clinical differentiators — each gets its own heading and plain-language explanation.
+const primaryModalities = [
+  {
+    id: 'dbt',
+    name: 'Dialectical Behavior Therapy (DBT)',
+    body: [
+      'DBT is a structured, skills-based form of therapy developed for people who experience intense emotions. In our groups and individual sessions, teens learn four core skill sets: mindfulness, distress tolerance, emotional regulation, and interpersonal effectiveness.',
+      'These are practical tools teens practice in session and then use in the situations that matter — at home, at school, and in their relationships. DBT is one of the most evidence-based approaches available for adolescents living with anxiety, depression, self-harm, and emotional dysregulation.',
+    ],
+  },
+  {
+    id: 'polyvagal',
+    name: 'Polyvagal-Informed Care',
+    body: [
+      'Polyvagal theory explains how the nervous system responds to threat, stress, and safety, and why teens who have experienced trauma often react in ways that feel automatic, overwhelming, or hard to control.',
+      'We help teens understand what is happening in their body when they feel dysregulated, and we use that understanding as the foundation for building safety and calm — not coping strategies layered on top of an activated nervous system. This is one of the things that makes our clinical model meaningfully different from standard outpatient therapy.',
+    ],
+  },
+  {
+    id: 'trauma',
+    name: 'Trauma-Informed Care',
+    body: [
+      'Every member of our clinical team is trained in trauma-informed care. It is the baseline for how we practice, not a specialty add-on. That means we look for the story behind the behavior, we never push a teen to disclose more than they are ready to, and we structure every interaction around safety, trust, and choice.',
+      'It also means we take seriously that many teens who arrive with anxiety, depression, or emotional dysregulation are carrying trauma that has not been named yet.',
+    ],
+  },
+];
+
+// Supporting therapies — woven into every group session as standard curriculum.
+const supportingModalities = [
+  {
+    id: 'experiential',
+    name: 'Experiential Therapy',
+    body: [
+      'Experiential therapy engages the body and the environment, not just the mind, as part of the therapeutic process. For us, that includes somatic exercises that help teens notice and work with what is happening physically when emotions are activated.',
+      'This connects directly to our polyvagal-informed approach: when teens learn to read their body’s signals, they build the capacity to regulate rather than react. Our location also gives us something most clinical programs do not have. We border a lake, and we use that setting intentionally, including guided mindfulness walks that bring teens out of the clinical room and into a grounding, natural place.',
+    ],
+  },
+  {
+    id: 'expressive',
+    name: 'Expressive Therapy',
+    body: [
+      'Expressive therapy uses creative modalities like art, music, and other forms of expression as a way into emotional material that can be hard to reach through words alone.',
+      'Art therapy and music therapy are part of our group curriculum, not optional enrichment. For teens who are not yet ready to talk directly about what they are experiencing, these methods offer a way to do therapeutic work from the first day.',
+    ],
+  },
+];
+
+// Modality tags, grouped by tier, shown as chips.
+const primaryTags = [
+  'Dialectical Behavior Therapy (DBT)',
+  'Polyvagal-Informed Care',
+  'Trauma-Informed Care',
+];
+const supportingTags = [
+  'Experiential Therapy',
+  'Expressive Therapy',
+  'Art Therapy',
+  'Music Therapy',
+  'Somatic Exercises',
+  'Mindfulness Practice',
+  'Family Systems Therapy',
+];
+---
+<Base
+  title="Our Approach — Joshua Tree Health"
+  description="How we treat teens ages 10–17: DBT, polyvagal-informed care, and trauma-informed treatment, with experiential and expressive therapy woven into every group session in Apex, NC."
+>
+  <PageHero
+    title="Clinically rigorous care, delivered with warmth."
+    sub="Our treatment is grounded in evidence-based methods and designed around how teens experience distress — not just how it's classified."
+  />
+
+  <!-- ===== INTRO ===== -->
+  <section class="section" aria-labelledby="intro-title">
+    <div class="container-x">
+      <div class="prose" data-reveal>
+        <h2 class="section-title font-display" id="intro-title">One plan, built around your teen.</h2>
+        <p class="lead">We don't build one-size-fits-all care. Every teen who comes through our doors gets a treatment plan shaped around their specific needs, strengths, and goals.</p>
+        <p>All of our clinical staff are trained in trauma-informed care. Our approach centers on three methods that set our model apart: DBT, polyvagal-informed care, and trauma-informed treatment, with experiential and expressive therapies woven into every group session.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRIMARY MODALITIES ===== -->
+  <section class="section surface-cream-deep" aria-labelledby="primary-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Core methods</p>
+        <h2 class="section-title font-display" id="primary-title">The three methods at the center of our care.</h2>
+        <p class="section-sub">You don't need a clinical background to understand what each one means for your teen. Here's what they are and how we use them.</p>
+      </div>
+      <div class="grid-3" data-reveal-group>
+        {primaryModalities.map((m) => (
+          <article class="info-card" id={m.id} data-reveal-item>
+            <h3 class="info-card__title">{m.name}</h3>
+            {m.body.map((p) => (
+              <p class="info-card__body">{p}</p>
+            ))}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SUPPORTING MODALITIES ===== -->
+  <section class="section" aria-labelledby="supporting-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Woven in</p>
+        <h2 class="section-title font-display" id="supporting-title">Experiential and expressive therapy, in every group.</h2>
+        <p class="section-sub">These are distinct kinds of therapy, and they're a standard part of the curriculum — not add-ons a teen has to earn or opt into.</p>
+      </div>
+      <div class="grid-2" data-reveal-group>
+        {supportingModalities.map((m) => (
+          <article class="info-card info-card--hover" id={m.id} data-reveal-item>
+            <h3 class="info-card__title">{m.name}</h3>
+            {m.body.map((p) => (
+              <p class="info-card__body">{p}</p>
+            ))}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MODALITY TAGS ===== -->
+  <section class="section surface-cream-deep" aria-labelledby="tags-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">The full toolkit</p>
+        <h2 class="section-title font-display" id="tags-title">Everything we draw on.</h2>
+        <p class="section-sub">A treatment plan pulls from these as they fit the teen in front of us.</p>
+      </div>
+      <div class="tag-groups" data-reveal>
+        <div class="tag-group">
+          <h3 class="tag-group__label">Core methods</h3>
+          <div class="tag-row">
+            {primaryTags.map((t) => (
+              <span class="chip">{t}</span>
+            ))}
+          </div>
+        </div>
+        <div class="tag-group">
+          <h3 class="tag-group__label">Supporting therapies</h3>
+          <div class="tag-row">
+            {supportingTags.map((t) => (
+              <span class="chip">{t}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAMILY INVOLVEMENT ===== -->
+  <section class="section" aria-labelledby="family-title">
+    <div class="container-x">
+      <div class="prose" data-reveal>
+        <h2 class="section-title font-display" id="family-title">Family involvement isn't optional. It's how teens get better and stay better.</h2>
+        <p>Research consistently shows that family involvement is one of the strongest predictors of positive outcomes in adolescent behavioral health treatment. Family sessions are built into every treatment plan from the first day, not offered as a separate service or an afterthought.</p>
+        <p>We work with families to understand what's happening at home, build shared language around what the teen is experiencing, and give parents and caregivers concrete tools to support their teen between sessions. Teens can't sustain change on their own if the patterns around them stay the same.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PULL-QUOTE (migrated from the retired For Teens page) ===== -->
+  <section class="section surface-lavender" aria-labelledby="quote-title">
+    <div class="container-x">
+      <figure class="pullquote" data-reveal>
+        <span class="pullquote__mark" aria-hidden="true">&ldquo;</span>
+        <blockquote class="pullquote__text font-display" id="quote-title">Small steps. Strong roots. You belong here.</blockquote>
+        <figcaption class="pullquote__cite">What we tell every teen who walks in.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== CLOSING CTA ===== -->
+  <section class="section surface-green" aria-labelledby="cta-title">
+    <div class="container-x">
+      <div class="section-head section-head--center" data-reveal>
+        <h2 class="section-title font-display" id="cta-title">It's okay if you don't know what your teen needs yet.</h2>
+        <p class="section-sub">That's what the first call is for. We'll figure it out together.</p>
+        <div class="cta-actions">
+          <a href="/admissions" class="btn btn--on-dark">Start the Conversation <span class="btn__arrow">→</span></a>
+          <a href="tel:+19193355053" class="btn btn--ghost-on-dark">Call (919) 335-5053</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tag-groups { display: grid; gap: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
+  .tag-group__label {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    margin-bottom: 0.9rem;
+  }
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+</style>

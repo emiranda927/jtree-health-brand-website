@@ -6,7 +6,7 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 
 const steps = [
   { n: '01', t: 'Fill out the form', b: 'A two-minute form. No medical details — we’ll cover those by phone.' },
-  { n: '02', t: 'We call you', b: 'A real conversation about what your teen needs — within one business day.' },
+  { n: '02', t: 'We call you', b: 'A conversation about what your teen needs, within one business day.' },
   { n: '03', t: 'Start within 3–5 days', b: 'We recommend the right level of care and build a plan together. No pressure.' },
 ];
 const ages = Array.from({ length: 8 }, (_, i) => 10 + i);
@@ -19,9 +19,8 @@ const sources = ['Google', 'Referral', 'Doctor', 'School', 'Other'];
   description="Request a callback from Joshua Tree Health. No waitlist, response within one business day, in-network with major insurers. Adolescent PHP & IOP in Apex, NC."
 >
   <PageHero
-    eyebrow="No waitlist · 1-business-day response · In-network with major insurers"
     title="Let's find the right fit for <em>your family</em>."
-    sub="Fill out the short form below and we'll call you within one business day. No commitment — just a real conversation about what your teen needs."
+    sub="Fill out the short form below and we'll call you within one business day. No commitment, just a conversation about what your teen needs."
   />
 
   <section class="section section--tight" aria-label="How it works">

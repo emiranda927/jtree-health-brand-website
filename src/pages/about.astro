@@ -5,68 +5,80 @@ import { Image } from 'astro:assets';
 import gabyImg from '../assets/images/Gaby-founder-headshot.JPG';
 
 const values = [
-  { name: 'Grounded', body: 'We assess honestly. We recommend what’s right — even when it’s not the easy answer.' },
-  { name: 'Genuine', body: 'No corporate distance. No clinical gloss. Just real people doing real work.' },
-  { name: 'Growth-focused', body: 'We track outcomes, and families see the data. Progress you can actually measure.' },
+  {
+    name: 'Rooted Honesty',
+    body: 'We tell teens and families the truth, even when it’s hard — and we never punish someone for telling us theirs.',
+  },
+  {
+    name: 'Earned Trust',
+    body: 'We don’t ask anyone to open up before we’ve shown we’re safe to open up to. Trust is built in the room, session by session.',
+  },
+  {
+    name: 'Steady Structure',
+    body: 'Lasting change happens inside consistency, not chaos. We build the structure so teens don’t have to build it alone.',
+  },
+  {
+    name: 'Whole-Person Care',
+    body: 'We treat the teen in front of us, not just the diagnosis on the chart. The family is part of every treatment plan.',
+  },
 ];
 ---
 <Base
-  title="About — Named for a desert plant, and a brother | Joshua Tree Health"
-  description="Why Joshua Tree Health exists: adolescent PHP & IOP in Apex, NC, named for a desert plant — and for a brother lost too soon. Grounded, genuine, growth-focused."
+  title="About Us — Joshua Tree Health"
+  description="Why Joshua Tree Health exists, and what we believe. Adolescent PHP & IOP in Apex, NC, built around honest, family-centered care for teens ages 10–17."
 >
   <PageHero
-    eyebrow="About Joshua Tree Health"
-    title="We built JTree because we know what it costs when <em>care comes too late</em>."
-    sub="Named for a desert plant — and for a brother we lost too soon."
+    title="Rooted enough to weather hard things.<br>Flexible enough to grow in your own shape."
+    variant="green"
+    center={true}
   />
 
-  <!-- Origin story -->
-  <section class="section" aria-labelledby="story-title">
+  <!-- ===== MISSION / WHY JOSHUA TREE ===== -->
+  <section class="section" aria-labelledby="mission-title">
     <div class="container-x">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">Our story</p>
-        <h2 class="section-title font-display" id="story-title">Why we're named the way we are.</h2>
+        <h2 class="section-title font-display" id="mission-title">Why Joshua Tree?</h2>
       </div>
       <div class="prose" data-reveal>
-        <p class="lead">The Joshua tree grows slowly, in a shape entirely its own — deep roots, a long timeline, and a silhouette you'd recognize anywhere.</p>
-        <p>It survives the desert not by rushing, but by holding on. That's how we think about adolescence, and about healing: not as a problem to be solved on someone else's schedule, but as a desert to be navigated — with the right support, and enough time.</p>
-        <p>We're also named for <strong>Josh</strong> — a brother lost too soon, when care moved too slowly to reach him in time. Joshua Tree Health exists so that other families don't have to wait. So that help arrives quickly, fits around real life, and treats a teen like a person worth knowing — never a case to be processed.</p>
-        <p>That's the whole reason we're here. No corporate gloss. No clinical distance. Just the kind of care we wish had been there.</p>
-        <p class="lead">Like the tree: deep roots. A long timeline. A shape completely its own.</p>
+        <p class="lead">The Joshua Tree doesn’t grow like other trees. It grows in harsh conditions, in its own direction, in a shape that’s entirely its own. That’s what we believe healing can look like for teenagers: not conformity, not polish, not becoming someone else’s idea of okay.</p>
+        <p>We built Joshua Tree Health to be a different kind of behavioral health program. One that takes teens seriously, meets families without judgment, and treats clinical care and human warmth as the same thing, not a tradeoff.</p>
+
+        {/* PLACEHOLDER: Gaby to supply — the personal Josh paragraph. Do NOT fabricate Josh's story, Gaby's relationship to him, or a cause of death. Leave the bracket visible until she writes it. */}
+        <p>The name also carries something personal. Joshua Tree Health is named for Josh, [Gaby’s relationship to Josh].</p>
+        <p class="mission-note"><em>Gaby will complete this paragraph — 2 to 4 sentences about who Josh was, what his memory means to her, and how it shaped why this work matters. This is the one place on the site this story lives.</em></p>
       </div>
     </div>
   </section>
 
-  <!-- Founder -->
-  <section class="section" aria-labelledby="founder-title">
+  <!-- ===== FOUNDER ===== -->
+  <section class="section surface-cream-deep" aria-labelledby="founder-title">
     <div class="container-x">
       <div class="split founder">
         <figure class="founder__media" data-reveal>
           <Image src={gabyImg} alt="Gabriela Forter, founder of Joshua Tree Health" widths={[420, 640, 900]} sizes="(min-width: 880px) 44vw, 92vw" class="founder__img" />
-          <figcaption class="founder__cap">Gabriela Forter · Founder</figcaption>
+          <figcaption class="founder__cap">Gabriela Forter · Founder &amp; CEO</figcaption>
         </figure>
         <div data-reveal data-reveal-delay="0.08">
           <p class="eyebrow">The founder</p>
-          <h2 class="section-title font-display" id="founder-title">Built from what was missing.</h2>
-          <p class="section-sub">Gabriela founded Joshua Tree Health to build the kind of care her brother Josh didn't have — care that reaches families in time, treats teens like people, and doesn't make you fight the system to get it.</p>
-          <p class="founder__bio">She brings a background in healthcare investing, AI, and operations — an MBA from Stanford and a Master in Public Administration from Harvard Kennedy School — and a long-running focus on expanding access to mental-health care for communities that have gone without it.</p>
+          <h2 class="section-title font-display" id="founder-title">Gabriela Forter</h2>
+          <p class="section-sub">Founder &amp; CEO</p>
+          {/* PLACEHOLDER: Gaby to supply bio and preferred personal detail. Do NOT fabricate a background, credentials, or biography. */}
+          <p class="founder__bio"><em>Gaby will add a short bio here — her background, why she started Joshua Tree Health, and one personal detail she wants families to know.</em></p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Values -->
-  <section class="section surface-cream-deep" aria-labelledby="values-title">
+  <!-- ===== VALUES ===== -->
+  <section class="section" aria-labelledby="values-title">
     <div class="container-x">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">What we stand for</p>
-        <h2 class="section-title font-display" id="values-title">Three commitments we make to every family.</h2>
-        <p class="section-sub">Our values aren't a waiting-room poster. They're in how we assess, how we show up, and how we measure what matters.</p>
+        <h2 class="section-title font-display" id="values-title">What we believe.</h2>
       </div>
-      <div class="grid-3" data-reveal-group>
+      <div class="grid-4" data-reveal-group>
         {values.map((v) => (
           <article class="info-card" data-reveal-item>
-            <p class="value-tag">{v.name}</p>
+            <h3 class="info-card__title">{v.name}</h3>
             <p class="info-card__body">{v.body}</p>
           </article>
         ))}
@@ -74,38 +86,44 @@ const values = [
     </div>
   </section>
 
-  <!-- Team -->
-  <section class="section" aria-labelledby="team-title">
+  <!-- ===== ACCREDITATION ===== -->
+  <section class="section surface-cream-deep" aria-labelledby="carf-title">
     <div class="container-x">
       <div class="split">
         <div data-reveal>
-          <p class="eyebrow">Our team</p>
-          <h2 class="section-title font-display" id="team-title">The people in the room with your teen.</h2>
-          <p class="section-sub">Licensed clinicians and psychiatrists who chose adolescent mental health on purpose — and stay because the work matters. Low turnover, high trust, the same faces week after week.</p>
+          <p class="eyebrow">Accreditation</p>
+          <h2 class="section-title font-display" id="carf-title">CARF accredited.</h2>
+          <p class="section-sub">CARF accreditation is an independent, rigorous review of safety, ethics, and quality of care in behavioral health. Joshua Tree Health has earned it.</p>
         </div>
         <div class="carf-card card" data-reveal data-reveal-delay="0.08">
-          <p class="eyebrow eyebrow--plain">Accreditation</p>
-          <p class="carf-card__title font-display">CARF accredited.</p>
-          <p class="carf-card__body">CARF accreditation is the gold standard in behavioral health — an independent, rigorous review of safety, ethics, and quality of care. Joshua Tree Health has earned it.</p>
+          <p class="eyebrow eyebrow--plain">Who we serve</p>
+          <p class="carf-card__title font-display">Adolescents ages 10–17.</p>
+          <p class="carf-card__body">We offer Partial Hospitalization (PHP) and Intensive Outpatient (IOP) programs from our lakeside location in Apex, NC, with family involvement built into every treatment plan.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Quote -->
-  <section class="quote surface-lavender" aria-label="Parent testimonial">
+  {/* PLACEHOLDER: Gaby to supply an attributable parent quote (with consent). Do NOT ship an invented testimonial — the pull-quote section is intentionally omitted until approved copy exists. */}
+
+  <!-- ===== CLOSING CTA ===== -->
+  <section class="section surface-green" aria-labelledby="about-cta-title">
     <div class="container-x">
-      <div class="pullquote">
-        <span class="pullquote__mark" aria-hidden="true">“</span>
-        <p class="pullquote__text" data-reveal>I didn't know if this was the right level of care. It was. They met my son exactly where he was.</p>
-        <p class="pullquote__cite" data-reveal data-reveal-delay="0.08">Parent of a JTree Health teen</p>
+      <div class="section-head section-head--center" data-reveal>
+        <h2 class="section-title font-display" id="about-cta-title">Start the conversation.</h2>
+        <p class="section-sub">One call is enough to find out whether Joshua Tree is the right fit. No commitment, no pressure.</p>
+      </div>
+      <div class="cta-row" data-reveal data-reveal-delay="0.08">
+        <a class="btn btn--on-dark" href="/admissions">Start the Conversation <span class="btn__arrow">→</span></a>
+        <a class="btn btn--ghost-on-dark" href="tel:+19193355053">Call (919) 335-5053</a>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .value-tag { font-family: var(--font-head); font-weight: 600; font-size: 1.3rem; color: var(--color-deep-green); }
+  .mission-note { color: var(--color-ink-soft); font-size: 0.95rem; }
+
   .carf-card { padding: clamp(1.6rem, 1rem + 2vw, 2.4rem); display: flex; flex-direction: column; gap: 0.8rem; }
   .carf-card__title { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.2rem); color: var(--color-deep-green); }
   .carf-card__body { color: var(--color-ink-soft); line-height: 1.6; }
@@ -114,4 +132,6 @@ const values = [
   .founder__img { width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); aspect-ratio: 4 / 5; object-fit: cover; object-position: 40% 28%; }
   .founder__cap { margin-top: 0.9rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-sage); }
   .founder__bio { margin-top: 1.1rem; color: var(--color-ink-soft); line-height: 1.65; }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.6rem; }
 </style>
