@@ -18,6 +18,7 @@ const programs = [
 ];
 const times = ['Morning', 'Afternoon', 'Evening'];
 const sources = ['Google', 'Referral', 'Doctor', 'School', 'Other'];
+const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Self-pay', 'Other'];
 ---
 <Base
   bodyClass="brand-page admissions-page"
@@ -86,31 +87,23 @@ const sources = ['Google', 'Referral', 'Doctor', 'School', 'Other'];
 
           <div class="form__row form__row--2">
             <div class="field field--req">
-              <label for="parent_first_name">First name</label>
-              <input id="parent_first_name" name="parent_first_name" type="text" autocomplete="given-name" required />
-              <span class="jth-field-error" id="err-parent_first_name"></span>
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+              <span class="jth-field-error" id="err-name"></span>
             </div>
             <div class="field field--req">
-              <label for="parent_last_name">Last name</label>
-              <input id="parent_last_name" name="parent_last_name" type="text" autocomplete="family-name" required />
-              <span class="jth-field-error" id="err-parent_last_name"></span>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+              <span class="jth-field-error" id="err-email"></span>
             </div>
           </div>
 
           <div class="form__row form__row--2">
             <div class="field field--req">
-              <label for="parent_email">Email</label>
-              <input id="parent_email" name="parent_email" type="email" autocomplete="email" required />
-              <span class="jth-field-error" id="err-parent_email"></span>
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+              <span class="jth-field-error" id="err-phone"></span>
             </div>
-            <div class="field field--req">
-              <label for="parent_phone">Phone</label>
-              <input id="parent_phone" name="parent_phone" type="tel" autocomplete="tel" required />
-              <span class="jth-field-error" id="err-parent_phone"></span>
-            </div>
-          </div>
-
-          <div class="form__row form__row--2">
             <div class="field field--req">
               <label for="teen_age">Teen's age</label>
               <select id="teen_age" name="teen_age" required>
@@ -119,6 +112,9 @@ const sources = ['Google', 'Referral', 'Doctor', 'School', 'Other'];
               </select>
               <span class="jth-field-error" id="err-teen_age"></span>
             </div>
+          </div>
+
+          <div class="form__row form__row--2">
             <div class="field field--req">
               <label for="program_interest">Program of interest</label>
               <select id="program_interest" name="program_interest" required>
@@ -127,31 +123,48 @@ const sources = ['Google', 'Referral', 'Doctor', 'School', 'Other'];
               </select>
               <span class="jth-field-error" id="err-program_interest"></span>
             </div>
+            <div class="field">
+              <label for="best_time_to_call">Best time to call <span class="field__opt">(optional)</span></label>
+              <select id="best_time_to_call" name="best_time_to_call">
+                <option value="">No preference</option>
+                {times.map((t) => <option value={t}>{t}</option>)}
+              </select>
+            </div>
           </div>
 
           <div class="form__row form__row--2">
-            <div class="field field--req">
-              <label for="best_time_to_call">Best time to call</label>
-              <select id="best_time_to_call" name="best_time_to_call" required>
-                <option value="">Select…</option>
-                {times.map((t) => <option value={t}>{t}</option>)}
+            <div class="field">
+              <label for="insurance">Insurance <span class="field__opt">(optional)</span></label>
+              <select id="insurance" name="insurance">
+                <option value="">If you know it…</option>
+                {insurances.map((i) => <option value={i}>{i}</option>)}
               </select>
-              <span class="jth-field-error" id="err-best_time_to_call"></span>
             </div>
             <div class="field">
-              <label for="how_did_you_hear">How did you hear about us?</label>
-              <select id="how_did_you_hear" name="how_did_you_hear">
-                <option value="">Select… (optional)</option>
-                {sources.map((s) => <option value={s}>{s}</option>)}
-              </select>
+              <label for="zip">ZIP code <span class="field__opt">(optional)</span></label>
+              <input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" />
             </div>
           </div>
 
-          <label class="form__consent field--req">
-            <input type="checkbox" name="consent_contact" value="true" required />
-            <span>I agree to be contacted by JTree Health about programs. We will never share your information.</span>
-          </label>
-          <span class="jth-field-error" id="err-consent_contact"></span>
+          <div class="form__row form__row--2">
+            <div class="field">
+              <label for="how_did_you_hear">How did you hear about us? <span class="field__opt">(optional)</span></label>
+              <select id="how_did_you_hear" name="how_did_you_hear">
+                <option value="">Select…</option>
+                {sources.map((s) => <option value={s}>{s}</option>)}
+              </select>
+            </div>
+            <div class="field"></div>
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label for="notes">Anything you'd like us to know? <span class="field__opt">(optional)</span></label>
+              <textarea id="notes" name="notes" rows="3" maxlength="1000" placeholder="A sentence about what's going on is helpful — but totally optional. No medical details needed."></textarea>
+            </div>
+          </div>
+
+          <p class="form__disclaimer">By submitting, you're asking JTree Health to contact you about care. We'll only use your information to respond, and we'll never share it.</p>
 
           {/* Honeypot — hidden from humans, catches bots */}
           <div class="hp" aria-hidden="true">

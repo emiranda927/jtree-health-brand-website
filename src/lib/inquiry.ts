@@ -3,9 +3,8 @@
 // after interaction, sends a no-PII "partial" beacon.
 //
 // API contract (jtree-form-api/lib/validate.ts InquirySchema): a single `name`
-// plus `email`/`phone` — the form still renders First/Last inputs, so the two
-// are merged into `name` at submit. `consent_contact` is a client-side gate
-// only (the API strips unknown keys). Config comes from window.JTREE_CONFIG.
+// field plus `email`/`phone`, matching the rendered input names directly.
+// Config comes from window.JTREE_CONFIG.
 
 type Cfg = { apiUrl?: string; partialApiUrl?: string; thankYouUrl?: string; turnstileSiteKey?: string };
 const w = window as unknown as { JTREE_CONFIG?: Cfg; turnstile?: any; crypto?: Crypto };
@@ -88,7 +87,9 @@ function init(form: HTMLFormElement) {
 
   // Partial-capture — fires once, only after non-PII interaction, suppressed by submit.
   let interacted = false, fullSubmitted = false, partialSent = false;
-  const PARTIAL_TRIGGERS = ['teen_age', 'program_interest', 'best_time_to_call', 'how_did_you_hear'];
+  // Contact fields are included so an abandoned form is followable — whatever
+  // they entered (name/email/phone) before leaving is captured on the partial.
+  const PARTIAL_TRIGGERS = ['name', 'email', 'phone', 'teen_age', 'program_interest', 'best_time_to_call', 'how_did_you_hear', 'zip', 'insurance', 'notes'];
   PARTIAL_TRIGGERS.forEach((name) => {
     const el = form.querySelector('[name="' + name + '"]');
     if (el) el.addEventListener('change', () => { interacted = true; });
@@ -124,26 +125,27 @@ function init(form: HTMLFormElement) {
     if (data.hp_field) { window.location.href = THANK_URL; return; } // honeypot
 
     const errors: [string, string][] = [];
-    if (!data.parent_first_name?.trim()) errors.push(['parent_first_name', 'Please enter your first name.']);
-    if (!data.parent_last_name?.trim()) errors.push(['parent_last_name', 'Please enter your last name.']);
-    if (!data.parent_email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.parent_email)) errors.push(['parent_email', 'Please enter a valid email.']);
-    if (!data.parent_phone || !/^\d{10,11}$/.test(data.parent_phone.replace(/\D/g, ''))) errors.push(['parent_phone', 'Please enter a 10-digit phone number.']);
+    if (!data.name?.trim()) errors.push(['name', 'Please enter your name.']);
+    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.push(['email', 'Please enter a valid email.']);
+    if (!data.phone || !/^\d{10,11}$/.test(data.phone.replace(/\D/g, ''))) errors.push(['phone', 'Please enter a 10-digit phone number.']);
     if (!data.teen_age) errors.push(['teen_age', 'Please select your teen’s age.']);
     if (!data.program_interest) errors.push(['program_interest', 'Please pick a program.']);
-    if (!data.best_time_to_call) errors.push(['best_time_to_call', 'Please pick a time of day.']);
-    if (!data.consent_contact) errors.push(['consent_contact', 'We need your consent to contact you.']);
     if (errors.length) { errors.forEach((er) => showError(er[0], er[1])); showBanner('Please fix the highlighted fields and try again.'); return; }
 
     const payload: Record<string, unknown> = {
-      name: (data.parent_first_name.trim() + ' ' + data.parent_last_name.trim()).slice(0, 100),
-      email: data.parent_email.trim(),
-      phone: data.parent_phone.trim(),
+      name: data.name.trim(),
+      email: data.email.trim(),
+      phone: data.phone.trim(),
       teen_age: parseInt(data.teen_age, 10),
       program_interest: data.program_interest,
-      best_time_to_call: data.best_time_to_call,
       session_id: sessionId,
     };
+    if (data.best_time_to_call) payload.best_time_to_call = data.best_time_to_call;
     if (data.how_did_you_hear) payload.how_did_you_hear = data.how_did_you_hear;
+    if (data.zip?.trim()) payload.zip = data.zip.trim();
+    if (data.insurance) payload.insurance = data.insurance;
+    if (data.notes?.trim()) payload.notes = data.notes.trim();
+    // Attribution — carried through so channel performance / CAC is measurable on completed leads.
     if (utms.utm_source) payload.utm_source = utms.utm_source;
     if (utms.utm_medium) payload.utm_medium = utms.utm_medium;
     if (utms.utm_campaign) payload.utm_campaign = utms.utm_campaign;
@@ -170,11 +172,10 @@ function init(form: HTMLFormElement) {
       }
       let body: any = null;
       try { body = await res.json(); } catch {}
-      // The API reports validation problems as a single {field, message}; map
-      // its field names back onto the rendered inputs.
-      const FIELD_MAP: Record<string, string> = { name: 'parent_first_name', email: 'parent_email', phone: 'parent_phone' };
+      // The API reports validation problems as a single {field, message}; its
+      // field names now match the rendered input names directly.
       const showApiFieldError = (field: string, message?: string) => {
-        showError(FIELD_MAP[field] || field, message || 'Please check this field.');
+        showError(field, message || 'Please check this field.');
       };
       if (res.status === 429) showBanner('Too many submissions. Please wait a moment and try again.');
       else if (res.status === 403) showBanner('Verification failed. Please retry the challenge below the form.');
