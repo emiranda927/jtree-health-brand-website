@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { nanoid } from "nanoid";
 import { InquirySchema, type Lead } from "../lib/validate.js";
 import { checkRateLimit } from "../lib/rateLimit.js";
-import { sendToRitten } from "../lib/ritten.js";
+import { sendToSupabase } from "../lib/supabase.js";
 import { appendLeadToSheet } from "../lib/sheets.js";
 import { sendEmailToAdmissions } from "../lib/email.js";
 import { verifyTurnstile } from "../lib/turnstile.js";
@@ -77,26 +77,20 @@ export default async function handler(
     return;
   }
 
-  // 5. Build lead
+  // 5. Build lead — carry every submitted field through (drop the honeypot and
+  // the turnstile token, which are transport concerns, not lead data).
+  const { hp_field: _hp, cf_turnstile_response: _turnstile, ...leadFields } = data;
   const lead: Lead = {
     lead_id: `JT-${nanoid(10)}`,
     submitted_at: new Date().toISOString(),
-    parent_first_name: data.parent_first_name,
-    parent_last_name: data.parent_last_name,
-    parent_email: data.parent_email,
-    parent_phone: data.parent_phone,
-    teen_age: data.teen_age,
-    program_interest: data.program_interest,
-    best_time_to_call: data.best_time_to_call,
-    how_did_you_hear: data.how_did_you_hear,
-    session_id: data.session_id,
+    ...leadFields,
   };
 
   logger.info("Lead received", { lead_id: lead.lead_id });
 
   // 6. Dual delivery
   const [crmResult, emailResult] = await Promise.allSettled([
-    sendToRittenOrSheets(lead),
+    deliverToCrm(lead),
     sendEmailToAdmissions(lead),
   ]);
 
@@ -143,13 +137,29 @@ export default async function handler(
 }
 
 /**
- * Try Ritten first; if it fails (not configured or error), fall back to Google Sheets.
+ * Deliver the lead to the CRM. Supabase is the system of record — a successful
+ * insert puts the lead straight onto the intake pipeline board. Google Sheets
+ * is written in parallel as a best-effort mirror until it's retired.
+ *
+ * The channel counts as delivered if EITHER store accepts the lead, so a lead
+ * is never lost to a single-store outage. When the Supabase env vars are unset,
+ * `sendToSupabase` throws immediately and this falls back to Sheets-only —
+ * i.e. safe to ship before the Supabase credentials are configured.
  */
-async function sendToRittenOrSheets(lead: Lead): Promise<void> {
-  try {
-    await sendToRitten(lead);
-  } catch {
-    logger.info("Falling back to Google Sheets", { lead_id: lead.lead_id });
-    await appendLeadToSheet(lead);
+async function deliverToCrm(lead: Lead): Promise<void> {
+  const [supa, sheet] = await Promise.allSettled([
+    sendToSupabase(lead),
+    appendLeadToSheet(lead),
+  ]);
+  const supaOk = supa.status === "fulfilled";
+  const sheetOk = sheet.status === "fulfilled";
+
+  if (!supaOk && !sheetOk) {
+    throw new Error("CRM_DELIVERY_FAILURE");
+  }
+  if (!supaOk) {
+    logger.warn("Supabase insert failed — lead saved to Sheets only", { lead_id: lead.lead_id });
+  } else if (!sheetOk) {
+    logger.warn("Sheets mirror failed — lead saved to Supabase", { lead_id: lead.lead_id });
   }
 }

@@ -38,11 +38,10 @@ export function buildRittenPayload(lead: Lead): Record<string, unknown> {
     session_id: lead.session_id ?? null,
     submitted_at: lead.submitted_at,
     contact: {
-      first_name: lead.parent_first_name,
-      last_name: lead.parent_last_name,
-      email: lead.parent_email,
-      phone: lead.parent_phone,
-      role: "parent_guardian",
+      name: lead.name,
+      email: lead.email,
+      phone: lead.phone,
+      role: "unknown",
     },
     patient: {
       age: lead.teen_age,

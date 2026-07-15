@@ -13,6 +13,8 @@ interface LogEntry {
   delivery?: {
     crm?: "success" | "failed" | "skipped";
     email?: "success" | "failed" | "skipped";
+    supabase?: "success" | "failed" | "skipped";
+    sheets?: "success" | "failed" | "skipped";
   };
   error_code?: string;
 }

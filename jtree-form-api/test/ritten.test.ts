@@ -5,10 +5,9 @@ import type { Lead } from "../lib/validate.js";
 const lead: Lead = {
   lead_id: "JT-test1234",
   submitted_at: "2026-04-25T10:00:00.000Z",
-  parent_first_name: "Jane",
-  parent_last_name: "Doe",
-  parent_email: "jane@example.com",
-  parent_phone: "+15551234567",
+  name: "Jane Doe",
+  email: "jane@example.com",
+  phone: "+15551234567",
   teen_age: 14,
   program_interest: "IOP",
   best_time_to_call: "Morning",
@@ -20,17 +19,16 @@ describe("buildRittenPayload", () => {
     const payload = buildRittenPayload(lead) as {
       source: string;
       external_id: string;
-      contact: { first_name: string; last_name: string; email: string; phone: string; role: string };
+      contact: { name: string; email: string; phone: string; role: string };
       patient: { age: number; relationship_to_contact: string };
       inquiry: { program_interest: string; best_time_to_call: string; how_did_you_hear: string | null };
     };
     expect(payload.source).toBe("website_form");
     expect(payload.external_id).toBe("JT-test1234");
-    expect(payload.contact.first_name).toBe("Jane");
-    expect(payload.contact.last_name).toBe("Doe");
+    expect(payload.contact.name).toBe("Jane Doe");
     expect(payload.contact.email).toBe("jane@example.com");
     expect(payload.contact.phone).toBe("+15551234567");
-    expect(payload.contact.role).toBe("parent_guardian");
+    expect(payload.contact.role).toBe("unknown");
     expect(payload.patient.age).toBe(14);
     expect(payload.patient.relationship_to_contact).toBe("child");
     expect(payload.inquiry.program_interest).toBe("IOP");

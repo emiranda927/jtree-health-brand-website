@@ -6,15 +6,13 @@ import { InquirySchema, normalizePhone } from "../lib/validate.js";
 // ---------------------------------------------------------------------------
 
 const validInput = {
-  parent_first_name: "Jane",
-  parent_last_name: "Doe",
-  parent_email: "jane@example.com",
-  parent_phone: "(555) 123-4567",
+  name: "Jane Doe",
+  email: "jane@example.com",
+  phone: "(555) 123-4567",
   teen_age: 14,
   program_interest: "IOP",
   best_time_to_call: "Morning",
   how_did_you_hear: "Google",
-  consent_contact: true,
   hp_field: "",
 };
 
@@ -23,42 +21,36 @@ describe("InquirySchema validation", () => {
     const result = InquirySchema.safeParse(validInput);
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(result.data.parent_phone).toBe("+15551234567");
+      expect(result.data.phone).toBe("+15551234567");
     }
   });
 
-  it("rejects missing required field (parent_first_name)", () => {
-    const input = { ...validInput, parent_first_name: "" };
+  it("rejects a missing name", () => {
+    const input = { ...validInput, name: "" };
     const result = InquirySchema.safeParse(input);
     expect(result.success).toBe(false);
   });
 
-  it("rejects missing required field (parent_last_name)", () => {
-    const input = { ...validInput, parent_last_name: "" };
+  it("rejects a missing email", () => {
+    const input = { ...validInput, email: "" };
     const result = InquirySchema.safeParse(input);
     expect(result.success).toBe(false);
   });
 
-  it("rejects missing parent_email", () => {
-    const input = { ...validInput, parent_email: "" };
+  it("rejects an invalid email", () => {
+    const input = { ...validInput, email: "not-an-email" };
     const result = InquirySchema.safeParse(input);
     expect(result.success).toBe(false);
   });
 
-  it("rejects invalid email", () => {
-    const input = { ...validInput, parent_email: "not-an-email" };
+  it("rejects an email over 100 characters", () => {
+    const input = { ...validInput, email: "a".repeat(90) + "@example.com" };
     const result = InquirySchema.safeParse(input);
     expect(result.success).toBe(false);
   });
 
-  it("rejects email over 100 characters", () => {
-    const input = { ...validInput, parent_email: "a".repeat(90) + "@example.com" };
-    const result = InquirySchema.safeParse(input);
-    expect(result.success).toBe(false);
-  });
-
-  it("rejects first name over 50 characters", () => {
-    const input = { ...validInput, parent_first_name: "A".repeat(51) };
+  it("rejects a name over 100 characters", () => {
+    const input = { ...validInput, name: "A".repeat(101) };
     const result = InquirySchema.safeParse(input);
     expect(result.success).toBe(false);
   });
@@ -102,14 +94,14 @@ describe("InquirySchema validation", () => {
     expect(result.success).toBe(true);
   });
 
-  it("rejects consent_contact = false", () => {
-    const input = { ...validInput, consent_contact: false };
+  it("allows best_time_to_call to be omitted (now optional)", () => {
+    const { best_time_to_call, ...input } = validInput;
     const result = InquirySchema.safeParse(input);
-    expect(result.success).toBe(false);
+    expect(result.success).toBe(true);
   });
 
-  it("accepts consent_contact = 'true' (string)", () => {
-    const input = { ...validInput, consent_contact: "true" };
+  it("accepts optional zip, insurance, and notes", () => {
+    const input = { ...validInput, zip: "27502", insurance: "Aetna", notes: "A sentence of context." };
     const result = InquirySchema.safeParse(input);
     expect(result.success).toBe(true);
   });

@@ -51,16 +51,19 @@ async function appendRow(row: string[]): Promise<void> {
 }
 
 export async function appendLeadToSheet(lead: Lead): Promise<void> {
+  // Legacy mirror: the sheet keeps its original 12-column layout. The form now
+  // collects one name, so it goes in the former first-name column (C) and the
+  // last-name column (D) is left blank.
   const row = [
     lead.lead_id,
     lead.submitted_at,
-    lead.parent_first_name,
-    lead.parent_last_name,
-    lead.parent_email,
-    lead.parent_phone,
+    lead.name,
+    "",
+    lead.email,
+    lead.phone,
     String(lead.teen_age),
     lead.program_interest,
-    lead.best_time_to_call,
+    lead.best_time_to_call ?? "",
     lead.how_did_you_hear ?? "",
     "lead",
     lead.session_id ?? "",

@@ -22,7 +22,7 @@ export function normalizePhone(raw: string): string {
   throw new Error("Invalid phone number");
 }
 
-export const ProgramInterest = z.enum(["IOP", "PHP", "Not sure"]);
+export const ProgramInterest = z.enum(["IOP", "PHP", "Unsure"]);
 export const BestTimeToCall = z.enum(["Morning", "Afternoon", "Evening"]);
 export const HowDidYouHear = z.enum([
   "Google",
@@ -33,22 +33,19 @@ export const HowDidYouHear = z.enum([
 ]);
 
 export const InquirySchema = z.object({
-  parent_first_name: z
+  // One name — the form no longer asks "parent vs teen"; the pre-screen call
+  // clarifies who this is and captures the patient's name.
+  name: z
     .string()
-    .min(1, "First name is required")
-    .max(50, "First name must be 50 characters or fewer"),
+    .min(1, "Please enter your name")
+    .max(100, "Name must be 100 characters or fewer"),
 
-  parent_last_name: z
-    .string()
-    .min(1, "Last name is required")
-    .max(50, "Last name must be 50 characters or fewer"),
-
-  parent_email: z
+  email: z
     .string()
     .email("Invalid email address")
     .max(100, "Email must be 100 characters or fewer"),
 
-  parent_phone: z
+  phone: z
     .string()
     .min(1, "Phone number is required")
     .transform((val) => normalizePhone(val)),
@@ -59,19 +56,26 @@ export const InquirySchema = z.object({
     .min(10, "Age must be between 10 and 17")
     .max(17, "Age must be between 10 and 17"),
 
+  // Level-of-care interest (IOP / PHP / Unsure). Captured verbatim — this is
+  // what the family says, not the program we assign them (staff set that in
+  // the CRM at pre-screen).
   program_interest: ProgramInterest,
 
-  best_time_to_call: BestTimeToCall,
-
+  // Optional, friction-reducing fields.
+  best_time_to_call: BestTimeToCall.optional(),
   how_did_you_hear: HowDidYouHear.optional(),
+  zip: z.string().max(10, "ZIP too long").optional(),
+  insurance: z.string().max(60, "Insurance too long").optional(),
+  notes: z.string().max(1000, "Please keep this under 1000 characters").optional(),
 
-  consent_contact: z
-    .union([z.boolean(), z.literal("true"), z.literal("on")])
-    .transform((val) => val === true || val === "true" || val === "on")
-    .refine((val) => val === true, "Consent to contact is required"),
+  // Marketing attribution — captured silently from the URL. Carried through to
+  // the CRM so channel performance / CAC can be measured on completed leads.
+  utm_source: z.string().max(100).optional(),
+  utm_medium: z.string().max(100).optional(),
+  utm_campaign: z.string().max(100).optional(),
+  referrer: z.string().max(500).optional(),
 
-  // Optional — present only when the form's partial-capture path generated
-  // one in this tab. Lets admissions correlate a partial → completed lead.
+  // Present when the tab generated one — links a completed lead to its partial.
   session_id: z
     .string()
     .max(64, "session_id too long")
@@ -92,19 +96,19 @@ export const InquirySchema = z.object({
 export type InquiryInput = z.input<typeof InquirySchema>;
 export type InquiryData = z.output<typeof InquirySchema>;
 
-export interface Lead extends Omit<InquiryData, "hp_field" | "consent_contact"> {
+export interface Lead extends Omit<InquiryData, "hp_field"> {
   lead_id: string;
   submitted_at: string;
-  session_id?: string;
 }
 
 /**
- * Partial inquiry — fires when a parent interacted with the form but didn't
- * submit. By design, carries NO PII (no name, email, phone): only the
- * non-identifying interest signals + a session_id + acquisition source.
- *
- * Privacy contract: a partial row should never expose who the parent is.
- * Adding any PII field here is a privacy regression — talk to product first.
+ * Partial inquiry — fires when someone interacted with the form but didn't
+ * submit. Product decision (2026-07-15): partials are now *followable* —
+ * whatever contact info was entered before abandoning (name/email/phone) is
+ * captured so the team can reach out, alongside the interest signals and
+ * acquisition source. All fields except session_id are optional; a partial is
+ * a best-effort snapshot of a half-filled form, so nothing here is required or
+ * strictly validated (a half-typed email must not reject the whole beacon).
  */
 export const PartialInquirySchema = z.object({
   session_id: z
@@ -113,10 +117,17 @@ export const PartialInquirySchema = z.object({
     .max(64, "session_id too long")
     .regex(/^[A-Za-z0-9_-]+$/, "session_id has invalid characters"),
 
+  name: z.string().max(100).optional(),
+  email: z.string().max(100).optional(),
+  phone: z.string().max(30).optional(),
+
   teen_age: z.coerce.number().int().min(10).max(17).optional(),
   program_interest: ProgramInterest.optional(),
   best_time_to_call: BestTimeToCall.optional(),
   how_did_you_hear: HowDidYouHear.optional(),
+  zip: z.string().max(10).optional(),
+  insurance: z.string().max(60).optional(),
+  notes: z.string().max(1000).optional(),
 
   utm_source: z.string().max(100).optional(),
   utm_medium: z.string().max(100).optional(),

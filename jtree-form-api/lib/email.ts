@@ -27,7 +27,7 @@ export async function sendEmailToAdmissions(lead: Lead): Promise<void> {
   const { error } = await resend.emails.send({
     from: "Joshua Tree Health <noreply@jtreehealth.com>",
     to: [to],
-    subject: `New Inquiry: ${lead.parent_first_name} ${lead.parent_last_name} — ${lead.program_interest}`,
+    subject: `New Inquiry: ${lead.name} — ${lead.program_interest}`,
     html,
   });
 
@@ -69,16 +69,19 @@ export async function sendAlertEmail(subject: string, body: string): Promise<voi
 }
 
 function buildLeadEmailHtml(lead: Lead): string {
-  const rows = [
+  const rows: Array<[string, string]> = [
     ["Lead ID", lead.lead_id],
-    ["Submitted", new Date(lead.submitted_at).toLocaleString("en-US", { timeZone: "America/Los_Angeles" })],
-    ["Parent Name", `${lead.parent_first_name} ${lead.parent_last_name}`],
-    ["Email", lead.parent_email],
-    ["Phone", lead.parent_phone],
+    ["Submitted", new Date(lead.submitted_at).toLocaleString("en-US", { timeZone: "America/New_York" })],
+    ["Name", lead.name],
+    ["Email", lead.email],
+    ["Phone", lead.phone],
     ["Teen Age", String(lead.teen_age)],
     ["Program Interest", lead.program_interest],
-    ["Best Time to Call", lead.best_time_to_call],
+    ["Best Time to Call", lead.best_time_to_call ?? "—"],
     ["How Did You Hear", lead.how_did_you_hear ?? "—"],
+    ["ZIP", lead.zip ?? "—"],
+    ["Insurance", lead.insurance ?? "—"],
+    ["Anything to know", lead.notes ?? "—"],
   ];
 
   const tableRows = rows
