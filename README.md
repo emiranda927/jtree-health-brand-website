@@ -87,3 +87,5 @@ caching + security headers. Set the production domain to `www.jtreehealth.com`
 WCAG-AA contrast (brand-approved pairings), visible focus states, `prefers-reduced-motion`
 honored, semantic landmarks, labelled forms. Images are responsive WebP via `astro:assets`;
 static output keeps Lighthouse high.
+
+<!-- vercel-git-connect smoke test 2026-07-17T17:53:37Z -->
