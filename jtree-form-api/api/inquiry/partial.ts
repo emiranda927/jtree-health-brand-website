@@ -14,7 +14,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { nanoid } from "nanoid";
 import { PartialInquirySchema, type PartialLead } from "../../lib/validate.js";
 import { checkRateLimit } from "../../lib/rateLimit.js";
-import { sendPartialToRitten } from "../../lib/ritten.js";
+import { sendPartialToSupabase } from "../../lib/supabase.js";
 import { appendPartialToSheet } from "../../lib/sheets.js";
 import { applyCorsHeaders } from "../../lib/cors.js";
 import { logger } from "../../lib/logger.js";
@@ -79,41 +79,29 @@ export default async function handler(
     return;
   }
 
+  const { hp_field: _hp, ...partialFields } = data;
   const partial: PartialLead = {
     lead_id: `JT-P-${nanoid(10)}`,
     submitted_at: new Date().toISOString(),
-    session_id: data.session_id,
-    teen_age: data.teen_age,
-    program_interest: data.program_interest,
-    best_time_to_call: data.best_time_to_call,
-    how_did_you_hear: data.how_did_you_hear,
-    utm_source: data.utm_source,
-    utm_medium: data.utm_medium,
-    utm_campaign: data.utm_campaign,
-    referrer: data.referrer,
+    ...partialFields,
   };
 
   logger.info("Partial received", { lead_id: partial.lead_id });
 
-  // Dual delivery, same fallback shape as full leads. We never block — the
-  // browser has already moved on.
-  const [crmResult] = await Promise.allSettled([
-    sendPartialToRittenOrSheets(partial),
+  // Deliver to Supabase (the CRM's abandoned-inquiry store) with Sheets as a
+  // best-effort mirror. We never block — the browser has already moved on.
+  const [supa, sheet] = await Promise.allSettled([
+    sendPartialToSupabase(partial),
+    appendPartialToSheet(partial),
   ]);
 
   logger.info("Partial delivery complete", {
     lead_id: partial.lead_id,
-    delivery: { crm: crmResult.status === "fulfilled" ? "success" : "failed" },
+    delivery: {
+      supabase: supa.status === "fulfilled" ? "success" : "failed",
+      sheets: sheet.status === "fulfilled" ? "success" : "failed",
+    },
   });
 
   res.status(204).end();
-}
-
-async function sendPartialToRittenOrSheets(partial: PartialLead): Promise<void> {
-  try {
-    await sendPartialToRitten(partial);
-  } catch {
-    logger.info("Partial falling back to Google Sheets", { lead_id: partial.lead_id });
-    await appendPartialToSheet(partial);
-  }
 }

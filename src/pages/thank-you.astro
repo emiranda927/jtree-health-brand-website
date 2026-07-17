@@ -3,31 +3,34 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 
 const next = [
-  { n: '01', t: 'We review your note', b: 'A real member of our admissions team reads it — not a bot.' },
+  { n: '01', t: 'We read your note', b: 'Someone on our admissions team reads it personally.' },
   { n: '02', t: 'We call you', b: 'Within one business day, at the number you gave us.' },
   { n: '03', t: 'We find the fit', b: 'Together we figure out the right next step for your teen.' },
 ];
 ---
 <Base
-  title="Thank you | Joshua Tree Health"
+  title="Thank You — Joshua Tree Health"
   description="Thanks for reaching out to Joshua Tree Health. We'll call you within one business day."
 >
   <PageHero
     center
     eyebrow="Request received"
-    title="Thanks — we'll be in <em>touch</em>."
-    sub="We've got your request, and someone from our admissions team will call you within one business day. Take a breath. You've done the hard part."
+    title="Thanks. We'll be in <em>touch</em>."
+    sub="We have your request, and someone from our admissions team will call you within one business day. Reaching out is often the hardest step, and you've taken it."
     primaryCta={{ label: 'Back to home', href: '/' }}
-    secondaryCta={{ label: 'Explore programs', href: '/programs' }}
+    secondaryCta={{ label: 'Explore Programs', href: '/what-we-offer' }}
   />
 
-  <section class="section section--tight" aria-label="What happens next">
+  <section class="section section--tight" aria-labelledby="next-title">
     <div class="container-x">
+      <div class="section-head section-head--center" data-reveal>
+        <h2 id="next-title" class="section-title font-display">What happens next</h2>
+      </div>
       <ol class="process__steps" data-reveal-group>
         {next.map((s) => (
           <li class="step" data-reveal-item>
             <span class="step__num">{s.n}</span>
-            <h2 class="step__title">{s.t}</h2>
+            <h3 class="step__title">{s.t}</h3>
             <p class="step__body">{s.b}</p>
           </li>
         ))}
@@ -35,12 +38,12 @@ const next = [
     </div>
   </section>
 
-  <section class="section" aria-label="Crisis">
+  <section class="section" aria-labelledby="crisis-title">
     <div class="container-x">
       <div class="callout surface-green" data-reveal>
         <div class="callout__text">
-          <h2 class="section-title font-display">Need help right now?</h2>
-          <p class="section-sub">If your teen is in crisis and can't wait for our call, you don't have to either. Call or text 988 any time, day or night.</p>
+          <h2 id="crisis-title" class="section-title font-display">Need help right now?</h2>
+          <p class="section-sub">If your teen is in crisis and can't wait for our call, you don't have to wait either. Call or text 988 any time, day or night, or text HOME to 741741.</p>
         </div>
         <a href="tel:988" class="btn btn--on-dark callout__cta">Call or text 988</a>
       </div>

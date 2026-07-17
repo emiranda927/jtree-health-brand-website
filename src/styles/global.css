@@ -19,7 +19,7 @@
   /* --- Derived tints & shades --- */
   --color-deep-green-900: #0c1f18;
   --color-deep-green-800: #102a20;
-  --color-deep-green-700: #13332708;
+  --color-deep-green-700: #133327;   /* was #13332708 (stray alpha) */
   --color-pine: #21503d;
   --color-sage: #3a6450;
   --color-lime-soft: #ddef9f;

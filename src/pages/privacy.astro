@@ -3,19 +3,20 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 ---
 <Base
-  title="Privacy Policy | Joshua Tree Health"
+  title="Privacy Policy — Joshua Tree Health"
   description="How Joshua Tree Health collects, uses, and protects your information."
 >
   <PageHero
-    eyebrow="Last updated June 2026"
     title="Privacy Policy"
-    sub="Your trust matters to us. This explains what we collect on this website, how we use it, and the choices you have."
+    sub="This explains what we collect on this website, how we use it, and the choices you have."
   />
 
-  <section class="section" aria-label="Privacy policy">
+  <section class="section" aria-labelledby="privacy-title">
     <div class="container-x">
+      <h2 id="privacy-title" class="sr-only">Privacy policy</h2>
       <div class="prose" data-reveal>
-        <p class="lead">We collect only what we need to respond to you and improve this site — and we never sell your information.</p>
+        <p class="lead">We collect only what we need to respond to you and improve this site, and we never sell your information.</p>
+        <p class="form__note">Last updated June 2026.</p>
 
         <h2>Information we collect</h2>
         <p>When you submit a form (such as a callback or contact request), we collect the information you provide — typically your name, phone number, email, your teen's age, and any message. We ask you <strong>not</strong> to include medical details in website forms; clinical information is gathered securely by phone or in person.</p>

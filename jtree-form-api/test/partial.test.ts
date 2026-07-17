@@ -45,22 +45,27 @@ describe("PartialInquirySchema validation", () => {
     expect(result.success).toBe(false);
   });
 
-  it("silently strips PII fields if a misconfigured client sends them", () => {
-    // Privacy guarantee: PII is not part of the partial schema, so Zod's
-    // default object behavior strips it from the parsed output. This test
-    // pins that behavior — if it ever changes, the privacy story changes.
+  it("accepts the followable contact fields (name / email / phone)", () => {
+    // Partials are now followable — whatever contact info was entered before
+    // abandoning is captured so the team can reach out.
     const result = PartialInquirySchema.safeParse({
       session_id: "sid_test",
-      parent_first_name: "Jane",
-      parent_email: "jane@example.com",
-      parent_phone: "555-1234",
+      name: "Jane Doe",
+      email: "jane@example.com",
+      phone: "555-123-4567",
     });
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(result.data).not.toHaveProperty("parent_first_name");
-      expect(result.data).not.toHaveProperty("parent_email");
-      expect(result.data).not.toHaveProperty("parent_phone");
+      expect(result.data.name).toBe("Jane Doe");
+      expect(result.data.email).toBe("jane@example.com");
+      expect(result.data.phone).toBe("555-123-4567");
     }
+  });
+
+  it("strips unknown keys", () => {
+    const result = PartialInquirySchema.safeParse({ session_id: "sid_test", surprise: "x" });
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data).not.toHaveProperty("surprise");
   });
 
   it("rejects an out-of-range teen_age", () => {
@@ -108,14 +113,11 @@ describe("InquirySchema accepts session_id (correlation contract)", () => {
   // The full inquiry path also accepts session_id so a partial can be
   // matched to the eventual lead row in admissions' sheet. Pin that here.
   const validFull = {
-    parent_first_name: "Jane",
-    parent_last_name: "Doe",
-    parent_email: "jane@example.com",
-    parent_phone: "(555) 123-4567",
+    name: "Jane Doe",
+    email: "jane@example.com",
+    phone: "(555) 123-4567",
     teen_age: 14,
     program_interest: "IOP",
-    best_time_to_call: "Morning",
-    consent_contact: true,
     session_id: "sid_full_submit",
     hp_field: "",
   };

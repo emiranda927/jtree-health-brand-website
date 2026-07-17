@@ -1,0 +1,196 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+
+// Data-driven roster. Add, remove, or reorder cards here as hiring continues.
+// Bios are intentionally left as visible placeholders — do not fabricate them.
+const leadership = [
+  {
+    name: 'Gabriela Forter',
+    credentials: 'Founder & CEO',
+    title: 'Leadership',
+    bioPlaceholder: 'Gaby will add a short bio and one personal detail she wants families to know.',
+  },
+];
+
+const clinicalTeam = [
+  {
+    name: 'Beth Bertram',
+    credentials: 'Licensed Therapist, DBT Certified',
+    title: 'IOP Clinical Lead',
+    bioPlaceholder: 'Bio to come from Beth, or Gaby to draft.',
+  },
+  {
+    name: 'Caitlyn Dowdy',
+    credentials: 'Licensed Therapist, DBT Certified',
+    title: 'Clinical Director',
+    bioPlaceholder: 'Bio to come from Caitlyn, or Gaby to draft.',
+  },
+  {
+    name: 'Grace Beasley',
+    credentials: 'Licensed Therapist',
+    title: 'Primary Therapist',
+    bioPlaceholder: 'Bio to come.',
+  },
+  {
+    name: 'Alayna West',
+    credentials: 'Licensed Therapist',
+    title: 'Primary Therapist',
+    bioPlaceholder: 'Bio to come.',
+  },
+];
+
+// Build initials for the headshot placeholder from the member's name.
+const initials = (name) =>
+  name
+    .split(' ')
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+---
+<Base
+  title="Our Team — Joshua Tree Health"
+  description="Meet the licensed clinicians and staff at Joshua Tree Health. Adolescent PHP & IOP in Apex, NC, for teens ages 10–17."
+>
+  <PageHero
+    title="Meet our team."
+    sub="Licensed clinicians and staff who work with adolescents in behavioral health."
+    variant="green"
+    center={true}
+  />
+
+  <!-- ===== LEADERSHIP ===== -->
+  <section class="section" aria-labelledby="leadership-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Leadership</p>
+        <h2 class="section-title font-display" id="leadership-title">The people behind Joshua Tree.</h2>
+      </div>
+      <div class="grid-3 team-grid" data-reveal-group>
+        {leadership.map((member) => (
+          <article class="team-card" data-reveal-item>
+            <div class="team-card__photo" aria-hidden="true">
+              <span class="team-card__initials font-display">{initials(member.name)}</span>
+            </div>
+            <h3 class="team-card__name font-display">{member.name}</h3>
+            <p class="team-card__cred">{member.credentials}</p>
+            <p class="team-card__title">{member.title}</p>
+            {/* PLACEHOLDER: bio to be supplied by the team. Do NOT fabricate a background, credentials, or biography. */}
+            <p class="team-card__bio"><em>{member.bioPlaceholder}</em></p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CLINICAL TEAM ===== -->
+  <section class="section surface-cream-deep" aria-labelledby="clinical-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Clinical team</p>
+        <h2 class="section-title font-display" id="clinical-title">The clinicians in the room.</h2>
+        <p class="section-sub">Every member of our clinical team is licensed and trained in trauma-informed care. Family sessions are part of every treatment plan.</p>
+      </div>
+      <div class="grid-3 team-grid" data-reveal-group>
+        {clinicalTeam.map((member) => (
+          <article class="team-card" data-reveal-item>
+            <div class="team-card__photo" aria-hidden="true">
+              <span class="team-card__initials font-display">{initials(member.name)}</span>
+            </div>
+            <h3 class="team-card__name font-display">{member.name}</h3>
+            <p class="team-card__cred">{member.credentials}</p>
+            <p class="team-card__title">{member.title}</p>
+            {/* PLACEHOLDER: bio to be supplied by the team. Do NOT fabricate a background, credentials, or biography. */}
+            <p class="team-card__bio"><em>{member.bioPlaceholder}</em></p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CLOSING CTA ===== -->
+  <section class="section surface-green" aria-labelledby="team-cta-title">
+    <div class="container-x">
+      <div class="section-head section-head--center" data-reveal>
+        <h2 class="section-title font-display" id="team-cta-title">Start the conversation.</h2>
+        <p class="section-sub">One call is enough to find out whether Joshua Tree is the right fit. There's no pressure to enroll.</p>
+      </div>
+      <div class="cta-row" data-reveal data-reveal-delay="0.08">
+        <a class="btn btn--on-dark" href="/admissions">Start the Conversation <span class="btn__arrow">→</span></a>
+        <a class="btn btn--ghost-on-dark" href="tel:+19193355053">Call (919) 335-5053</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .team-grid { align-items: start; }
+
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.35rem;
+  }
+
+  .team-card__photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-2xl);
+    background: var(--color-cream-deep);
+    border: 1px solid color-mix(in srgb, var(--color-sage) 22%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .surface-cream-deep .team-card__photo {
+    background: var(--color-cream);
+  }
+
+  .team-card__initials {
+    font-size: clamp(2.2rem, 1.6rem + 2vw, 3rem);
+    color: var(--color-sage);
+    letter-spacing: 0.04em;
+  }
+
+  .team-card__name {
+    font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.5rem);
+    color: var(--color-deep-green);
+  }
+
+  .team-card__cred {
+    color: var(--color-ink-soft);
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .team-card__title {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    margin-top: 0.15rem;
+  }
+
+  .team-card__bio {
+    margin-top: 0.8rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.6rem;
+  }
+</style>

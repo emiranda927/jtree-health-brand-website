@@ -1,20 +1,48 @@
 ---
-const links = [
-  { label: 'Programs', href: '/programs' },
+const mainNav = [
   { label: 'What We Treat', href: '/what-we-treat' },
-  { label: 'For Teens', href: '/for-teens' },
+  {
+    label: 'What We Offer',
+    href: '/what-we-offer',
+    children: [
+      { label: 'Our Approach', href: '/what-we-offer/our-approach' },
+      { label: 'Intensive Outpatient (IOP)', href: '/what-we-offer/iop' },
+      { label: 'Partial Hospitalization (PHP)', href: '/what-we-offer/php' },
+    ],
+  },
   { label: 'For Parents', href: '/for-parents' },
-  { label: 'About', href: '/about' },
-];
-const mobileExtra = [
   { label: 'Insurance', href: '/insurance' },
-  { label: 'Service Area', href: '/service-area' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Careers', href: '/careers' },
+  {
+    label: 'About Us',
+    href: '/about',
+    children: [
+      { label: 'Our Culture', href: '/about/our-culture' },
+      { label: 'Our Team', href: '/about/team' },
+    ],
+  },
+  { label: 'Learning Hub', href: '/learning-hub' },
 ];
+
 const { pathname } = Astro.url;
 const isActive = (href: string) => pathname === href || pathname === href + '/';
+const branchActive = (item: { href: string; children?: { href: string }[] }) =>
+  isActive(item.href) || Boolean(item.children?.some((c) => isActive(c.href)));
 ---
+<!-- Utility bar (desktop only; scrolls away above the sticky nav) -->
+<div class="utility">
+  <div class="container-x utility__inner">
+    <a href="tel:+19193355053" class="utility__phone">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true">
+        <path d="M6.5 4h3l1.5 4-2 1.2a12 12 0 0 0 5.6 5.6l1.2-2 4 1.5v3a2 2 0 0 1-2.2 2A16.8 16.8 0 0 1 4.5 6.2 2 2 0 0 1 6.5 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      (919) 335-5053
+    </a>
+    <div class="utility__right">
+      <a href="/refer" class="utility__link">Refer a Patient</a>
+    </div>
+  </div>
+</div>
+
 <header class="nav" data-nav>
   <div class="container-x nav__inner">
     <a href="/" class="nav__brand" aria-label="Joshua Tree Health — home">
@@ -22,18 +50,27 @@ const isActive = (href: string) => pathname === href || pathname === href + '/';
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      {links.map((l) => (
-        <a href={l.href} class:list={['nav__link', { 'is-active': isActive(l.href) }]}>{l.label}</a>
+      {mainNav.map((item) => item.children ? (
+        <div class="nav__item nav__item--menu">
+          <a
+            href={item.href}
+            class:list={['nav__link', { 'is-active': branchActive(item) }]}
+            aria-haspopup="true"
+          >{item.label}<span class="nav__caret" aria-hidden="true">▾</span></a>
+          <div class="nav__menu">
+            <ul>
+              {item.children.map((c) => (
+                <li><a href={c.href} class:list={['nav__menu-link', { 'is-active': isActive(c.href) }]}>{c.label}</a></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <a href={item.href} class:list={['nav__link', { 'is-active': isActive(item.href) }]}>{item.label}</a>
       ))}
     </nav>
 
     <div class="nav__actions">
-      <a href="tel:+19193355053" class="nav__phone" aria-label="Call 919 335 5053">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
-          <path d="M6.5 4h3l1.5 4-2 1.2a12 12 0 0 0 5.6 5.6l1.2-2 4 1.5v3a2 2 0 0 1-2.2 2A16.8 16.8 0 0 1 4.5 6.2 2 2 0 0 1 6.5 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-        </svg>
-        <span>(919) 335-5053</span>
-      </a>
       <a href="/admissions" class="btn nav__cta">Get Started</a>
       <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
         <span></span><span></span><span></span>
@@ -41,21 +78,56 @@ const isActive = (href: string) => pathname === href || pathname === href + '/';
     </div>
   </div>
 
-  <!-- Mobile panel -->
-  <div class="mobile" id="mobile-menu" data-menu hidden>
-    <nav class="mobile__links" aria-label="Mobile">
-      {[...links, ...mobileExtra].map((l) => (
-        <a href={l.href} class:list={['mobile__link', { 'is-active': isActive(l.href) }]}>{l.label}</a>
-      ))}
-    </nav>
-    <div class="mobile__footer">
-      <a href="/admissions" class="btn btn--lime mobile__cta">Start the Conversation</a>
-      <a href="tel:+19193355053" class="mobile__phone">Call (919) 335-5053</a>
-    </div>
-  </div>
 </header>
 
+<!-- Mobile panel sits OUTSIDE the header so the header's scrolled backdrop-filter never
+     becomes its containing block (which would trap this position:fixed drawer). -->
+<div class="mobile" id="mobile-menu" data-menu>
+  <nav class="mobile__links" aria-label="Mobile">
+    {mainNav.map((item) => (
+      <>
+        <a href={item.href} class:list={['mobile__link', { 'is-active': isActive(item.href) }]}>{item.label}</a>
+        {item.children && (
+          <div class="mobile__sub">
+            {item.children.map((c) => (
+              <a href={c.href} class:list={['mobile__sublink', { 'is-active': isActive(c.href) }]}>{c.label}</a>
+            ))}
+          </div>
+        )}
+      </>
+    ))}
+    <a href="/refer" class="mobile__link">Refer a Patient</a>
+    <a href="/contact" class="mobile__link">Contact</a>
+  </nav>
+  <div class="mobile__footer">
+    <a href="/admissions" class="btn btn--lime mobile__cta">Get Started</a>
+    <a href="tel:+19193355053" class="mobile__phone">Call (919) 335-5053</a>
+  </div>
+</div>
+
 <style>
+  /* ---------- Utility bar ---------- */
+  .utility { display: none; background: var(--color-cream); border-bottom: 1px solid var(--color-line); }
+  .utility__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 34px; gap: 1rem;
+  }
+  .utility__phone {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.01em;
+    color: var(--color-sage);
+    transition: color var(--dur) var(--ease-soft);
+  }
+  .utility__phone:hover { color: var(--color-deep-green); }
+  .utility__right { display: flex; align-items: center; gap: 1.25rem; }
+  .utility__link {
+    font-family: var(--font-head); font-size: 0.8rem; font-weight: 500;
+    color: var(--color-pine);
+    transition: color var(--dur) var(--ease-soft);
+  }
+  .utility__link:hover { color: var(--color-deep-green); }
+
+  /* ---------- Nav ---------- */
   .nav {
     position: sticky;
     top: 0;
@@ -71,50 +143,70 @@ const isActive = (href: string) => pathname === href || pathname === href + '/';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 1.25rem;
     min-height: 72px;
   }
   .nav__brand { display: inline-flex; align-items: center; flex: none; }
   .nav__logo { height: 32px; width: auto; }
 
-  .nav__links { display: none; align-items: center; gap: 0.35rem; }
+  .nav__links { display: none; align-items: center; gap: 0.15rem; }
+  .nav__item { position: relative; display: inline-flex; }
   .nav__link {
     position: relative;
-    padding: 0.5rem 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.7rem;
     font-family: var(--font-head);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 500;
     color: var(--color-pine);
     border-radius: var(--radius-pill);
+    white-space: nowrap;
     transition: color var(--dur) var(--ease-soft), background-color var(--dur) var(--ease-soft);
   }
-  .nav__link::after {
-    content: "";
+  .nav__link:hover, .nav__link.is-active { color: var(--color-deep-green); }
+  .nav__caret { font-size: 0.7em; opacity: 0.6; transition: transform var(--dur) var(--ease-soft); }
+  .nav__item--menu:hover .nav__caret,
+  .nav__item--menu:focus-within .nav__caret { transform: rotate(180deg); }
+
+  /* Dropdown menu (CSS-only; opens on hover + focus-within for keyboard) */
+  .nav__menu {
     position: absolute;
-    left: 0.8rem; right: 0.8rem; bottom: 0.32rem;
-    height: 2px; border-radius: 2px;
-    background: var(--color-lime-deep);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--dur) var(--ease-soft);
+    top: 100%;
+    left: 0;
+    min-width: 15rem;
+    padding: 0.5rem;
+    background: var(--color-cream-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity var(--dur) var(--ease-soft), transform var(--dur) var(--ease-soft), visibility var(--dur);
+    z-index: 60;
   }
-  .nav__link:hover { color: var(--color-deep-green); }
-  .nav__link:hover::after,
-  .nav__link.is-active::after { transform: scaleX(1); }
-  .nav__link.is-active { color: var(--color-deep-green); }
+  .nav__item--menu:hover .nav__menu,
+  .nav__item--menu:focus-within .nav__menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav__menu ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.1rem; }
+  .nav__menu-link {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    border-radius: var(--radius);
+    font-family: var(--font-head);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-pine);
+    transition: color var(--dur) var(--ease-soft), background-color var(--dur) var(--ease-soft);
+  }
+  .nav__menu-link:hover, .nav__menu-link.is-active { color: var(--color-deep-green); background: rgba(24, 59, 46, 0.06); }
 
   .nav__actions { display: flex; align-items: center; gap: 0.75rem; }
-  .nav__phone {
-    display: none;
-    align-items: center;
-    gap: 0.45rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.01em;
-    color: var(--color-sage);
-    transition: color var(--dur) var(--ease-soft);
-  }
-  .nav__phone:hover { color: var(--color-deep-green); }
   .nav__cta { padding: 0.7em 1.25em; }
 
   .nav__toggle {
@@ -138,35 +230,44 @@ const isActive = (href: string) => pathname === href || pathname === href + '/';
   .nav.menu-open .nav__toggle span:nth-child(2) { opacity: 0; }
   .nav.menu-open .nav__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* Mobile panel */
+  /* ---------- Mobile panel ---------- */
   .mobile {
     position: fixed;
     inset: 0 0 0 auto;
-    width: min(86vw, 380px);
+    width: min(88vw, 400px);
     background: var(--color-cream);
     border-left: 1px solid var(--color-line);
     box-shadow: var(--shadow-lg);
-    padding: 6rem 1.6rem 2rem;
+    padding: 6.25rem 1.6rem 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transform: translateX(100%);
-    transition: transform 0.42s var(--ease-emphasis);
+    visibility: hidden;
+    transition: transform 0.42s var(--ease-emphasis), visibility 0.42s var(--ease-emphasis);
     z-index: 45;
     overflow-y: auto;
   }
-  .mobile[hidden] { display: flex; }
-  .nav.menu-open .mobile { transform: translateX(0); }
-  .mobile__links { display: flex; flex-direction: column; gap: 0.2rem; }
+  .nav.menu-open ~ .mobile { transform: translateX(0); visibility: visible; }
+  .mobile__links { display: flex; flex-direction: column; gap: 0.1rem; }
   .mobile__link {
     font-family: var(--font-head);
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: var(--color-deep-green);
-    padding: 0.7rem 0;
+    padding: 0.65rem 0;
     border-bottom: 1px solid var(--color-line);
   }
   .mobile__link.is-active { color: var(--color-lime-deep); }
+  .mobile__sub { display: flex; flex-direction: column; padding: 0.2rem 0 0.5rem 0.9rem; border-bottom: 1px solid var(--color-line); }
+  .mobile__sublink {
+    font-family: var(--font-head);
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: var(--color-pine);
+    padding: 0.5rem 0;
+  }
+  .mobile__sublink.is-active { color: var(--color-lime-deep); }
   .mobile__footer { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
   .mobile__cta { width: 100%; padding: 1em; }
   .mobile__phone {
@@ -183,12 +284,13 @@ const isActive = (href: string) => pathname === href || pathname === href + '/';
     transition: opacity var(--dur) var(--ease-soft);
     z-index: 44;
   }
-  .nav.menu-open .nav__scrim { opacity: 1; pointer-events: auto; }
+  .nav.menu-open ~ .nav__scrim { opacity: 1; pointer-events: auto; }
 
-  @media (min-width: 960px) {
+  @media (min-width: 1040px) {
+    .utility { display: block; }
     .nav__links { display: flex; }
-    .nav__phone { display: inline-flex; }
     .nav__toggle { display: none; }
+    .mobile, .nav__scrim { display: none; }
   }
 </style>
 
