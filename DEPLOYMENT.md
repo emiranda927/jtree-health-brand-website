@@ -63,30 +63,29 @@ Security headers + CSP live in `vercel.json` (this repo). The temp domain
 `jtree-health-site.vercel.app` sends `X-Robots-Tag: noindex` via a host-scoped rule —
 the real domain will not (added 2026-07-11).
 
-### 3a. GitHub repo & auto-deploy hooks — current truth (2026-07-12)
+### 3a. GitHub repo & auto-deploy hooks — current truth (2026-07-12, wired same day)
 
-- The GitHub repo is **`emiranda927/jtree-health-brand-website`**. PR #4
-  ("Migrate frontend: Astro site supersedes WordPress theme") merged ~2026-06-23:
-  `main` now has the **Astro app at the repo root**, `jtree-form-api/` beside it,
-  and the old WP theme under `legacy/`.
-- ⚠️ **Repo `main` is ~3 weeks behind production.** Everything since July 1 (copy
-  rebuild to the new sitemap, nav/CTA fixes, headshot, deployment prep, opt-out
-  consent) was deployed via CLI from a detached working copy
-  (`~/Projects/jtree-health`) and never pushed. **Do not push `main` to any
-  git-connected Vercel project, and do not (re)connect git, until the sync branch
-  below is merged** — otherwise the June site can be deployed over production.
-- A local branch **`sync/astro-2026-07-12`** (in `~/Projects/jtree-health-website/site`)
-  brings repo `main` to exact parity with production. After it's pushed + merged:
-  1. Vercel → `jtree-health-site` → Settings → Git: connect to the repo, Root
-     Directory `.` (or run `npx vercel git connect` from the linked folder).
-  2. Vercel → `jtree-health` (API): confirm its Git connection, Root Directory
-     `jtree-form-api`.
-  3. Leave "Ignored Build Step" on **Automatic** on both projects so a push that
-     only touches the site doesn't rebuild the API, and vice versa.
-  4. From then on: **deploys happen by pushing to `main`** (PRs get preview URLs);
-     the CLI (`npx vercel --prod --yes`) remains a manual fallback.
-  The detached `~/Projects/jtree-health` folder is then retired — future work happens
-  in the monorepo.
+- The GitHub repo is **`emiranda927/jtree-health-brand-website`**. `main` has the
+  **Astro app at the repo root**, `jtree-form-api/` beside it, and the old WP theme
+  under `legacy/`.
+- ✅ **`main` is at parity with production** (PR #5, "Sync Astro site to current
+  production," merged 2026-07-12 — squashed everything that had only existed as CLI
+  deploys since PR #4: copy rebuild, new sitemap, nav/CTA fixes, headshot, opt-out
+  consent, deployment hardening).
+- ✅ **Both Vercel projects are git-connected and auto-deploy from `main`**:
+  - `jtree-health-site` (Astro app) → Root Directory `.` → connected 2026-07-12,
+    verified with a real push (commit `110a722`, build completed and went live
+    under a minute, confirmed via the `-git-main-` alias and a content spot-check).
+  - `jtree-health` (form API) → Root Directory `jtree-form-api` → was already
+    connected from an earlier session; confirmed correct Root Directory, left as-is.
+- **Going forward: deploys happen by pushing to `main`** (branches/PRs get preview
+  URLs). `npx vercel --prod --yes` remains a manual fallback if git deploy is ever
+  down. The detached `~/Projects/jtree-health` working copy is **retired** — all
+  further work (including the designer's) happens in this monorepo, branch → PR →
+  merge.
+- Not yet checked: "Ignored Build Step" behavior when a change touches only one of
+  the two projects (site vs. API) in the same push — low-risk (worst case is an
+  unnecessary rebuild, not a wrong deploy), revisit if build minutes matter.
 
 ## 4. LAUNCH-DAY CHECKLIST (the only remaining work)
 
@@ -106,7 +105,7 @@ never promoted.
 
 ## 5. Designer handoff — rules of the road
 
-- Work happens in the GitHub monorepo (`emiranda927/jtree-health-brand-website`, Astro app at root) **once the sync branch in §3a is merged**. Branch → PR → Vercel preview URL → merge to `main` deploys production. `npm run dev` to preview locally; `npm run build` must pass. Until the sync merges, treat `~/Projects/jtree-health` (CLI deploys) as the source of truth.
+- Work happens in the GitHub monorepo (`emiranda927/jtree-health-brand-website`, Astro app at root). Branch → PR → Vercel preview URL → merge to `main` auto-deploys production (git-connected, see §3a). `npm run dev` to preview locally; `npm run build` must pass before merging.
 - **Copy is contract**: wording follows the founder's copy guide + the brand rules in it (no "real/actually" qualifiers, no teen slang, no invented stats, founder story on About only). Don't regress it while restyling.
 - **Do not change** (functional, all verified): the admissions + careers `<form>` field names/IDs, `src/lib/inquiry.ts` / `careers.ts` / `Base.astro` script blocks (GTM, consent, config), `vercel.json` (headers/redirects), `robots.txt`.
 - Content placeholders awaiting **Gaby**, not the designer: founder surname check ("Forter"), Josh paragraph on About, mission/vision on Our Culture, team bios/headshots, Learning Hub articles, homepage parent quote confirmation, real outcome stats (only if she can stand behind them).
