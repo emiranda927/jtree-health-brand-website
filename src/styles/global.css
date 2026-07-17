@@ -7,6 +7,40 @@
    JetBrains Mono labels metadata · Caveat accents with restraint
    ============================================================================ */
 
+/* --- Official brand fonts (2026-07 brand kit, self-hosted; see BRAND_ASSETS.md).
+       Batica Sans = brand display face (headlines); Misoka = accent face.
+       Declared here for the redesign — pages opt in via --font-brand / --font-accent. --- */
+@font-face {
+  font-family: "Batica Sans";
+  src: url("/fonts/batica-sans/baticasans-regular.woff2") format("woff2"),
+       url("/fonts/batica-sans/baticasans-regular.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Batica Sans";
+  src: url("/fonts/batica-sans/baticasans-italic.woff2") format("woff2"),
+       url("/fonts/batica-sans/baticasans-italic.otf") format("opentype");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Batica Sans";
+  src: url("/fonts/batica-sans/baticasans-bold.woff2") format("woff2"),
+       url("/fonts/batica-sans/baticasans-bold.otf") format("opentype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Batica Sans";
+  src: url("/fonts/batica-sans/baticasans-bolditalic.woff2") format("woff2"),
+       url("/fonts/batica-sans/baticasans-bolditalic.otf") format("opentype");
+  font-weight: 700; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Misoka";
+  src: url("/fonts/misoka/misoka.woff2") format("woff2"),
+       url("/fonts/misoka/misoka.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
 @theme {
   /* --- Canonical brand colors --- */
   --color-deep-green: #183b2e;   /* primary · trust · clinical grounding */
@@ -42,6 +76,9 @@
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --font-hand: "Caveat Variable", "Segoe Script", cursive;
+  /* Official brand kit faces (2026-07) — adopt during the redesign */
+  --font-brand: "Batica Sans", "Sora Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-accent: "Misoka", "Caveat Variable", cursive;
 
   /* --- Fluid type scale (min ~360px → max ~1440px) --- */
   --text-micro: 0.6875rem;
