@@ -3,9 +3,8 @@
 // JTH brand collage kit. Layer positions are % of the fixed-aspect .chero__stage,
 // derived from the Figma frame coordinates (stage origin 2350,700 · 4317×3645).
 //
-// FONT NOTE: the Figma headline uses "Batica Sans" (a commercial font not licensed
-// in this repo). Rendered here in Sora (the closest available brand sans) as a
-// stand-in — swap in Batica Sans once licensed to match the design exactly.
+// Headline set in Batica Sans (official brand display face, self-hosted since the
+// 2026-07-17 brand-kit import — see BRAND_ASSETS.md), matching the Figma exactly.
 
 // Right-side collage cluster, back-to-front. l/t/w are % of the stage box.
 const layers = [
@@ -73,7 +72,7 @@ const layers = [
   .chero__copy { max-width: 37rem; }
 
   .chero__title {
-    font-family: var(--font-head);
+    font-family: var(--font-brand);
     font-weight: 700;
     font-size: clamp(2.6rem, 1.5rem + 4vw, 4.55rem);
     line-height: 0.96;
