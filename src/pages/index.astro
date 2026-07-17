@@ -1,38 +1,10 @@
 ---
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import heroImg from '../assets/images/joshua-tree-hero.webp';
+import CollageHero from '../components/CollageHero.astro';
 ---
 <Base>
-  <!-- ============================ HERO — cinematic full-bleed ============================ -->
-  <section class="hero" data-hero-scope aria-labelledby="hero-title">
-    <div class="hero__media" data-parallax="0.18">
-      <Image
-        src={heroImg}
-        alt="Five teens sitting together under a Joshua tree at golden hour on a desert ridge"
-        widths={[768, 1280, 1760, 2200]}
-        sizes="100vw"
-        class="hero__img"
-        data-hero-zoom
-        loading="eager"
-        fetchpriority="high"
-      />
-      <div class="hero__scrim" aria-hidden="true"></div>
-    </div>
-
-    <div class="container-x hero__content">
-      <h1 class="hero__title font-display" id="hero-title" data-hero>
-        Grow in a shape <em>entirely your own.</em>
-      </h1>
-      <p class="hero__lede" data-hero>
-        Structured PHP and IOP care for teens, grounded in evidence and built around connection.
-      </p>
-      <div class="hero__actions" data-hero>
-        <a href="/admissions" class="btn">Start the Conversation <span class="btn__arrow">→</span></a>
-        <a href="/what-we-offer" class="btn btn--ghost">Explore Programs</a>
-      </div>
-    </div>
-  </section>
+  <!-- ============================ HERO — collage (Figma node 171:573) ============================ -->
+  <CollageHero />
 
   <!-- ============================ TRUST STRIP ============================ -->
   <section class="trust" aria-label="Accreditation and coverage">

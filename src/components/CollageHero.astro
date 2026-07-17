@@ -1,0 +1,143 @@
+---
+// Collage hero — recreates the designer's Figma hero (node 171:573) from the
+// JTH brand collage kit. Layer positions are % of the fixed-aspect .chero__stage,
+// derived from the Figma frame coordinates (stage origin 2350,700 · 4317×3645).
+//
+// Headline set in Batica Sans (official brand display face, self-hosted since the
+// 2026-07-17 brand-kit import — see BRAND_ASSETS.md), matching the Figma exactly.
+
+// Right-side collage cluster, back-to-front. l/t/w are % of the stage box.
+const layers = [
+  { src: '/brand/collage-dot-grid-dense.svg',          l: 27.6, t: 7.7,  w: 61.9, z: 1, cls: 'is-dots' },
+  { src: '/brand/collage-watercolor-deep-green.webp',  l: 50.0, t: 50.0, w: 60.0, z: 2, cls: 'is-wash' },
+  { src: '/brand/collage-watercolor-green-mound.webp', l: 24.9, t: 63.0, w: 46.5, z: 2, cls: 'is-wash' },
+  { src: '/brand/collage-watercolor-lavender.webp',    l: 1.7,  t: 83.5, w: 44.0, z: 2, cls: 'is-wash' },
+  { src: '/brand/collage-lime-blob-round.webp',        l: 61.8, t: 2.8,  w: 15.7, z: 3, cls: '' },
+  { src: '/brand/collage-torn-joshua-tree-photo.webp', l: 38.0, t: 8.6,  w: 68.9, z: 5, cls: 'is-tree' },
+  { src: '/brand/collage-green-dot-tape.webp',         l: 26.5, t: 58.4, w: 34.6, z: 6, cls: '' },
+  { src: '/brand/collage-sun-burst.svg',               l: 11.7, t: 76.4, w: 12.0, z: 6, cls: '' },
+  { src: '/brand/collage-star-large.svg',              l: 43.5, t: 15.7, w: 7.0,  z: 7, cls: '' },
+  { src: '/brand/collage-scribble-mark-1.svg',         l: 88.0, t: 8.6,  w: 5.8,  z: 7, cls: '' },
+  { src: '/brand/collage-scribble-mark-2.svg',         l: 30.5, t: 58.2, w: 6.9,  z: 7, cls: '' },
+];
+---
+<section class="chero" aria-labelledby="chero-title">
+  <!-- Decorative collage (right cluster) -->
+  <div class="chero__stage" aria-hidden="true" data-reveal-group>
+    {layers.map((el) => (
+      <img
+        src={el.src}
+        alt=""
+        loading="eager"
+        class:list={['chero__layer', el.cls]}
+        style={`left:${el.l}%;top:${el.t}%;width:${el.w}%;z-index:${el.z};`}
+        data-reveal-item
+      />
+    ))}
+  </div>
+
+  <!-- Bottom-left accents (bleed off the left edge) -->
+  <img src="/brand/collage-watercolor-lime.webp" alt="" aria-hidden="true" class="chero__accent chero__accent--hill" />
+  <img src="/brand/collage-star-small.svg" alt="" aria-hidden="true" class="chero__accent chero__accent--star" />
+
+  <div class="container-x chero__inner">
+    <div class="chero__copy">
+      <h1 class="chero__title" id="chero-title" data-reveal>
+        Grow in a shape that is entirely your own.
+      </h1>
+      <p class="chero__sub" data-reveal data-reveal-delay="0.08">
+        Clinical excellence is the foundation. Growth is personal.
+      </p>
+      <div class="chero__actions" data-reveal data-reveal-delay="0.14">
+        <a href="/admissions" class="btn chero__btn">Get Support <span class="btn__arrow">→</span></a>
+        <a href="/what-we-offer" class="btn btn--ghost chero__btn">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .chero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-cream);
+    isolation: isolate;
+  }
+
+  .chero__inner {
+    position: relative;
+    z-index: 3;
+    padding-block: clamp(2rem, 1rem + 4vw, 4.5rem) clamp(3rem, 2rem + 7vw, 7rem);
+  }
+  .chero__copy { max-width: 37rem; }
+
+  .chero__title {
+    font-family: var(--font-brand);
+    font-weight: 700;
+    font-size: clamp(2.6rem, 1.5rem + 4vw, 4.55rem);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    color: var(--color-deep-green);
+    text-wrap: balance;
+    margin: 0;
+  }
+  .chero__sub {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: clamp(1.25rem, 1rem + 1vw, 1.8rem);
+    line-height: 1.3;
+    color: var(--color-deep-green);
+    margin-top: clamp(1.2rem, 0.8rem + 1.5vw, 2rem);
+    max-width: 28ch;
+  }
+  .chero__actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: clamp(1.8rem, 1.2rem + 2vw, 2.8rem); }
+  .chero__btn {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.82rem;
+    padding: 1.05em 1.9em;
+  }
+
+  /* ---------- collage stage (desktop: absolute, bottom-right) ---------- */
+  .chero__stage {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 62%;
+    max-width: 860px;
+    aspect-ratio: 4317 / 3645;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .chero__layer {
+    position: absolute;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 12px 30px rgba(24, 59, 46, 0.10));
+  }
+  .chero__layer.is-dots,
+  .chero__layer.is-wash { filter: none; }
+  .chero__layer.is-tree { filter: drop-shadow(0 18px 40px rgba(24, 59, 46, 0.18)); }
+
+  .chero__accent { position: absolute; height: auto; z-index: 1; pointer-events: none; }
+  .chero__accent--hill { left: -4%; bottom: -5%; width: 26%; max-width: 360px; }
+  .chero__accent--star { left: 8.5%; bottom: 6%; width: 3.2%; max-width: 44px; min-width: 26px; }
+
+  .chero { min-height: clamp(560px, 78vh, 880px); display: flex; align-items: center; }
+
+  /* ---------- mobile / tablet: stack ---------- */
+  @media (max-width: 900px) {
+    .chero { min-height: 0; display: block; }
+    .chero__inner { display: flex; flex-direction: column; }
+    .chero__copy { max-width: 100%; }
+    .chero__stage {
+      position: relative;
+      right: auto; bottom: auto;
+      width: min(100%, 460px);
+      margin: clamp(2rem, 1rem + 4vw, 3rem) auto 0;
+      order: 2;
+    }
+    .chero__accent--hill, .chero__accent--star { display: none; }
+  }
+</style>
