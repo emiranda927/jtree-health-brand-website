@@ -42,29 +42,39 @@
 }
 
 @theme {
-  /* --- Canonical brand colors --- */
-  --color-deep-green: #183b2e;   /* primary · trust · clinical grounding */
-  --color-lime: #c8e869;         /* energy · growth · teen-facing accent  */
-  --color-lavender: #b8a7e6;     /* calm · emotional softness             */
-  --color-cream: #f6f4ec;        /* main background · warmth              */
-  --color-charcoal: #1d1d1f;     /* text · contrast · seriousness         */
-  --color-sunflower: #ffd100;    /* hope · optimism · highlight           */
+  /* --- Canonical brand colors (official kit, 2026-07-17 — see BRAND_ASSETS.md / DESIGN.md §2) --- */
+  --color-deep-green: #1e3d34;   /* Forest · primary ink · clinical grounding */
+  --color-lime: #b8e04a;         /* Cyber Lime · energy accent, never text    */
+  --color-lavender: #a89fd8;     /* Digital Lavender · calm, emotional softness */
+  --color-cream: #fffaf3;        /* Cream · paper, main background            */
+  /* --color-charcoal / --color-sunflower retired 2026-07-17: unused outside
+     their own declaration, and not part of the official 6-color palette. */
 
-  /* --- Derived tints & shades --- */
-  --color-deep-green-900: #0c1f18;
-  --color-deep-green-800: #102a20;
-  --color-deep-green-700: #133327;   /* was #13332708 (stray alpha) */
-  --color-pine: #21503d;
-  --color-sage: #3a6450;
-  --color-lime-soft: #ddef9f;
-  --color-lime-deep: #a7cf3f;
-  --color-lavender-soft: #d8cef2;
-  --color-lavender-deep: #8c75c8;
-  --color-cream-deep: #efebdc;   /* alternate section surface */
-  --color-cream-card: #fbfaf4;   /* lifted card on cream      */
-  --color-sand: #e6e0cd;
-  --color-line: #e4decc;         /* hairline on cream         */
-  --color-line-strong: #d2cbb6;
+  /* --- Derived tints & shades (official steps where the kit defines them;
+         computed blends where it doesn't — see DESIGN.md §2 migration note) --- */
+  --color-deep-green-900: #071b15;   /* Forest-3 (official) */
+  --color-deep-green-800: #142f27;   /* computed: Forest -> Forest-3 */
+  --color-deep-green-700: #19362e;   /* computed: Forest -> Forest-3 */
+  --color-pine: #2c5f52;             /* Deep Sage (official) */
+  --color-sage: #1d4f42;             /* Deep Sage-2 (official) — kept dark enough
+                                         for caption/label text at 9:1 on cream;
+                                         official Mist Sage is decorative-only,
+                                         too light for text (1.97:1) */
+  --color-lime-soft: #dfeea7;        /* computed: Cyber Lime -> Cream */
+  --color-lime-deep: #7ea70d;        /* Cyber Lime-3 (official) — still low
+                                         contrast on cream (2.72:1); audit its
+                                         text/active-state usages in DESIGN.md §10.8 */
+  --color-lavender-soft: #d8d1e7;    /* computed: Digital Lavender -> Cream */
+  --color-lavender-deep: #685ab1;    /* Digital Lavender-3 (official) */
+  --color-cream-deep: #f1e2ce;       /* Cream-2 (official) — alternate section surface */
+  --color-cream-card: #fffcf7;       /* computed: lifted card, lighter than page bg */
+  --color-sand: #f2e5d4;             /* computed: Cream -> Cream-3 */
+  --color-line: #f6ebdd;             /* computed: hairline on cream */
+  --color-line-strong: #eee0cc;      /* computed: stronger hairline */
+  /* --color-ink / -ink-soft / -ink-faint / -cream-dim intentionally UNCHANGED:
+     utility body-text grays outside the 6-color official palette. They already
+     carry a faint green undertone and hold correct contrast; retinting them
+     needs a designer-approved scale, not an invented one — see DESIGN.md §10.8. */
   --color-ink: #1d1d1f;
   --color-ink-soft: #494a45;     /* muted body */
   --color-ink-faint: #6f7066;    /* captions   */
