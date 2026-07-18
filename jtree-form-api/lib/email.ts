@@ -44,14 +44,19 @@ export async function sendEmailToAdmissions(lead: Lead): Promise<void> {
 
 /**
  * Send a watchdog alert email when zero leads are received.
+ *
+ * Throws when OWNER_ALERT_EMAIL (or the Resend key) is unconfigured: a
+ * watchdog that cannot deliver its alert must fail the cron run loudly —
+ * a silent return here makes the cron report success while no one is
+ * actually being notified.
  */
 export async function sendAlertEmail(subject: string, body: string): Promise<void> {
-  const resend = getClient();
   const to = process.env.OWNER_ALERT_EMAIL;
   if (!to) {
-    logger.warn("OWNER_ALERT_EMAIL not set — cannot send alert");
-    return;
+    logger.error("OWNER_ALERT_EMAIL not set — alert undeliverable");
+    throw new Error("OWNER_ALERT_EMAIL not set");
   }
+  const resend = getClient();
 
   const { error } = await resend.emails.send({
     from: "Joshua Tree Health Alerts <noreply@jtreehealth.com>",
@@ -112,7 +117,7 @@ function buildLeadEmailHtml(lead: Lead): string {
   `;
 }
 
-function escapeHtml(str: string): string {
+export function escapeHtml(str: string): string {
   return str
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
