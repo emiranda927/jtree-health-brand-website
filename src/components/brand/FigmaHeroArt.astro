@@ -1,0 +1,299 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+---
+
+<div
+  class:list={['figma-hero-art', className]}
+  role="img"
+  aria-label="A mixed-media collage of a Joshua tree with watercolor, paper, tape, and hand-drawn marks"
+>
+  <span class="figma-hero-art__dots figma-hero-art__dots--main" aria-hidden="true"></span>
+  <span class="figma-hero-art__dots figma-hero-art__dots--edge" aria-hidden="true"></span>
+
+  <img class="figma-hero-art__wash figma-hero-art__wash--mint" src="/brand-v2/washes/wash-11.webp" alt="" aria-hidden="true" />
+  <img class="figma-hero-art__wash figma-hero-art__wash--deep" src="/brand-v2/washes/wash-07.webp" alt="" aria-hidden="true" />
+  <img class="figma-hero-art__wash figma-hero-art__wash--lavender" src="/brand-v2/washes/wash-01.webp" alt="" aria-hidden="true" />
+  <img class="figma-hero-art__wash figma-hero-art__wash--lime-left" src="/brand-v2/washes/wash-09.webp" alt="" aria-hidden="true" />
+  <img class="figma-hero-art__wash figma-hero-art__wash--lime-mid" src="/brand-v2/washes/wash-09.webp" alt="" aria-hidden="true" />
+
+  <span class="figma-hero-art__disc figma-hero-art__disc--top" aria-hidden="true"></span>
+
+  <img
+    class="figma-hero-art__tree"
+    src="/brand-v2/collage/joshua-tree-cut-collage.webp"
+    alt=""
+    aria-hidden="true"
+    loading="eager"
+    fetchpriority="high"
+  />
+
+  <img class="figma-hero-art__tape" src="/brand-v2/tapes/tape-01.webp" alt="" aria-hidden="true" />
+
+  <span class="figma-hero-art__outlined-star figma-hero-art__outlined-star--top" aria-hidden="true">
+    <img src="/brand-v2/graphics/element-8-forest.svg" alt="" />
+    <span></span>
+  </span>
+  <span class="figma-hero-art__outlined-star figma-hero-art__outlined-star--bottom" aria-hidden="true">
+    <img src="/brand-v2/graphics/element-8-forest.svg" alt="" />
+    <span></span>
+  </span>
+
+  <img class="figma-hero-art__spike figma-hero-art__spike--right" src="/brand-v2/graphics/element-1-forest.svg" alt="" aria-hidden="true" />
+  <img class="figma-hero-art__spike figma-hero-art__spike--middle" src="/brand-v2/graphics/element-2-forest.svg" alt="" aria-hidden="true" />
+
+  <span class="figma-hero-art__sun" aria-hidden="true">
+    <span></span>
+    <img src="/brand-v2/halos/halo-1-forest.svg" alt="" />
+  </span>
+</div>
+
+<style>
+  .figma-hero-art {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: visible;
+    pointer-events: none;
+    isolation: isolate;
+  }
+
+  .figma-hero-art img {
+    display: block;
+    max-width: none;
+    user-select: none;
+  }
+
+  .figma-hero-art__wash,
+  .figma-hero-art__tree,
+  .figma-hero-art__tape,
+  .figma-hero-art__spike,
+  .figma-hero-art__outlined-star,
+  .figma-hero-art__disc,
+  .figma-hero-art__sun,
+  .figma-hero-art__dots {
+    position: absolute;
+  }
+
+  .figma-hero-art__dots {
+    z-index: 1;
+    background-image: radial-gradient(circle, #1e3d34 0 2.4px, transparent 2.8px);
+    background-size: clamp(34px, 3.05vw, 58px) clamp(34px, 3.05vw, 58px);
+    opacity: .95;
+  }
+
+  .figma-hero-art__dots--main {
+    left: 52.6%;
+    top: 10.5%;
+    width: 42%;
+    height: 57%;
+    mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 100%);
+  }
+
+  .figma-hero-art__dots--edge {
+    left: -1.5%;
+    bottom: 1%;
+    width: 17%;
+    height: 14%;
+  }
+
+  .figma-hero-art__wash--mint {
+    z-index: 0;
+    width: 30%;
+    right: -8%;
+    top: 27%;
+    transform: rotate(-2deg);
+  }
+
+  .figma-hero-art__wash--deep {
+    z-index: 2;
+    width: 57%;
+    right: -4%;
+    bottom: -15%;
+    transform: rotate(1deg);
+  }
+
+  .figma-hero-art__wash--lavender {
+    z-index: 6;
+    width: 27%;
+    left: 37.5%;
+    bottom: -24%;
+  }
+
+  .figma-hero-art__wash--lime-left {
+    z-index: 4;
+    width: 28%;
+    left: -7%;
+    bottom: -27%;
+    transform: rotate(5deg);
+  }
+
+  .figma-hero-art__wash--lime-mid {
+    z-index: 3;
+    width: 17%;
+    left: 52.5%;
+    bottom: 5%;
+    transform: rotate(-8deg);
+  }
+
+  .figma-hero-art__disc {
+    z-index: 3;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: var(--color-lime, #b8e04a);
+    background-image: url('/brand-v2/washes/wash-09.webp');
+    background-position: 47% 43%;
+    background-size: 145% auto;
+    background-repeat: no-repeat;
+  }
+
+  .figma-hero-art__disc--top {
+    left: 75.3%;
+    top: 7%;
+    width: 10.5%;
+    aspect-ratio: 1;
+  }
+
+  .figma-hero-art__tree {
+    z-index: 7;
+    width: 47.2%;
+    left: 59.2%;
+    top: 18.2%;
+    filter: drop-shadow(0 20px 30px rgba(30, 61, 52, .08));
+  }
+
+  .figma-hero-art__tape {
+    z-index: 8;
+    width: 18.2%;
+    left: 51.4%;
+    bottom: 12.6%;
+    transform: rotate(14deg);
+  }
+
+  .figma-hero-art__outlined-star {
+    z-index: 9;
+    display: block;
+  }
+
+  .figma-hero-art__outlined-star img,
+  .figma-hero-art__outlined-star span {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .figma-hero-art__outlined-star span {
+    inset: 14%;
+    width: 72%;
+    height: 72%;
+    background: var(--color-lime, #b8e04a);
+    -webkit-mask: url('/brand-v2/graphics/element-8-forest.svg') center / contain no-repeat;
+    mask: url('/brand-v2/graphics/element-8-forest.svg') center / contain no-repeat;
+  }
+
+  .figma-hero-art__outlined-star--top {
+    left: 63.2%;
+    top: 19.2%;
+    width: 5.4%;
+    aspect-ratio: 1;
+    transform: rotate(-8deg);
+  }
+
+  .figma-hero-art__outlined-star--bottom {
+    left: 10.9%;
+    bottom: 4.4%;
+    width: 4%;
+    aspect-ratio: 1;
+    transform: rotate(13deg);
+  }
+
+  .figma-hero-art__spike {
+    z-index: 9;
+  }
+
+  .figma-hero-art__spike--right {
+    width: 4.5%;
+    right: 3.3%;
+    top: 13.1%;
+    transform: rotate(9deg);
+  }
+
+  .figma-hero-art__spike--middle {
+    width: 4.4%;
+    left: 50.1%;
+    top: 47.7%;
+    transform: rotate(-8deg);
+  }
+
+  .figma-hero-art__sun {
+    z-index: 9;
+    left: 42.8%;
+    bottom: 6.2%;
+    width: 8.1%;
+    aspect-ratio: 1;
+  }
+
+  .figma-hero-art__sun > span {
+    position: absolute;
+    inset: 24%;
+    border-radius: 50%;
+    background: url('/brand-v2/washes/wash-09.webp') 50% 50% / 180% auto no-repeat;
+  }
+
+  .figma-hero-art__sun img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 980px) {
+    .figma-hero-art {
+      top: auto;
+      height: 590px;
+    }
+
+    .figma-hero-art__tree { left: 30%; top: 10%; width: 73%; }
+    .figma-hero-art__dots--main { left: 21%; top: 2%; width: 78%; height: 68%; }
+    .figma-hero-art__disc--top { left: 76%; top: 0; width: 16%; }
+    .figma-hero-art__wash--mint { width: 48%; right: -18%; top: 24%; }
+    .figma-hero-art__wash--deep { width: 88%; right: -13%; bottom: -28%; }
+    .figma-hero-art__wash--lavender { width: 42%; left: 17%; bottom: -34%; }
+    .figma-hero-art__wash--lime-left { width: 43%; left: -18%; bottom: -34%; }
+    .figma-hero-art__wash--lime-mid { width: 28%; left: 30%; bottom: 1%; }
+    .figma-hero-art__tape { width: 30%; left: 30%; bottom: 6%; }
+    .figma-hero-art__outlined-star--top { left: 35%; top: 13%; width: 8.5%; }
+    .figma-hero-art__outlined-star--bottom { left: 6%; bottom: 4%; width: 7%; }
+    .figma-hero-art__spike--right { width: 7.5%; right: 4%; top: 8%; }
+    .figma-hero-art__spike--middle { width: 7%; left: 20%; top: 45%; }
+    .figma-hero-art__sun { left: 20%; bottom: 4%; width: 13%; }
+    .figma-hero-art__dots--edge { left: -4%; bottom: 0; width: 28%; height: 18%; }
+  }
+
+  @media (max-width: 700px) {
+    .figma-hero-art { height: 440px; }
+    .figma-hero-art__dots {
+      background-image: radial-gradient(circle, #1e3d34 0 1.8px, transparent 2.2px);
+      background-size: 34px 34px;
+    }
+    .figma-hero-art__tree { left: 19%; top: 10%; width: 96%; }
+    .figma-hero-art__dots--main { left: 16%; width: 86%; }
+    .figma-hero-art__disc--top { left: 72%; width: 20%; }
+    .figma-hero-art__wash--mint { width: 70%; right: -38%; }
+    .figma-hero-art__wash--deep { width: 120%; right: -31%; bottom: -31%; }
+    .figma-hero-art__wash--lavender { width: 58%; left: -2%; bottom: -35%; }
+    .figma-hero-art__wash--lime-left { width: 60%; left: -36%; bottom: -34%; }
+    .figma-hero-art__wash--lime-mid { width: 37%; left: 17%; bottom: 0; }
+    .figma-hero-art__tape { width: 41%; left: 18%; bottom: 5%; }
+    .figma-hero-art__outlined-star--top { left: 23%; width: 11%; }
+    .figma-hero-art__spike--middle { left: 8%; width: 9%; }
+    .figma-hero-art__spike--right { width: 9%; }
+    .figma-hero-art__sun { left: 5%; width: 17%; }
+    .figma-hero-art__outlined-star--bottom,
+    .figma-hero-art__dots--edge { display: none; }
+  }
+</style>

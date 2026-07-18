@@ -51,14 +51,16 @@ const initials = (name) =>
     .toUpperCase();
 ---
 <Base
+  bodyClass="brand-page rollout-page"
   title="Our Team — Joshua Tree Health"
   description="Meet the licensed clinicians and staff at Joshua Tree Health. Adolescent PHP & IOP in Apex, NC, for teens ages 10–17."
 >
   <PageHero
+    eyebrow="Our team"
+    art="happy"
     title="Meet our team."
     sub="Licensed clinicians and staff who work with adolescents in behavioral health."
     variant="green"
-    center={true}
   />
 
   <!-- ===== LEADERSHIP ===== -->
@@ -166,16 +168,17 @@ const initials = (name) =>
 
   .team-card__cred {
     color: var(--color-ink-soft);
-    font-size: 0.98rem;
-    line-height: 1.5;
+    font-size: 1.0625rem;
+    line-height: 1.55;
   }
 
   .team-card__title {
     font-family: var(--font-mono);
-    font-size: 0.74rem;
-    letter-spacing: 0.08em;
+    font-size: 0.95rem;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--color-sage);
+    color: var(--color-deep-sage);
     margin-top: 0.15rem;
   }
 
@@ -183,7 +186,7 @@ const initials = (name) =>
     margin-top: 0.8rem;
     color: var(--color-ink-soft);
     line-height: 1.6;
-    font-size: 0.95rem;
+    font-size: 1.0625rem;
   }
 
   .cta-row {

@@ -5,10 +5,13 @@ import PageHero from '../components/PageHero.astro';
 const cities = ['Apex', 'Cary', 'Raleigh', 'Chapel Hill', 'Durham'];
 ---
 <Base
+  bodyClass="brand-page rollout-page"
   title="Service Area — Joshua Tree Health"
   description="Joshua Tree Health is in Apex, NC and serves adolescents ages 10–17 across the greater Triangle — Apex, Cary, Raleigh, Chapel Hill, Durham, and surrounding communities."
 >
   <PageHero
+    eyebrow="Apex, North Carolina"
+    art="desert"
     title="Who we serve."
     sub="Joshua Tree Health is located in Apex, NC and serves adolescents ages 10–17 across the greater Triangle area, including Apex, Cary, Raleigh, Chapel Hill, Durham, and surrounding communities."
     primaryCta={{ label: 'Start the Conversation', href: '/admissions' }}
