@@ -1,99 +1,154 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
+import BrandPageHero from '../components/BrandPageHero.astro';
+import { Image } from 'astro:assets';
+import parentHero from '../assets/images/hero-background.webp';
 
-const sections = [
-  {
-    id: 'not-overreacting',
-    title: "You're not overreacting.",
-    body: "If you're here, something has shifted. Maybe it's been building for a while. Maybe it happened fast. Whatever brought you to this page, trust that instinct. We're here to help you make sense of what your teen needs and what the options are.",
-  },
+const parentSections = [
   {
     id: 'what-to-expect',
-    title: 'What to expect.',
-    body: 'We offer PHP and IOP for adolescents ages 10–17. Both programs are structured and evidence-based, designed to build skills that last beyond the program itself. Programs run during the day or after school, so teens can stay at home and maintain family connection throughout treatment.',
+    eyebrow: 'What to expect',
+    title: 'Structured care, with home still at the center.',
+    body: 'We offer PHP and IOP for adolescents ages 10–17. Both programs are structured and evidence-based, designed to build skills that last beyond the program itself. Teens return home each day, and IOP runs after school so daily life can continue.',
+    image: '/brand-v2/spots/dbt-cbt-reframing.svg',
+    alt: 'Illustration representing communication and reframing skills',
+    tone: 'lavender',
   },
   {
     id: 'family-part-of-treatment',
-    title: 'Family is part of the treatment — not a bystander to it.',
-    body: "We don't just treat your teen. Family involvement is one of the strongest predictors of how well teens do during and after treatment. That's why family sessions are built into every treatment plan from day one. You'll be informed about how things are going, involved in setting goals, and given concrete tools to support your teen at home. You're not dropping your teen off and waiting to hear back.",
+    eyebrow: 'Your role',
+    title: 'Family is part of treatment, not outside of it.',
+    body: 'Family sessions are built into the plan from day one. You will be involved in setting goals, kept informed about progress, and given concrete tools to support your teen at home. You are not left waiting to hear how things are going.',
+    image: '/brand-v2/spots/happy.svg',
+    alt: 'Illustration of a character expressing hope and connection',
+    tone: 'sage',
   },
   {
     id: 'clinically-rigorous',
-    title: 'Clinically rigorous. Human throughout.',
-    body: 'Our clinicians specialize in adolescent behavioral health. We take the severity of what teens are going through seriously, communicate clearly, and are here for your whole family, not just your teen.',
+    eyebrow: 'The care team',
+    title: 'Clinically serious. Human throughout.',
+    body: 'Our clinicians specialize in adolescent behavioral health. We take the severity of what teens are going through seriously, communicate directly, and build care around the whole family rather than treating the diagnosis in isolation.',
+    image: '/brand-v2/spots/mindfulness-meditation.svg',
+    alt: 'Illustration representing grounded, mindful support',
+    tone: 'lime',
   },
 ];
 
 const faqs = [
   {
-    q: 'How do I know if my teen needs PHP vs. IOP?',
-    a: "That's exactly what an admissions call is for. We'll ask about what's been going on, and together we'll figure out the right level of care, without pressure to commit to anything on the call.",
+    q: 'How do I know if my teen needs PHP or IOP?',
+    a: 'You do not need to decide that before calling. We will ask about what has been happening, talk through safety and daily functioning, and recommend the level of care that fits.',
   },
   {
     q: 'Will I be kept in the loop during treatment?',
-    a: "Yes. You'll have regular contact with your teen's treatment team throughout. You're not dropping your teen off and waiting to hear back — family involvement is built into how we work.",
+    a: 'Yes. Family sessions and regular communication are built into how we work. If something changes between scheduled updates, the treatment team will reach out directly.',
   },
   {
-    q: "What if my teen doesn't want to come?",
-    a: "A lot of teens start there. The first step is the conversation with us — you don't need your teen to be on board before you make that call. We can help you think through how to approach it with them.",
+    q: "What if my teen does not want to come?",
+    a: 'A lot of teens start there. You can call before your teen is fully on board. We can help you think through how to approach the conversation without turning it into another fight.',
+  },
+  {
+    q: 'Will my teen fall behind in school?',
+    a: 'PHP includes academic support during the treatment day. IOP runs after school from 3–6pm. We coordinate with schools when that support is part of the plan.',
+  },
+  {
+    q: 'How does insurance work?',
+    a: 'We work with major insurers and verify benefits before treatment begins, so you can understand coverage and likely costs before making a decision.',
   },
   {
     q: 'What happens after the program ends?',
-    a: "We don't just discharge. We work with you and any outpatient providers on a clear handoff plan so your teen has support in place when they leave.",
+    a: 'We build a clear transition plan with your family and outpatient providers, so support is in place before your teen leaves the program.',
   },
 ];
 ---
-<Base
-  title="For Parents — Joshua Tree Health"
-  description="Serious PHP and IOP care for teens ages 10–17, with families involved from day one. Here's what to expect, and how we'll help you decide if Joshua Tree is the right fit."
->
-  <PageHero
-    title="Serious care for teens.<br>Support for <em>families</em>."
-    sub="More support than weekly therapy. Less restrictive than hospitalization. We'll help you figure out if Joshua Tree is the right fit."
-    primaryCta={{ label: 'Talk to Our Admissions Team', href: '/admissions' }}
-    secondaryCta={{ label: 'Call (919) 335-5053', href: 'tel:+19193355053' }}
-  />
 
-  <!-- ===== FOR PARENTS — FOUR CONTENT SECTIONS ===== -->
-  <section class="section" aria-labelledby="not-overreacting-title">
-    <div class="container-x">
-      <div class="prose" data-reveal-group>
-        {sections.map((s) => (
-          <div data-reveal-item>
-            <h2 class="section-title font-display" id={`${s.id}-title`}>{s.title}</h2>
-            <p>{s.body}</p>
-          </div>
-        ))}
+<Base
+  bodyClass="brand-page parents-page"
+  title="For Parents — Joshua Tree Health"
+  description="Serious PHP and IOP care for teens ages 10–17, with families involved from day one. Learn what to expect and how Joshua Tree Health supports parents."
+>
+  <BrandPageHero
+    eyebrow="For parents"
+    title="Serious care for teens. Support for <em>your whole family.</em>"
+    sub="When weekly therapy is no longer enough, we help you understand what comes next—and make sure you are supported through it too."
+    primaryCta={{ label: 'Talk to admissions', href: '/admissions' }}
+    secondaryCta={{ label: 'Call (919) 335-5053', href: 'tel:+19193355053' }}
+    facts={[
+      { label: 'PHP + IOP', detail: 'More support without an overnight stay' },
+      { label: 'Home each day', detail: 'Family connection remains intact' },
+      { label: 'Parents involved', detail: 'Family work begins from day one' },
+    ]}
+  >
+    <div class="parents-hero-art">
+      <img class="parents-hero-art__wash" src="/brand-v2/washes/wash-03.webp" alt="" aria-hidden="true" />
+      <div class="parents-hero-art__frame">
+        <Image src={parentHero} alt="A group of teens talking together near a Joshua tree" widths={[700, 1000, 1400]} sizes="(max-width: 980px) 88vw, 44vw" class="parents-hero-art__photo" />
+      </div>
+      <img class="parents-hero-art__tape" src="/brand-v2/tapes/tape-01.webp" alt="" aria-hidden="true" />
+      <img class="parents-hero-art__mark" src="/brand-v2/graphics/element-2-forest.svg" alt="" aria-hidden="true" />
+    </div>
+  </BrandPageHero>
+
+  <section class="section parent-reassurance" aria-labelledby="not-overreacting-title">
+    <div class="container-x parent-reassurance__layout">
+      <div data-reveal>
+        <p class="eyebrow">Trust what you are noticing</p>
+        <h2 class="section-title font-display" id="not-overreacting-title">You are not overreacting.</h2>
+        <p class="parent-reassurance__copy">If you are here, something has shifted. Maybe it has been building for a while. Maybe it happened fast. You do not need to know exactly what the problem is before asking for help. Start with what you have seen and what feels different at home.</p>
+        <a href="/admissions" class="link-arrow">Talk it through with admissions →</a>
+      </div>
+      <div class="parent-reassurance__art" data-reveal data-reveal-delay="0.08">
+        <img src="/brand-v2/collage/tree-growth-halo.webp" alt="A Joshua tree surrounded by hopeful hand-drawn symbols and a seated character" loading="lazy" />
       </div>
     </div>
   </section>
 
-  <!-- ===== FAQ ===== -->
-  <section class="section surface-cream-deep" aria-labelledby="parent-faq-title">
-    <div class="container-x">
+  <section class="parent-stories" aria-label="What parents can expect">
+    {parentSections.map((section, index) => (
+      <article class:list={['parent-story', `parent-story--${section.tone}`, { 'parent-story--reverse': index % 2 === 1 }]} aria-labelledby={`${section.id}-title`}>
+        <div class="container-x parent-story__layout">
+          <div class="parent-story__copy" data-reveal>
+            <p class="eyebrow">{section.eyebrow}</p>
+            <h2 class="section-title font-display" id={`${section.id}-title`}>{section.title}</h2>
+            <p>{section.body}</p>
+          </div>
+          <div class="parent-story__art" data-reveal data-reveal-delay="0.08">
+            <img class="parent-story__wash" src={index === 0 ? '/brand-v2/washes/wash-09.webp' : index === 1 ? '/brand-v2/washes/wash-03.webp' : '/brand-v2/washes/wash-01.webp'} alt="" aria-hidden="true" />
+            <img class="parent-story__spot" src={section.image} alt={section.alt} loading="lazy" />
+            <img class="parent-story__punct" src={index === 1 ? '/brand-v2/graphics/element-1-forest.svg' : '/brand-v2/halos/halo-9-lavender.svg'} alt="" aria-hidden="true" />
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="section parent-faq" aria-labelledby="parent-faq-title">
+    <div class="container-x parent-faq__layout">
       <div class="section-head" data-reveal>
-        <h2 class="section-title font-display" id="parent-faq-title">Questions parents ask.</h2>
+        <p class="eyebrow">Practical questions</p>
+        <h2 class="section-title font-display" id="parent-faq-title">What parents usually ask first.</h2>
+        <p class="section-sub">If your question is not here, call us. You will speak with a person who understands the programs.</p>
       </div>
-      <div class="faq" data-reveal>
-        {faqs.map((f) => (
+      <div class="faq" data-reveal data-reveal-delay="0.08">
+        {faqs.map((faq) => (
           <details class="faq__item">
-            <summary>{f.q}</summary>
-            <div class="faq__answer">{f.a}</div>
+            <summary>{faq.q}</summary>
+            <div class="faq__answer">{faq.a}</div>
           </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ===== CLOSING CTA ===== -->
-  <section class="section surface-green" aria-labelledby="parent-cta-title">
-    <div class="container-x">
-      <div class="section-head section-head--center" data-reveal>
-        <h2 class="section-title font-display" id="parent-cta-title">Talk it through with us.</h2>
-        <p class="section-sub">One call is enough to find out if Joshua Tree is the right fit. No commitment, no pressure.</p>
+  <section class="parent-cta" aria-labelledby="parent-cta-title">
+    <div class="container-x parent-cta__inner" data-reveal>
+      <img src="/brand-v2/graphics/element-1-forest.svg" alt="" aria-hidden="true" />
+      <div>
+        <p class="eyebrow">Admissions</p>
+        <h2 class="font-display" id="parent-cta-title">You noticed something. That is enough to start.</h2>
+        <p>Tell us what has changed. We will help you understand what kind of support makes sense.</p>
         <div class="parent-cta__actions">
-          <a class="btn btn--on-dark" href="/admissions">Talk to Our Admissions Team <span class="btn__arrow">→</span></a>
+          <a class="btn btn--on-dark" href="/admissions">Talk to admissions <span class="btn__arrow">→</span></a>
           <a class="btn btn--ghost-on-dark" href="tel:+19193355053">Call (919) 335-5053</a>
         </div>
       </div>
@@ -102,11 +157,66 @@ const faqs = [
 </Base>
 
 <style>
-  .parent-cta__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    justify-content: center;
-    margin-top: 2rem;
+  .parents-hero-art { position: absolute; inset: 0; isolation: isolate; }
+  .parents-hero-art__wash { position: absolute; z-index: -1; width: 106%; max-width: none; left: 50%; top: 4%; opacity: .78; transform: translateX(-50%) rotate(-3deg); }
+  .parents-hero-art__frame { position: absolute; z-index: 2; width: 88%; right: 1%; top: 10%; padding: 10px; background: var(--color-cream); box-shadow: 0 28px 54px rgba(30, 61, 52, .13); transform: rotate(-1.5deg); clip-path: polygon(2% 4%, 98% 0, 100% 93%, 94% 100%, 3% 97%, 0 12%); }
+  .parents-hero-art__photo { width: 100%; height: 390px; object-fit: cover; object-position: 70% center; clip-path: polygon(1% 2%, 99% 0, 100% 95%, 94% 100%, 2% 98%, 0 8%); }
+  .parents-hero-art__tape { position: absolute; z-index: 3; width: 28%; right: 2%; top: 5%; transform: rotate(12deg); }
+  .parents-hero-art__mark { position: absolute; z-index: 4; width: 15%; left: 0; bottom: 4%; transform: rotate(-10deg); }
+
+  .parent-reassurance { overflow: hidden; background: var(--color-deep-green); color: var(--color-cream); }
+  .parent-reassurance__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(380px, .9fr); gap: clamp(3rem, 7vw, 8rem); align-items: center; }
+  .parent-reassurance .section-title { color: var(--color-cream); }
+  .parent-reassurance .eyebrow, .parent-reassurance .link-arrow { color: var(--color-lime); }
+  .parent-reassurance__copy { max-width: 42rem; margin-top: 1.6rem; color: var(--color-cream-dim); font-size: clamp(1.12rem, 1.4vw, 1.3rem); line-height: 1.58; }
+  .parent-reassurance .link-arrow { margin-top: 1.7rem; }
+  .parent-reassurance__art { position: relative; min-height: 650px; }
+  .parent-reassurance__art img { position: absolute; width: 108%; max-width: none; left: 50%; bottom: -12%; transform: translateX(-50%); filter: drop-shadow(0 22px 32px rgba(7, 24, 18, .18)); }
+
+  .parent-story { padding-block: clamp(5.5rem, 9vw, 9rem); overflow: hidden; }
+  .parent-story--lavender { background: var(--color-lavender-soft); }
+  .parent-story--sage { background: #d8e7df; }
+  .parent-story--lime { background: var(--color-cream); }
+  .parent-story__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(380px, .92fr); gap: clamp(3rem, 8vw, 9rem); align-items: center; }
+  .parent-story--reverse .parent-story__copy { order: 2; }
+  .parent-story--reverse .parent-story__art { order: 1; }
+  .parent-story__copy > p:last-child { max-width: 43rem; margin-top: 1.5rem; color: var(--color-ink-soft); font-size: clamp(1.08rem, 1.3vw, 1.25rem); line-height: 1.58; }
+  .parent-story__art { position: relative; min-height: 520px; isolation: isolate; }
+  .parent-story__wash { position: absolute; z-index: -1; width: 112%; max-width: none; left: 50%; top: 4%; opacity: .58; transform: translateX(-50%) rotate(-4deg); }
+  .parent-story__spot { position: absolute; width: 100%; max-width: none; left: 50%; bottom: 0; transform: translateX(-50%); }
+  .parent-story__punct { position: absolute; width: 16%; right: 1%; top: 2%; transform: rotate(8deg); }
+
+  .parent-faq { background: var(--color-cream-deep); }
+  .parent-faq__layout { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr); gap: clamp(3rem, 8vw, 9rem); align-items: start; }
+  .parent-faq .section-head { position: sticky; top: 110px; }
+  .parent-faq .faq { max-width: none; }
+  .parent-faq .faq__item summary { padding-block: 1.5rem; font-size: 1.22rem; line-height: 1.1; text-transform: uppercase; letter-spacing: .015em; }
+  .parent-faq .faq__answer { font-size: 1.08rem; }
+
+  .parent-cta { padding-block: clamp(5.5rem, 9vw, 9rem); background: var(--color-deep-green); color: var(--color-cream); }
+  .parent-cta__inner { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+  .parent-cta__inner > img { width: 92px; filter: brightness(0) saturate(100%) invert(91%) sepia(35%) saturate(943%) hue-rotate(27deg) brightness(101%); }
+  .parent-cta .eyebrow { color: var(--color-lime); }
+  .parent-cta h2 { max-width: 14ch; margin-top: 1rem; color: var(--color-cream); font-size: clamp(3rem, 5vw, 5.4rem); }
+  .parent-cta h2 + p { max-width: 44rem; margin-top: 1.5rem; color: var(--color-cream-dim); font-size: 1.15rem; }
+  .parent-cta__actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+
+  @media (max-width: 980px) {
+    .parents-hero-art { max-width: 700px; margin-inline: auto; }
+    .parent-reassurance__layout, .parent-story__layout, .parent-faq__layout { grid-template-columns: 1fr; }
+    .parent-reassurance__art, .parent-story__art { max-width: 620px; }
+    .parent-story--reverse .parent-story__copy, .parent-story--reverse .parent-story__art { order: initial; }
+    .parent-faq .section-head { position: static; }
+  }
+
+  @media (max-width: 700px) {
+    .parents-hero-art__frame { width: 95%; right: 0; }
+    .parents-hero-art__photo { height: 275px; }
+    .parent-reassurance__art { min-height: 430px; }
+    .parent-reassurance__art img { width: 118%; bottom: -10%; }
+    .parent-story__art { min-height: 390px; }
+    .parent-story__spot { width: 108%; }
+    .parent-cta__inner { grid-template-columns: 1fr; }
+    .parent-cta__inner > img { width: 72px; }
   }
 </style>

@@ -67,10 +67,13 @@ const supportingTags = [
 ];
 ---
 <Base
+  bodyClass="brand-page rollout-page"
   title="Our Approach — Joshua Tree Health"
   description="How we treat teens ages 10–17: DBT, polyvagal-informed care, and trauma-informed treatment, with experiential and expressive therapy woven into every group session in Apex, NC."
 >
   <PageHero
+    eyebrow="Our clinical approach"
+    art="approach"
     title="Clinically rigorous care, delivered with warmth."
     sub="Our treatment is grounded in evidence-based methods and designed around how teens experience distress — not just how it's classified."
   />
@@ -198,10 +201,11 @@ const supportingTags = [
   .tag-groups { display: grid; gap: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
   .tag-group__label {
     font-family: var(--font-mono);
-    font-size: 0.74rem;
-    letter-spacing: 0.14em;
+    font-size: 0.95rem;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--color-sage);
+    color: var(--color-deep-sage);
     margin-bottom: 0.9rem;
   }
   .cta-actions {
