@@ -28,6 +28,23 @@ long edge ≤ 2600px, alpha preserved).
 | `public/fonts/misoka/` | Misoka accent webfont (woff2 + OTF) |
 | `public/brand/` (root, from earlier July imports) | `collage-*` hero-layer singles, `insurers/` payer logos — these predate this kit; several overlap it (tape, watercolor washes, dot grids). Prefer `kit/` versions going forward; the singles stay until the collage hero is re-pointed. |
 
+### Insurer logos (`public/brand/insurers/`)
+
+Payer trademarks for the Insurance page's "in-network with" trust strip. Official
+logos, sourced individually (not from the Drive brand kit — these are third-party
+marks, not JTH's own). 4 of the 5 insurers named in the copy guide are in:
+
+| File | Insurer | Format |
+|---|---|---|
+| `aetna.svg` | Aetna | vector |
+| `cigna.svg` | Cigna | vector |
+| `unitedhealthcare.svg` | UnitedHealthcare | vector |
+| `optum.png` | Optum (UHC's behavioral-health brand) | raster, alpha, 512×148 |
+
+**Still missing — do not fabricate:** Blue Cross Blue Shield of NC and Tricare.
+Pull official logos for both before the Insurance page trust strip ships; a strip
+that's visibly missing 2 of 5 named insurers undercuts the page's credibility.
+
 Fonts are declared in `src/styles/global.css` (`@font-face`) and addressable as
 `var(--font-brand)` (Batica Sans → Sora fallback) and `var(--font-accent)` (Misoka).
 Fraunces ships via Fontsource variable packages already — the kit's static Fraunces
