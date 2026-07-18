@@ -1,7 +1,11 @@
 // Admissions inquiry form — ported from jtree-wp-theme/assets/js/form.js.
 // Submits to the live jtree-form-api (api.jtreehealth.com) and, on page-leave
-// after interaction, sends a no-PII "partial" beacon. Field names match
-// jtree-form-api/lib/validate.ts. Config comes from window.JTREE_CONFIG.
+// after interaction, sends a no-PII "partial" beacon.
+//
+// API contract (jtree-form-api/lib/validate.ts InquirySchema): a single `name`
+// plus `email`/`phone` — the form still renders First/Last inputs, so the two
+// are merged into `name` at submit. `consent_contact` is a client-side gate
+// only (the API strips unknown keys). Config comes from window.JTREE_CONFIG.
 
 type Cfg = { apiUrl?: string; partialApiUrl?: string; thankYouUrl?: string; turnstileSiteKey?: string };
 const w = window as unknown as { JTREE_CONFIG?: Cfg; turnstile?: any; crypto?: Crypto };
@@ -131,17 +135,19 @@ function init(form: HTMLFormElement) {
     if (errors.length) { errors.forEach((er) => showError(er[0], er[1])); showBanner('Please fix the highlighted fields and try again.'); return; }
 
     const payload: Record<string, unknown> = {
-      parent_first_name: data.parent_first_name.trim(),
-      parent_last_name: data.parent_last_name.trim(),
-      parent_email: data.parent_email.trim(),
-      parent_phone: data.parent_phone.trim(),
+      name: (data.parent_first_name.trim() + ' ' + data.parent_last_name.trim()).slice(0, 100),
+      email: data.parent_email.trim(),
+      phone: data.parent_phone.trim(),
       teen_age: parseInt(data.teen_age, 10),
       program_interest: data.program_interest,
       best_time_to_call: data.best_time_to_call,
-      consent_contact: data.consent_contact === 'true' || data.consent_contact === 'on',
       session_id: sessionId,
     };
     if (data.how_did_you_hear) payload.how_did_you_hear = data.how_did_you_hear;
+    if (utms.utm_source) payload.utm_source = utms.utm_source;
+    if (utms.utm_medium) payload.utm_medium = utms.utm_medium;
+    if (utms.utm_campaign) payload.utm_campaign = utms.utm_campaign;
+    if (referrer) payload.referrer = referrer;
 
     if (TURNSTILE_KEY && w.turnstile && widgetId !== null) {
       const token = w.turnstile.getResponse(widgetId);
@@ -164,10 +170,19 @@ function init(form: HTMLFormElement) {
       }
       let body: any = null;
       try { body = await res.json(); } catch {}
+      // The API reports validation problems as a single {field, message}; map
+      // its field names back onto the rendered inputs.
+      const FIELD_MAP: Record<string, string> = { name: 'parent_first_name', email: 'parent_email', phone: 'parent_phone' };
+      const showApiFieldError = (field: string, message?: string) => {
+        showError(FIELD_MAP[field] || field, message || 'Please check this field.');
+      };
       if (res.status === 429) showBanner('Too many submissions. Please wait a moment and try again.');
       else if (res.status === 403) showBanner('Verification failed. Please retry the challenge below the form.');
       else if (res.status >= 400 && res.status < 500 && body && Array.isArray(body.errors)) {
-        body.errors.forEach((er: any) => { if (er && er.field) showError(er.field, er.message || 'Please check this field.'); });
+        body.errors.forEach((er: any) => { if (er && er.field) showApiFieldError(er.field, er.message); });
+        showBanner('Please fix the highlighted fields and try again.');
+      } else if (res.status >= 400 && res.status < 500 && body && typeof body.field === 'string') {
+        showApiFieldError(body.field, body.message);
         showBanner('Please fix the highlighted fields and try again.');
       } else showBanner('Something went wrong on our side. Please call us at (919) 335-5053 and we’ll take it from there.');
       if (TURNSTILE_KEY && w.turnstile && widgetId !== null) { try { w.turnstile.reset(widgetId); } catch {} }

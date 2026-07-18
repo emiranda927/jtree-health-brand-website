@@ -10,7 +10,12 @@ const steps = [
   { n: '03', t: 'Start within 3–5 days', b: 'We recommend the right level of care and build a plan together. No pressure.' },
 ];
 const ages = Array.from({ length: 8 }, (_, i) => 10 + i);
-const programs = ['IOP', 'PHP', 'Not sure'];
+// value must match the API's ProgramInterest enum (IOP | PHP | Unsure)
+const programs = [
+  { value: 'IOP', label: 'IOP' },
+  { value: 'PHP', label: 'PHP' },
+  { value: 'Unsure', label: 'Not sure' },
+];
 const times = ['Morning', 'Afternoon', 'Evening'];
 const sources = ['Google', 'Referral', 'Doctor', 'School', 'Other'];
 ---
@@ -118,7 +123,7 @@ const sources = ['Google', 'Referral', 'Doctor', 'School', 'Other'];
               <label for="program_interest">Program of interest</label>
               <select id="program_interest" name="program_interest" required>
                 <option value="">Select…</option>
-                {programs.map((p) => <option value={p}>{p}</option>)}
+                {programs.map((p) => <option value={p.value}>{p.label}</option>)}
               </select>
               <span class="jth-field-error" id="err-program_interest"></span>
             </div>
