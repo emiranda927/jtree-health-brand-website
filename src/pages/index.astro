@@ -1,103 +1,119 @@
 ---
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import heroImg from '../assets/images/joshua-tree-hero.webp';
+import FigmaHeroArt from '../components/brand/FigmaHeroArt.astro';
+
+const pathways = [
+  {
+    title: 'No judgment. No shame.',
+    body: "You don't have to have it all figured out. We start where you are.",
+    href: '/for-parents',
+    link: 'For families',
+    image: '/brand-v2/spots/happy.svg',
+    scale: 1.08,
+  },
+  {
+    title: 'More than weekly therapy.',
+    body: 'Skills, structure, and support for the moments when once-a-week care is not enough.',
+    href: '/what-we-offer',
+    link: 'Explore programs',
+    image: '/brand-v2/spots/dbt-cbt-reframing.svg',
+    scale: 1,
+  },
+  {
+    title: 'You have power here.',
+    body: 'We help teens regain a sense of control and choose what comes next.',
+    href: '/what-we-treat',
+    link: 'What we treat',
+    image: '/brand-v2/spots/mindfulness-meditation.svg',
+    scale: 1,
+  },
+  {
+    title: 'Growth in your own shape.',
+    body: 'Care is built around the teen in front of us, not a one-size-fits-all curriculum.',
+    href: '/what-we-offer/our-approach',
+    link: 'Our approach',
+    image: '/brand-v2/spots/nature-walking.svg',
+    scale: 1.07,
+  },
+];
 ---
-<Base>
-  <!-- ============================ HERO — cinematic full-bleed ============================ -->
+<Base bodyClass="home-v2">
   <section class="hero" data-hero-scope aria-labelledby="hero-title">
-    <div class="hero__media" data-parallax="0.18">
-      <Image
-        src={heroImg}
-        alt="Five teens sitting together under a Joshua tree at golden hour on a desert ridge"
-        widths={[768, 1280, 1760, 2200]}
-        sizes="100vw"
-        class="hero__img"
-        data-hero-zoom
-        loading="eager"
-        fetchpriority="high"
-      />
-      <div class="hero__scrim" aria-hidden="true"></div>
-    </div>
-
-    <div class="container-x hero__content">
-      <h1 class="hero__title font-display" id="hero-title" data-hero>
-        Grow in a shape <em>entirely your own.</em>
-      </h1>
-      <p class="hero__lede" data-hero>
-        Structured PHP and IOP care for teens, grounded in evidence and built around connection.
-      </p>
-      <div class="hero__actions" data-hero>
-        <a href="/admissions" class="btn">Start the Conversation <span class="btn__arrow">→</span></a>
-        <a href="/what-we-offer" class="btn btn--ghost">Explore Programs</a>
+    <FigmaHeroArt />
+    <div class="container-x hero__grid">
+      <div class="hero__copy">
+        <h1 class="hero__title font-display" id="hero-title" data-hero>
+          <span>Grow in a shape</span>
+          <span>that is entirely</span>
+          <span>your own.</span>
+        </h1>
+        <p class="hero__lede" data-hero>
+          Clinical excellence is the foundation.<br />Growth is personal.
+        </p>
+        <div class="hero__actions" data-hero>
+          <a href="/admissions" class="btn">Get support</a>
+          <a href="/what-we-offer" class="btn btn--ghost">Learn more</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================ TRUST STRIP ============================ -->
   <section class="trust" aria-label="Accreditation and coverage">
-    <div class="container-x trust__inner" data-reveal style="justify-content:center;">
-      <ul class="trust__logos">
-        <li class="trust__logo">CARF Accredited</li>
-        <li class="trust__logo">Licensed Clinicians</li>
-        <li class="trust__logo">In-Network with Major Insurers</li>
-      </ul>
+    <div class="container-x trust__inner" data-reveal>
+      <p>CARF accredited</p>
+      <span aria-hidden="true">·</span>
+      <p>Licensed clinicians</p>
+      <span aria-hidden="true">·</span>
+      <p>In-network with major insurers</p>
     </div>
   </section>
 
-  <!-- ============================ MANIFESTO ============================ -->
-  <section class="manifesto surface-green" aria-labelledby="manifesto-title">
-    <div class="container-x manifesto__inner">
-      <h2 class="manifesto__lead font-display" id="manifesto-title" data-reveal>
-        You know your teen better than anyone.
-      </h2>
-      <p class="manifesto__body" data-reveal data-reveal-delay="0.08">
-        When it's a bad week, you can usually figure it out. But when the anxiety, the
-        withdrawal, the shutting down, or a crisis starts getting in the way of daily life,
-        it's easy to feel unsure of how to help. That's what we're here for.
-      </p>
-      <p class="manifesto__body" data-reveal data-reveal-delay="0.13">
-        Family involvement is built into how we work, not as an add-on but as a core part of
-        treatment, because how well teens do is closely tied to how supported their families feel.
-      </p>
-      <p class="manifesto__body" data-reveal data-reveal-delay="0.18">
-        Whether you're looking for a structured program or just trying to understand the
-        options, you're in the right place.
-      </p>
-      <div data-reveal data-reveal-delay="0.22" style="margin-top:2rem;">
-        <a href="/admissions" class="btn btn--on-dark">Start the Conversation <span class="btn__arrow">→</span></a>
+  <section class="manifesto" aria-labelledby="manifesto-title">
+    <div class="container-x manifesto__grid">
+      <div class="manifesto__copy">
+        <img class="section-punct section-punct--light" src="/brand-v2/halos/halo-10-lime.svg" alt="" aria-hidden="true" />
+        <p class="eyebrow eyebrow--light">For parents and families</p>
+        <h2 class="manifesto__lead font-display" id="manifesto-title" data-reveal>
+          You know your teen better than anyone.
+        </h2>
+        <p class="manifesto__body" data-reveal data-reveal-delay="0.08">
+          When anxiety, withdrawal, shutting down, or a crisis starts getting in the way of daily life, it can be hard to know what kind of help comes next. That is what we are here for.
+        </p>
+        <p class="manifesto__body" data-reveal data-reveal-delay="0.13">
+          Family involvement is built into how we work because teens do better when the people supporting them feel supported too.
+        </p>
+        <div class="manifesto__action" data-reveal data-reveal-delay="0.18">
+          <a href="/admissions" class="btn btn--on-dark">Start the conversation <span class="btn__arrow">→</span></a>
+        </div>
+      </div>
+      <div class="manifesto__art" data-reveal data-reveal-delay="0.08">
+        <img class="manifesto__growth" src="/brand-v2/collage/tree-growth-halo.webp" alt="A Joshua tree surrounded by watercolor, hand-drawn symbols, and a seated character" loading="lazy" />
       </div>
     </div>
   </section>
 
-  <!-- ============================ VALUE PILLARS ============================ -->
-  <section class="section pillars" aria-labelledby="pillars-title">
+  <section class="section pathways" aria-labelledby="pathways-title">
     <div class="container-x">
-      <div class="section-head section-head--center" data-reveal>
-        <h2 class="section-title font-display" id="pillars-title">What to expect from us.</h2>
+      <div class="section-head" data-reveal>
+        <img class="section-punct" src="/brand-v2/graphics/element-1-forest.svg" alt="" aria-hidden="true" />
+        <p class="eyebrow">What to expect</p>
+        <h2 class="section-title font-display" id="pathways-title">Care should feel made for the person receiving it.</h2>
       </div>
-      <div class="grid-4" data-reveal-group>
-        <article class="info-card" data-reveal-item>
-          <h3 class="info-card__title">No judgment. No shame.</h3>
-          <p class="info-card__body">You don't have to have it all figured out. We start where you are.</p>
-        </article>
-        <article class="info-card" data-reveal-item>
-          <h3 class="info-card__title">More than weekly therapy.</h3>
-          <p class="info-card__body">A step between crisis and everyday life, with skills, structure, and support when you need it most.</p>
-        </article>
-        <article class="info-card" data-reveal-item>
-          <h3 class="info-card__title">You have power here.</h3>
-          <p class="info-card__body">We're not just here to help your teen cope. We're here to help them regain a sense of control and choose what comes next.</p>
-        </article>
-        <article class="info-card" data-reveal-item>
-          <h3 class="info-card__title">Growth in your own shape.</h3>
-          <p class="info-card__body">Not one-size-fits-all. We help teens move in a direction that makes sense for them.</p>
-        </article>
+      <div class="pathways__grid" data-reveal-group>
+        {pathways.map((pathway, index) => (
+          <a class:list={['pathway', { 'pathway--offset': index % 2 === 1 }]} href={pathway.href} data-reveal-item>
+            <img class="pathway__art" style={`--art-scale: ${pathway.scale}`} src={pathway.image} alt="" aria-hidden="true" loading="lazy" />
+            <div class="pathway__copy">
+              <h3>{pathway.title}</h3>
+              <p>{pathway.body}</p>
+              <span>{pathway.link} →</span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ============================ PROGRAMS ============================ -->
   <section class="section programs" id="programs" aria-labelledby="programs-title">
     <div class="container-x">
       <div class="section-head" data-reveal>
@@ -108,67 +124,70 @@ import heroImg from '../assets/images/joshua-tree-hero.webp';
 
       <div class="programs__grid" data-reveal-group>
         <article class="program-card" data-reveal-item>
-          <p class="program-card__tag">Partial Hospitalization · PHP</p>
-          <h3 class="program-card__title font-display">Full-day care. Home each evening.</h3>
-          <p class="program-card__sched"><span>Five days a week</span><span class="dot">·</span><span>9am – 3pm</span></p>
-          <p class="program-card__body">Structured daily care for teens who need more than therapy — and can still go home each night.</p>
+          <img class="program-card__mark" src="/brand-v2/graphics/element-13-deep-sage.svg" alt="" aria-hidden="true" />
+          <div class="program-card__identity">
+            <span class="program-card__code" aria-hidden="true">PHP</span>
+            <p class="program-card__tag">Partial Hospitalization Program</p>
+          </div>
+          <h3 class="program-card__title">Full-day treatment, five days a week.</h3>
+          <p class="program-card__sched">9am–3pm · Home each evening</p>
+          <p class="program-card__body">Our highest level of outpatient care for teens who need daily structure and more support than weekly therapy.</p>
           <ul class="program-card__list">
-            <li>Group &amp; individual therapy</li>
+            <li>Group and individual therapy</li>
             <li>Family sessions</li>
             <li>Academic support</li>
             <li>Integrated psychiatric care</li>
           </ul>
-          <a href="/what-we-offer/php" class="link-arrow">Learn about PHP →</a>
+          <a href="/what-we-offer/php" class="link-arrow">Explore the PHP program →</a>
         </article>
 
-        <article class="program-card program-card--accent" data-reveal-item>
-          <p class="program-card__tag">Intensive Outpatient · IOP</p>
-          <h3 class="program-card__title font-display">After school. Life stays intact.</h3>
-          <p class="program-card__sched"><span>Three afternoons a week</span><span class="dot">·</span><span>3 – 6pm</span></p>
-          <p class="program-card__body">Teens stay in school, stay at home, and stay connected to their lives — while getting the intensive support they actually need.</p>
+        <article class="program-card program-card--dark" data-reveal-item>
+          <img class="program-card__mark" src="/brand-v2/halos/halo-10-lime.svg" alt="" aria-hidden="true" />
+          <div class="program-card__identity">
+            <span class="program-card__code" aria-hidden="true">IOP</span>
+            <p class="program-card__tag">Intensive Outpatient Program</p>
+          </div>
+          <h3 class="program-card__title">After-school treatment, three days a week.</h3>
+          <p class="program-card__sched">3–6pm · School and home stay intact</p>
+          <p class="program-card__body">A step below PHP for teens who need intensive support while continuing school and daily routines.</p>
           <ul class="program-card__list">
             <li>After-school scheduling</li>
-            <li>Group &amp; individual therapy</li>
-            <li>Skills for real life (DBT)</li>
+            <li>Group and individual therapy</li>
+            <li>Skills for real life through DBT</li>
             <li>Integrated psychiatric care</li>
           </ul>
-          <a href="/what-we-offer/iop" class="link-arrow">Learn about IOP →</a>
+          <a href="/what-we-offer/iop" class="link-arrow">Explore the IOP program →</a>
         </article>
       </div>
 
       <p class="programs__insurance" data-reveal>
-        Covered by most major insurance plans — in-network with BCBS, Cigna, Aetna, UHC, and Tricare.
-        We verify your benefits before you start, so there are no surprises.
+        Covered by most major insurance plans, including BCBS, Cigna, Aetna, UHC, and Tricare. We verify benefits before care begins.
       </p>
     </div>
   </section>
 
-  <!-- ============================ OUTCOMES ============================ -->
-  <section class="section measure surface-cream-deep" aria-labelledby="measure-title">
-    <div class="container-x">
-      <div class="section-head section-head--center" data-reveal>
-        <h2 class="section-title font-display" id="measure-title">Care that works for teens and families.</h2>
-        <p class="section-sub">We track how your teen is doing — symptoms, day-to-day functioning, how things feel at home — and review it with you as care goes on. When something isn't working, we change the plan.</p>
+  <section class="section measure" aria-labelledby="measure-title">
+    <div class="container-x measure__layout">
+      <div class="measure__art" data-reveal>
+        <img class="measure__wash" src="/brand-v2/washes/wash-03.webp" alt="" aria-hidden="true" />
+        <img class="measure__spot" src="/brand-v2/spots/art-therapy.svg" alt="Illustration representing creative expression in treatment" loading="lazy" />
+        <img class="measure__punct" src="/brand-v2/halos/halo-9-lavender.svg" alt="" aria-hidden="true" />
       </div>
-
-      <div class="grid-3" data-reveal-group>
-        <article class="info-card" data-reveal-item>
-          <h3 class="info-card__title">A clear plan from day one</h3>
-          <p class="info-card__body">After intake, you'll know what your teen is working on and why, with a plan built around them rather than a fixed curriculum.</p>
-        </article>
-        <article class="info-card" data-reveal-item>
-          <h3 class="info-card__title">Progress you can see at home</h3>
-          <p class="info-card__body">The skills teens build here are meant to show up in everyday life: at school, with friends, and in the moments that were hardest.</p>
-        </article>
-        <article class="info-card" data-reveal-item>
-          <h3 class="info-card__title">Families kept in the loop</h3>
-          <p class="info-card__body">You'll know how things are going throughout, and leave with tools to keep supporting your teen after the program ends.</p>
-        </article>
+      <div class="measure__copy">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Care that adapts</p>
+          <h2 class="section-title font-display" id="measure-title">Progress should show up in real life.</h2>
+          <p class="section-sub">We track symptoms, day-to-day functioning, and how things feel at home. When something is not working, we change the plan.</p>
+        </div>
+        <div class="measure__points" data-reveal-group>
+          <article data-reveal-item><h3>A clear plan from day one</h3><p>After intake, you will know what your teen is working on and why.</p></article>
+          <article data-reveal-item><h3>Progress you can see at home</h3><p>The skills built here are meant to show up at school, with friends, and during hard moments.</p></article>
+          <article data-reveal-item><h3>Families kept in the loop</h3><p>You will know how care is going and leave with tools to keep supporting your teen.</p></article>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================ PROCESS ============================ -->
   <section class="section process" aria-labelledby="process-title">
     <div class="container-x">
       <div class="section-head" data-reveal>
@@ -176,260 +195,264 @@ import heroImg from '../assets/images/joshua-tree-hero.webp';
         <h2 class="section-title font-display" id="process-title">Three steps. Then a plan.</h2>
       </div>
       <ol class="process__steps" data-reveal-group>
-        <li class="step" data-reveal-item>
-          <span class="step__num">01</span>
-          <h3 class="step__title">Fill out the form</h3>
-          <p class="step__body">A two-minute form. No medical details — we'll cover those by phone.</p>
-        </li>
-        <li class="step" data-reveal-item>
-          <span class="step__num">02</span>
-          <h3 class="step__title">We call you</h3>
-          <p class="step__body">A conversation about what your teen needs, within one business day.</p>
-        </li>
-        <li class="step" data-reveal-item>
-          <span class="step__num">03</span>
-          <h3 class="step__title">Start within 3–5 days</h3>
-          <p class="step__body">We recommend the right level of care and build a plan together. No pressure.</p>
-        </li>
+        <li class="step" data-reveal-item><span class="step__num">01</span><h3>Fill out the form</h3><p>A two-minute form. No medical details—we will cover those by phone.</p></li>
+        <li class="step" data-reveal-item><span class="step__num">02</span><h3>We call you</h3><p>A conversation about what your teen needs, within one business day.</p></li>
+        <li class="step" data-reveal-item><span class="step__num">03</span><h3>Start within 3–5 days</h3><p>We recommend the right level of care and build a plan together.</p></li>
       </ol>
     </div>
   </section>
 
-  <!-- ============================ TESTIMONIAL ============================ -->
-  <section class="quote surface-lavender" aria-label="Parent testimonial">
+  <section class="quote" aria-label="Parent testimonial">
     <div class="container-x quote__inner">
-      <p class="quote__mark font-display" aria-hidden="true">“</p>
+      <img class="quote__punct" src="/brand-v2/graphics/element-11-colorway.svg" alt="" aria-hidden="true" />
       <blockquote class="quote__text font-display" data-reveal>
-        I didn't know if this was the right level of care. It was. They met my son exactly where he was.
+        “I did not know if this was the right level of care. It was. They met my son exactly where he was.”
       </blockquote>
-      <p class="quote__cite" data-reveal data-reveal-delay="0.08">Parent of a JTree Health teen</p>
+      <p class="quote__cite" data-reveal data-reveal-delay="0.08">Parent of a Joshua Tree Health teen</p>
     </div>
   </section>
 
-  <!-- ============================ LOCATION ============================ -->
   <section class="section location" aria-labelledby="location-title">
     <div class="container-x location__grid">
       <div class="location__info" data-reveal>
         <p class="eyebrow">Visit us</p>
-        <h2 class="section-title font-display" id="location-title">Apex, NC — easy access from across the Triangle.</h2>
+        <h2 class="section-title font-display" id="location-title">Apex, NC—easy access from across the Triangle.</h2>
         <p class="section-sub">Serving families across Raleigh, Cary, Durham, and Chapel Hill.</p>
-        <address class="location__address">
-          800 West Williams St, STE 203<br />
-          Apex, NC 27502
-        </address>
+        <address class="location__address">800 West Williams St, STE 203<br />Apex, NC 27502</address>
         <div class="location__actions">
-          <a class="btn btn--ghost" href="https://maps.google.com/?q=800+West+Williams+St+STE+203+Apex+NC+27502" target="_blank" rel="noopener">Get directions →</a>
+          <a class="btn btn--ghost" href="https://maps.google.com/?q=800+West+Williams+St+STE+203+Apex+NC+27502" target="_blank" rel="noopener">Get directions</a>
           <a class="link-arrow" href="tel:+19193355053">(919) 335-5053</a>
         </div>
       </div>
       <div class="location__map" data-reveal data-reveal-delay="0.08">
-        <iframe
-          title="Map to Joshua Tree Health in Apex, NC"
-          src="https://maps.google.com/maps?q=800%20West%20Williams%20St%20Apex%20NC%2027502&t=&z=14&ie=UTF8&iwloc=&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
+        <iframe title="Map to Joshua Tree Health in Apex, NC" src="https://maps.google.com/maps?q=800%20West%20Williams%20St%20Apex%20NC%2027502&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </section>
 
-  <!-- ============================ CLOSING CTA ============================ -->
-  <section class="section surface-cream-deep" aria-labelledby="home-cta-title">
-    <div class="container-x">
-      <div class="section-head section-head--center" data-reveal>
-        <h2 class="section-title font-display" id="home-cta-title">Find the right level of care.</h2>
-        <p class="section-sub">Whether your teen needs PHP or IOP, we'll help you understand the options before you commit to anything.</p>
-      </div>
-      <div style="display:flex; justify-content:center;" data-reveal data-reveal-delay="0.08">
-        <a href="/admissions" class="btn">Find the Right Level of Care <span class="btn__arrow">→</span></a>
-      </div>
+  <section class="closing" aria-labelledby="home-cta-title">
+    <div class="container-x closing__inner" data-reveal>
+      <img class="section-punct section-punct--light" src="/brand-v2/halos/halo-10-lime.svg" alt="" aria-hidden="true" />
+      <p class="eyebrow eyebrow--light">Admissions</p>
+      <h2 class="font-display" id="home-cta-title">Find the right level of care.</h2>
+      <p>Tell us what is happening at home. We will help you understand the options before you commit to anything.</p>
+      <a href="/admissions" class="btn btn--on-dark">Start the conversation <span class="btn__arrow">→</span></a>
     </div>
   </section>
 </Base>
 
 <style>
-  /* ---------- HERO ---------- */
+  :global(body.home-v2) {
+    --color-deep-green: #1e3d34;
+    --color-deep-green-900: #132a24;
+    --color-pine: #2c5f52;
+    --color-sage: #2c5f52;
+    --color-lime: #b8e04a;
+    --color-lime-deep: #8daf2e;
+    --color-lavender: #a89fd8;
+    --color-lavender-soft: #d9d4ee;
+    --color-lavender-deep: #756ca8;
+    --color-cream: #fffaf3;
+    --color-cream-deep: #f7f2e8;
+    --color-cream-card: #fffdf8;
+    --color-line: rgba(30, 61, 52, .16);
+    --color-line-strong: rgba(30, 61, 52, .28);
+    --color-charcoal: #28473e;
+    --color-ink-soft: #4d625b;
+    --color-ink-faint: #667970;
+    --color-cream-dim: rgba(255, 250, 243, .76);
+    --font-display: "Batica Sans", Arial, sans-serif;
+    --font-head: "Misoka Heavy", "Batica Sans", Arial, sans-serif;
+    --font-sans: "Fraunces SuperSoft", Georgia, serif;
+    --font-mono: "Misoka Heavy", "Batica Sans", Arial, sans-serif;
+    background: var(--color-cream);
+    font-family: var(--font-sans);
+  }
+
+  :global(.home-v2 .font-display) {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-variation-settings: normal;
+    letter-spacing: -.04em;
+    line-height: .96;
+  }
+
+  :global(.home-v2 .eyebrow) {
+    font-family: var(--font-head);
+    font-size: .98rem;
+    font-weight: 900;
+    letter-spacing: .04em;
+    line-height: 1.14;
+  }
+  :global(.home-v2 .eyebrow::before) { display: none; }
+  :global(.home-v2 .btn), :global(.home-v2 .link-arrow) {
+    font-family: var(--font-head);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .025em;
+  }
+  :global(.home-v2 .btn) { font-size: 1rem; line-height: 1.08; }
+  :global(.home-v2 .link-arrow) {
+    width: fit-content;
+    font-size: .98rem;
+    line-height: 1.2;
+    border-bottom: 2px solid var(--color-lavender);
+    padding-bottom: .16rem;
+  }
+  :global(.home-v2 .nav.is-scrolled) { background: rgba(255, 250, 243, .9); }
+  #manifesto-title, #pathways-title, #programs-title, #measure-title, #process-title, #location-title, #home-cta-title { scroll-margin-top: 92px; }
+
   .hero {
     position: relative;
-    isolation: isolate;
-    min-height: clamp(600px, 90vh, 900px);
-    display: flex;
-    align-items: flex-end;
     overflow: hidden;
-    background: var(--color-deep-green-900, #0c1f18);
-  }
-  .hero__media { position: absolute; inset: -7% 0; z-index: 0; will-change: transform; }
-  .hero__img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
-  .hero__scrim {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(180deg, rgba(246, 244, 236, 0) 32%, rgba(246, 244, 236, 0.55) 72%, rgba(246, 244, 236, 0.95) 100%),
-      linear-gradient(96deg, rgba(246, 244, 236, 0.96) 0%, rgba(246, 244, 236, 0.78) 26%, rgba(246, 244, 236, 0.32) 48%, rgba(246, 244, 236, 0) 62%);
-  }
-
-  .hero__content {
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    max-width: var(--container);
-    margin-inline: auto;
-    padding-bottom: clamp(3rem, 2rem + 5vw, 6rem);
-  }
-  .hero__title {
-    font-size: clamp(2.5rem, 1.4rem + 4vw, 4.7rem);
-    line-height: 1.02;
-    margin: 0.85rem 0 1.35rem;
-    max-width: 16ch;
-    color: var(--color-deep-green);
-  }
-  .hero__title em { font-style: italic; color: var(--color-lime-deep); }
-  .hero__lede {
-    font-size: var(--text-body-l);
-    color: var(--color-ink-soft);
-    max-width: 33rem;
-    line-height: 1.6;
-  }
-  .hero__actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
-  .hero__trust {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
-    margin-top: 1.8rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.02em;
-    color: var(--color-sage);
-  }
-  .hero__trust-dot { opacity: 0.45; }
-
-  /* ---------- TRUST STRIP ---------- */
-  .trust {
-    padding-block: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
-    border-bottom: 1px solid var(--color-line);
     background: var(--color-cream);
   }
-  .trust__inner { display: flex; flex-direction: column; gap: 1.1rem; align-items: center; text-align: center; }
-  .trust__label {
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-ink-faint);
+  .hero__grid {
+    position: relative;
+    z-index: 2;
+    min-height: clamp(760px, calc(100dvh - 72px), 1100px);
+    display: flex;
+    align-items: center;
+    padding-block: clamp(5rem, 8vw, 8.5rem);
   }
-  .trust__logos {
-    display: flex; flex-wrap: wrap; justify-content: center;
-    gap: clamp(1.25rem, 0.5rem + 3vw, 3rem);
-    list-style: none; margin: 0; padding: 0;
+  .hero__copy { position: relative; z-index: 2; width: min(50.5%, 810px); min-width: 0; }
+  .hero__title {
+    margin: 0;
+    font-size: clamp(4.2rem, 5.35vw, 6.35rem);
+    color: var(--color-deep-green);
   }
-  .trust__logo {
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.3rem);
-    color: var(--color-sage);
-    opacity: 0.85;
-  }
+  .hero__title span { display: block; }
+  .hero__lede { max-width: 39rem; margin-top: 2.8rem; color: var(--color-deep-green); font-size: clamp(1.35rem, 1.7vw, 2rem); line-height: 1.45; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 2.8rem; }
+  .hero__actions .btn { min-width: 210px; justify-content: center; }
 
-  @media (min-width: 700px) {
-    .trust__inner { flex-direction: row; justify-content: space-between; text-align: left; }
-  }
+  .trust { background: var(--color-lime); color: var(--color-deep-green); }
+  .trust__inner { min-height: 104px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .7rem 1.4rem; }
+  .trust p { margin: 0; font-family: var(--font-head); font-size: clamp(.88rem, 1.35vw, 1.15rem); text-transform: uppercase; letter-spacing: .02em; }
+  .trust span { font-family: var(--font-sans); font-size: 1.4rem; }
 
-  @media (max-width: 680px) {
-    .hero { align-items: flex-end; min-height: 88vh; }
-    .hero__img { object-position: 64% 50%; }
-    .hero__scrim {
-      background:
-        linear-gradient(180deg, rgba(246, 244, 236, 0) 30%, rgba(246, 244, 236, 0.7) 60%, rgba(246, 244, 236, 0.97) 88%);
-    }
-    .hero__title { max-width: 14ch; }
-  }
+  .manifesto { overflow: hidden; background: var(--color-deep-green); color: var(--color-cream); }
+  .manifesto__grid { min-height: 810px; display: grid; grid-template-columns: minmax(0, .98fr) minmax(0, 1.02fr); align-items: center; gap: clamp(2rem, 4vw, 4.5rem); }
+  .manifesto__copy { padding-block: clamp(5rem, 8vw, 8rem); }
+  .eyebrow--light { color: var(--color-lime); }
+  .manifesto__lead { max-width: 13ch; margin-top: 1.25rem; color: var(--color-cream); font-size: clamp(3rem, 5.2vw, 5.5rem); }
+  .manifesto__body { max-width: 43rem; margin-top: 1.35rem; color: var(--color-cream-dim); font-size: clamp(1.05rem, 1.25vw, 1.2rem); line-height: 1.58; }
+  .manifesto__action { margin-top: 2.2rem; }
+  .manifesto__art { position: relative; width: 100%; max-width: 760px; min-height: 760px; justify-self: end; align-self: center; isolation: isolate; }
+  .manifesto__growth { position: absolute; width: 118%; max-width: none; left: 50%; top: 50%; transform: translate(-50%, -49%); filter: drop-shadow(0 24px 32px rgba(8, 26, 19, .18)); }
 
-  /* ---------- MANIFESTO ---------- */
-  .manifesto { padding-block: clamp(4.5rem, 3rem + 7vw, 9rem); }
-  .manifesto__inner { max-width: 54rem; }
-  .manifesto__eyebrow { color: var(--color-lime); }
-  .manifesto__lead {
-    font-size: clamp(1.9rem, 1.1rem + 3vw, 3.4rem);
-    line-height: 1.12;
-    color: var(--color-cream);
-    margin: 1.2rem 0 1.6rem;
-    max-width: 20ch;
-  }
-  .manifesto__body { font-size: var(--text-body-l); line-height: 1.6; color: var(--color-cream-dim); max-width: 42rem; }
-  .manifesto__body + .manifesto__body { margin-top: 1.1rem; }
+  .section-punct { width: 66px; margin-bottom: 1.2rem; transform: rotate(-9deg); }
+  .section-punct--light { width: 78px; }
+  .section-head { max-width: 760px; }
+  .section-title { margin-top: 1rem; font-size: clamp(2.8rem, 5vw, 5.2rem); }
+  .section-sub { font-size: clamp(1.05rem, 1.25vw, 1.2rem); }
 
-  /* ---------- PROGRAMS ---------- */
-  .programs__grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-  .program-card {
-    background: var(--color-cream-card);
-    border: 1px solid var(--color-line);
-    border-radius: var(--radius-xl);
-    padding: clamp(1.6rem, 1rem + 2vw, 2.5rem);
-    display: flex; flex-direction: column; gap: 0.9rem;
-    transition: box-shadow var(--dur) var(--ease-soft), transform var(--dur) var(--ease-soft), border-color var(--dur) var(--ease-soft);
-  }
-  .program-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); border-color: var(--color-line-strong); }
-  .program-card--accent { background: var(--color-deep-green); border-color: transparent; }
-  .program-card--accent .program-card__title { color: var(--color-cream); }
-  .program-card--accent .program-card__body { color: var(--color-cream-dim); }
-  .program-card--accent .program-card__sched { color: var(--color-lime); }
-  .program-card--accent .program-card__tag { color: var(--color-lime); }
-  .program-card--accent .program-card__list li { color: var(--color-cream-dim); }
-  .program-card--accent .program-card__list li::before { color: var(--color-lime); }
-  .program-card--accent .link-arrow { color: var(--color-lime); }
-  .program-card--accent .link-arrow:hover { border-color: var(--color-lime); }
-  .program-card__tag { font-family: var(--font-mono); font-size: var(--text-label); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-sage); }
-  .program-card__title { font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2rem); color: var(--color-deep-green); line-height: 1.08; }
-  .program-card__sched { font-family: var(--font-mono); font-size: 0.84rem; color: var(--color-pine); display: flex; gap: 0.5em; align-items: center; }
-  .program-card__sched .dot { opacity: 0.4; }
-  .program-card__body { color: var(--color-ink-soft); }
-  .program-card__list { list-style: none; margin: 0.3rem 0 0.6rem; padding: 0; display: grid; gap: 0.55rem; }
-  .program-card__list li { position: relative; padding-left: 1.4rem; font-size: 0.95rem; color: var(--color-ink-soft); }
-  .program-card__list li::before { content: "→"; position: absolute; left: 0; color: var(--color-lime-deep); }
+  .pathways { background: var(--color-cream); }
+  .pathways__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.25rem, 2.3vw, 2.5rem); margin-top: clamp(3rem, 6vw, 6rem); }
+  .pathway { display: grid; grid-template-rows: 245px auto; color: inherit; text-decoration: none; }
+  .pathway--offset { transform: translateY(2.4rem); }
+  .pathway__art { width: 100%; height: 235px; object-fit: contain; transform: scale(var(--art-scale, 1)); transition: transform var(--dur) var(--ease-soft); }
+  .pathway:hover .pathway__art { transform: scale(var(--art-scale, 1)) translateY(-7px) rotate(-1deg); }
+  .pathway__copy { padding-top: 1.25rem; border-top: 1px solid var(--color-line); }
+  .pathway:nth-child(2) .pathway__copy { border-top-color: var(--color-lavender); }
+  .pathway:nth-child(3) .pathway__copy { border-top-color: var(--color-lime-deep); }
+  .pathway h3 { font-family: var(--font-head); font-size: clamp(1.05rem, 1.5vw, 1.35rem); line-height: .96; text-transform: uppercase; letter-spacing: .015em; }
+  .pathway p { margin-top: .8rem; color: var(--color-ink-soft); font-size: 1.0625rem; line-height: 1.58; }
+  .pathway span { display: inline-block; margin-top: 1.3rem; padding-bottom: .12rem; border-bottom: 2px solid var(--color-lavender); font-family: var(--font-head); font-size: .98rem; line-height: 1.2; text-transform: uppercase; letter-spacing: .02em; }
+
+  .programs { background: var(--color-cream-deep); }
+  .programs__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.25rem, 2.5vw, 2.5rem); }
+  .program-card { position: relative; min-height: 560px; display: flex; flex-direction: column; padding: clamp(2rem, 4vw, 3.5rem); background: var(--color-cream-card); border: 1px solid var(--color-line); overflow: hidden; }
+  .program-card--dark { margin-top: 3rem; background: var(--color-deep-green); color: var(--color-cream); border-color: transparent; }
+  .program-card__mark { position: absolute; width: 88px; right: 1.6rem; top: 1.6rem; transform: rotate(8deg); }
+  .program-card__identity { max-width: calc(100% - 6rem); }
+  .program-card__code { display: block; font-family: var(--font-display); font-size: clamp(3.5rem, 6vw, 6rem); font-weight: 700; line-height: .78; letter-spacing: -.06em; color: var(--color-deep-green); }
+  .program-card__tag, .program-card__sched { font-family: var(--font-head); font-size: 1rem; line-height: 1.18; text-transform: uppercase; letter-spacing: .025em; color: var(--color-pine); }
+  .program-card__tag { margin-top: 1rem; }
+  .program-card__title { max-width: 16ch; margin-top: 2.4rem; font-family: var(--font-display); font-size: clamp(2rem, 3vw, 3.2rem); font-weight: 700; line-height: .96; letter-spacing: -.035em; }
+  .program-card__sched { margin-top: 1.4rem; }
+  .program-card__body { max-width: 38rem; margin-top: 1.2rem; color: var(--color-ink-soft); font-size: 1.1rem; line-height: 1.6; }
+  .program-card__list { display: grid; gap: .65rem; margin: 1.4rem 0 2rem; padding: 1.25rem 0 0; list-style: none; border-top: 1px solid var(--color-line); color: var(--color-ink-soft); }
+  .program-card__list li::before { content: '→'; margin-right: .65rem; color: var(--color-lime-deep); }
   .program-card .link-arrow { margin-top: auto; }
-  .programs__insurance {
-    margin-top: clamp(1.75rem, 1rem + 2vw, 2.75rem);
-    font-size: 0.96rem; line-height: 1.55; color: var(--color-ink-soft);
-    max-width: 54rem; padding: 1.1rem 1.4rem;
-    border-left: 3px solid var(--color-lime);
-    background: var(--color-cream-deep);
-    border-radius: 0 var(--radius) var(--radius) 0;
+  .program-card--dark .program-card__tag, .program-card--dark .program-card__sched, .program-card--dark .link-arrow { color: var(--color-lime); }
+  .program-card--dark .program-card__code { color: var(--color-cream); }
+  .program-card--dark .program-card__title { color: var(--color-cream); }
+  .program-card--dark .program-card__body, .program-card--dark .program-card__list { color: var(--color-cream-dim); }
+  .program-card--dark .program-card__list { border-color: rgba(255,250,243,.2); }
+  .programs__insurance { max-width: 54rem; margin-top: 3rem; padding-left: 1.1rem; border-left: 4px solid var(--color-lime); color: var(--color-ink-soft); }
+
+  .measure { overflow: hidden; background: var(--color-lavender-soft); }
+  .measure__layout { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); align-items: center; gap: clamp(3rem, 7vw, 8rem); }
+  .measure__art { position: relative; width: 100%; max-width: 600px; min-height: 570px; isolation: isolate; }
+  .measure__wash { position: absolute; z-index: -1; width: 112%; max-width: none; left: 50%; top: 7%; opacity: .62; transform: translateX(-50%) rotate(-3deg); }
+  .measure__spot { position: absolute; width: 102%; max-width: none; left: 50%; bottom: 0; transform: translateX(-50%); }
+  .measure__punct { position: absolute; width: 16%; max-width: 96px; right: 2%; top: 4%; transform: rotate(9deg); }
+  .measure__copy .section-head { margin-bottom: 2.5rem; }
+  .measure__points { border-top: 1px solid rgba(30,61,52,.24); }
+  .measure__points article { display: grid; grid-template-columns: minmax(180px, .75fr) 1.25fr; gap: 1.5rem; padding: 1.35rem 0; border-bottom: 1px solid rgba(30,61,52,.24); }
+  .measure__points h3 { font-family: var(--font-head); font-size: 1.12rem; line-height: 1.08; text-transform: uppercase; letter-spacing: .012em; }
+  .measure__points p { color: var(--color-ink-soft); font-size: 1.0625rem; line-height: 1.58; }
+
+  .process { background: var(--color-cream); }
+  .process__steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 3rem); margin: 0; padding: 0; list-style: none; }
+  .step { padding-top: 1.5rem; border-top: 2px solid var(--color-line-strong); }
+  .step__num { font-family: var(--font-head); color: var(--color-lime-deep); font-size: 1rem; letter-spacing: .025em; }
+  .step h3 { margin-top: 2.4rem; font-family: var(--font-head); font-size: 1.28rem; line-height: 1.08; text-transform: uppercase; letter-spacing: .012em; }
+  .step p { margin-top: .85rem; color: var(--color-ink-soft); font-size: 1.0625rem; line-height: 1.58; }
+
+  .quote { padding-block: clamp(5rem, 9vw, 9rem); background: var(--color-lavender); }
+  .quote__inner { max-width: 920px; margin-inline: auto; text-align: center; }
+  .quote__punct { width: 76px; margin: 0 auto 2rem; }
+  .quote__text { color: var(--color-deep-green); font-size: clamp(2.2rem, 4.5vw, 4.5rem); line-height: 1.02; }
+  .quote__cite { margin-top: 1.8rem; font-family: var(--font-head); font-size: .98rem; line-height: 1.2; text-transform: uppercase; letter-spacing: .025em; }
+
+  .location { background: var(--color-cream); }
+  .location__grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: clamp(3rem, 6vw, 7rem); }
+  .location__address { margin: 1.7rem 0; color: var(--color-deep-green); font-style: normal; font-size: 1.14rem; line-height: 1.55; }
+  .location__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
+  .location__map { aspect-ratio: 4 / 3; overflow: hidden; border: 10px solid var(--color-cream-card); box-shadow: 0 24px 50px rgba(30,61,52,.13); transform: rotate(1deg); }
+  .location__map iframe { width: 100%; height: 100%; border: 0; filter: saturate(.85); }
+
+  .closing { padding-block: clamp(5.5rem, 10vw, 10rem); background: var(--color-deep-green); color: var(--color-cream); }
+  .closing__inner { max-width: 850px; }
+  .closing h2 { max-width: 10ch; color: var(--color-cream); font-size: clamp(3.3rem, 6.5vw, 6.8rem); }
+  .closing p:not(.eyebrow) { max-width: 42rem; margin: 1.5rem 0 2rem; color: var(--color-cream-dim); font-size: 1.15rem; }
+
+  @media (max-width: 980px) {
+    .manifesto__grid, .measure__layout, .location__grid { grid-template-columns: 1fr; }
+    .hero__grid { min-height: auto; align-items: flex-start; padding-block: 4.5rem 640px; }
+    .hero__copy { width: min(100%, 720px); }
+    .manifesto__art { min-height: 650px; max-width: 680px; justify-self: center; }
+    .pathways__grid { grid-template-columns: repeat(2, 1fr); row-gap: 5rem; }
+    .pathway--offset { transform: none; }
+    .measure__layout { gap: 1rem; }
+    .measure__art { min-height: 510px; max-width: 620px; }
   }
-  @media (min-width: 820px) { .programs__grid { grid-template-columns: 1fr 1fr; } }
 
-  /* ---------- OUTCOMES ---------- */
-  .stats__grid {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: clamp(2rem, 1rem + 3vw, 3rem) clamp(1rem, 0.5rem + 2vw, 2.5rem);
+  @media (max-width: 700px) {
+    .hero__grid { padding-block: 3.75rem 480px; }
+    .hero__title { font-size: clamp(3.1rem, 14.2vw, 4.7rem); }
+    .hero__lede { margin-top: 1.8rem; font-size: 1.2rem; }
+    .hero__actions { gap: .75rem; margin-top: 2rem; }
+    .hero__actions .btn { min-width: 0; }
+    .trust__inner { min-height: 130px; gap: .4rem .7rem; }
+    .trust p { font-size: .95rem; line-height: 1.16; }
+    .manifesto__grid { min-height: auto; gap: 0; }
+    .manifesto__copy { padding-block: 5rem 2rem; }
+    .manifesto__lead { font-size: clamp(3rem, 13vw, 4.7rem); }
+    .manifesto__art { min-height: 0; width: 100%; margin: .75rem auto 0; overflow: hidden; }
+    .manifesto__growth { position: relative; width: 116%; left: 50%; top: auto; transform: translateX(-50%); }
+    .pathways__grid { grid-template-columns: 1fr; gap: 3.5rem; }
+    .pathway { grid-template-columns: minmax(110px, .72fr) minmax(0, 1.28fr); grid-template-rows: auto; align-items: center; gap: 1.2rem; }
+    .pathway__art { height: 180px; }
+    .programs__grid, .process__steps { grid-template-columns: 1fr; }
+    .program-card, .program-card--dark { min-height: 520px; margin-top: 0; }
+    .measure__art { min-height: 390px; }
+    .measure__wash { width: 120%; top: 5%; }
+    .measure__spot { width: 108%; }
+    .measure__punct { width: 18%; right: 0; }
+    .measure__points article { grid-template-columns: 1fr; gap: .6rem; }
+    .location__map { border-width: 6px; }
   }
-  .stat { text-align: center; display: flex; flex-direction: column; gap: 0.7rem; }
-  .stat__num {
-    font-size: clamp(2.7rem, 1.6rem + 4vw, 4.6rem);
-    line-height: 0.95; color: var(--color-deep-green); font-weight: 600;
-    display: inline-flex; align-items: baseline; justify-content: center; gap: 0.16em;
-  }
-  .stat__unit { font-size: 0.3em; font-family: var(--font-mono); color: var(--color-sage); text-transform: uppercase; letter-spacing: 0.08em; }
-  .stat__label { font-size: 0.92rem; line-height: 1.45; color: var(--color-ink-soft); max-width: 24ch; margin-inline: auto; }
-  @media (min-width: 860px) { .stats__grid { grid-template-columns: repeat(4, 1fr); } }
-
-  /* ---------- PROCESS ---------- */
-  .process__steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: clamp(1.6rem, 1rem + 2vw, 2.75rem); }
-  .step { display: flex; flex-direction: column; gap: 0.6rem; padding-top: 1.5rem; border-top: 2px solid var(--color-line-strong); }
-  .step__num { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.1em; color: var(--color-lime-deep); font-weight: 600; }
-  .step__title { font-family: var(--font-head); font-size: 1.3rem; font-weight: 600; color: var(--color-deep-green); }
-  .step__body { color: var(--color-ink-soft); font-size: 0.98rem; line-height: 1.55; }
-  @media (min-width: 760px) { .process__steps { grid-template-columns: repeat(3, 1fr); } }
-
-  /* ---------- TESTIMONIAL ---------- */
-  .quote { padding-block: clamp(4rem, 3rem + 6vw, 7.5rem); }
-  .quote__inner { max-width: 50rem; margin-inline: auto; text-align: center; }
-  .quote__mark { font-size: 5rem; line-height: 0.5; color: var(--color-lavender-deep); height: 0.45em; }
-  .quote__text { font-size: clamp(1.5rem, 1.1rem + 2.2vw, 2.55rem); line-height: 1.3; color: var(--color-deep-green); letter-spacing: -0.01em; font-weight: 500; }
-  .quote__cite { margin-top: 1.6rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-pine); }
-
-  /* ---------- LOCATION ---------- */
-  .location__grid { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 1rem + 3vw, 3.5rem); align-items: center; }
-  .location__address { font-style: normal; font-size: var(--text-body-l); line-height: 1.6; color: var(--color-deep-green); margin: 1.5rem 0; font-family: var(--font-head); font-weight: 500; }
-  .location__actions { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
-  .location__map { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--color-line); aspect-ratio: 4 / 3; }
-  .location__map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.15) contrast(1.02); }
-  @media (min-width: 880px) { .location__grid { grid-template-columns: 1fr 1.1fr; } }
 </style>

@@ -1,0 +1,199 @@
+---
+interface Fact {
+  label: string;
+  detail: string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  sub: string;
+  tone?: 'cream' | 'forest' | 'lavender';
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+  facts?: Fact[];
+}
+
+const {
+  eyebrow,
+  title,
+  sub,
+  tone = 'cream',
+  primaryCta,
+  secondaryCta,
+  facts = [],
+} = Astro.props;
+---
+
+<section class:list={['brand-hero', `brand-hero--${tone}`]} data-hero-scope>
+  <div class="container-x brand-hero__container">
+    <div class="brand-hero__grid">
+      <div class="brand-hero__copy">
+        <p class="brand-hero__eyebrow" data-hero>{eyebrow}</p>
+        <h1 class="brand-hero__title" set:html={title} data-hero></h1>
+        <p class="brand-hero__sub" data-hero>{sub}</p>
+        {(primaryCta || secondaryCta) && (
+          <div class="brand-hero__actions" data-hero>
+            {primaryCta && (
+              <a class:list={['btn', tone === 'forest' && 'btn--on-dark']} href={primaryCta.href}>
+                {primaryCta.label} <span class="btn__arrow">→</span>
+              </a>
+            )}
+            {secondaryCta && (
+              <a class:list={['btn', tone === 'forest' ? 'btn--ghost-on-dark' : 'btn--ghost']} href={secondaryCta.href}>
+                {secondaryCta.label}
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+
+      <div class="brand-hero__art" data-hero>
+        <slot />
+      </div>
+    </div>
+
+    {facts.length > 0 && (
+      <dl class="brand-hero__facts" data-hero>
+        {facts.map((fact) => (
+          <div>
+            <dt>{fact.label}</dt>
+            <dd>{fact.detail}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
+  </div>
+</section>
+
+<style>
+  .brand-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-cream);
+  }
+
+  .brand-hero--lavender { background: var(--color-lavender-soft); }
+  .brand-hero--forest { background: var(--color-deep-green); color: var(--color-cream); }
+
+  .brand-hero__container {
+    padding-top: clamp(4.5rem, 7vw, 7.5rem);
+    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .brand-hero__grid {
+    min-height: clamp(500px, 43vw, 680px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(380px, .98fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 7rem);
+  }
+
+  .brand-hero__copy { position: relative; z-index: 3; }
+
+  .brand-hero__eyebrow {
+    margin: 0 0 1.4rem;
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.14;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--color-deep-sage, var(--color-pine));
+  }
+
+  .brand-hero--forest .brand-hero__eyebrow { color: var(--color-lime); }
+
+  .brand-hero__title {
+    max-width: 11ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3.8rem, 5.6vw, 6.5rem);
+    font-weight: 700;
+    line-height: .94;
+    letter-spacing: -.048em;
+    color: var(--color-deep-green);
+    text-wrap: balance;
+  }
+
+  .brand-hero__title :global(em) {
+    font-style: normal;
+    color: var(--color-deep-sage, var(--color-pine));
+  }
+
+  .brand-hero--forest .brand-hero__title { color: var(--color-cream); }
+  .brand-hero--forest .brand-hero__title :global(em) { color: var(--color-lime); }
+
+  .brand-hero__sub {
+    max-width: 38rem;
+    margin-top: 2rem;
+    font-family: var(--font-sans);
+    font-size: clamp(1.2rem, 1.5vw, 1.55rem);
+    line-height: 1.48;
+    color: var(--color-ink-soft);
+    text-wrap: pretty;
+  }
+
+  .brand-hero--forest .brand-hero__sub { color: var(--color-cream-dim); }
+
+  .brand-hero__actions { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 2.2rem; }
+  .brand-hero__actions :global(.btn) { min-width: 190px; }
+
+  .brand-hero__art {
+    position: relative;
+    min-height: 500px;
+    align-self: stretch;
+    isolation: isolate;
+  }
+
+  .brand-hero__facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2.25rem 0 0;
+    padding: 1.65rem 0 0;
+    border-top: 1px solid var(--color-line-strong);
+  }
+
+  .brand-hero--forest .brand-hero__facts { border-color: rgba(255, 250, 243, .24); }
+
+  .brand-hero__facts div { min-width: 0; }
+  .brand-hero__facts dt {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.14;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: var(--color-deep-green);
+  }
+
+  .brand-hero__facts dd {
+    margin: .55rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
+
+  .brand-hero--forest .brand-hero__facts dt { color: var(--color-lime); }
+  .brand-hero--forest .brand-hero__facts dd { color: var(--color-cream-dim); }
+
+  @media (max-width: 980px) {
+    .brand-hero__grid { grid-template-columns: 1fr; min-height: 0; }
+    .brand-hero__copy { max-width: 760px; }
+    .brand-hero__art { min-height: 500px; }
+  }
+
+  @media (max-width: 700px) {
+    .brand-hero__container { padding-top: 3.5rem; }
+    .brand-hero__grid { gap: 1.5rem; }
+    .brand-hero__title { font-size: clamp(3.25rem, 15vw, 5rem); }
+    .brand-hero__sub { margin-top: 1.5rem; font-size: 1.18rem; }
+    .brand-hero__actions :global(.btn) { min-width: 0; }
+    .brand-hero__art { min-height: 350px; }
+    .brand-hero__facts { grid-template-columns: 1fr; gap: 1rem; }
+    .brand-hero__facts div { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 1rem; align-items: baseline; }
+    .brand-hero__facts dd { margin: 0; }
+  }
+</style>

@@ -10,10 +10,13 @@ const resources = [
 ];
 ---
 <Base
+  bodyClass="brand-page rollout-page"
   title="Crisis Resources — Joshua Tree Health"
   description="If you or your teen is in crisis: call 911 for immediate danger, call or text 988 for the Suicide & Crisis Lifeline, or text HOME to 741741. Free, confidential, available 24/7."
 >
   <PageHero
+    eyebrow="Crisis resources"
+    art="anxious"
     variant="green"
     title="In a crisis, you're <em>not alone</em>."
     sub="If you or your teen is in immediate danger, call 911. For urgent mental health support, these lines are free, confidential, and available 24/7."
@@ -52,9 +55,9 @@ const resources = [
     padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
     display: flex; flex-direction: column; gap: 0.7rem; align-items: flex-start;
   }
-  .crisis-card__tag { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-sage); }
+  .crisis-card__tag { font-family: var(--font-mono); font-size: 0.95rem; line-height: 1.15; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-deep-sage); }
   .crisis-card__name { font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem); color: var(--color-deep-green); }
-  .crisis-card__detail { color: var(--color-ink-soft); line-height: 1.55; }
+  .crisis-card__detail { color: var(--color-ink-soft); font-size: 1.0625rem; line-height: 1.62; }
   .crisis-card__btn { margin-top: 0.6rem; }
   .crisis-foot { margin-top: clamp(2rem, 1.5rem + 2vw, 3rem); max-width: 46rem; font-size: var(--text-body-l); line-height: 1.6; color: var(--color-pine); font-family: var(--font-display); }
 </style>

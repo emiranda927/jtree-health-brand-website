@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
+import BrandPageHero from '../components/BrandPageHero.astro';
 
 const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 
@@ -16,19 +16,39 @@ const sources = ['Google', 'Referral', 'Doctor', 'School', 'Other'];
 const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Self-pay', 'Other'];
 ---
 <Base
+  bodyClass="brand-page admissions-page"
   title="Admissions — Start the Conversation | Joshua Tree Health"
   description="Request a callback from Joshua Tree Health. No waitlist, response within one business day, in-network with major insurers. Adolescent PHP & IOP in Apex, NC."
 >
-  <PageHero
-    title="Let's find the right fit for <em>your family</em>."
-    sub="Fill out the short form below and we'll call you within one business day. No commitment, just a conversation about what your teen needs."
-  />
+  <BrandPageHero
+    eyebrow="Admissions"
+    title="Let’s find the right care for <em>your family.</em>"
+    sub="Tell us a little about what is happening. An admissions specialist will call within one business day to listen, answer questions, and explain the options."
+    primaryCta={{ label: 'Request a callback', href: '#inquiry-form' }}
+    secondaryCta={{ label: 'Call (919) 335-5053', href: 'tel:+19193355053' }}
+    facts={[
+      { label: 'PHP + IOP', detail: 'Two levels of structured outpatient care' },
+      { label: 'Ages 10–17', detail: 'Built for teens and tweens' },
+      { label: 'One business day', detail: 'Our response time to new inquiries' },
+    ]}
+  >
+    <div class="admissions-hero-art">
+      <img class="admissions-hero-art__wash" src="/brand-v2/washes/wash-08.webp" alt="" aria-hidden="true" />
+      <img class="admissions-hero-art__scene" src="/brand-v2/watercolor/one-on-one-therapy.webp" alt="Watercolor illustration of a teen meeting one-on-one with a therapist" />
+      <img class="admissions-hero-art__tape" src="/brand-v2/tapes/tape-08.webp" alt="" aria-hidden="true" />
+      <img class="admissions-hero-art__mark" src="/brand-v2/graphics/element-1-forest.svg" alt="" aria-hidden="true" />
+    </div>
+  </BrandPageHero>
 
-  <section class="section section--tight" aria-label="How it works">
-    <div class="container-x">
-      <ol class="process__steps" data-reveal-group>
+  <section class="section admissions-steps" aria-labelledby="admissions-steps-title">
+    <div class="container-x admissions-steps__layout">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">What happens next</p>
+        <h2 class="section-title font-display" id="admissions-steps-title">A clear first step. No guesswork.</h2>
+      </div>
+      <ol class="admissions-steps__grid" data-reveal-group>
         {steps.map((s) => (
-          <li class="step" data-reveal-item>
+          <li class="admission-step" data-reveal-item>
             <span class="step__num">{s.n}</span>
             <h2 class="step__title">{s.t}</h2>
             <p class="step__body">{s.b}</p>
@@ -41,9 +61,10 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
   <section class="section surface-cream-deep" aria-labelledby="form-title">
     <div class="container-x admissions">
       <div class="admissions__intro" data-reveal>
+        <img class="admissions__punct" src="/brand-v2/graphics/element-2-forest.svg" alt="" aria-hidden="true" />
         <p class="eyebrow">Request a callback</p>
-        <h2 class="section-title font-display" id="form-title">Two minutes. Then we call you.</h2>
-        <p class="section-sub">No medical details here — we'll cover everything by phone. If we're not the right fit, we'll tell you honestly and help you find what is.</p>
+        <h2 class="section-title font-display" id="form-title">A short form. Then a real conversation.</h2>
+        <p class="section-sub">You do not need a diagnosis or a complete history to reach out. We will ask for the clinical details by phone, privately and at your pace.</p>
         <ul class="checklist admissions__assure">
           <li>Response within one business day</li>
           <li>We verify your insurance before you start</li>
@@ -51,7 +72,11 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
         </ul>
       </div>
 
-      <div class="admissions__formwrap card" data-reveal data-reveal-delay="0.08">
+      <div class="admissions__formwrap" data-reveal data-reveal-delay="0.08">
+        <div class="admissions__formhead">
+          <p>Secure inquiry</p>
+          <span>Fields marked required help us return your call.</span>
+        </div>
         <form class="form" id="inquiry-form" novalidate>
           <div class="form-error-banner" role="alert" aria-live="assertive"></div>
 
@@ -161,22 +186,57 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
 </script>
 
 <style>
-  .admissions { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 1rem + 3vw, 3.5rem); align-items: start; }
-  .admissions__assure { margin-top: 1.6rem; }
-  .admissions__formwrap { padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
-  .section--tight { padding-block: clamp(2.5rem, 2rem + 3vw, 4rem); }
+  .admissions-hero-art { position: absolute; inset: 0; isolation: isolate; }
+  .admissions-hero-art img { position: absolute; max-width: none; }
+  .admissions-hero-art__wash { z-index: -1; width: 112%; left: 50%; top: 5%; opacity: .48; transform: translateX(-50%); }
+  .admissions-hero-art__scene { z-index: 2; width: 103%; left: 50%; bottom: -2%; transform: translateX(-50%); }
+  .admissions-hero-art__tape { z-index: 3; width: 28%; right: 3%; top: 8%; transform: rotate(12deg); }
+  .admissions-hero-art__mark { z-index: 4; width: 15%; left: 2%; top: 7%; transform: rotate(-8deg); }
 
-  .form-error-banner { display: none; padding: 0.8rem 1rem; border-radius: var(--radius); background: #f7e2dd; border: 1px solid #e0a99c; color: #8a2f1f; font-size: 0.9rem; }
+  .admissions-steps { background: var(--color-cream); }
+  .admissions-steps__layout { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr); gap: clamp(3rem, 7vw, 8rem); align-items: start; }
+  .admissions-steps__layout .section-head { position: sticky; top: 110px; }
+  .admissions-steps__grid { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-line-strong); }
+  .admission-step { display: grid; grid-template-columns: 5.5rem minmax(170px, .7fr) minmax(0, 1fr); gap: 1.5rem; align-items: baseline; padding: 1.8rem 0; border-bottom: 1px solid var(--color-line-strong); }
+  .admission-step .step__num { font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; line-height: 1; letter-spacing: -.05em; color: var(--color-lavender-deep); }
+  .admission-step .step__title { font-size: 1.28rem; line-height: .98; text-transform: uppercase; letter-spacing: .02em; }
+  .admission-step .step__body { font-family: var(--font-sans); font-size: 1.05rem; }
+
+  .admissions { display: grid; grid-template-columns: 1fr; gap: clamp(3rem, 6vw, 7rem); align-items: start; }
+  .admissions__intro { position: sticky; top: 110px; }
+  .admissions__punct { width: 76px; margin-bottom: 1.4rem; transform: rotate(-8deg); }
+  .admissions__assure { margin-top: 1.6rem; }
+  .admissions__formwrap { overflow: hidden; background: var(--color-cream-card); border: 1px solid var(--color-line-strong); box-shadow: 0 28px 60px -32px rgba(30, 61, 52, .32); }
+  .admissions__formhead { display: flex; align-items: baseline; justify-content: space-between; gap: 1.5rem; padding: 1.25rem clamp(1.5rem, 3vw, 2.5rem); background: var(--color-deep-green); color: var(--color-cream); }
+  .admissions__formhead p { font-family: var(--font-head); font-size: 1rem; line-height: 1.14; letter-spacing: .025em; text-transform: uppercase; }
+  .admissions__formhead span { color: var(--color-cream-dim); font-size: 1rem; line-height: 1.45; }
+  .admissions__formwrap .form { padding: clamp(1.5rem, 3vw, 2.5rem); }
+
+  .form-error-banner { display: none; padding: 0.8rem 1rem; border-radius: var(--radius); background: #efe5ed; border: 1px solid #c9a9bf; color: #6f3158; font-size: 0.95rem; }
   .form-error-banner.is-visible { display: block; }
-  .jth-field-error { font-size: 0.78rem; color: #a8341f; min-height: 0; }
+  .jth-field-error { font-size: 0.9rem; line-height: 1.4; color: #78355f; min-height: 0; }
   .jth-field-error:empty { display: none; }
-  .field [aria-invalid="true"] { border-color: #c0492f; box-shadow: 0 0 0 3px rgba(168, 52, 31, 0.12); }
+  .field [aria-invalid="true"] { border-color: #874268; box-shadow: 0 0 0 3px rgba(135, 66, 104, .12); }
   .form__note-link { color: var(--color-pine); border-bottom: 1.5px solid var(--color-lime); }
-  .field__opt { font-weight: 400; color: var(--color-ink-faint); font-size: 0.82em; }
-  .form__disclaimer { font-size: 0.8rem; color: var(--color-ink-faint); line-height: 1.5; margin: 0; }
+  .field__opt { font-family: "Batica Sans", Arial, sans-serif; font-weight: 400; color: var(--color-ink-faint); font-size: 0.9rem; letter-spacing: 0; text-transform: none; }
+  .form__disclaimer { font-size: 0.95rem; color: var(--color-ink-faint); line-height: 1.58; margin: 0; }
   .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .cf-turnstile-box { min-height: 65px; }
   .btn.is-loading { opacity: 0.85; cursor: progress; }
 
-  @media (min-width: 880px) { .admissions { grid-template-columns: 1fr 1.05fr; } }
+  @media (min-width: 880px) { .admissions { grid-template-columns: .82fr 1.18fr; } }
+
+  @media (max-width: 980px) {
+    .admissions-hero-art { max-width: 660px; margin-inline: auto; }
+    .admissions-steps__layout { grid-template-columns: 1fr; }
+    .admissions-steps__layout .section-head, .admissions__intro { position: static; }
+  }
+
+  @media (max-width: 700px) {
+    .admissions-hero-art__scene { width: 112%; }
+    .admissions-hero-art__wash { width: 124%; }
+    .admission-step { grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; }
+    .admission-step .step__body { grid-column: 2; }
+    .admissions__formhead { align-items: flex-start; flex-direction: column; gap: .5rem; }
+  }
 </style>

@@ -1,30 +1,228 @@
 ---
+const artMap = {
+  group: {
+    src: '/brand-v2/watercolor/group-therapy.webp',
+    alt: 'A watercolor illustration of teens in group therapy',
+    kind: 'watercolor',
+  },
+  session: {
+    src: '/brand-v2/watercolor/one-on-one-therapy.webp',
+    alt: 'A watercolor illustration of a teen meeting with a therapist',
+    kind: 'watercolor',
+  },
+  approach: {
+    src: '/brand-v2/spots/dbt-cbt-reframing.svg',
+    alt: 'An expressive illustration about reframing thoughts and communication',
+    kind: 'spot',
+  },
+  growth: {
+    src: '/brand-v2/collage/tree-growth-halo.webp',
+    alt: 'A Joshua tree surrounded by watercolor and hand-drawn symbols',
+    kind: 'growth',
+  },
+  desert: {
+    src: '/brand-v2/collage/joshua-tree-cut-collage.webp',
+    alt: 'A Joshua tree in a layered paper collage',
+    kind: 'collage',
+  },
+  nature: {
+    src: '/brand-v2/spots/nature-walking.svg',
+    alt: 'An expressive illustration of a person growing alongside a Joshua tree',
+    kind: 'spot',
+  },
+  art: {
+    src: '/brand-v2/spots/art-therapy.svg',
+    alt: 'An expressive illustration of art therapy',
+    kind: 'spot',
+  },
+  happy: {
+    src: '/brand-v2/spots/happy.svg',
+    alt: 'An expressive illustration of optimism and relief',
+    kind: 'spot',
+  },
+  anxious: {
+    src: '/brand-v2/spots/anxious.svg',
+    alt: 'An expressive illustration of anxiety and overwhelming thoughts',
+    kind: 'spot',
+  },
+  depression: {
+    src: '/brand-v2/spots/depression.svg',
+    alt: 'An expressive illustration of depression and the possibility of growth',
+    kind: 'spot',
+  },
+  mark: {
+    src: '/brand-v2/logos/submark-forest.svg',
+    alt: '',
+    kind: 'mark',
+  },
+} as const;
+
 interface Props {
   eyebrow?: string;
-  title: string; // may contain <em> / <br>
+  title: string;
   sub?: string;
   variant?: 'cream' | 'green';
   center?: boolean;
+  art?: keyof typeof artMap;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
 }
-const { eyebrow, title, sub, variant = 'cream', center = false, primaryCta, secondaryCta } = Astro.props;
-const cls = ['page-hero', variant === 'green' && 'page-hero--green', center && 'page-hero--center']
-  .filter(Boolean)
-  .join(' ');
+
+const {
+  eyebrow,
+  title,
+  sub,
+  variant = 'cream',
+  center = false,
+  art,
+  primaryCta,
+  secondaryCta,
+} = Astro.props;
+const artData = art ? artMap[art] : null;
+const plainTitle = title.replace(/<[^>]*>/g, '').trim();
+const cls = [
+  'page-hero',
+  variant === 'green' && 'page-hero--green',
+  center && 'page-hero--center',
+  artData && 'page-hero--with-art',
+  plainTitle.length > 30 && 'page-hero--long-title',
+].filter(Boolean).join(' ');
 ---
-<section class={cls}>
-  <div class="container-x">
-    <div class="page-hero__inner" data-reveal>
-      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-      <h1 class="page-hero__title font-display" set:html={title}></h1>
-      {sub && <p class="page-hero__sub">{sub}</p>}
+
+<section class={cls} data-hero-scope>
+  <div class="container-x page-hero__grid">
+    <div class="page-hero__inner">
+      {eyebrow && <p class="eyebrow" data-hero>{eyebrow}</p>}
+      <h1 class="page-hero__title font-display" set:html={title} data-hero></h1>
+      {sub && <p class="page-hero__sub" data-hero>{sub}</p>}
       {(primaryCta || secondaryCta) && (
-        <div class="page-hero__actions">
-          {primaryCta && <a href={primaryCta.href} class="btn">{primaryCta.label} <span class="btn__arrow">→</span></a>}
-          {secondaryCta && <a href={secondaryCta.href} class="btn btn--ghost">{secondaryCta.label}</a>}
+        <div class="page-hero__actions" data-hero>
+          {primaryCta && (
+            <a href={primaryCta.href} class:list={['btn', variant === 'green' && 'btn--on-dark']}>
+              {primaryCta.label} <span class="btn__arrow">→</span>
+            </a>
+          )}
+          {secondaryCta && (
+            <a href={secondaryCta.href} class:list={['btn', variant === 'green' ? 'btn--ghost-on-dark' : 'btn--ghost']}>
+              {secondaryCta.label}
+            </a>
+          )}
         </div>
       )}
     </div>
+
+    {artData && (
+      <figure class:list={['page-hero__art', `page-hero__art--${artData.kind}`]} data-hero>
+        <img class="page-hero__wash" src={variant === 'green' ? '/brand-v2/washes/wash-03.webp' : '/brand-v2/washes/wash-01.webp'} alt="" aria-hidden="true" />
+        <img class="page-hero__image" src={artData.src} alt={artData.alt} />
+        <img class="page-hero__tape" src="/brand-v2/tapes/tape-01.webp" alt="" aria-hidden="true" />
+        <img class="page-hero__punct" src={variant === 'green' ? '/brand-v2/halos/halo-10-lime.svg' : '/brand-v2/graphics/element-1-forest.svg'} alt="" aria-hidden="true" />
+      </figure>
+    )}
   </div>
 </section>
+
+<style>
+  .page-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-cream);
+  }
+
+  .page-hero--green {
+    background: var(--color-deep-green);
+    color: var(--color-cream);
+  }
+
+  .page-hero__grid {
+    min-height: clamp(520px, 42vw, 690px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 7rem);
+    padding-block: clamp(4.5rem, 7vw, 7.5rem);
+  }
+
+  .page-hero:not(.page-hero--with-art) .page-hero__grid { grid-template-columns: 1fr; }
+  .page-hero__inner { position: relative; z-index: 2; max-width: 58rem; }
+  .page-hero--center .page-hero__inner { margin-inline: auto; text-align: center; }
+
+  .page-hero__title {
+    max-width: 12ch;
+    margin: 1rem 0 0;
+    font-size: clamp(3.6rem, 5.5vw, 6.4rem);
+    line-height: .94;
+    letter-spacing: -.048em;
+    color: var(--color-deep-green);
+    text-wrap: balance;
+  }
+
+  .page-hero:not(.page-hero--with-art) .page-hero__title { max-width: 15ch; }
+  .page-hero--long-title .page-hero__title {
+    max-width: 14ch;
+    font-size: clamp(3.15rem, 4.7vw, 5.35rem);
+    line-height: .97;
+  }
+  .page-hero--center .page-hero__title { margin-inline: auto; }
+  .page-hero__title :global(em) { font-style: normal; color: var(--color-deep-sage); }
+  .page-hero--green .page-hero__title { color: var(--color-cream); }
+  .page-hero--green .page-hero__title :global(em) { color: var(--color-lime); }
+
+  .page-hero__sub {
+    max-width: 42rem;
+    margin-top: 1.8rem;
+    font-family: var(--font-sans);
+    font-size: clamp(1.18rem, 1.45vw, 1.5rem);
+    line-height: 1.52;
+    color: var(--color-ink-soft);
+    text-wrap: pretty;
+  }
+
+  .page-hero--center .page-hero__sub { margin-inline: auto; }
+  .page-hero--green .page-hero__sub { color: var(--color-cream-dim); }
+  .page-hero--green :global(.eyebrow) { color: var(--color-lime); }
+  .page-hero__actions { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 2rem; }
+  .page-hero--center .page-hero__actions { justify-content: center; }
+
+  .page-hero__art {
+    position: relative;
+    min-height: 480px;
+    margin: 0;
+    isolation: isolate;
+  }
+
+  .page-hero__art img { position: absolute; max-width: none; }
+  .page-hero__wash { z-index: -1; width: 116%; left: 50%; top: 4%; opacity: .7; transform: translateX(-50%) rotate(-3deg); }
+  .page-hero__image { z-index: 2; width: 102%; left: 50%; top: 50%; transform: translate(-50%, -50%); filter: drop-shadow(0 22px 34px rgba(20, 55, 44, .12)); }
+  .page-hero__tape { z-index: 3; width: 26%; right: -1%; top: 7%; transform: rotate(11deg); }
+  .page-hero__punct { z-index: 4; width: 16%; left: 0; top: 9%; transform: rotate(-8deg); }
+  .page-hero--green .page-hero__punct { filter: none; }
+
+  .page-hero__art--watercolor .page-hero__image { width: 112%; }
+  .page-hero__art--growth .page-hero__image { width: 90%; }
+  .page-hero__art--collage .page-hero__image { width: 112%; top: 56%; }
+  .page-hero__art--spot .page-hero__image { width: 88%; }
+  .page-hero__art--mark .page-hero__image { width: 72%; opacity: .96; }
+
+  @media (max-width: 980px) {
+    .page-hero__grid { grid-template-columns: 1fr; min-height: 0; }
+    .page-hero__inner { max-width: 760px; }
+    .page-hero__art { width: min(100%, 650px); min-height: 500px; justify-self: center; }
+  }
+
+  @media (max-width: 700px) {
+    .page-hero__grid { gap: 1.5rem; padding-block: 3.5rem 2.25rem; }
+    .page-hero__title { font-size: clamp(3.15rem, 14.6vw, 4.8rem); }
+    .page-hero--long-title .page-hero__title {
+      max-width: 12ch;
+      font-size: clamp(2.35rem, 10.2vw, 3.55rem);
+      letter-spacing: -.042em;
+    }
+    .page-hero__sub { margin-top: 1.4rem; font-size: 1.16rem; }
+    .page-hero__art { min-height: 340px; }
+    .page-hero__art--growth { min-height: 390px; }
+    .page-hero__art--watercolor .page-hero__image { width: 108%; }
+    .page-hero__art--growth .page-hero__image { width: 94%; }
+    .page-hero__art--spot .page-hero__image { width: 94%; }
+  }
+</style>

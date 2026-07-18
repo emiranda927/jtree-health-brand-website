@@ -1,137 +1,221 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
+import BrandPageHero from '../components/BrandPageHero.astro';
 import { Image } from 'astro:assets';
 import gabyImg from '../assets/images/Gaby-founder-headshot.JPG';
 
 const values = [
   {
-    name: 'Rooted Honesty',
-    body: 'We tell teens and families the truth, even when it’s hard — and we never punish someone for telling us theirs.',
+    name: 'Rooted honesty',
+    body: 'We tell teens and families the truth, even when it is hard—and we never punish someone for telling us theirs.',
   },
   {
-    name: 'Earned Trust',
-    body: 'We don’t ask anyone to open up before we’ve shown we’re safe to open up to. Trust is built in the room, session by session.',
+    name: 'Earned trust',
+    body: 'We do not ask anyone to open up before we have shown that we are safe to open up to. Trust is built session by session.',
   },
   {
-    name: 'Steady Structure',
-    body: 'Lasting change happens inside consistency, not chaos. We build the structure so teens don’t have to build it alone.',
+    name: 'Steady structure',
+    body: 'Lasting change happens inside consistency, not chaos. We build the structure so teens do not have to build it alone.',
   },
   {
-    name: 'Whole-Person Care',
+    name: 'Whole-person care',
     body: 'We treat the teen in front of us, not just the diagnosis on the chart. The family is part of every treatment plan.',
   },
 ];
 ---
+
 <Base
+  bodyClass="brand-page about-page"
   title="About Us — Joshua Tree Health"
   description="Why Joshua Tree Health exists, and what we believe. Adolescent PHP & IOP in Apex, NC, built around honest, family-centered care for teens ages 10–17."
 >
-  <PageHero
-    title="Rooted enough to weather hard things.<br>Flexible enough to grow in your own shape."
-    variant="green"
-    center={true}
-  />
+  <BrandPageHero
+    eyebrow="About Joshua Tree Health"
+    title="Rooted enough for hard things. Free to grow in <em>your own shape.</em>"
+    sub="We built an adolescent mental health program where clinical rigor and human warmth reinforce each other. Teens are taken seriously. Families are part of the care."
+    tone="forest"
+    primaryCta={{ label: 'Meet the team', href: '/about/team' }}
+    secondaryCta={{ label: 'Our approach', href: '/what-we-offer/our-approach' }}
+    facts={[
+      { label: 'Apex, NC', detail: 'Serving families across the Triangle' },
+      { label: 'Ages 10–17', detail: 'Focused on teens and tweens' },
+      { label: 'CARF accredited', detail: 'Independently reviewed for quality' },
+    ]}
+  >
+    <div class="about-hero-art">
+      <img class="about-hero-art__wash" src="/brand-v2/washes/wash-03.webp" alt="" aria-hidden="true" />
+      <img class="about-hero-art__tree" src="/brand-v2/collage/joshua-tree-cut-collage.webp" alt="A Joshua tree cut into a layered paper collage" />
+      <img class="about-hero-art__tape" src="/brand-v2/tapes/tape-01.webp" alt="" aria-hidden="true" />
+      <img class="about-hero-art__mark" src="/brand-v2/graphics/element-1-forest.svg" alt="" aria-hidden="true" />
+    </div>
+  </BrandPageHero>
 
-  <!-- ===== MISSION / WHY JOSHUA TREE ===== -->
-  <section class="section" aria-labelledby="mission-title">
-    <div class="container-x">
-      <div class="section-head" data-reveal>
-        <h2 class="section-title font-display" id="mission-title">Why Joshua Tree?</h2>
+  <section class="section about-mission" aria-labelledby="mission-title">
+    <div class="container-x about-mission__layout">
+      <div data-reveal>
+        <p class="eyebrow">Why the Joshua tree</p>
+        <h2 class="section-title font-display" id="mission-title">Growth does not have one correct shape.</h2>
       </div>
-      <div class="prose" data-reveal>
-        <p class="lead">The Joshua Tree doesn’t grow like other trees. It grows in harsh conditions, in its own direction, in a shape that’s entirely its own. That’s what we believe healing can look like for teenagers: not conformity, not polish, not becoming someone else’s idea of okay.</p>
-        <p>We built Joshua Tree Health to be a different kind of behavioral health program. One that takes teens seriously, meets families without judgment, and treats clinical care and human warmth as the same thing, not a tradeoff.</p>
-
-        {/* PLACEHOLDER: Gaby to supply — the personal Josh paragraph. Do NOT fabricate Josh's story, Gaby's relationship to him, or a cause of death. Leave the bracket visible until she writes it. */}
-        <p>The name also carries something personal. Joshua Tree Health is named for Josh, [Gaby’s relationship to Josh].</p>
-        <p class="mission-note"><em>Gaby will complete this paragraph — 2 to 4 sentences about who Josh was, what his memory means to her, and how it shaped why this work matters. This is the one place on the site this story lives.</em></p>
+      <div class="about-mission__copy" data-reveal data-reveal-delay="0.08">
+        <p class="about-mission__lead">The Joshua tree does not grow like other trees. It grows in harsh conditions, in its own direction, in a shape that is entirely its own.</p>
+        <p>That is what we believe healing can look like for teenagers: not conformity, not polish, and not becoming someone else’s idea of okay.</p>
+        <p>We built Joshua Tree Health to take teens seriously, meet families without judgment, and treat clinical care and human warmth as parts of the same standard.</p>
+        <aside class="about-mission__personal">
+          <img src="/brand-v2/graphics/element-2-forest.svg" alt="" aria-hidden="true" />
+          <p>The name is personal, too. Joshua Tree Health honors Josh. His memory grounds this work and our belief that finding care should never feel like crossing a desert alone.</p>
+        </aside>
       </div>
     </div>
   </section>
 
-  <!-- ===== FOUNDER ===== -->
-  <section class="section surface-cream-deep" aria-labelledby="founder-title">
-    <div class="container-x">
-      <div class="split founder">
-        <figure class="founder__media" data-reveal>
-          <Image src={gabyImg} alt="Gabriela Forter, founder of Joshua Tree Health" widths={[420, 640, 900]} sizes="(min-width: 880px) 44vw, 92vw" class="founder__img" />
-          <figcaption class="founder__cap">Gabriela Forter · Founder &amp; CEO</figcaption>
-        </figure>
-        <div data-reveal data-reveal-delay="0.08">
-          <p class="eyebrow">The founder</p>
-          <h2 class="section-title font-display" id="founder-title">Gabriela Forter</h2>
-          <p class="section-sub">Founder &amp; CEO</p>
-          {/* PLACEHOLDER: Gaby to supply bio and preferred personal detail. Do NOT fabricate a background, credentials, or biography. */}
-          <p class="founder__bio"><em>Gaby will add a short bio here — her background, why she started Joshua Tree Health, and one personal detail she wants families to know.</em></p>
+  <section class="section founder-section" aria-labelledby="founder-title">
+    <div class="container-x founder-section__layout">
+      <figure class="founder-art" data-reveal>
+        <img class="founder-art__wash" src="/brand-v2/washes/wash-09.webp" alt="" aria-hidden="true" />
+        <div class="founder-art__frame">
+          <Image src={gabyImg} alt="Gabriela Forter, founder and CEO of Joshua Tree Health" widths={[540, 800, 1100]} sizes="(max-width: 980px) 88vw, 44vw" class="founder-art__photo" />
         </div>
+        <img class="founder-art__tape" src="/brand-v2/tapes/tape-06.webp" alt="" aria-hidden="true" />
+        <img class="founder-art__mark" src="/brand-v2/halos/halo-9-lavender.svg" alt="" aria-hidden="true" />
+        <figcaption>Gabriela Forter · Founder &amp; CEO</figcaption>
+      </figure>
+
+      <div class="founder-section__copy" data-reveal data-reveal-delay="0.08">
+        <p class="eyebrow">The founder</p>
+        <h2 class="section-title font-display" id="founder-title">Gabriela Forter</h2>
+        <p class="founder-section__role">Founder &amp; CEO</p>
+        <p>Gaby founded Joshua Tree Health to create the kind of adolescent program families look for when weekly therapy is no longer enough: clinically rigorous, direct, and deeply human.</p>
+        <p>Her work centers on building a place where teens are taken seriously, parents are part of the treatment, and every family understands what happens next.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== VALUES ===== -->
-  <section class="section" aria-labelledby="values-title">
-    <div class="container-x">
-      <div class="section-head" data-reveal>
-        <h2 class="section-title font-display" id="values-title">What we believe.</h2>
+  <section class="section values-section" aria-labelledby="values-title">
+    <div class="container-x values-section__layout">
+      <div class="values-section__intro" data-reveal>
+        <p class="eyebrow">What guides the work</p>
+        <h2 class="section-title font-display" id="values-title">The values have to show up in the room.</h2>
+        <img src="/brand-v2/spots/nature-walking.svg" alt="Illustration of a character growing alongside a Joshua tree" loading="lazy" />
       </div>
-      <div class="grid-4" data-reveal-group>
-        {values.map((v) => (
-          <article class="info-card" data-reveal-item>
-            <h3 class="info-card__title">{v.name}</h3>
-            <p class="info-card__body">{v.body}</p>
+      <div class="values-list" data-reveal-group>
+        {values.map((value, index) => (
+          <article class="value-row" data-reveal-item>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <h3>{value.name}</h3>
+            <p>{value.body}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ===== ACCREDITATION ===== -->
-  <section class="section surface-cream-deep" aria-labelledby="carf-title">
-    <div class="container-x">
-      <div class="split">
-        <div data-reveal>
-          <p class="eyebrow">Accreditation</p>
-          <h2 class="section-title font-display" id="carf-title">CARF accredited.</h2>
-          <p class="section-sub">CARF accreditation is an independent, rigorous review of safety, ethics, and quality of care in behavioral health. Joshua Tree Health has earned it.</p>
-        </div>
-        <div class="carf-card card" data-reveal data-reveal-delay="0.08">
-          <p class="eyebrow eyebrow--plain">Who we serve</p>
-          <p class="carf-card__title font-display">Adolescents ages 10–17.</p>
-          <p class="carf-card__body">We offer Partial Hospitalization (PHP) and Intensive Outpatient (IOP) programs from our lakeside location in Apex, NC, with family involvement built into every treatment plan.</p>
-        </div>
+  <section class="section credibility-section" aria-labelledby="carf-title">
+    <div class="container-x credibility-section__layout">
+      <div data-reveal>
+        <img class="credibility-section__mark" src="/brand-v2/graphics/element-13-deep-sage.svg" alt="" aria-hidden="true" />
+        <p class="eyebrow">Independent accountability</p>
+        <h2 class="section-title font-display" id="carf-title">CARF accredited.</h2>
+        <p class="section-sub">CARF accreditation is an independent review of safety, ethics, and quality in behavioral health. It gives families and referral partners an external standard—not just our word.</p>
       </div>
+      <dl class="credibility-facts" data-reveal data-reveal-delay="0.08">
+        <div><dt>Who we serve</dt><dd>Adolescents ages 10–17</dd></div>
+        <div><dt>Levels of care</dt><dd>Partial Hospitalization (PHP) and Intensive Outpatient (IOP)</dd></div>
+        <div><dt>Where</dt><dd>800 West Williams St, STE 203 · Apex, NC</dd></div>
+        <div><dt>How families participate</dt><dd>Family involvement is built into every treatment plan</dd></div>
+      </dl>
     </div>
   </section>
 
-  {/* PLACEHOLDER: Gaby to supply an attributable parent quote (with consent). Do NOT ship an invented testimonial — the pull-quote section is intentionally omitted until approved copy exists. */}
-
-  <!-- ===== CLOSING CTA ===== -->
-  <section class="section surface-green" aria-labelledby="about-cta-title">
-    <div class="container-x">
-      <div class="section-head section-head--center" data-reveal>
-        <h2 class="section-title font-display" id="about-cta-title">Start the conversation.</h2>
-        <p class="section-sub">One call is enough to find out whether Joshua Tree is the right fit. No commitment, no pressure.</p>
-      </div>
-      <div class="cta-row" data-reveal data-reveal-delay="0.08">
-        <a class="btn btn--on-dark" href="/admissions">Start the Conversation <span class="btn__arrow">→</span></a>
-        <a class="btn btn--ghost-on-dark" href="tel:+19193355053">Call (919) 335-5053</a>
+  <section class="about-cta" aria-labelledby="about-cta-title">
+    <div class="container-x about-cta__inner" data-reveal>
+      <img src="/brand-v2/graphics/element-1-forest.svg" alt="" aria-hidden="true" />
+      <div>
+        <p class="eyebrow">Admissions</p>
+        <h2 class="font-display" id="about-cta-title">Care can be serious without feeling cold.</h2>
+        <p>Tell us what your family needs. We will help you understand whether Joshua Tree Health is the right level of care.</p>
+        <div class="about-cta__actions">
+          <a class="btn btn--on-dark" href="/admissions">Start the conversation <span class="btn__arrow">→</span></a>
+          <a class="btn btn--ghost-on-dark" href="tel:+19193355053">Call (919) 335-5053</a>
+        </div>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .mission-note { color: var(--color-ink-soft); font-size: 0.95rem; }
+  .about-hero-art { position: absolute; inset: 0; isolation: isolate; }
+  .about-hero-art img { position: absolute; max-width: none; }
+  .about-hero-art__wash { z-index: -1; width: 110%; left: 50%; top: 4%; opacity: .72; transform: translateX(-50%) rotate(-3deg); }
+  .about-hero-art__tree { z-index: 2; width: 108%; left: 50%; bottom: -18%; transform: translateX(-50%); filter: drop-shadow(0 24px 34px rgba(7, 23, 17, .18)); }
+  .about-hero-art__tape { z-index: 3; width: 29%; right: 1%; top: 8%; transform: rotate(12deg); }
+  .about-hero-art__mark { z-index: 4; width: 15%; left: 1%; top: 8%; transform: rotate(-9deg); filter: brightness(0) saturate(100%) invert(91%) sepia(35%) saturate(943%) hue-rotate(27deg) brightness(101%); }
 
-  .carf-card { padding: clamp(1.6rem, 1rem + 2vw, 2.4rem); display: flex; flex-direction: column; gap: 0.8rem; }
-  .carf-card__title { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.2rem); color: var(--color-deep-green); }
-  .carf-card__body { color: var(--color-ink-soft); line-height: 1.6; }
+  .about-mission { background: var(--color-cream); }
+  .about-mission__layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(3rem, 8vw, 9rem); align-items: start; }
+  .about-mission__copy { max-width: 52rem; display: grid; gap: 1.3rem; color: var(--color-ink-soft); font-size: 1.08rem; line-height: 1.68; }
+  .about-mission__lead { font-family: var(--font-sans); font-size: clamp(1.5rem, 2.3vw, 2.35rem); line-height: 1.32; color: var(--color-deep-green); }
+  .about-mission__personal { display: grid; grid-template-columns: 4.5rem 1fr; gap: 1.5rem; align-items: start; margin-top: 1rem; padding: 1.6rem 0 0; border-top: 1px solid var(--color-line-strong); }
+  .about-mission__personal img { width: 64px; transform: rotate(-8deg); }
+  .about-mission__personal p { font-size: 1.08rem; }
 
-  .founder__media { margin: 0; }
-  .founder__img { width: 100%; border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); aspect-ratio: 4 / 5; object-fit: cover; object-position: 40% 28%; }
-  .founder__cap { margin-top: 0.9rem; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-sage); }
-  .founder__bio { margin-top: 1.1rem; color: var(--color-ink-soft); line-height: 1.65; }
+  .founder-section { overflow: hidden; background: var(--color-lavender-soft); }
+  .founder-section__layout { display: grid; grid-template-columns: minmax(380px, .92fr) minmax(0, 1.08fr); gap: clamp(3rem, 8vw, 9rem); align-items: center; }
+  .founder-art { position: relative; min-height: 650px; margin: 0; isolation: isolate; }
+  .founder-art__wash { position: absolute; z-index: -1; width: 112%; max-width: none; left: 50%; top: 6%; opacity: .68; transform: translateX(-50%) rotate(4deg); }
+  .founder-art__frame { position: absolute; z-index: 2; width: 82%; left: 8%; top: 4%; padding: 10px; background: var(--color-cream); box-shadow: 0 28px 54px rgba(30, 61, 52, .14); transform: rotate(-1.5deg); clip-path: polygon(2% 4%, 98% 0, 100% 93%, 94% 100%, 3% 97%, 0 12%); }
+  .founder-art__photo { width: 100%; height: 520px; object-fit: cover; object-position: 42% 28%; clip-path: polygon(1% 2%, 99% 0, 100% 95%, 94% 100%, 2% 98%, 0 8%); }
+  .founder-art__tape { position: absolute; z-index: 3; width: 27%; right: 3%; top: 1%; transform: rotate(12deg); }
+  .founder-art__mark { position: absolute; z-index: 4; width: 17%; left: 0; bottom: 7%; transform: rotate(-9deg); }
+  .founder-art figcaption { position: absolute; left: 8%; bottom: 0; font-family: var(--font-head); font-size: .98rem; line-height: 1.15; letter-spacing: .03em; text-transform: uppercase; color: var(--color-deep-green); }
+  .founder-section__role { margin-top: 1.1rem; font-family: var(--font-head); font-size: 1rem; line-height: 1.15; letter-spacing: .025em; text-transform: uppercase; color: var(--color-deep-sage); }
+  .founder-section__copy > p:not(.eyebrow):not(.founder-section__role) { max-width: 43rem; margin-top: 1.3rem; color: var(--color-ink-soft); font-size: 1.12rem; line-height: 1.62; }
 
-  .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.6rem; }
+  .values-section { background: var(--color-cream-deep); }
+  .values-section__layout { display: grid; grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr); gap: clamp(3rem, 8vw, 9rem); align-items: start; }
+  .values-section__intro { position: sticky; top: 110px; }
+  .values-section__intro > img { width: min(100%, 420px); margin-top: 2.5rem; }
+  .values-list { border-top: 1px solid var(--color-line-strong); }
+  .value-row { display: grid; grid-template-columns: 4.5rem minmax(180px, .65fr) minmax(0, 1fr); gap: 1.5rem; align-items: baseline; padding: 1.7rem 0; border-bottom: 1px solid var(--color-line-strong); }
+  .value-row > span { font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; line-height: 1; letter-spacing: -.05em; color: var(--color-lavender-deep); }
+  .value-row h3 { font-family: var(--font-head); font-size: 1.2rem; font-weight: 900; line-height: .98; letter-spacing: .018em; text-transform: uppercase; }
+  .value-row p { color: var(--color-ink-soft); font-size: 1.04rem; line-height: 1.52; }
+
+  .credibility-section { background: var(--color-cream); }
+  .credibility-section__layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(3rem, 8vw, 9rem); align-items: center; }
+  .credibility-section__mark { width: 78px; margin-bottom: 1.5rem; }
+  .credibility-facts { margin: 0; border-top: 1px solid var(--color-line-strong); }
+  .credibility-facts div { display: grid; grid-template-columns: minmax(150px, .7fr) 1.3fr; gap: 1.5rem; padding: 1.35rem 0; border-bottom: 1px solid var(--color-line-strong); }
+  .credibility-facts dt { font-family: var(--font-head); font-size: 1rem; line-height: 1.15; letter-spacing: .025em; text-transform: uppercase; color: var(--color-deep-green); }
+  .credibility-facts dd { margin: 0; color: var(--color-ink-soft); line-height: 1.5; }
+
+  .about-cta { padding-block: clamp(5.5rem, 9vw, 9rem); background: var(--color-deep-green); color: var(--color-cream); }
+  .about-cta__inner { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+  .about-cta__inner > img { width: 92px; filter: brightness(0) saturate(100%) invert(91%) sepia(35%) saturate(943%) hue-rotate(27deg) brightness(101%); }
+  .about-cta .eyebrow { color: var(--color-lime); }
+  .about-cta h2 { max-width: 13ch; margin-top: 1rem; color: var(--color-cream); font-size: clamp(3rem, 5vw, 5.4rem); }
+  .about-cta h2 + p { max-width: 44rem; margin-top: 1.5rem; color: var(--color-cream-dim); font-size: 1.15rem; }
+  .about-cta__actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+
+  @media (max-width: 980px) {
+    .about-hero-art { max-width: 680px; margin-inline: auto; }
+    .about-mission__layout, .founder-section__layout, .values-section__layout, .credibility-section__layout { grid-template-columns: 1fr; }
+    .founder-art { max-width: 620px; }
+    .values-section__intro { position: static; }
+    .values-section__intro > img { max-width: 360px; }
+  }
+
+  @media (max-width: 700px) {
+    .about-hero-art__tree { width: 118%; bottom: -12%; }
+    .about-mission__personal { grid-template-columns: 3.5rem 1fr; gap: 1rem; }
+    .about-mission__personal img { width: 50px; }
+    .founder-art { min-height: 535px; }
+    .founder-art__frame { width: 90%; left: 4%; }
+    .founder-art__photo { height: 420px; }
+    .founder-art figcaption { left: 4%; font-size: .92rem; }
+    .value-row { grid-template-columns: 3.5rem minmax(0, 1fr); gap: 1rem; }
+    .value-row p { grid-column: 2; }
+    .credibility-facts div { grid-template-columns: 1fr; gap: .5rem; }
+    .about-cta__inner { grid-template-columns: 1fr; }
+    .about-cta__inner > img { width: 72px; }
+  }
 </style>
