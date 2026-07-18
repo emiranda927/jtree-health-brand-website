@@ -1,7 +1,7 @@
 # Joshua Tree Health — Website
 
-Premium, photography-led marketing site for Joshua Tree Health, an adolescent
-(ages 10–17) trauma-informed PHP & IOP mental-health program in Apex, NC.
+Mixed-media editorial marketing site for Joshua Tree Health, an adolescent
+(ages 10–17) PHP and IOP mental-health program in Apex, NC.
 
 Built with **Astro 5 + Tailwind v4 + GSAP + Lenis**. Static output, deploys to **Vercel**.
 
@@ -13,6 +13,7 @@ Built with **Astro 5 + Tailwind v4 + GSAP + Lenis**. Static output, deploys to *
 npm install
 npm run dev      # local dev at http://localhost:4321
 npm run build    # static build → ./dist
+npm run verify   # build + SEO/indexability/link audit
 npm run preview  # preview the production build
 ```
 
@@ -31,12 +32,19 @@ src/
     CrisisBar.astro         # persistent 988 / 741741 safety strip
     PageHero.astro          # reusable inner-page hero (cream or green variant)
     Figure.astro            # framed illustration (white-bg art melts in via multiply)
-  pages/                    # one .astro per route (14 pages)
+  pages/                    # one .astro per route
   styles/global.css         # design tokens + reusable component classes
   lib/motion.ts             # Lenis smooth-scroll + GSAP reveals (respects reduced-motion)
   assets/                   # optimized via astro:assets (imported images only)
-public/brand/               # logos, favicons (served as-is)
+public/brand-v2/            # current mixed-media visual identity and logos
 ```
+
+## Visual source of truth
+
+`origin/main` is the canonical visual identity. Update local work from main before
+making visual changes; do not merge older local visual layers back into main.
+GSAP, Lenis, Fontsource typography, the mixed-media hero system, and the current
+navigation styling are intentional parts of the architecture.
 
 ## Design system (source of truth: `src/styles/global.css`)
 
@@ -57,19 +65,19 @@ The `multiply` blend dissolves the white background into a brand-tinted panel �
 
 ---
 
-## ⚠️ Before launch — wire these up
+## Before launch — verify these claims
 
-1. **Form submissions** — the Admissions and Contact forms currently validate and
-   redirect to `/thank-you` as a demo. Wire them to the existing `jtree-form-api`:
-   see the `INTEGRATION` comment in `src/pages/admissions.astro` and `src/pages/contact.astro`
-   (POST the `FormData` to your endpoint, then redirect).
-2. **Founder's story** — `src/pages/about.astro` contains an on-brand *draft* of the
-   origin story. Replace with Gaby's actual words.
-3. **Team** — add real clinician bios/photos to the About "team" section.
-4. **Privacy** — `src/pages/privacy.astro` is a website privacy policy, not the HIPAA
+1. **Founder story** — add Gaby's approved personal paragraph in her own words.
+2. **Team** — confirm every displayed name, role, license, credential, biography,
+   and portrait with the clinician before publication.
+3. **Program claims** — verify CARF status, PHP hours, age-track structure, family
+   session cadence, Parent DBT Skills Group availability, and lead-therapist DBT credentials.
+4. **Insurance** — confirm every payer contract before naming a plan as in-network.
+5. **Privacy** — `src/pages/privacy.astro` is a website privacy policy, not the HIPAA
    Notice of Privacy Practices. Have legal review before launch.
-5. **Verify hours / details** — confirm PHP (9–3) and IOP (3–6) hours, phone, address.
-6. **OG image** — set a real social-share image (currently falls back to the logo).
+
+The admissions form posts only after explicit submission. Do not restore abandoned-
+form capture or send form fields, teen ages, insurance selections, or messages to analytics.
 
 ## Deploy (Vercel)
 

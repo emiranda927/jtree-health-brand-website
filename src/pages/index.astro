@@ -2,68 +2,76 @@
 import Base from '../layouts/Base.astro';
 import FigmaHeroArt from '../components/brand/FigmaHeroArt.astro';
 
-const pathways = [
+const conditions = [
   {
-    title: 'No judgment. No shame.',
-    body: "You don't have to have it all figured out. We start where you are.",
-    href: '/for-parents',
-    link: 'For families',
-    image: '/brand-v2/spots/happy.svg',
-    scale: 1.08,
+    title: 'Depression & low mood',
+    body: 'Pulling away from people and activities, low energy, sleep that is off, or irritability that will not lift.',
+    image: '/brand-v2/spots/depression.svg',
+    scale: 1,
   },
   {
-    title: 'More than weekly therapy.',
-    body: 'Skills, structure, and support for the moments when once-a-week care is not enough.',
-    href: '/what-we-offer',
-    link: 'Explore programs',
+    title: 'Anxiety & panic',
+    body: 'Worry that does not switch off, avoidance, panic symptoms, or intense fear around school and social situations.',
+    image: '/brand-v2/spots/anxious.svg',
+    scale: 1,
+  },
+  {
+    title: 'ADHD & executive functioning',
+    body: 'Trouble starting or finishing tasks, acting before thinking, and strong reactions to frustration or perceived failure.',
     image: '/brand-v2/spots/dbt-cbt-reframing.svg',
     scale: 1,
   },
   {
-    title: 'You have power here.',
-    body: 'We help teens regain a sense of control and choose what comes next.',
-    href: '/what-we-treat',
-    link: 'What we treat',
-    image: '/brand-v2/spots/mindfulness-meditation.svg',
-    scale: 1,
-  },
-  {
-    title: 'Growth in your own shape.',
-    body: 'Care is built around the teen in front of us, not a one-size-fits-all curriculum.',
-    href: '/what-we-offer/our-approach',
-    link: 'Our approach',
+    title: 'Trauma & PTSD',
+    body: 'Feeling constantly on alert, shutting down, or reacting strongly when the present connects to something painful.',
     image: '/brand-v2/spots/nature-walking.svg',
     scale: 1.07,
   },
+  {
+    title: 'Autism & social communication',
+    body: 'Sensory overload, hard transitions, masking exhaustion, or anxiety and low mood alongside autism.',
+    image: '/brand-v2/spots/happy.svg',
+    scale: 1.08,
+  },
+  {
+    title: 'Emotional dysregulation & mood',
+    body: 'Big reactions that are hard to control, rapid mood shifts, and a long road back to calm after conflict.',
+    image: '/brand-v2/spots/mindfulness-meditation.svg',
+    scale: 1,
+  },
 ];
 ---
-<Base bodyClass="home-v2">
+<Base
+  bodyClass="home-v2"
+  title="Joshua Tree Health | Teen PHP & IOP in Apex, NC"
+  description="PHP and IOP mental health care for adolescents ages 10–17 in Apex, NC, grounded in DBT, polyvagal-informed care, and family involvement."
+>
   <section class="hero" data-hero-scope aria-labelledby="hero-title">
     <FigmaHeroArt />
     <div class="container-x hero__grid">
       <div class="hero__copy">
         <h1 class="hero__title font-display" id="hero-title" data-hero>
           <span>Grow in a shape</span>
-          <span>that is <span class="hero__accent">entirely</span></span>
+          <span><span class="hero__accent">entirely</span></span>
           <span class="hero__accent">your own.</span>
         </h1>
         <p class="hero__lede" data-hero>
-          Clinical excellence is the foundation.<br />Growth is personal.
+          For teens who need more than a weekly appointment.<br />Structured PHP and IOP in Apex, with evenings at home.
         </p>
         <div class="hero__actions" data-hero>
-          <a href="/admissions" class="btn">Start the conversation</a>
+          <a href="/get-started" class="btn">Start the conversation</a>
           <a href="/what-we-offer" class="btn btn--ghost">Explore programs</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="trust" aria-label="Accreditation and coverage">
+  <section class="trust" aria-label="Program facts">
     <ul class="container-x trust__inner" data-reveal>
-      <li>CARF accredited</li>
+      <li>Apex, North Carolina</li>
       <li>Ages 10–17</li>
       <li>No waitlist</li>
-      <li>In-network care</li>
+      <li>Benefits verification</li>
     </ul>
   </section>
 
@@ -71,18 +79,22 @@ const pathways = [
     <div class="container-x manifesto__grid">
       <div class="manifesto__copy">
         <img class="section-punct section-punct--light" src="/brand-v2/halos/halo-10-lime.svg" alt="" aria-hidden="true" />
-        <p class="eyebrow eyebrow--light">For parents and families</p>
         <h2 class="manifesto__lead font-display" id="manifesto-title" data-reveal>
-          You know your teen better than anyone.
+          When one appointment a week is no longer enough, there is care that still keeps home in the picture.
         </h2>
         <p class="manifesto__body" data-reveal data-reveal-delay="0.08">
-          When anxiety, withdrawal, shutting down, or a crisis starts getting in the way of daily life, it can be hard to know what kind of help comes next. That is what we are here for.
+          IOP and PHP provide more time, structure, and clinical support without an overnight stay.
         </p>
+        {/* TODO: VERIFY before adding guide claims here: separate pre-teen/teen tracks, Parent DBT Skills Group, weekly 1:1 family therapy cadence (all pending in docs/CLAIM_REGISTER.md) */}
         <p class="manifesto__body" data-reveal data-reveal-delay="0.13">
-          Family involvement is built into how we work because teens do better when the people supporting them feel supported too.
+          Some teens come when symptoms are getting harder to manage between weekly sessions. Others need a steady transition home after inpatient or residential care. We meet both moments with a clear plan and a consistent week.
         </p>
-        <div class="manifesto__action" data-reveal data-reveal-delay="0.18">
-          <a href="/admissions" class="btn btn--on-dark">Start the conversation <span class="btn__arrow">→</span></a>
+        <p class="manifesto__body" data-reveal data-reveal-delay="0.18">
+          Care includes DBT skills groups, individual therapy, family involvement, and expressive work through art, music, and mindfulness. Teens return home every evening and practice what they are learning in daily life.
+        </p>
+        <div class="manifesto__action" data-reveal data-reveal-delay="0.22">
+          <a href="/get-started" class="btn btn--on-dark">Start the conversation <span class="btn__arrow">→</span></a>
+          <a class="manifesto__link" href="/what-we-offer/our-approach">See how we work →</a>
         </div>
       </div>
       <div class="manifesto__art" data-reveal data-reveal-delay="0.08">
@@ -95,21 +107,22 @@ const pathways = [
     <div class="container-x">
       <div class="section-head" data-reveal>
         <img class="section-punct" src="/brand-v2/graphics/element-1-forest.svg" alt="" aria-hidden="true" />
-        <p class="eyebrow">What to expect</p>
-        <h2 class="section-title font-display" id="pathways-title">Care should feel made for the person receiving it.</h2>
+        <p class="eyebrow">What we treat</p>
+        <h2 class="section-title font-display" id="pathways-title">What brings families to us.</h2>
       </div>
       <div class="pathways__grid" data-reveal-group>
-        {pathways.map((pathway) => (
-          <a class="pathway" href={pathway.href} data-reveal-item>
-            <img class="pathway__art" style={`--art-scale: ${pathway.scale}`} src={pathway.image} alt="" aria-hidden="true" loading="lazy" />
+        {conditions.map((condition) => (
+          <a class="pathway" href="/what-we-treat" data-reveal-item>
+            <img class="pathway__art" style={`--art-scale: ${condition.scale}`} src={condition.image} alt="" aria-hidden="true" loading="lazy" />
             <div class="pathway__copy">
-              <h3>{pathway.title}</h3>
-              <p>{pathway.body}</p>
-              <span>{pathway.link} →</span>
+              <h3>{condition.title}</h3>
+              <p>{condition.body}</p>
+              <span>Learn more →</span>
             </div>
           </a>
         ))}
       </div>
+      <p class="pathways__more" data-reveal><a class="link-arrow" href="/what-we-treat">See all conditions we treat →</a></p>
     </div>
   </section>
 
@@ -117,8 +130,8 @@ const pathways = [
     <div class="container-x">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Our programs</p>
-        <h2 class="section-title font-display" id="programs-title">Two programs. One team. Zero waitlists.</h2>
-        <p class="section-sub">PHP for full-day structured care. IOP for after-school intensive support. Both evidence-based, both built around how teens live.</p>
+        <h2 class="section-title font-display" id="programs-title">Two levels of structured outpatient care.</h2>
+        <p class="section-sub">PHP provides a full treatment day. IOP meets after school during the school year. Both allow teens to return home every evening.</p>
       </div>
 
       <div class="programs__grid" data-reveal-group>
@@ -128,14 +141,16 @@ const pathways = [
             <span class="program-card__code" aria-hidden="true">PHP</span>
             <p class="program-card__tag">Partial Hospitalization Program</p>
           </div>
-          <h3 class="program-card__title">Full-day treatment, five days a week.</h3>
-          <p class="program-card__sched">9am–3pm · Home each evening</p>
-          <p class="program-card__body">Our highest level of outpatient care for teens who need daily structure and more support than weekly therapy.</p>
+          <h3 class="program-card__title">Full-day treatment during the week.</h3>
+          {/* TODO: VERIFY PHP exact hours and weekly day count before publishing schedule specifics (register: pending) */}
+          <p class="program-card__sched">Daytime programming · Home each evening</p>
+          <p class="program-card__body">Our highest level of outpatient care, for teens who need more structure and support than weekly or after-school therapy.</p>
           <ul class="program-card__list">
             <li>Group and individual therapy</li>
             <li>Family sessions</li>
-            <li>Academic support</li>
-            <li>Integrated psychiatric care</li>
+            <li>Care coordination and transition planning</li>
+            {/* TODO: VERIFY scope of psychiatric care coordination with clinical leadership before expanding this line */}
+            <li>Psychiatric care coordination as clinically indicated</li>
           </ul>
           <a href="/what-we-offer/php" class="link-arrow">Explore the PHP program →</a>
         </article>
@@ -147,20 +162,20 @@ const pathways = [
             <p class="program-card__tag">Intensive Outpatient Program</p>
           </div>
           <h3 class="program-card__title">After-school treatment, three days a week.</h3>
-          <p class="program-card__sched">3–6pm · School and home stay intact</p>
-          <p class="program-card__body">A step below PHP for teens who need intensive support while continuing school and daily routines.</p>
+          <p class="program-card__sched">Mon/Wed/Fri · 3:30–6:30pm during the school year</p>
+          <p class="program-card__body">A step below PHP for teens who need more than weekly therapy while continuing school and daily routines.</p>
           <ul class="program-card__list">
             <li>After-school scheduling</li>
             <li>Group and individual therapy</li>
-            <li>Skills for real life through DBT</li>
-            <li>Integrated psychiatric care</li>
+            <li>DBT skills practiced in session</li>
+            <li>Family therapy built into treatment</li>
           </ul>
           <a href="/what-we-offer/iop" class="link-arrow">Explore the IOP program →</a>
         </article>
       </div>
 
       <p class="programs__insurance" data-reveal>
-        Covered by most major insurance plans, including BCBS, Cigna, Aetna, UHC, and Tricare. We verify benefits before care begins.
+        We'll verify your insurance benefits and walk you through expected costs before care begins. We do not accept Medicaid.
       </p>
     </div>
   </section>
@@ -176,13 +191,14 @@ const pathways = [
         <div class="section-head" data-reveal>
           <p class="eyebrow">Care that adapts</p>
           <h2 class="section-title font-display" id="measure-title">Progress should show up in real life.</h2>
-          <p class="section-sub">We track symptoms, day-to-day functioning, and how things feel at home. When something is not working, we change the plan.</p>
+          <p class="section-sub">We check progress from intake through discharge. If your teen is not improving in the ways that matter, the team revisits the plan.</p>
         </div>
         <div class="measure__points" data-reveal-group>
-          <article data-reveal-item><h3>A clear plan from day one</h3><p>After intake, you will know what your teen is working on and why.</p></article>
-          <article data-reveal-item><h3>Progress you can see at home</h3><p>The skills built here are meant to show up at school, with friends, and during hard moments.</p></article>
-          <article data-reveal-item><h3>Families kept in the loop</h3><p>You will know how care is going and leave with tools to keep supporting your teen.</p></article>
+          <article data-reveal-item><h3>Know what the plan is for</h3><p>After intake, you will know what your teen is working on and why it matters.</p></article>
+          <article data-reveal-item><h3>Look beyond the therapy room</h3><p>Progress should be visible at school, with friends, and during the hard moments at home.</p></article>
+          <article data-reveal-item><h3>Stay part of the work</h3><p>The team will talk with you about how care is going and what you can reinforce at home.</p></article>
         </div>
+        <p class="measure__more" data-reveal><a class="link-arrow" href="/about/outcomes">How we measure progress →</a></p>
       </div>
     </div>
   </section>
@@ -191,23 +207,13 @@ const pathways = [
     <div class="container-x">
       <div class="section-head" data-reveal>
         <p class="eyebrow">How it works</p>
-        <h2 class="section-title font-display" id="process-title">Three steps. Then a plan.</h2>
+        <h2 class="section-title font-display" id="process-title">Three steps to a clearer next move.</h2>
       </div>
       <ol class="process__steps" data-reveal-group>
-        <li class="step" data-reveal-item><span class="step__num">01</span><h3>Fill out the form</h3><p>A two-minute form. No medical details—we will cover those by phone.</p></li>
-        <li class="step" data-reveal-item><span class="step__num">02</span><h3>We call you</h3><p>A conversation about what your teen needs, within one business day.</p></li>
-        <li class="step" data-reveal-item><span class="step__num">03</span><h3>Start within 3–5 days</h3><p>We recommend the right level of care and build a plan together.</p></li>
+        <li class="step" data-reveal-item><span class="step__num">01</span><h3>Fill out the form</h3><p>A two-minute form. No medical details. We cover those by phone.</p></li>
+        <li class="step" data-reveal-item><span class="step__num">02</span><h3>We call you</h3><p>A conversation about what is happening and whether this level of care may fit your teen.</p></li>
+        <li class="step" data-reveal-item><span class="step__num">03</span><h3>Start within days</h3><p>A typical start is three to five days from first contact. We recommend the level of care that fits and build the plan together.</p></li>
       </ol>
-    </div>
-  </section>
-
-  <section class="quote" aria-label="Parent testimonial">
-    <div class="container-x quote__inner">
-      <img class="quote__punct" src="/brand-v2/graphics/element-11-colorway.svg" alt="" aria-hidden="true" />
-      <blockquote class="quote__text font-display" data-reveal>
-        “I did not know if this was the right level of care. It was. They met my son exactly where he was.”
-      </blockquote>
-      <p class="quote__cite" data-reveal data-reveal-delay="0.08">Parent of a Joshua Tree Health teen</p>
     </div>
   </section>
 
@@ -215,8 +221,8 @@ const pathways = [
     <div class="container-x location__grid">
       <div class="location__info" data-reveal>
         <p class="eyebrow">Visit us</p>
-        <h2 class="section-title font-display" id="location-title">Apex, NC—easy access from across the Triangle.</h2>
-        <p class="section-sub">Serving families across Raleigh, Cary, Durham, and Chapel Hill.</p>
+        <h2 class="section-title font-display" id="location-title">Apex, NC. Easy access from across the Triangle.</h2>
+        <p class="section-sub">Serving families across Cary, Holly Springs, Raleigh, Durham, and Chapel Hill.</p>
         <address class="location__address">800 West Williams St, STE 203<br />Apex, NC 27502</address>
         <div class="location__actions">
           <a class="btn btn--ghost" href="https://maps.google.com/?q=800+West+Williams+St+STE+203+Apex+NC+27502" target="_blank" rel="noopener">Get directions</a>
@@ -238,9 +244,12 @@ const pathways = [
     <div class="container-x closing__inner" data-reveal>
       <img class="section-punct section-punct--light" src="/brand-v2/halos/halo-10-lime.svg" alt="" aria-hidden="true" />
       <p class="eyebrow eyebrow--light">Admissions</p>
-      <h2 class="font-display" id="home-cta-title">Find the right level of care.</h2>
-      <p>Tell us what is happening at home. We will help you understand the options before you commit to anything.</p>
-      <a href="/admissions" class="btn btn--on-dark">Start the conversation <span class="btn__arrow">→</span></a>
+      <h2 class="font-display" id="home-cta-title">Not sure which program is right?</h2>
+      <p>You do not have to decide before you call. A licensed therapist will assess what your teen needs, and our admissions team will explain the options first.</p>
+      <div class="closing__actions">
+        <a href="/get-started" class="btn btn--on-dark">Start the conversation <span class="btn__arrow">→</span></a>
+        <a class="closing__call" href="tel:+19193355053">Call (919) 335-5053</a>
+      </div>
     </div>
   </section>
 </Base>
@@ -342,7 +351,8 @@ const pathways = [
   .eyebrow--light { color: var(--color-lime); }
   .manifesto__lead { max-width: 13ch; margin-top: 1.25rem; color: var(--color-cream); font-size: clamp(3rem, 5.2vw, 5.5rem); }
   .manifesto__body { max-width: 43rem; margin-top: 1.35rem; color: var(--color-cream-dim); font-size: clamp(1.05rem, 1.25vw, 1.2rem); line-height: 1.58; }
-  .manifesto__action { margin-top: 2.2rem; }
+  .manifesto__action { display: flex; flex-wrap: wrap; align-items: center; gap: 1.6rem; margin-top: 2.2rem; }
+  .manifesto__link { font-family: var(--font-head); font-weight: 900; font-size: .98rem; line-height: 1.2; text-transform: uppercase; letter-spacing: .025em; color: var(--color-lime); border-bottom: 2px solid var(--color-lime); padding-bottom: .12rem; }
   .manifesto__art { position: relative; width: 100%; max-width: 760px; min-height: 760px; justify-self: end; align-self: center; isolation: isolate; }
   .manifesto__growth { position: absolute; width: 118%; max-width: none; left: 50%; top: 50%; transform: translate(-50%, -49%); filter: drop-shadow(0 24px 32px rgba(8, 26, 19, .18)); }
 
@@ -353,7 +363,8 @@ const pathways = [
   .section-sub { font-size: clamp(1.05rem, 1.25vw, 1.2rem); }
 
   .pathways { background: var(--color-cream); }
-  .pathways__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.25rem, 2.3vw, 2.5rem); margin-top: clamp(3rem, 6vw, 6rem); }
+  .pathways__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 2.3vw, 2.5rem); margin-top: clamp(3rem, 6vw, 6rem); }
+  .pathways__more { margin-top: clamp(2.5rem, 4vw, 3.5rem); }
   .pathway { display: grid; grid-template-rows: 245px auto; color: inherit; text-decoration: none; }
   .pathway__art { width: 100%; height: 235px; object-fit: contain; transform: scale(var(--art-scale, 1)); transition: transform var(--dur) var(--ease-soft); }
   .pathway:hover .pathway__art { transform: scale(var(--art-scale, 1)) translateY(-7px) rotate(-1deg); }
@@ -400,6 +411,7 @@ const pathways = [
   .measure__points article { display: grid; grid-template-columns: minmax(180px, .75fr) 1.25fr; gap: 1.5rem; padding: 1.35rem 0; border-bottom: 1px solid rgba(30,61,52,.24); }
   .measure__points h3 { font-family: var(--font-head); font-size: 1.12rem; line-height: 1.08; text-transform: uppercase; letter-spacing: .012em; }
   .measure__points p { color: var(--color-ink-soft); font-size: 1.0625rem; line-height: 1.58; }
+  .measure__more { margin-top: 2.2rem; }
 
   .process { background: var(--color-cream); }
   .process__steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 3rem); margin: 0; padding: 0; list-style: none; }
@@ -428,8 +440,10 @@ const pathways = [
 
   .closing { padding-block: clamp(5.5rem, 10vw, 10rem); background: var(--color-deep-green); color: var(--color-cream); }
   .closing__inner { max-width: 850px; }
-  .closing h2 { max-width: 10ch; color: var(--color-cream); font-size: clamp(3.3rem, 6.5vw, 6.8rem); }
+  .closing h2 { max-width: 14ch; color: var(--color-cream); font-size: clamp(3.3rem, 6.5vw, 6.8rem); }
   .closing p:not(.eyebrow) { max-width: 42rem; margin: 1.5rem 0 2rem; color: var(--color-cream-dim); font-size: 1.15rem; }
+  .closing__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.6rem; }
+  .closing__call { font-family: var(--font-head); font-weight: 900; font-size: .98rem; line-height: 1.2; text-transform: uppercase; letter-spacing: .025em; color: var(--color-lime); border-bottom: 2px solid var(--color-lime); padding-bottom: .12rem; }
 
   @media (max-width: 980px) {
     .manifesto__grid, .measure__layout, .location__grid { grid-template-columns: 1fr; }

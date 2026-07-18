@@ -1,0 +1,108 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+
+const states = [
+  { title: 'Safe and social (ventral vagal)', body: 'The state the theory links to connection and learning. A teen here can listen, engage, practice skills, and access reasoning. This is where therapeutic work tends to land.' },
+  { title: 'Fight or flight (sympathetic activation)', body: 'The body’s response to perceived threat. Heart rate can rise, muscles can tense, and clear reasoning becomes harder to reach. What looks like defiance may be a teen reacting from a body prepared for danger.' },
+  { title: 'Shutdown or freeze (dorsal vagal)', body: 'A deeper response to overwhelming threat. Teens in this state can look withdrawn, flat, or numb. It is sometimes mistaken for compliance or disengagement.' },
+];
+
+const practices = [
+  'Sessions begin with time to settle. The group and facilitator set a tone and rhythm before skills work starts.',
+  'Teens practice noticing their own state: what activation, shutdown, and steadiness each feel like in their body, and what helps them shift.',
+  'Movement, mindfulness, sensory awareness, art, and music give teens ways to work when words are not the best entry point.',
+  'The pace of disclosure and processing follows the teen. We do not push before a teen is ready.',
+  'The physical environment and the quality of the therapeutic relationship are part of the clinical work.',
+];
+---
+
+<Base
+  bodyClass="brand-page"
+  title="Polyvagal-Informed Care for Teens | Joshua Tree Health"
+  description="What polyvagal-informed care means in our teen PHP and IOP in Apex, NC: nervous-system states, pacing, and the conditions that support treatment."
+>
+  <PageHero
+    title="Polyvagal-informed <em>care.</em>"
+    sub="We pay attention to nervous-system state because the timing and pace of a session matter."
+    art="nature"
+    primaryCta={{ label: 'Start the conversation', href: '/get-started' }}
+  />
+
+  <section class="section" aria-labelledby="meaning-title">
+    <div class="container-x prose" data-reveal>
+      <h2 id="meaning-title">What is polyvagal theory?</h2>
+      <p>Polyvagal theory, developed by neuroscientist Dr. Stephen Porges, describes how the autonomic nervous system, the part of the body that runs largely below conscious awareness, responds to safety, threat, and connection.</p>
+      <p>Researchers continue to debate some of the theory&rsquo;s physiological and evolutionary claims. We use it as a working framework: a way of noticing what state a teen is in and adjusting the pace and shape of a session. For anyone who wants the scientific discussion, we link to it below.</p>
+    </div>
+  </section>
+
+  <section class="section surface-cream-deep" aria-labelledby="states-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Three states</p>
+        <h2 class="section-title font-display" id="states-title">The states the theory describes.</h2>
+      </div>
+      <div class="grid-3" data-reveal-group>
+        {states.map((state) => (
+          <article class="info-card" data-reveal-item><h3>{state.title}</h3><p>{state.body}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="why-title">
+    <div class="container-x prose" data-reveal>
+      <h2 id="why-title">Why this matters for teens carrying trauma.</h2>
+      <p>Many of the adolescents who come to Joshua Tree, especially those carrying trauma, spend a lot of time in the activated or shutdown states the theory describes. Their nervous systems have learned to treat a wide range of situations as threatening, often for reasons that made sense earlier in their lives.</p>
+      <p>When a teen is highly activated, language and reflection can become harder to access. A useful skill may be taught at the wrong moment and never become usable.</p>
+      <p>We start by noticing the conditions around the teen and what helps them settle enough to stay present. Then the rest of the work has a better chance of taking hold.</p>
+    </div>
+  </section>
+
+  <section class="section surface-cream-deep" aria-labelledby="practice-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">In practice</p>
+        <h2 class="section-title font-display" id="practice-title">What this looks like in a session.</h2>
+        <p class="section-sub">This framework shapes the pace of a session and the order in which the work happens.</p>
+      </div>
+      <ul class="checklist" data-reveal>{practices.map((practice) => <li>{practice}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="clinicians-title">
+    <div class="container-x prose" data-reveal>
+      <h2 id="clinicians-title">For referring clinicians.</h2>
+      <p>Polyvagal-informed care is sometimes described in ways that obscure what it changes clinically. In our program it informs session structure and pacing, co-regulation practices in group settings, the role of somatic and expressive work, and how we approach trauma history and disclosure.</p>
+      <!-- TODO: VERIFY the scope of staff polyvagal training and supervision before publishing any training or credential claims here. -->
+      <p>If you want to talk through how the model works in practice, <a href="tel:+19193355053">call us at (919) 335-5053</a>. We are glad to get specific.</p>
+    </div>
+  </section>
+
+  <section class="section surface-cream-deep" aria-labelledby="polyvagal-sources-title">
+    <div class="container-x prose" data-reveal>
+      <h2 id="polyvagal-sources-title">Sources and scientific context</h2>
+      <p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12302812/" target="_blank" rel="noopener">Polyvagal Theory: current status, applications, and future directions</a></p>
+      <p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12937499/" target="_blank" rel="noopener">International expert critique of Polyvagal Theory&rsquo;s physiological claims</a></p>
+      <p><a class="link-arrow" href="/what-we-offer/our-approach">← Return to our full approach</a></p>
+    </div>
+  </section>
+
+  <section class="section surface-green" aria-labelledby="polyvagal-cta-title">
+    <div class="container-x">
+      <div class="section-head section-head--center" data-reveal>
+        <h2 class="section-title font-display" id="polyvagal-cta-title">See where this fits in the program.</h2>
+        <p class="section-sub">Polyvagal-informed care works alongside DBT skills, trauma-informed practice, and family involvement.</p>
+        <div class="cta-row">
+          <a class="btn btn--on-dark" href="/what-we-offer/our-approach">Learn about our full approach <span class="btn__arrow">→</span></a>
+          <a class="btn btn--ghost-on-dark" href="/get-started">Get started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.6rem; }
+</style>

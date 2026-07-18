@@ -2,8 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
   "redirects": [
+    { "source": "/admissions", "destination": "/get-started", "permanent": true },
     { "source": "/parent-guide", "destination": "/for-parents", "permanent": true },
     { "source": "/home", "destination": "/", "permanent": true },
+    { "source": "/blog", "destination": "/learning-hub", "permanent": true },
+    { "source": "/learning-hub/blog", "destination": "/learning-hub", "permanent": true },
     { "source": "/for-teens", "destination": "/what-we-treat", "permanent": true },
     { "source": "/programs", "destination": "/what-we-offer", "permanent": true }
   ],

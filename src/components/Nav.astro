@@ -10,7 +10,6 @@ const mainNav = [
       { label: 'Partial Hospitalization (PHP)', href: '/what-we-offer/php' },
     ],
   },
-  { label: 'For Parents', href: '/for-parents' },
   { label: 'Insurance', href: '/insurance' },
   {
     label: 'About Us',
@@ -18,9 +17,10 @@ const mainNav = [
     children: [
       { label: 'Our Culture', href: '/about/our-culture' },
       { label: 'Our Team', href: '/about/team' },
+      { label: 'Clinical Outcomes', href: '/about/outcomes' },
+      { label: 'FAQs', href: '/about/faqs' },
     ],
   },
-  { label: 'Learning Hub', href: '/learning-hub' },
 ];
 
 const { pathname } = Astro.url;
@@ -46,7 +46,7 @@ const branchActive = (item: { href: string; children?: { href: string }[] }) =>
 
 <header class="nav" data-nav>
   <div class="container-x nav__inner">
-    <a href="/" class="nav__brand" aria-label="Joshua Tree Health — home">
+    <a href="/" class="nav__brand" aria-label="Joshua Tree Health home">
       <img src={logoSrc} alt="Joshua Tree Health" class="nav__logo" width="190" height="34" />
     </a>
 
@@ -72,7 +72,7 @@ const branchActive = (item: { href: string; children?: { href: string }[] }) =>
     </nav>
 
     <div class="nav__actions">
-      <a href="/admissions" class="btn nav__cta">Get Started</a>
+      <a href="/get-started" class="btn nav__cta">Get Started</a>
       <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
         <span></span><span></span><span></span>
       </button>
@@ -101,7 +101,7 @@ const branchActive = (item: { href: string; children?: { href: string }[] }) =>
     <a href="/contact" class="mobile__link">Contact</a>
   </nav>
   <div class="mobile__footer">
-    <a href="/admissions" class="btn btn--lime mobile__cta">Get Started</a>
+    <a href="/get-started" class="btn btn--lime mobile__cta">Get Started</a>
     <a href="tel:+19193355053" class="mobile__phone">Call (919) 335-5053</a>
   </div>
 </div>

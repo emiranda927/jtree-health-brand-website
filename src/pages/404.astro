@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+---
+<Base
+  bodyClass="brand-page rollout-page"
+  title="Page Not Found | Joshua Tree Health"
+  description="The requested page could not be found. Explore Joshua Tree Health programs or contact our team."
+  robots="noindex, follow"
+>
+  <PageHero
+    eyebrow="404"
+    art="mark"
+    title="That page isn't here."
+    sub="The link may be outdated or the page may have moved. You can return home, explore our programs, or call us for help."
+    primaryCta={{ label: 'Return home', href: '/' }}
+    secondaryCta={{ label: 'Explore programs', href: '/what-we-offer' }}
+  />
+</Base>

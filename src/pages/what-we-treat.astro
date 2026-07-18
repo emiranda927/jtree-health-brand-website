@@ -2,29 +2,174 @@
 import Base from '../layouts/Base.astro';
 import BrandPageHero from '../components/BrandPageHero.astro';
 
-const conditions = [
-  { title: 'Anxiety & panic', body: 'Overwhelming worry, panic attacks, and the avoidance that builds up around them.', mark: 'element-1-forest.svg' },
-  { title: 'Depression', body: 'Low mood, hopelessness, withdrawal, and the heaviness that makes daily life hard.', mark: 'element-11-colorway.svg' },
-  { title: 'Trauma & PTSD', body: 'The lasting weight of frightening or painful experiences, met with trauma-informed care.', mark: 'element-2-forest.svg' },
-  { title: 'Self-harm & safety', body: 'Self-harming behaviors and safety concerns, addressed with structure and without judgment.', mark: 'element-13-deep-sage.svg', crisis: true },
-  { title: 'Suicidal ideation', body: 'Suicidal thoughts that need more support than weekly therapy, but do not require hospitalization.', mark: 'element-8-forest.svg', crisis: true },
-  { title: 'School avoidance', body: 'School refusal and the anxiety, perfectionism, or burnout underneath it.', mark: 'element-4-forest.svg' },
-  { title: 'Emotional dysregulation', body: 'Big emotions and impulsive reactions, and the skills to manage them.', mark: 'element-9-colorway.svg' },
-  { title: 'OCD & related', body: 'Intrusive thoughts and compulsions that have taken up too much room.', mark: 'element-5-forest.svg' },
-  { title: 'Grief & loss', body: 'Loss, life change, and grief that does not follow a straight line.', mark: 'element-14-colorway.svg' },
+// Condition cards follow the founder guide's format (EHR order), filtered
+// through docs/CLAIM_REGISTER.md.
+// TODO: VERIFY scope of staff trauma-informed and polyvagal training before
+// restoring the guide's "every member of our clinical team is trained" line.
+// The trauma card below describes the practice instead of the credential.
+const conditions: { title: string; mark: string; bullets: string[]; help: string }[] = [
+  {
+    title: 'Depression & low mood',
+    mark: 'element-11-colorway.svg',
+    bullets: [
+      'Persistent sadness, irritability, or hopelessness that doesn’t lift',
+      'Pulling away from friends, family, or activities they used to enjoy',
+      'Loss of energy or motivation that has lasted weeks',
+      'Difficulty sleeping, eating, or getting through daily tasks',
+      'Feeling like nothing matters or things won’t get better',
+    ],
+    help: 'Depression can make effort feel unavailable. A consistent week, connection with peers, and skills practiced in session give teens support they do not have to generate alone.',
+  },
+  {
+    title: 'Anxiety & panic',
+    mark: 'element-1-forest.svg',
+    bullets: [
+      'Worry that doesn’t turn off, even when there’s no clear reason for it',
+      'Panic attacks or intense physical symptoms like a racing heart or trouble breathing',
+      'Avoiding situations, places, or people to manage the fear',
+      'Intense worry about social situations, school performance, or the future',
+      'Difficulty sleeping or concentrating',
+    ],
+    help: 'Teens learn to recognize what happens in their body as anxiety rises and practice tools early enough to change what happens next.',
+  },
+  {
+    title: 'ADHD & executive functioning',
+    mark: 'element-13-deep-sage.svg',
+    bullets: [
+      'Difficulty paying attention or staying on task, even for things they care about',
+      'Acting before thinking, or difficulty sitting still',
+      'Forgetting things, losing track of time, or stalling out on tasks',
+      'Emotional sensitivity, with big reactions to frustration or perceived failure',
+      'Falling behind at school despite effort and ability',
+    ],
+    help: 'Years of working hard and still falling behind can wear down a teen’s confidence. We address the anxiety, low mood, impulsivity, and intense frustration that can make ADHD harder to live with.',
+  },
+  {
+    title: 'Trauma & PTSD',
+    mark: 'element-2-forest.svg',
+    bullets: [
+      'Flashbacks, nightmares, or intrusive memories',
+      'Being on high alert, startling easily, or finding it hard to feel safe',
+      'Emotional numbness or disconnection from people and activities',
+      'Big reactions that seem out of proportion to what’s happening now',
+      'Avoiding people, places, or situations tied to painful experiences',
+    ],
+    help: 'Care moves at the teen’s pace. We pay attention to what helps them stay present and never push for disclosure before they are ready.',
+  },
+  {
+    title: 'Autism & social communication',
+    mark: 'element-8-forest.svg',
+    bullets: [
+      'Difficulty reading social cues or navigating peer relationships',
+      'Anxiety or meltdowns in social or sensory-heavy situations',
+      'Rigid thinking patterns or difficulty with transitions',
+      'Masking exhaustion: performing neurotypically in public and crashing at home',
+      'Anxiety or depression occurring alongside autism',
+    ],
+    help: 'Care focuses on the anxiety, low mood, overload, and relationship stress that can make daily life harder. Group gives teens a lower-pressure place to practice connection.',
+  },
+  {
+    title: 'Emotional dysregulation & mood',
+    mark: 'element-9-colorway.svg',
+    bullets: [
+      'Big emotional reactions that feel uncontrollable or come out of nowhere',
+      'Difficulty calming down after frustration or conflict',
+      'Rapid mood shifts',
+      'Impulsive decisions or behaviors during emotional moments',
+      'Intense conflict in relationships that keep turning chaotic',
+    ],
+    help: 'DBT gives teens concrete ways to get through intense moments, understand what set them off, and handle conflict with more choice.',
+  },
+  {
+    title: 'OCD & intrusive thoughts',
+    mark: 'element-5-forest.svg',
+    bullets: [
+      'Intrusive, repetitive thoughts that are hard to dismiss',
+      'Compulsive behaviors or rituals that take up significant time',
+      'Needing things to feel exactly right before moving forward',
+      'Avoiding situations that trigger obsessive thoughts',
+      'Reassurance-seeking that never relieves the anxiety for long',
+    ],
+    help: 'Skills-based group and individual therapy help teens recognize and interrupt the OCD cycle, so intrusive thoughts have less power over daily life.',
+  },
+  {
+    title: 'School avoidance & academic decline',
+    mark: 'element-4-forest.svg',
+    bullets: [
+      'Frequent absences or refusal to attend school',
+      'Stomachaches or headaches that show up before school',
+      'Difficulty concentrating or a sudden drop in performance',
+      'Intense worry about social situations or academic pressure',
+      'Missing so much school that catching up feels impossible',
+    ],
+    help: 'We work with teens and families to understand what’s underneath the avoidance, whether that’s anxiety, depression, trauma, or burnout, and build the skills and confidence to re-engage, one step at a time.',
+  },
 ];
+
+// TODO: VERIFY current practice for school coordination while a teen is in PHP
+// (the school FAQ promises planning help only, no coordination guarantee).
+// TODO: VERIFY scope of care coordination with outside providers at discharge
+// (register: describe as "as clinically indicated" only).
+const faqs = [
+  {
+    question: 'What ages do you serve?',
+    answer: 'Adolescents ages 10–17. Programming is developmentally appropriate across that range, and our admissions team can explain how groups are organized for your child’s age.',
+  },
+  {
+    question: 'Does my teen need a formal diagnosis to start?',
+    answer: 'No. During the assessment with a licensed therapist, we get to know your teen’s history and what’s been going on. That’s how we figure out whether our level of care is a good fit.',
+  },
+  {
+    question: 'How do I know if my teen needs IOP or PHP?',
+    answer: 'You’ll find out through the assessment. Call our admissions team and describe the situation. If it seems like a match, we’ll schedule a clinical assessment with a licensed therapist, and that assessment determines which level fits.',
+  },
+  {
+    question: 'Will my teen have to be hospitalized?',
+    answer: 'No. IOP and PHP are outpatient, so teens go home every evening. We’re designed for teens who need more than weekly therapy but don’t require inpatient care.',
+  },
+  {
+    question: 'Can my teen stay in school during the program?',
+    answer: 'Yes. IOP meets after school on Monday, Wednesday, and Friday, 3:30–6:30pm during the school year. PHP runs during the day, so school attendance is paused while a teen is in PHP. Admissions will help you plan for this.',
+  },
+  {
+    question: 'How involved will I be as a parent?',
+    answer: 'Very. Family therapy is built into treatment, and parents build the same skills their teen is practicing as part of that work. Admissions will explain how family involvement is structured.',
+  },
+  {
+    question: 'What if my teen doesn’t want to come?',
+    answer: 'Many teens start there. Call before you’ve figured that part out. We can help you think through how to approach it with them.',
+  },
+  {
+    question: 'What happens when the program ends?',
+    answer: 'Transition planning starts during treatment. We coordinate with outside providers, as clinically indicated, so there’s a clear plan for what comes next. Your teen doesn’t leave without a next step.',
+  },
+  {
+    question: 'Does insurance cover this?',
+    answer: 'Coverage depends on your specific plan. We’ll verify your insurance benefits and walk you through expected costs before care begins. We do not accept Medicaid.',
+  },
+];
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
 ---
 
 <Base
   bodyClass="brand-page treat-page"
-  title="What We Treat — Joshua Tree Health"
-  description="Anxiety, depression, trauma, self-harm, school avoidance and more — evidence-based PHP and IOP care for teens ages 10–17 in Apex, NC."
+  title="Teen Depression, Anxiety & Trauma Care | Joshua Tree Health"
+  description="What we treat at Joshua Tree Health in Apex, NC: teen depression, anxiety, ADHD, trauma, OCD, autism, and school avoidance. PHP and IOP for ages 10–17."
+  jsonLd={faqSchema}
 >
   <BrandPageHero
-    eyebrow="What we treat"
-    title="Support for what is taking up <em>too much room.</em>"
-    sub="We help teens work through anxiety, depression, trauma, safety concerns, and other struggles that are disrupting school, relationships, or daily life."
-    primaryCta={{ label: 'Start the conversation', href: '/admissions' }}
+    eyebrow=""
+    title="What we <em>treat.</em>"
+    sub="Maybe school has become impossible. Maybe your teen cannot settle, sleep, or let anyone close. Start with what you see. We’ll work from there."
+    primaryCta={{ label: 'Start the conversation', href: '/get-started' }}
     secondaryCta={{ label: 'Call (919) 335-5053', href: 'tel:+19193355053' }}
     facts={[
       { label: 'Ages 10–17', detail: 'Adolescent-focused care' },
@@ -45,11 +190,11 @@ const conditions = [
     <div class="container-x treat-intro__layout">
       <div data-reveal>
         <p class="eyebrow">Start with what you see</p>
-        <h2 class="section-title font-display" id="intro-title">You do not need the diagnosis before you call.</h2>
+        <h2 class="section-title font-display" id="intro-title">You don’t need a diagnosis before you call.</h2>
       </div>
       <div class="treat-intro__copy" data-reveal data-reveal-delay="0.08">
-        <p>Maybe your teen has a diagnosis. Maybe you only know that something has changed: school feels impossible, emotions are harder to manage, or they are pulling away from the life they used to have.</p>
-        <p>Tell us what you are seeing. We will help you understand whether this level of care fits and what the next step should be.</p>
+        <p>Maybe your teen has a diagnosis. Maybe you only know that something has changed: school feels impossible, emotions are harder to manage, or they’re pulling away from the life they used to have.</p>
+        <p>Many of the teens we support arrive looking like the descriptions below. If any of this feels familiar, tell us what you’re seeing. We’ll help you understand whether this level of care fits and what the next step should be.</p>
       </div>
     </div>
   </section>
@@ -58,7 +203,7 @@ const conditions = [
     <div class="container-x">
       <div class="section-head" data-reveal>
         <p class="eyebrow">What we work with</p>
-        <h2 class="section-title font-display" id="conditions-title">The struggles that walk through our door.</h2>
+        <h2 class="section-title font-display" id="conditions-title">The concerns families bring us most often.</h2>
       </div>
 
       <div class="condition-index__list" data-reveal-group>
@@ -66,14 +211,24 @@ const conditions = [
           <article class="condition-row" data-reveal-item>
             <span class="condition-row__index">{String(index + 1).padStart(2, '0')}</span>
             <img class="condition-row__mark" src={`/brand-v2/graphics/${condition.mark}`} alt="" aria-hidden="true" />
-            <h3>{condition.title}</h3>
-            <div>
-              <p>{condition.body}</p>
-              {condition.crisis && <a href="/crisis">Need immediate help? View crisis resources →</a>}
+            <h2>{condition.title}</h2>
+            <div class="condition-row__content">
+              <p class="condition-row__label">What it looks like</p>
+              <ul>
+                {condition.bullets.map((bullet) => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+              <div class="condition-row__help">
+                <p class="condition-row__label">How we help</p>
+                <p>{condition.help}</p>
+              </div>
             </div>
           </article>
         ))}
       </div>
+
+      <p class="condition-index__note" data-reveal>We also work with teens navigating grief and loss, life transitions, behavior challenges, and other concerns not listed here. If you’re not sure whether what your teen is going through fits, call us. We’ll help you figure it out.</p>
     </div>
   </section>
 
@@ -86,9 +241,58 @@ const conditions = [
       </div>
       <div data-reveal data-reveal-delay="0.08">
         <p class="eyebrow">Our approach</p>
-        <h2 class="section-title font-display" id="approach-title">Treat the person, not just the diagnosis.</h2>
-        <p class="section-sub">Evidence guides the plan. The teen in front of us shapes how that plan is delivered. We combine structured treatment, practical skills, and family involvement without reducing someone to a list of symptoms.</p>
-        <a href="/what-we-offer/our-approach" class="link-arrow">See our full approach →</a>
+        <h2 class="section-title font-display" id="approach-title">Care should fit the teen, not the label.</h2>
+        <p class="section-sub">We build each plan around what is happening in daily life, what your teen needs now, and what they are ready to work on.</p>
+        <a href="/what-we-offer/our-approach" class="link-arrow">See how we work →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section treat-steps" aria-labelledby="steps-title">
+    <div class="container-x treat-steps__layout">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">For parents</p>
+        <h2 class="section-title font-display" id="steps-title">What to expect when you reach out.</h2>
+      </div>
+      <div>
+        <ol class="treat-steps__grid" data-reveal-group>
+          <li class="treat-step" data-reveal-item>
+            <span class="step__num">01</span>
+            <h3 class="step__title">Call our admissions team.</h3>
+            <p class="step__body">One call is enough to start figuring out whether Joshua Tree is the right fit. No commitment, no pressure. We’ll ask about what’s been going on and answer your questions.</p>
+          </li>
+          <li class="treat-step" data-reveal-item>
+            <span class="step__num">02</span>
+            <h3 class="step__title">Assessment with a licensed therapist.</h3>
+            <p class="step__body">If it looks like a match, we’ll schedule a clinical assessment with one of our licensed therapists. That assessment determines whether IOP or PHP fits and begins the treatment plan.</p>
+          </li>
+          <li class="treat-step" data-reveal-item>
+            <span class="step__num">03</span>
+            <h3 class="step__title">The program begins.</h3>
+            <p class="step__body">Your teen starts in groups, with individual therapy alongside the group program, and family involvement is built in from the start. A typical start is three to five days from first contact, and there’s no waitlist.</p>
+          </li>
+        </ol>
+        <a href="/get-started" class="btn" data-reveal>Start the conversation <span class="btn__arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section treat-faq surface-cream-deep" aria-labelledby="faq-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Common questions</p>
+        <h2 class="section-title font-display" id="faq-title">Questions parents ask first.</h2>
+      </div>
+      <div data-reveal>
+        <div class="faq">
+          {faqs.map((faq) => (
+            <details class="faq__item">
+              <summary>{faq.question}</summary>
+              <div class="faq__answer"><p>{faq.answer}</p></div>
+            </details>
+          ))}
+        </div>
+        <a href="/insurance" class="link-arrow">See insurance details →</a>
       </div>
     </div>
   </section>
@@ -98,11 +302,11 @@ const conditions = [
       <img src="/brand-v2/graphics/element-2-forest.svg" alt="" aria-hidden="true" />
       <div>
         <p class="eyebrow">Not sure where this fits?</p>
-        <h2 class="font-display" id="fit-title">Tell us what is happening at home.</h2>
+        <h2 class="font-display" id="fit-title">Tell us what has changed.</h2>
       </div>
       <div>
-        <p>We will talk it through. If another level of care makes more sense, we will say so clearly and help you understand the options.</p>
-        <a href="/admissions" class="btn btn--on-dark">Start the conversation <span class="btn__arrow">→</span></a>
+        <p>We’ll talk it through. If another level of care makes more sense, we’ll say so clearly and help you understand the options.</p>
+        <a href="/get-started" class="btn btn--on-dark">Start the conversation <span class="btn__arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -124,12 +328,18 @@ const conditions = [
   .condition-index { background: var(--color-cream-deep); }
   .condition-index .section-head { max-width: 840px; }
   .condition-index__list { border-top: 1px solid var(--color-line-strong); }
-  .condition-row { display: grid; grid-template-columns: 4.2rem 4.5rem minmax(210px, .72fr) minmax(0, 1.28fr); gap: clamp(1rem, 2.5vw, 2.5rem); align-items: center; padding: 1.55rem 0; border-bottom: 1px solid var(--color-line-strong); }
+  .condition-row { display: grid; grid-template-columns: 4.2rem 4.5rem minmax(210px, .72fr) minmax(0, 1.28fr); gap: clamp(1rem, 2.5vw, 2.5rem); align-items: start; padding: 2.1rem 0; border-bottom: 1px solid var(--color-line-strong); }
   .condition-row__index { font-family: var(--font-display); font-size: 2.35rem; font-weight: 700; line-height: 1; letter-spacing: -.05em; color: var(--color-lavender-deep); }
   .condition-row__mark { width: 58px; height: 58px; object-fit: contain; }
-  .condition-row h3 { font-family: var(--font-head); font-size: clamp(1.05rem, 1.4vw, 1.32rem); font-weight: 900; line-height: .98; letter-spacing: .02em; text-transform: uppercase; }
-  .condition-row p { max-width: 48rem; font-size: 1.1rem; line-height: 1.58; color: var(--color-ink-soft); }
-  .condition-row a { display: inline-block; margin-top: .65rem; border-bottom: 2px solid var(--color-lavender); font-family: var(--font-head); font-size: 1rem; line-height: 1.25; letter-spacing: .015em; text-transform: uppercase; color: var(--color-deep-green); }
+  .condition-row h2 { margin-top: .45rem; font-family: var(--font-head); font-size: clamp(1.05rem, 1.4vw, 1.32rem); font-weight: 900; line-height: .98; letter-spacing: .02em; text-transform: uppercase; }
+  .condition-row__label { margin: 0 0 .6rem; font-family: var(--font-head); font-size: .88rem; font-weight: 900; line-height: 1.2; letter-spacing: .06em; text-transform: uppercase; color: var(--color-deep-sage); }
+  .condition-row__content ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .4rem; max-width: 48rem; }
+  .condition-row__content li { position: relative; padding-left: 1.15rem; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
+  .condition-row__content li::before { content: ""; position: absolute; left: 0; top: .55em; width: .42rem; height: .42rem; border-radius: 50%; background: var(--color-lavender-deep); }
+  .condition-row__help { margin-top: 1.2rem; }
+  .condition-row__help .condition-row__label { margin-bottom: .4rem; }
+  .condition-row__help p:last-child { max-width: 48rem; font-size: 1.05rem; line-height: 1.55; color: var(--color-ink-soft); }
+  .condition-index__note { max-width: 52rem; margin-top: 2.2rem; font-size: 1.1rem; line-height: 1.6; color: var(--color-ink-soft); }
 
   .treat-approach { overflow: hidden; background: var(--color-lavender-soft); }
   .treat-approach__layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(3rem, 8vw, 9rem); align-items: center; }
@@ -138,6 +348,18 @@ const conditions = [
   .treat-approach__spot { position: absolute; width: 100%; max-width: none; left: 50%; bottom: 0; transform: translateX(-50%); }
   .treat-approach__punct { position: absolute; width: 16%; right: 1%; top: 2%; transform: rotate(8deg); }
   .treat-approach .link-arrow { margin-top: 1.8rem; }
+
+  .treat-steps { background: var(--color-cream); }
+  .treat-steps__layout { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr); gap: clamp(3rem, 7vw, 8rem); align-items: start; }
+  .treat-steps__layout .section-head { position: sticky; top: 110px; }
+  .treat-steps__grid { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-line-strong); }
+  .treat-step { display: grid; grid-template-columns: 5.5rem minmax(170px, .7fr) minmax(0, 1fr); gap: 1.5rem; align-items: baseline; padding: 1.8rem 0; border-bottom: 1px solid var(--color-line-strong); }
+  .treat-step .step__num { font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; line-height: 1; letter-spacing: -.05em; color: var(--color-lavender-deep); }
+  .treat-step .step__title { font-size: 1.28rem; line-height: .98; text-transform: uppercase; letter-spacing: .02em; }
+  .treat-step .step__body { font-family: var(--font-sans); font-size: 1.05rem; }
+  .treat-steps .btn { margin-top: 2rem; }
+
+  .treat-faq .link-arrow { display: inline-block; margin-top: 1.7rem; }
 
   .treat-cta { padding-block: clamp(5rem, 9vw, 9rem); background: var(--color-deep-green); color: var(--color-cream); }
   .treat-cta__inner { display: grid; grid-template-columns: 6rem minmax(0, 1fr) minmax(280px, .72fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
@@ -149,7 +371,8 @@ const conditions = [
 
   @media (max-width: 980px) {
     .treat-hero-art { max-width: 680px; margin-inline: auto; }
-    .treat-intro__layout, .treat-approach__layout { grid-template-columns: 1fr; }
+    .treat-intro__layout, .treat-approach__layout, .treat-steps__layout { grid-template-columns: 1fr; }
+    .treat-steps__layout .section-head { position: static; }
     .treat-approach__art { max-width: 620px; }
     .treat-cta__inner { grid-template-columns: 5rem 1fr; }
     .treat-cta__inner > div:last-child { grid-column: 2; }
@@ -158,11 +381,14 @@ const conditions = [
   @media (max-width: 700px) {
     .treat-hero-art__anxious { width: 78%; left: -11%; }
     .treat-hero-art__happy { width: 58%; right: -8%; }
-    .condition-row { grid-template-columns: 3rem 3.5rem minmax(0, 1fr); align-items: start; }
+    .condition-row { grid-template-columns: 3rem 3.5rem minmax(0, 1fr); }
     .condition-row__index { font-size: 1.8rem; }
     .condition-row__mark { width: 44px; height: 44px; }
-    .condition-row > div { grid-column: 3; }
+    .condition-row h2 { margin-top: .3rem; }
+    .condition-row__content { grid-column: 3; }
     .treat-approach__art { min-height: 390px; }
+    .treat-step { grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; }
+    .treat-step .step__body { grid-column: 2; }
     .treat-cta__inner { grid-template-columns: 1fr; }
     .treat-cta__inner > img { width: 68px; }
     .treat-cta__inner > div:last-child { grid-column: auto; }

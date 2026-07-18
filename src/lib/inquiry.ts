@@ -1,17 +1,16 @@
 // Admissions inquiry form — ported from jtree-wp-theme/assets/js/form.js.
-// Submits to the live jtree-form-api (api.jtreehealth.com) and, on page-leave
-// after interaction, sends a no-PII "partial" beacon.
+// Submits to the live jtree-form-api (api.jtreehealth.com) only after the
+// visitor explicitly submits the form. Abandoned form contents are not sent.
 //
 // API contract (jtree-form-api/lib/validate.ts InquirySchema): a single `name`
 // field plus `email`/`phone`, matching the rendered input names directly.
 // Config comes from window.JTREE_CONFIG.
 
-type Cfg = { apiUrl?: string; partialApiUrl?: string; thankYouUrl?: string; turnstileSiteKey?: string };
+type Cfg = { apiUrl?: string; thankYouUrl?: string; turnstileSiteKey?: string };
 const w = window as unknown as { JTREE_CONFIG?: Cfg; turnstile?: any; crypto?: Crypto };
 
 const CONFIG: Cfg = w.JTREE_CONFIG || {};
 const API_URL = CONFIG.apiUrl || 'https://api.jtreehealth.com/api/inquiry';
-const PARTIAL_URL = CONFIG.partialApiUrl || API_URL.replace(/\/$/, '') + '/partial';
 const THANK_URL = CONFIG.thankYouUrl || '/thank-you/';
 const TURNSTILE_KEY = CONFIG.turnstileSiteKey || '';
 const SESSION_KEY = 'jth_session_id';
@@ -62,7 +61,19 @@ function init(form: HTMLFormElement) {
   }
   const utms = readUtms();
   try { sessionStorage.setItem(UTM_KEY, JSON.stringify(utms)); } catch {}
-  const referrer = (document.referrer || '').slice(0, 500);
+  // Preserve attribution without carrying query strings or fragments that may
+  // contain names, search terms, or other sensitive information.
+  const referrer = (() => {
+    if (!document.referrer) return '';
+    try {
+      const url = new URL(document.referrer);
+      url.search = '';
+      url.hash = '';
+      return url.toString().slice(0, 500);
+    } catch {
+      return '';
+    }
+  })();
 
   // UI helpers
   const showError = (field: string, msg: string) => {
@@ -84,37 +95,6 @@ function init(form: HTMLFormElement) {
     submit.classList.toggle('is-loading', busy);
     if (busy) submit.setAttribute('aria-busy', 'true'); else submit.removeAttribute('aria-busy');
   };
-
-  // Partial-capture — fires once, only after non-PII interaction, suppressed by submit.
-  let interacted = false, fullSubmitted = false, partialSent = false;
-  // Contact fields are included so an abandoned form is followable — whatever
-  // they entered (name/email/phone) before leaving is captured on the partial.
-  const PARTIAL_TRIGGERS = ['name', 'email', 'phone', 'teen_age', 'program_interest', 'best_time_to_call', 'how_did_you_hear', 'zip', 'insurance', 'notes'];
-  PARTIAL_TRIGGERS.forEach((name) => {
-    const el = form.querySelector('[name="' + name + '"]');
-    if (el) el.addEventListener('change', () => { interacted = true; });
-  });
-  function buildPartial() {
-    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
-    const payload: Record<string, string> = { session_id: sessionId };
-    PARTIAL_TRIGGERS.forEach((name) => { if (data[name]) payload[name] = data[name]; });
-    if (utms.utm_source) payload.utm_source = utms.utm_source;
-    if (utms.utm_medium) payload.utm_medium = utms.utm_medium;
-    if (utms.utm_campaign) payload.utm_campaign = utms.utm_campaign;
-    if (referrer) payload.referrer = referrer;
-    return payload;
-  }
-  function sendPartial() {
-    if (partialSent || fullSubmitted || !interacted) return;
-    partialSent = true;
-    const body = JSON.stringify(buildPartial());
-    try {
-      if (navigator.sendBeacon) { navigator.sendBeacon(PARTIAL_URL, new Blob([body], { type: 'application/json' })); return; }
-    } catch {}
-    try { fetch(PARTIAL_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body, keepalive: true }); } catch {}
-  }
-  window.addEventListener('pagehide', sendPartial);
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') sendPartial(); });
 
   // Full submission
   form.addEventListener('submit', async (e) => {
@@ -165,7 +145,6 @@ function init(form: HTMLFormElement) {
         body: JSON.stringify(payload),
       });
       if (res.ok) {
-        fullSubmitted = true;
         try { sessionStorage.setItem('jth_inquiry_done', '1'); } catch {}
         window.location.href = THANK_URL;
         return;

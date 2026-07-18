@@ -2,45 +2,40 @@
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 
-// Data-driven roster. Add, remove, or reorder cards here as hiring continues.
-// Bios are intentionally left as visible placeholders — do not fabricate them.
+// Data-driven roster. Add verified biographies and credentials only after each
+// team member has reviewed them.
 const leadership = [
   {
     name: 'Gabriela Forter',
     credentials: 'Founder & CEO',
     title: 'Leadership',
-    bioPlaceholder: 'Gaby will add a short bio and one personal detail she wants families to know.',
   },
 ];
 
 const clinicalTeam = [
   {
     name: 'Beth Bertram',
-    credentials: 'Licensed Therapist, DBT Certified',
+    credentials: 'Licensed Therapist',
     title: 'IOP Clinical Lead',
-    bioPlaceholder: 'Bio to come from Beth, or Gaby to draft.',
   },
   {
     name: 'Caitlyn Dowdy',
-    credentials: 'Licensed Therapist, DBT Certified',
+    credentials: 'Licensed Therapist',
     title: 'Clinical Director',
-    bioPlaceholder: 'Bio to come from Caitlyn, or Gaby to draft.',
   },
   {
     name: 'Grace Beasley',
     credentials: 'Licensed Therapist',
     title: 'Primary Therapist',
-    bioPlaceholder: 'Bio to come.',
   },
   {
     name: 'Alayna West',
     credentials: 'Licensed Therapist',
     title: 'Primary Therapist',
-    bioPlaceholder: 'Bio to come.',
   },
 ];
 
-// Build initials for the headshot placeholder from the member's name.
+// Build initials for the temporary portrait treatment from the member's name.
 const initials = (name) =>
   name
     .split(' ')
@@ -52,14 +47,13 @@ const initials = (name) =>
 ---
 <Base
   bodyClass="brand-page rollout-page"
-  title="Our Team — Joshua Tree Health"
-  description="Meet the licensed clinicians and staff at Joshua Tree Health. Adolescent PHP & IOP in Apex, NC, for teens ages 10–17."
+  title="Our Team | Joshua Tree Health"
+  description="Meet the licensed clinicians and staff at Joshua Tree Health, an adolescent PHP and IOP program in Apex, NC for ages 10–17."
 >
   <PageHero
-    eyebrow="Our team"
     art="happy"
     title="Meet our team."
-    sub="Licensed clinicians and staff who work with adolescents in behavioral health."
+    sub="The clinicians and staff responsible for assessment, treatment, and support at Joshua Tree Health."
     variant="green"
   />
 
@@ -68,7 +62,7 @@ const initials = (name) =>
     <div class="container-x">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Leadership</p>
-        <h2 class="section-title font-display" id="leadership-title">The people behind Joshua Tree.</h2>
+        <h2 class="section-title font-display" id="leadership-title">The people building the program.</h2>
       </div>
       <div class="grid-3 team-grid" data-reveal-group>
         {leadership.map((member) => (
@@ -79,8 +73,6 @@ const initials = (name) =>
             <h3 class="team-card__name font-display">{member.name}</h3>
             <p class="team-card__cred">{member.credentials}</p>
             <p class="team-card__title">{member.title}</p>
-            {/* PLACEHOLDER: bio to be supplied by the team. Do NOT fabricate a background, credentials, or biography. */}
-            <p class="team-card__bio"><em>{member.bioPlaceholder}</em></p>
           </article>
         ))}
       </div>
@@ -92,8 +84,8 @@ const initials = (name) =>
     <div class="container-x">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Clinical team</p>
-        <h2 class="section-title font-display" id="clinical-title">The clinicians in the room.</h2>
-        <p class="section-sub">Every member of our clinical team is licensed and trained in trauma-informed care. Family sessions are part of every treatment plan.</p>
+        <h2 class="section-title font-display" id="clinical-title">The clinicians your teen may work with.</h2>
+        <p class="section-sub">Our clinical team focuses on adolescent behavioral health. Admissions can walk you through who will be part of your teen’s assessment and care.</p>
       </div>
       <div class="grid-3 team-grid" data-reveal-group>
         {clinicalTeam.map((member) => (
@@ -104,8 +96,6 @@ const initials = (name) =>
             <h3 class="team-card__name font-display">{member.name}</h3>
             <p class="team-card__cred">{member.credentials}</p>
             <p class="team-card__title">{member.title}</p>
-            {/* PLACEHOLDER: bio to be supplied by the team. Do NOT fabricate a background, credentials, or biography. */}
-            <p class="team-card__bio"><em>{member.bioPlaceholder}</em></p>
           </article>
         ))}
       </div>
@@ -116,11 +106,11 @@ const initials = (name) =>
   <section class="section surface-green" aria-labelledby="team-cta-title">
     <div class="container-x">
       <div class="section-head section-head--center" data-reveal>
-        <h2 class="section-title font-display" id="team-cta-title">Start the conversation.</h2>
-        <p class="section-sub">One call is enough to find out whether Joshua Tree is the right fit. There's no pressure to enroll.</p>
+        <h2 class="section-title font-display" id="team-cta-title">Ask who will be part of your teen’s care.</h2>
+        <p class="section-sub">Admissions can explain who handles assessment, therapy, family communication, and treatment planning.</p>
       </div>
       <div class="cta-row" data-reveal data-reveal-delay="0.08">
-        <a class="btn btn--on-dark" href="/admissions">Start the Conversation <span class="btn__arrow">→</span></a>
+        <a class="btn btn--on-dark" href="/get-started">Start the conversation <span class="btn__arrow">→</span></a>
         <a class="btn btn--ghost-on-dark" href="tel:+19193355053">Call (919) 335-5053</a>
       </div>
     </div>

@@ -4,22 +4,23 @@ import PageHero from '../components/PageHero.astro';
 
 const next = [
   { n: '01', t: 'We read your note', b: 'Someone on our admissions team reads it personally.' },
-  { n: '02', t: 'We call you', b: 'Within one business day, at the number you gave us.' },
+  { n: '02', t: 'We call you', b: 'An admissions team member calls the number you provided.' },
   { n: '03', t: 'We find the fit', b: 'Together we figure out the right next step for your teen.' },
 ];
 ---
 <Base
   bodyClass="brand-page rollout-page"
-  title="Thank You — Joshua Tree Health"
-  description="Thanks for reaching out to Joshua Tree Health. We'll call you within one business day."
+  title="Thank you | Joshua Tree Health"
+  description="Thanks for reaching out to Joshua Tree Health. Our admissions team will review your request and contact you."
+  robots="noindex, follow"
 >
   <PageHero
     art="happy"
     eyebrow="Request received"
-    title="Thanks. We'll be in <em>touch</em>."
-    sub="We have your request, and someone from our admissions team will call you within one business day. Reaching out is often the hardest step, and you've taken it."
+    title="Your request is <em>in.</em>"
+    sub="An admissions team member will read what you sent and call the number you provided."
     primaryCta={{ label: 'Back to home', href: '/' }}
-    secondaryCta={{ label: 'Explore Programs', href: '/what-we-offer' }}
+    secondaryCta={{ label: 'Explore programs', href: '/what-we-offer' }}
   />
 
   <section class="section section--tight" aria-labelledby="next-title">
@@ -41,10 +42,10 @@ const next = [
 
   <section class="section" aria-labelledby="crisis-title">
     <div class="container-x">
-      <div class="callout surface-green" data-reveal>
+      <div class="callout surface-green">
         <div class="callout__text">
           <h2 id="crisis-title" class="section-title font-display">Need help right now?</h2>
-          <p class="section-sub">If your teen is in crisis and can't wait for our call, you don't have to wait either. Call or text 988 any time, day or night, or text HOME to 741741.</p>
+          <p class="section-sub">You don't have to wait for our call. If you or your teen is in crisis, call or text 988, or text HOME to 741741. Both are available any time, day or night.</p>
         </div>
         <a href="tel:988" class="btn btn--on-dark callout__cta">Call or text 988</a>
       </div>

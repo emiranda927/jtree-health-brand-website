@@ -1,0 +1,185 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+
+// TODO: VERIFY before strengthening any answer below (claim register, July 2026):
+// - Separate pre-teen (10–12) / teen (13–17) group tracks: pending. Do not promise separation.
+// - PHP exact hours and weekly day count: pending. Keep PHP schedule language general.
+// - In-network payer contracts: pending. Do not name insurers.
+// - Family-session cadence and Parent DBT Skills Group: pending. No fixed format or named group.
+// - Lead-therapist DBT certification: pending. No credential language.
+// - Dedicated-therapist continuity across individual/family/planning: pending.
+// - School coordination during PHP: unconfirmed in founder guide. No formal coordination promise.
+const faqGroups = [
+  {
+    label: 'About the program',
+    items: [
+      {
+        question: 'What ages do you serve?',
+        answer: 'We serve adolescents ages 10–17. If your child is close to either end of that range, call and ask; admissions can tell you quickly what is available.',
+      },
+      {
+        question: 'What do you treat?',
+        answer: 'Depression and low mood, anxiety and panic, trauma, emotional dysregulation, OCD and intrusive thoughts, ADHD and executive functioning challenges, autism with co-occurring anxiety or depression, and school avoidance. The What we treat page describes what each can look like day to day. If what you are seeing does not fit a neat category, call anyway.',
+      },
+      {
+        question: 'What is the difference between IOP and PHP?',
+        answer: 'IOP meets three days a week: Monday, Wednesday, and Friday, 3:30–6:30pm during the school year and 9am–12pm in summer. PHP runs during the day, with more days per week and more clinical contact; admissions will walk you through the current PHP schedule. Both are outpatient, and many teens step down from PHP into IOP as they stabilize.',
+      },
+      {
+        question: 'Do teens go home every evening?',
+        answer: 'Yes. IOP and PHP are both outpatient levels of care. Your teen sleeps at home every night, which is part of the design: skills learned in the program get practiced in real life the same day.',
+      },
+      {
+        question: 'Where are you located?',
+        answer: '800 W Williams St, Suite 203, Apex, NC 27502. Families come to us from across the Triangle, including Cary, Holly Springs, Fuquay-Varina, Raleigh, Chapel Hill, and Durham.',
+      },
+      {
+        question: 'Who will my teen be in group with?',
+        answer: 'Other adolescents in the program. Programming is developmentally appropriate across ages 10–17, and our admissions team will explain how groups are organized for your child’s age.',
+      },
+    ],
+  },
+  {
+    label: 'Getting started',
+    items: [
+      {
+        question: 'How do I know whether my teen needs IOP or PHP?',
+        answer: 'You don’t need to know before you call. We’ll ask about what’s been going on, and if it seems like a fit, we’ll schedule an assessment with one of our licensed therapists. The assessment determines the right level of care.',
+      },
+      {
+        question: 'Does my teen need a diagnosis to start?',
+        answer: 'No. During the assessment, our therapist will gather information about what’s been happening and how it’s affecting daily life. A diagnosis isn’t required to begin.',
+      },
+      {
+        question: 'How quickly can my teen start?',
+        answer: 'A typical start is three to five days from first contact. Timing depends on assessment scheduling and benefits verification, so admissions will confirm the date with you. There is currently no waitlist.',
+      },
+      {
+        question: 'What if my teen doesn’t want to come?',
+        answer: 'Many teens start there. Call us before you’ve figured that part out. We can help you think through how to approach it with them.',
+      },
+    ],
+  },
+  {
+    label: 'Insurance and cost',
+    items: [
+      {
+        question: 'What insurance do you accept?',
+        answer: 'We’ll verify your insurance benefits and explain expected costs before care begins. We do not accept Medicaid. Self-pay is available.',
+      },
+      {
+        question: 'Will we have out-of-pocket costs?',
+        answer: 'It depends on your plan and deductible; many families have some. Before your teen starts, we’ll verify your specific coverage and walk you through what to expect, so nothing at billing comes as a surprise. IOP and PHP services are generally HSA/FSA eligible.',
+      },
+    ],
+  },
+  {
+    label: 'Family involvement',
+    items: [
+      {
+        question: 'How involved will I be as a parent?',
+        answer: 'Family involvement is built into treatment, and family therapy is part of the program. Parents also build the same skills their teen is practicing, so the language at home matches the work in session. Admissions will explain what participation looks like for your family.',
+      },
+      {
+        question: 'Will I know how my teen is doing?',
+        answer: 'Yes. You’ll have regular communication with the treatment team throughout the program, and the team reviews progress with you in plain language.',
+      },
+    ],
+  },
+  {
+    label: 'The clinical program',
+    items: [
+      {
+        question: 'What is DBT?',
+        answer: 'Dialectical Behavior Therapy, a structured, skills-based approach built on a simple premise: a teen can be accepted exactly as they are and still work on changing. Teens practice four skill sets in sequence: mindfulness, distress tolerance, emotion regulation, and interpersonal effectiveness. Groups are led by licensed therapists, and skills are practiced in session so they hold up at home and at school.',
+      },
+      {
+        question: 'What is polyvagal-informed care?',
+        answer: 'An approach based on how the nervous system responds to stress and safety. In practice, it means helping teens notice what’s happening in their body before a reaction takes over, and building a felt sense of calm alongside thinking-based coping skills.',
+      },
+      {
+        question: 'Will my teen have the same therapist throughout?',
+        answer: 'Your teen will work with a consistent treatment team that coordinates the overall plan, and individual therapy happens alongside the group program. Admissions can describe how individual sessions and therapist assignment work in the current program.',
+      },
+    ],
+  },
+  {
+    label: 'School and after the program',
+    items: [
+      {
+        question: 'Can my teen stay in school during the program?',
+        answer: 'During the school year, IOP meets after school on Monday, Wednesday, and Friday, so most teens stay enrolled and keep attending. PHP runs during the day, and school looks different for those weeks; our team can help you plan the conversation with your teen’s school.',
+      },
+      {
+        question: 'What happens when the program ends?',
+        answer: 'Discharge planning starts during treatment. The team works with your family and, when authorized, outside providers to make sure there’s a clear next step in place. Your teen doesn’t leave without a plan.',
+      },
+    ],
+  },
+];
+
+const allFaqs = faqGroups.flatMap((group) => group.items);
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: allFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
+---
+
+<Base
+  bodyClass="brand-page"
+  title="Teen PHP & IOP FAQs | Joshua Tree Health"
+  description="The questions parents ask most about teen IOP and PHP in Apex, NC: schedules, insurance, family involvement, and how to get started."
+  jsonLd={faqSchema}
+>
+  <PageHero
+    title="Questions before the <em>first call.</em>"
+    sub="Clear answers about schedules, insurance, family involvement, and what happens after you reach out."
+    art="session"
+    primaryCta={{ label: 'Get started', href: '/get-started' }}
+    secondaryCta={{ label: 'Call (919) 335-5053', href: 'tel:+19193355053' }}
+  />
+
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <h2 class="section-title font-display" id="faq-title">What you may want to know first.</h2>
+      </div>
+      {faqGroups.map((group) => (
+        <div class="faq-group" data-reveal>
+          <h3 class="eyebrow faq-group__label">{group.label}</h3>
+          <div class="faq">
+            {group.items.map((faq) => (
+              <details class="faq__item">
+                <summary>{faq.question}</summary>
+                <div class="faq__answer"><p>{faq.answer}</p></div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section surface-cream-deep" aria-labelledby="faq-cta-title">
+    <div class="container-x prose" data-reveal>
+      <h2 id="faq-cta-title">Still have questions?</h2>
+      <p>Call and ask. If you would rather start in writing, the Get started page has a short form, and someone from our team will get back to you promptly.</p>
+      <div class="cta-row">
+        <a class="btn" href="tel:+19193355053">Call (919) 335-5053</a>
+        <a class="btn btn--ghost" href="/get-started">Get started</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .faq-group { margin-top: 2.6rem; }
+  .faq-group__label { margin: 0 0 .9rem; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 1.8rem; }
+</style>

@@ -2,19 +2,18 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 
-const cities = ['Apex', 'Cary', 'Raleigh', 'Chapel Hill', 'Durham'];
+const cities = ['Apex', 'Cary', 'Raleigh', 'Chapel Hill', 'Durham', 'Fuquay-Varina', 'Holly Springs'];
 ---
 <Base
   bodyClass="brand-page rollout-page"
-  title="Service Area — Joshua Tree Health"
-  description="Joshua Tree Health is in Apex, NC and serves adolescents ages 10–17 across the greater Triangle — Apex, Cary, Raleigh, Chapel Hill, Durham, and surrounding communities."
+  title="Service Area | Joshua Tree Health"
+  description="Adolescent IOP and PHP in Apex, NC, serving families across the Triangle: Apex, Cary, Raleigh, Holly Springs, Fuquay-Varina, Chapel Hill, and Durham."
 >
   <PageHero
-    eyebrow="Apex, North Carolina"
     art="desert"
-    title="Who we serve."
-    sub="Joshua Tree Health is located in Apex, NC and serves adolescents ages 10–17 across the greater Triangle area, including Apex, Cary, Raleigh, Chapel Hill, Durham, and surrounding communities."
-    primaryCta={{ label: 'Start the Conversation', href: '/admissions' }}
+    title="Care in Apex for families across the Triangle."
+    sub="Joshua Tree Health serves adolescents ages 10–17 at our Apex location. Families travel to us from Cary, Raleigh, Holly Springs, Fuquay-Varina, Chapel Hill, Durham, and nearby communities."
+    primaryCta={{ label: 'Start the conversation', href: '/get-started' }}
   />
 
   <!-- ===== VISIT / MAP ===== -->
@@ -28,7 +27,7 @@ const cities = ['Apex', 'Cary', 'Raleigh', 'Chapel Hill', 'Durham'];
             800 West Williams St, STE 203<br />
             Apex, NC 27502
           </address>
-          <p class="section-sub">Our program is based in Apex, with parking on site. Families travel to us from across the Raleigh, Durham, and Chapel Hill area.</p>
+          <p class="section-sub">Our program is based in Apex, with parking on site. Families travel to us from across Wake County and the Raleigh, Durham, and Chapel Hill area.</p>
           <div class="location__actions">
             <a class="btn btn--ghost" href="https://maps.google.com/?q=800+West+Williams+St+STE+203+Apex+NC+27502" target="_blank" rel="noopener">Get directions <span class="btn__arrow">→</span></a>
             <a class="link-arrow" href="tel:+19193355053">(919) 335-5053</a>

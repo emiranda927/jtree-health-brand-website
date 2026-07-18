@@ -1,0 +1,103 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+
+const skills = [
+  { title: 'Mindfulness', body: 'Paying attention to the present moment, including thoughts, feelings, and body sensations, without judgment. Mindfulness comes first because it makes the other skills possible. It is what lets a teen pause before reacting.' },
+  { title: 'Distress tolerance', body: 'Getting through a crisis without making it worse. When emotions are overwhelming, distress tolerance gives a teen a next action that can keep the moment from creating more problems.' },
+  { title: 'Emotional regulation', body: 'Understanding how emotions work and developing the ability to influence them. Teens learn to identify what they are feeling, understand what is driving it, and shift their emotional state when that is what the situation calls for.' },
+  { title: 'Interpersonal effectiveness', body: 'Navigating relationships without losing yourself or damaging the connection. This includes how to ask for what you need, how to say no, and how to keep your self-respect across different kinds of relationships.' },
+];
+
+const addresses = [
+  'Anxiety and panic',
+  'Depression and low mood',
+  'Emotional dysregulation',
+  'Self-harm',
+  'Suicidal ideation',
+  'ADHD and executive functioning challenges',
+  'Interpersonal conflict and relationship difficulties',
+  'Trauma responses, in combination with trauma-informed care',
+];
+---
+
+<Base
+  bodyClass="brand-page"
+  title="DBT for Teens in PHP & IOP | Joshua Tree Health"
+  description="How DBT works at Joshua Tree Health in Apex, NC: four skill sets taught in sequence and practiced in session in our adolescent PHP and IOP."
+>
+  <PageHero
+    title="Dialectical Behavior Therapy <em>(DBT).</em>"
+    sub="The clinical foundation of our program. A structured therapy developed for people who feel emotions intensely and have difficulty regulating them."
+    art="approach"
+    primaryCta={{ label: 'Start the conversation', href: '/get-started' }}
+  />
+
+  <section class="section" aria-labelledby="dbt-title">
+    <div class="container-x prose" data-reveal>
+      <h2 id="dbt-title">What is DBT?</h2>
+      <p>DBT is a structured therapy developed for people who experience emotions intensely and have difficulty regulating them. Psychologist Dr. Marsha Linehan created the model, and researchers have studied adaptations of it for adolescents, including teens at high risk for self-harm and suicide.</p>
+      <p>At its core, DBT holds two things at once: the idea that you are doing the best you can given your history and circumstances, and the idea that you can and need to change. That is the dialectic in DBT. Two things that seem opposite can both be true.</p>
+    </div>
+  </section>
+
+  <section class="section surface-cream-deep" aria-labelledby="skills-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Four skill sets</p>
+        <h2 class="section-title font-display" id="skills-title">What teens learn in DBT.</h2>
+      </div>
+      <div class="grid-2" data-reveal-group>
+        {skills.map((skill) => (
+          <article class="info-card" data-reveal-item><h3>{skill.title}</h3><p>{skill.body}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="fit-title">
+    <div class="container-x prose" data-reveal>
+      <h2 id="fit-title">Why DBT fits adolescents.</h2>
+      <p>DBT begins with the reality of intense emotion. It gives teens ways to understand what is happening and choose what to do next. That can be useful for teens who feel things deeply or rely on coping patterns that once made sense and now create more problems.</p>
+      <p>Our curriculum teaches the four skill sets in sequence. Teens learn with licensed therapists, practice with peers, and reinforce the skills through experiential work. The point is for those skills to be usable outside the program.</p>
+      <!-- TODO: VERIFY the exact DBT credential held by each lead therapist before publishing any certification language. Until confirmed, describe delivery (skills practiced in session, groups led by licensed therapists) rather than credentials. -->
+    </div>
+  </section>
+
+  <section class="section surface-cream-deep" aria-labelledby="addresses-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Common presentations</p>
+        <h2 class="section-title font-display" id="addresses-title">Where DBT skills may help.</h2>
+        <p class="section-sub">A clinical assessment determines whether DBT and this level of care fit a particular teen. The skills are commonly used with:</p>
+      </div>
+      <ul class="checklist" data-reveal>{addresses.map((item) => <li>{item}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="dbt-sources-title">
+    <div class="container-x prose" data-reveal>
+      <h2 id="dbt-sources-title">Research behind the model</h2>
+      <p>Research on structured DBT for adolescents includes randomized trials involving young people with repeated self-harm and suicide risk. That research supports the model for specific clinical populations; it does not guarantee an individual outcome.</p>
+      <p><a href="https://pubmed.ncbi.nlm.nih.gov/29926087/" target="_blank" rel="noopener">Randomized clinical trial of DBT for adolescents at high risk for suicide (PubMed)</a></p>
+      <p><a class="link-arrow" href="/what-we-offer/our-approach">← Return to our full approach</a></p>
+    </div>
+  </section>
+
+  <section class="section surface-green" aria-labelledby="dbt-cta-title">
+    <div class="container-x">
+      <div class="section-head section-head--center" data-reveal>
+        <h2 class="section-title font-display" id="dbt-cta-title">Questions about how DBT works in our program?</h2>
+        <p class="section-sub">Call and ask. We can explain what skills practice looks like inside the program.</p>
+        <div class="cta-row">
+          <a class="btn btn--on-dark" href="/get-started">Start the conversation <span class="btn__arrow">→</span></a>
+          <a class="btn btn--ghost-on-dark" href="tel:+19193355053">Call (919) 335-5053</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.6rem; }
+</style>

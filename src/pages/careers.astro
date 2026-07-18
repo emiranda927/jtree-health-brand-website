@@ -4,34 +4,36 @@ import PageHero from '../components/PageHero.astro';
 
 const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 
-const why = [
-  { title: 'Clinical excellence, no bureaucracy', body: 'Small caseloads, the autonomy to make clinical calls, and the time to do the work well.' },
-  { title: 'A team that stays', body: 'Low turnover, strong support, and colleagues who chose this work on purpose.' },
-  { title: 'Integrated care', body: 'Clinicians who work as one team, in the same conversation every week, not passing teens between silos.' },
-  { title: 'Mission you can feel', body: 'Every day is in service of teens and families when it matters most. That’s the whole job.' },
+// Keep credential, training, supervision, and internship promises out of public
+// copy until each is confirmed in docs/CLAIM_REGISTER.md.
+const offer = [
+  { title: 'A defined treatment model', body: 'The program is organized around DBT skills, polyvagal-informed care, trauma-informed practice, and family participation. Clinicians should know what the model asks of them and why.' },
+  { title: 'Adolescents are the focus', body: 'The work centers on ages 10–17. We value clinicians who understand adolescent development and can speak plainly with teens and families.' },
+  { title: 'Questions are part of the work', body: 'Good clinical judgment depends on asking when something is unclear. We want people who seek supervision, use evidence carefully, and stay open to changing course.' },
+  { title: 'A focused team', body: 'We are building a team where people know one another’s work and take shared responsibility for the quality of care.' },
 ];
 ---
 <Base
   bodyClass="brand-page rollout-page"
   title="Careers | Joshua Tree Health"
-  description="Join Joshua Tree Health in Apex, NC. Clinical excellence without bureaucracy, integrated care, and a team that stays. We're always looking for great clinicians."
+  description="Clinical careers at Joshua Tree Health, an adolescent PHP and IOP program in Apex, NC serving ages 10–17. Learn about the team and apply."
 >
   <PageHero
     art="happy"
-    eyebrow="Careers"
-    title="Do the work that matters.<br>Stay because <em>it does</em>."
-    sub="We're building the kind of adolescent mental health practice we'd want for our own families. If that's the work you got into this for, let's talk."
+    title="Do serious clinical work with people who take it <em>seriously.</em>"
+    sub="We are looking for clinicians who can bring rigor, steadiness, and clear thinking to adolescent care."
     primaryCta={{ label: 'Apply now', href: '#apply' }}
   />
 
-  <section class="section" aria-labelledby="why-title">
+  <section class="section" aria-labelledby="offer-title">
     <div class="container-x">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">Why JTree</p>
-        <h2 class="section-title font-display" id="why-title">A practice built for clinicians, too.</h2>
+        <p class="eyebrow">Working here</p>
+        <h2 class="section-title font-display" id="offer-title">The kind of practice we are building.</h2>
+        <p class="section-sub">Joshua Tree Health is an adolescent PHP and IOP program in Apex, NC. We work with ages 10–17 and organize care around a clear clinical model. We are interested in clinicians who can be warm without becoming vague and structured without becoming rigid.</p>
       </div>
       <div class="grid-2" data-reveal-group>
-        {why.map((w) => (
+        {offer.map((w) => (
           <article class="info-card info-card--hover" data-reveal-item>
             <h3 class="info-card__title">{w.title}</h3>
             <p class="info-card__body">{w.body}</p>
@@ -46,8 +48,8 @@ const why = [
       <div class="careers-apply__intro" data-reveal>
         <p class="eyebrow">Apply</p>
         <h2 class="section-title font-display" id="apply-title">Tell us about you.</h2>
-        <p class="section-sub">Even if you don't see a posted role, we'd love to hear from you. A person reads every application, not a bot.</p>
-        <p class="form__note" style="margin-top:1rem;">Prefer email? <a href="mailto:careers@jtreehealth.com">careers@jtreehealth.com</a></p>
+        <p class="section-sub">If you don't see an open role, we still want to hear from you. Send a resume and a short note about your background and interests, and we'll keep it on file for future openings.</p>
+        <p class="form__note" style="margin-top:1rem;">Prefer email? <a href="mailto:hello@jtreehealth.com">hello@jtreehealth.com</a></p>
       </div>
 
       <div class="careers-apply__formwrap card" data-reveal data-reveal-delay="0.08">
