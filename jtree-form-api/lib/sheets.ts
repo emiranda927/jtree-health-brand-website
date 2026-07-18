@@ -117,15 +117,36 @@ export async function countRecentLeads(windowMs: number): Promise<number> {
     range: "Leads!B:K",
   });
 
-  const rows = result.data.values ?? [];
-  const cutoff = new Date(Date.now() - windowMs).toISOString();
+  return countRecentLeadRows(result.data.values ?? [], windowMs, Date.now());
+}
+
+/**
+ * Pure counting logic over Leads!B:K rows, exported for tests.
+ *
+ * Timestamps must go through Date.parse, not string comparison: a cell that
+ * has been touched by hand (or reformatted by Sheets) comes back from the API
+ * as a locale string like "7/15/2026 10:30:00", and a lexicographic compare
+ * against an ISO cutoff ("7..." > "2026-...") would count it as recent
+ * forever — permanently silencing the zero-lead alert. Unparseable
+ * timestamps count as not-recent.
+ */
+export function countRecentLeadRows(
+  rows: unknown[][],
+  windowMs: number,
+  nowMs: number
+): number {
+  const cutoffMs = nowMs - windowMs;
   let count = 0;
 
   for (const row of rows) {
     const ts = row[0];
     const status = row[9]; // K column relative to B = index 9
     const isLead = status === "lead" || status === undefined || status === "";
-    if (isLead && typeof ts === "string" && ts >= cutoff) {
+    if (!isLead || typeof ts !== "string") {
+      continue;
+    }
+    const parsedMs = Date.parse(ts);
+    if (!Number.isNaN(parsedMs) && parsedMs >= cutoffMs) {
       count++;
     }
   }

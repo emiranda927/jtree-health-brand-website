@@ -42,7 +42,7 @@ After first deploy, point `api.jtreehealth.com` at Vercel via Cloudflare DNS (CN
 | `RITTEN_API_KEY` | optional | Bearer token sent as `Authorization: Bearer <key>`. |
 | `RESEND_API_KEY` | **required** | Resend API key for admissions notifications. |
 | `ADMISSIONS_EMAIL` | optional | Recipient (default `admissions@jtreehealth.com`). |
-| `OWNER_ALERT_EMAIL` | required for watchdog | Recipient for "no leads in 24h" alerts. |
+| `OWNER_ALERT_EMAIL` | required for watchdog | Recipient for "no leads in 24h" alerts. The watchdog cron run **fails (500)** if this is unset — it never silently skips the alert. |
 | `GOOGLE_SHEETS_ID` | **required** | Spreadsheet ID for the Sheets fallback. |
 | `GOOGLE_SERVICE_ACCOUNT_JSON` | **required** | Service account JSON, stringified. Must have edit access to the sheet. |
 | `ALLOWED_ORIGIN` | **required** | CORS origin — set to `https://jtreehealth.com` in production. |
@@ -74,3 +74,12 @@ The `lib/ritten.ts` client posts a JSON payload as a "contact" to `RITTEN_API_UR
 ## Watchdog cron
 
 `vercel.json` schedules `GET /api/watchdog` at `0 22 * * 1-5` (UTC = 6 PM ET, Mon–Fri). It counts rows in the Sheets `Leads` tab over the past 24h and emails `OWNER_ALERT_EMAIL` if zero — protecting against silent breakage of both delivery paths.
+
+Failure semantics (hardened 2026-07-18 after alerts were silently swallowed during the form outage):
+
+- Timestamps are compared via `Date.parse`, not string order. A hand-edited or Sheets-reformatted `submitted_at` cell comes back as `7/15/2026`-style text, and the old lexicographic compare counted it as "recent" forever — one such row suppressed every alert. Keep column B as plain-text ISO strings; the parser now tolerates formatted dates but counts them at their real age.
+- Missing `OWNER_ALERT_EMAIL` / `RESEND_API_KEY` makes the run **fail (500)** instead of reporting success without sending anything.
+- An unreadable sheet sends a "watchdog cannot read the leads sheet" alert (lead volume is unmonitored in that state), then 500s.
+- The JSON response includes `alerted: true|false`, so an external monitor can assert on it.
+
+Note: Vercel crons on the Hobby plan fire once per day within roughly an hour after the scheduled time, and cron runs are only visible in the dashboard (project → Settings → Cron Jobs). A run that 200s with `alerted:false` sent no email by design.
