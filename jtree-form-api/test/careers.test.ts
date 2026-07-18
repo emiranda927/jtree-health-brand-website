@@ -59,10 +59,19 @@ describe("CareerApplicationSchema validation", () => {
     expect(result.success).toBe(false);
   });
 
-  it("detects honeypot content", () => {
+  it("accepts a filled honeypot so the handler can fake success", () => {
     const result = CareerApplicationSchema.safeParse({
       ...validApplication,
       hp_field: "bot-filled",
+    });
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.hp_field).toBe("bot-filled");
+  });
+
+  it("caps hp_field at 2048 chars", () => {
+    const result = CareerApplicationSchema.safeParse({
+      ...validApplication,
+      hp_field: "x".repeat(2049),
     });
     expect(result.success).toBe(false);
   });

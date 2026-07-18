@@ -106,8 +106,19 @@ describe("InquirySchema validation", () => {
     expect(result.success).toBe(true);
   });
 
-  it("detects honeypot field with content", () => {
+  it("accepts a filled honeypot so the handler can fake success", () => {
+    // A filled honeypot must PASS validation — the handler catches it and
+    // returns a silent 200. A schema rejection would 422 naming the field.
     const input = { ...validInput, hp_field: "bot-filled-this" };
+    const result = InquirySchema.safeParse(input);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.hp_field).toBe("bot-filled-this");
+    }
+  });
+
+  it("caps hp_field at 2048 chars", () => {
+    const input = { ...validInput, hp_field: "x".repeat(2049) };
     const result = InquirySchema.safeParse(input);
     expect(result.success).toBe(false);
   });

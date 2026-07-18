@@ -84,10 +84,19 @@ describe("PartialInquirySchema validation", () => {
     expect(result.success).toBe(false);
   });
 
-  it("detects honeypot content", () => {
+  it("accepts a filled honeypot so the handler can silently drop it", () => {
     const result = PartialInquirySchema.safeParse({
       session_id: "sid_test",
       hp_field: "bot",
+    });
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.hp_field).toBe("bot");
+  });
+
+  it("caps hp_field at 2048 chars", () => {
+    const result = PartialInquirySchema.safeParse({
+      session_id: "sid_test",
+      hp_field: "x".repeat(2049),
     });
     expect(result.success).toBe(false);
   });

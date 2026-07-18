@@ -90,7 +90,10 @@ export const InquirySchema = z.object({
     .max(2048, "Turnstile token too long")
     .optional(),
 
-  hp_field: z.string().max(0, "Invalid submission").optional().default(""),
+  // Honeypot. Deliberately loose — a filled honeypot must PASS validation so
+  // the handler can answer with a fake success. Rejecting it here would 422
+  // with the field name and tip the bot off.
+  hp_field: z.string().max(2048).optional().default(""),
 });
 
 export type InquiryInput = z.input<typeof InquirySchema>;
@@ -134,7 +137,8 @@ export const PartialInquirySchema = z.object({
   utm_campaign: z.string().max(100).optional(),
   referrer: z.string().max(500).optional(),
 
-  hp_field: z.string().max(0).optional().default(""),
+  // Loose on purpose — see InquirySchema.hp_field.
+  hp_field: z.string().max(2048).optional().default(""),
 });
 
 export type PartialInquiryInput = z.input<typeof PartialInquirySchema>;
@@ -190,7 +194,8 @@ export const CareerApplicationSchema = z.object({
     .refine((val) => val === true, "Consent to contact is required"),
 
   cf_turnstile_response: z.string().max(2048).optional(),
-  hp_field: z.string().max(0).optional().default(""),
+  // Loose on purpose — see InquirySchema.hp_field.
+  hp_field: z.string().max(2048).optional().default(""),
 });
 
 export type CareerApplicationInput = z.input<typeof CareerApplicationSchema>;
