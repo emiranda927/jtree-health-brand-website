@@ -23,6 +23,14 @@ function getClientIp(req: VercelRequest): string {
   return req.socket?.remoteAddress ?? "unknown";
 }
 
+// Shared by the real success path AND the honeypot branch — the two responses
+// must stay byte-identical so a bot can't tell a swallowed submission from a
+// delivered one.
+const SUCCESS_BODY = {
+  success: true,
+  message: "Thanks — we'll be in touch.",
+};
+
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse
@@ -66,7 +74,7 @@ export default async function handler(
 
   if (data.hp_field && data.hp_field.length > 0) {
     logger.info("Career honeypot triggered");
-    res.status(200).json({ success: true });
+    res.status(200).json(SUCCESS_BODY);
     return;
   }
 
@@ -102,8 +110,5 @@ export default async function handler(
     return;
   }
 
-  res.status(200).json({
-    success: true,
-    message: "Thanks — we'll be in touch.",
-  });
+  res.status(200).json(SUCCESS_BODY);
 }
