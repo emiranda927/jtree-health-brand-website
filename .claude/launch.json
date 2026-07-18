@@ -6,6 +6,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["serve", "-p", "3456", "/Users/emiranda/Projects/jtree-health-brand/website/preview"],
       "port": 3456
+    },
+    {
+      "name": "jtree-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 4321
     }
   ]
 }
