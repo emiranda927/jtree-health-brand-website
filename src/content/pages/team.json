@@ -1,0 +1,53 @@
+{
+  "seo": {
+    "title": "Our Team | Joshua Tree Health",
+    "description": "Meet the licensed clinicians and staff at Joshua Tree Health, an adolescent PHP and IOP program in Apex, NC for ages 10–17."
+  },
+  "hero": {
+    "title": "Meet our team.",
+    "sub": "The clinicians and staff responsible for assessment, treatment, and support at Joshua Tree Health."
+  },
+  "leadership": {
+    "eyebrow": "Leadership",
+    "title": "The people building the program.",
+    "members": [
+      {
+        "name": "Gabriela Forter",
+        "credentials": "Founder & CEO",
+        "title": "Leadership"
+      }
+    ]
+  },
+  "clinical": {
+    "eyebrow": "Clinical team",
+    "title": "The clinicians your teen may work with.",
+    "intro": "Our clinical team focuses on adolescent behavioral health. Admissions can walk you through who will be part of your teen’s assessment and care.",
+    "members": [
+      {
+        "name": "Beth Bertram",
+        "credentials": "Licensed Therapist",
+        "title": "IOP Clinical Lead"
+      },
+      {
+        "name": "Caitlyn Dowdy",
+        "credentials": "Licensed Therapist",
+        "title": "Clinical Director"
+      },
+      {
+        "name": "Grace Beasley",
+        "credentials": "Licensed Therapist",
+        "title": "Primary Therapist"
+      },
+      {
+        "name": "Alayna West",
+        "credentials": "Licensed Therapist",
+        "title": "Primary Therapist"
+      }
+    ]
+  },
+  "closing": {
+    "title": "Ask who will be part of your teen’s care.",
+    "body": "Admissions can explain who handles assessment, therapy, family communication, and treatment planning.",
+    "primaryCta": "Start the conversation"
+  }
+}

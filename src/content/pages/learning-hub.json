@@ -1,0 +1,45 @@
+{
+  "seo": {
+    "title": "Learning Hub | Joshua Tree Health",
+    "description": "Plain-language resources on teen mental health, PHP, IOP, insurance, admissions, and crisis support from Joshua Tree Health."
+  },
+  "hero": {
+    "eyebrow": "Learning hub",
+    "title": "Start with what you need to know.",
+    "sub": "Program details, insurance help, admissions steps, and crisis resources in plain language.",
+    "primaryCta": "Start the Conversation"
+  },
+  "resources": {
+    "eyebrow": "Start here",
+    "title": "The questions families bring first.",
+    "intro": "Choose the question in front of you. Each page gives a direct answer and a clear next step.",
+    "items": [
+      {
+        "title": "What we treat",
+        "body": "Observable signs of anxiety, depression, ADHD, trauma, school avoidance, and other concerns families bring us.",
+        "href": "/what-we-treat"
+      },
+      {
+        "title": "Insurance, explained",
+        "body": "What in-network means, how PHP and IOP are billed, and the exact questions to ask your insurer before care begins.",
+        "href": "/insurance"
+      },
+      {
+        "title": "Crisis resources",
+        "body": "If you or your teen is in crisis, here are the numbers to call or text right now, and what to do next.",
+        "href": "/crisis"
+      },
+      {
+        "title": "How admissions works",
+        "body": "What happens when you reach out, what the first call is like, and what to have ready. No commitment, no pressure.",
+        "href": "/get-started"
+      }
+    ],
+    "itemCta": "Read more →"
+  },
+  "closing": {
+    "title": "Would it help to just talk it through?",
+    "body": "You don't have to read your way to an answer. One call is enough to find out whether Joshua Tree is the right fit for your teen.",
+    "primaryCta": "Start the Conversation"
+  }
+}

@@ -87,7 +87,8 @@ caching + security headers. Set the production domain to `www.jtreehealth.com`
 
 ## Roadmap (not yet done)
 
-- **TinaCMS** — planned, so non-developers can edit copy/stats/images. Not yet wired.
+- **Pages CMS pilot** — Home, About, Team, and Learning Hub now use typed, Git-backed content files. See `docs/CMS_TEAM_GUIDE.md` for the team workflow.
+- Expand the CMS to the remaining service and admissions pages after the pilot workflow is approved.
 - More photography across inner pages (currently illustration + type led).
 
 ## Accessibility & performance

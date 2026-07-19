@@ -1,0 +1,723 @@
+media:
+  input: public/uploads
+  output: /uploads
+  categories: [image]
+  extensions: [png, jpg, jpeg, webp, svg]
+  rename: safe
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      update: "content: update {path} via Pages CMS"
+
+components:
+  seo:
+    type: object
+    label: Search and sharing
+    description: Keep titles specific and descriptions useful. Canonicals, robots rules, and structured data remain managed in code.
+    fields:
+      - name: title
+        label: Page title
+        type: string
+        required: true
+        options:
+          minlength: 20
+          maxlength: 70
+      - name: description
+        label: Search description
+        type: text
+        required: true
+        options:
+          minlength: 50
+          maxlength: 170
+
+  text_pair:
+    type: object
+    fields:
+      - name: title
+        label: Heading
+        type: string
+        required: true
+      - name: body
+        label: Supporting copy
+        type: text
+        required: true
+
+  team_member:
+    type: object
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: credentials
+        label: Credentials or role
+        type: string
+        required: true
+        description: Publish licenses and credentials only after the person has confirmed them.
+      - name: title
+        label: Program title
+        type: string
+        required: true
+
+content:
+  - name: pilot_pages
+    label: Website copy pilot
+    type: group
+    items:
+      - name: home
+        label: Homepage
+        type: file
+        path: src/content/pages/home.json
+        format: json
+        operations:
+          create: false
+          rename: false
+          delete: false
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            label: Opening section
+            type: object
+            fields:
+              - name: lineOne
+                label: Headline line 1
+                type: string
+                required: true
+              - name: lineTwo
+                label: Headline line 2
+                type: string
+                required: true
+              - name: lineThree
+                label: Headline line 3
+                type: string
+                required: true
+              - name: ledeOne
+                label: Introduction line 1
+                type: text
+                required: true
+              - name: ledeTwo
+                label: Introduction line 2
+                type: text
+                required: true
+              - name: primaryCta
+                label: Primary button label
+                type: string
+                required: true
+              - name: secondaryCta
+                label: Secondary button label
+                type: string
+                required: true
+          - name: trustFacts
+            label: Verified program facts
+            type: string
+            list:
+              min: 4
+              max: 4
+            readonly: true
+            description: These are locked in the editor because changes require operational verification.
+          - name: manifesto
+            label: Why structured care
+            type: object
+            fields:
+              - name: title
+                label: Heading
+                type: text
+                required: true
+              - name: paragraphs
+                label: Paragraphs
+                type: text
+                required: true
+                list:
+                  min: 3
+                  max: 3
+              - name: primaryCta
+                label: Primary button label
+                type: string
+                required: true
+              - name: secondaryCta
+                label: Secondary link label
+                type: string
+                required: true
+          - name: pathways
+            label: What brings families to us
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: cardCta
+                label: Card link label
+                type: string
+                required: true
+              - name: allCta
+                label: Closing link label
+                type: string
+                required: true
+              - name: conditions
+                label: Conditions
+                component: text_pair
+                list:
+                  min: 6
+                  max: 6
+                  collapsible:
+                    collapsed: true
+                    summary: "{title}"
+          - name: programs
+            label: Program overview
+            type: object
+            description: Clinical Director review is required for changes to schedules, services, program intensity, or insurance language.
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: intro
+                label: Introduction
+                type: text
+                required: true
+              - name: php
+                label: PHP card
+                type: object
+                fields:
+                  - name: tag
+                    label: Program name
+                    type: string
+                    required: true
+                  - name: title
+                    label: Heading
+                    type: string
+                    required: true
+                  - name: schedule
+                    label: Schedule summary
+                    type: string
+                    required: true
+                  - name: body
+                    label: Description
+                    type: text
+                    required: true
+                  - name: features
+                    label: Included services
+                    type: string
+                    required: true
+                    list:
+                      min: 1
+                      max: 8
+                  - name: cta
+                    label: Link label
+                    type: string
+                    required: true
+              - name: iop
+                label: IOP card
+                type: object
+                fields:
+                  - name: tag
+                    label: Program name
+                    type: string
+                    required: true
+                  - name: title
+                    label: Heading
+                    type: string
+                    required: true
+                  - name: schedule
+                    label: Schedule summary
+                    type: string
+                    required: true
+                  - name: body
+                    label: Description
+                    type: text
+                    required: true
+                  - name: features
+                    label: Included services
+                    type: string
+                    required: true
+                    list:
+                      min: 1
+                      max: 8
+                  - name: cta
+                    label: Link label
+                    type: string
+                    required: true
+              - name: insuranceNote
+                label: Insurance note
+                type: text
+                required: true
+          - name: measure
+            label: How progress is discussed
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: intro
+                label: Introduction
+                type: text
+                required: true
+              - name: points
+                label: Progress points
+                component: text_pair
+                list:
+                  min: 3
+                  max: 3
+                  collapsible:
+                    collapsed: true
+                    summary: "{title}"
+              - name: cta
+                label: Link label
+                type: string
+                required: true
+          - name: process
+            label: Admissions steps
+            type: object
+            description: Do not add response-time or start-time promises unless operations has verified them.
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: steps
+                label: Steps
+                component: text_pair
+                list:
+                  min: 3
+                  max: 3
+                  collapsible:
+                    collapsed: true
+                    summary: "{title}"
+          - name: location
+            label: Location introduction
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: intro
+                label: Introduction
+                type: text
+                required: true
+              - name: directionsCta
+                label: Directions button label
+                type: string
+                required: true
+          - name: closing
+            label: Closing invitation
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: body
+                label: Supporting copy
+                type: text
+                required: true
+              - name: primaryCta
+                label: Button label
+                type: string
+                required: true
+
+      - name: about
+        label: About Joshua Tree Health
+        type: file
+        path: src/content/pages/about.json
+        format: json
+        operations:
+          create: false
+          rename: false
+          delete: false
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            label: Opening section
+            type: object
+            fields:
+              - name: title
+                label: Headline
+                type: string
+                required: true
+              - name: emphasis
+                label: Emphasized final phrase
+                type: string
+                required: true
+              - name: sub
+                label: Introduction
+                type: text
+                required: true
+              - name: primaryCta
+                label: Primary button label
+                type: string
+                required: true
+              - name: secondaryCta
+                label: Secondary button label
+                type: string
+                required: true
+              - name: facts
+                label: Verified facts
+                component: text_pair
+                readonly: true
+                list:
+                  min: 3
+                  max: 3
+                  collapsible:
+                    collapsed: true
+                    summary: "{title}"
+          - name: mission
+            label: Why the Joshua tree
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: lead
+                label: Opening statement
+                type: text
+                required: true
+              - name: paragraphs
+                label: Body paragraphs
+                type: text
+                required: true
+                list:
+                  min: 2
+                  max: 2
+          - name: founder
+            label: Founder section
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: name
+                label: Name
+                type: string
+                required: true
+              - name: role
+                label: Role
+                type: string
+                required: true
+              - name: description
+                label: Biography
+                type: text
+                required: true
+              - name: teamCta
+                label: Team link label
+                type: string
+                required: true
+          - name: history
+            label: Rebrand history
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: paragraphs
+                label: Body paragraphs
+                type: text
+                required: true
+                list:
+                  min: 3
+                  max: 3
+          - name: values
+            label: Values
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: items
+                label: Values
+                type: object
+                list:
+                  min: 1
+                  max: 8
+                  collapsible:
+                    collapsed: true
+                    summary: "{name}"
+                fields:
+                  - name: name
+                    label: Value name
+                    type: string
+                    required: true
+                  - name: body
+                    label: Description
+                    type: text
+                    required: true
+          - name: programFacts
+            label: Program facts
+            type: object
+            description: Clinical Director review is required for any change in this section.
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: intro
+                label: Introduction
+                type: text
+                required: true
+              - name: items
+                label: Facts
+                type: object
+                list:
+                  min: 4
+                  max: 4
+                  collapsible:
+                    collapsed: true
+                    summary: "{label}"
+                fields:
+                  - name: label
+                    label: Label
+                    type: string
+                    required: true
+                  - name: detail
+                    label: Detail
+                    type: text
+                    required: true
+          - name: closing
+            label: Closing invitation
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: body
+                label: Supporting copy
+                type: text
+                required: true
+              - name: primaryCta
+                label: Button label
+                type: string
+                required: true
+
+      - name: team
+        label: Team
+        type: file
+        path: src/content/pages/team.json
+        format: json
+        operations:
+          create: false
+          rename: false
+          delete: false
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            label: Opening section
+            type: object
+            fields:
+              - name: title
+                label: Headline
+                type: string
+                required: true
+              - name: sub
+                label: Introduction
+                type: text
+                required: true
+          - name: leadership
+            label: Leadership
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: members
+                label: People
+                component: team_member
+                list:
+                  min: 1
+                  collapsible:
+                    collapsed: true
+                    summary: "{name}"
+          - name: clinical
+            label: Clinical team
+            type: object
+            description: Every name, role, license, and credential must be confirmed by the person before publication.
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: intro
+                label: Introduction
+                type: text
+                required: true
+              - name: members
+                label: Clinicians
+                component: team_member
+                list:
+                  min: 1
+                  collapsible:
+                    collapsed: true
+                    summary: "{name}"
+          - name: closing
+            label: Closing invitation
+            type: object
+            fields:
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: body
+                label: Supporting copy
+                type: text
+                required: true
+              - name: primaryCta
+                label: Button label
+                type: string
+                required: true
+
+      - name: learning_hub
+        label: Learning Hub
+        type: file
+        path: src/content/pages/learning-hub.json
+        format: json
+        operations:
+          create: false
+          rename: false
+          delete: false
+        fields:
+          - name: seo
+            component: seo
+          - name: hero
+            label: Opening section
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Headline
+                type: string
+                required: true
+              - name: sub
+                label: Introduction
+                type: text
+                required: true
+              - name: primaryCta
+                label: Button label
+                type: string
+                required: true
+          - name: resources
+            label: Resource cards
+            type: object
+            fields:
+              - name: eyebrow
+                label: Section label
+                type: string
+                required: true
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: intro
+                label: Introduction
+                type: text
+                required: true
+              - name: items
+                label: Resources
+                type: object
+                list:
+                  min: 4
+                  max: 4
+                  collapsible:
+                    collapsed: true
+                    summary: "{title}"
+                fields:
+                  - name: title
+                    label: Card title
+                    type: string
+                    required: true
+                  - name: body
+                    label: Card description
+                    type: text
+                    required: true
+                  - name: href
+                    label: Destination
+                    type: string
+                    readonly: true
+              - name: itemCta
+                label: Card link label
+                type: string
+                required: true
+          - name: closing
+            label: Closing invitation
+            type: object
+            fields:
+              - name: title
+                label: Heading
+                type: string
+                required: true
+              - name: body
+                label: Supporting copy
+                type: text
+                required: true
+              - name: primaryCta
+                label: Button label
+                type: string
+                required: true

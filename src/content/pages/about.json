@@ -1,0 +1,103 @@
+{
+  "seo": {
+    "title": "About Joshua Tree Health | Formerly Simply Teens | Apex, NC",
+    "description": "Joshua Tree Health, formerly Simply Teens Outpatient, provides PHP and IOP care for adolescents ages 10–17 in Apex, North Carolina."
+  },
+  "hero": {
+    "title": "A name for the conditions that make growth",
+    "emphasis": "possible.",
+    "sub": "We built this program to offer steadiness through a hard stretch of adolescence, with clinical structure and a defined place for families.",
+    "primaryCta": "Meet the team",
+    "secondaryCta": "Our approach",
+    "facts": [
+      {
+        "title": "Apex, NC",
+        "body": "Serving families across the Triangle"
+      },
+      {
+        "title": "Ages 10–17",
+        "body": "Pre-teens and teens"
+      },
+      {
+        "title": "Formerly Simply Teens",
+        "body": "Continuing care in the Apex community"
+      }
+    ]
+  },
+  "mission": {
+    "eyebrow": "Why the Joshua tree",
+    "title": "The teen is not the tree.",
+    "lead": "The Joshua tree survives difficult conditions without following a blueprint. Its form records what it has adapted to.",
+    "paragraphs": [
+      "We do not ask teens to become Joshua trees. The name is a reminder that development responds to conditions. Change the conditions, and something different may become possible.",
+      "Our job is to provide those conditions: a reliable week, concrete skills, clinical attention, and family participation. Joshua Tree Health offers PHP and IOP for adolescents ages 10–17 in Apex, North Carolina."
+    ]
+  },
+  "founder": {
+    "eyebrow": "The founder",
+    "name": "Gabriela Forter",
+    "role": "Founder & CEO",
+    "description": "Gabriela Forter leads Joshua Tree Health’s work with adolescents and families in Apex, North Carolina.",
+    "teamCta": "Meet the leadership and clinical team →"
+  },
+  "history": {
+    "eyebrow": "Our history",
+    "title": "Simply Teens is now Joshua Tree Health.",
+    "paragraphs": [
+      "Joshua Tree Health was formerly known as Simply Teens Outpatient, a program that served adolescents and families in Apex, North Carolina for years.",
+      "In 2026, Simply Teens began a new chapter under new leadership, with an expanded clinical model and a new name. The name reflects where the program is going.",
+      "If you were a patient or family of Simply Teens Outpatient, you’re in the right place. We’re glad you found us."
+    ]
+  },
+  "values": {
+    "eyebrow": "What guides the work",
+    "title": "The values have to show up in the room.",
+    "items": [
+      {
+        "name": "Evidence first",
+        "body": "We build our programs around what clinical research shows works for adolescents, and we update how we practice as the evidence grows."
+      },
+      {
+        "name": "Family at the center",
+        "body": "Teens don’t develop in isolation. Family involvement is built into the work because the relationships around a teen matter as much as what happens in the room."
+      },
+      {
+        "name": "A direction of their own",
+        "body": "We help each teen build capacity and a clearer direction that fits who they are."
+      },
+      {
+        "name": "Structured care, lasting skills",
+        "body": "Structure is what makes the work possible. Consistent programming gives teens something to count on, and skills they carry beyond the program."
+      }
+    ]
+  },
+  "programFacts": {
+    "eyebrow": "Program at a glance",
+    "title": "Clear information before care begins.",
+    "intro": "Before you make any decision, admissions will walk you through the assessment, the current program schedule, and how insurance verification works.",
+    "items": [
+      {
+        "label": "Who we serve",
+        "detail": "Adolescents ages 10–17"
+      },
+      {
+        "label": "Levels of care",
+        "detail": "Partial Hospitalization (PHP) and Intensive Outpatient (IOP)"
+      },
+      {
+        "label": "Where",
+        "detail": "800 West Williams St, STE 203 · Apex, NC"
+      },
+      {
+        "label": "How families participate",
+        "detail": "Family involvement is discussed during assessment and treatment planning"
+      }
+    ]
+  },
+  "closing": {
+    "eyebrow": "Admissions",
+    "title": "Clinical seriousness and warmth belong in the same room.",
+    "body": "Tell us what your family is dealing with. We’ll help you figure out whether Joshua Tree Health is the right level of care.",
+    "primaryCta": "Start the conversation"
+  }
+}

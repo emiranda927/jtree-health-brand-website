@@ -21,6 +21,7 @@ launch = the short checklist in §4. Everything else is already done and proven.
 | `jtreehealth.com` root/www | Still Squarespace (old corporate site) | ⏳ cutover at launch |
 | CRM (Ritten) | Not configured — **Sheets fallback active by design** | optional, post-launch |
 | Turnstile CAPTCHA | Not configured on either side — API "falls open" (honeypot + rate-limit still active) | optional hardening |
+| Copy editing | Pages CMS → Git-backed files in `src/content/pages/` → review PR → Vercel | ✅ pilot configured for Home, About, Team, Learning Hub |
 
 ¹ Form API code lives at `jtree-health-website/site/jtree-form-api` (GitHub `emiranda927/jtree-health-brand-website`). It needs **no changes** for launch.
 
@@ -86,6 +87,14 @@ the real domain will not (added 2026-07-11).
 - Not yet checked: "Ignored Build Step" behavior when a change touches only one of
   the two projects (site vs. API) in the same push — low-risk (worst case is an
   unnecessary rebuild, not a wrong deploy), revisit if build minutes matter.
+
+### 3b. Pages CMS copy workflow
+
+- Pages CMS is an editing layer over files in this repository; it is not a production runtime dependency.
+- Editors work on `content/drafts`, run the CMS content check, and request a review from inside Pages CMS.
+- Merging the review pull request into `main` is the only CMS publishing action.
+- The pilot covers Home, About, Team, and Learning Hub. Layout, forms, analytics, redirects, motion, and production integrations remain code-owned.
+- Team instructions live in `docs/CMS_TEAM_GUIDE.md`.
 
 ## 4. LAUNCH-DAY CHECKLIST (the only remaining work)
 
