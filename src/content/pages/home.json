@@ -1,0 +1,145 @@
+{
+  "seo": {
+    "title": "Joshua Tree Health | Teen PHP & IOP in Apex, NC",
+    "description": "PHP and IOP mental health care for adolescents ages 10–17 in Apex, NC, grounded in DBT, polyvagal-informed care, and family involvement."
+  },
+  "hero": {
+    "lineOne": "Grow in a shape",
+    "lineTwo": "entirely",
+    "lineThree": "your own.",
+    "ledeOne": "For teens who need more than a weekly appointment.",
+    "ledeTwo": "Structured PHP and IOP in Apex, with evenings at home.",
+    "primaryCta": "Start the conversation",
+    "secondaryCta": "Explore programs"
+  },
+  "trustFacts": [
+    "Apex, North Carolina",
+    "Ages 10–17",
+    "No waitlist",
+    "Benefits verification"
+  ],
+  "manifesto": {
+    "title": "When one appointment a week is no longer enough, there is care that still keeps home in the picture.",
+    "paragraphs": [
+      "IOP and PHP provide more time, structure, and clinical support without an overnight stay.",
+      "Some teens come when symptoms are getting harder to manage between weekly sessions. Others need a steady transition home after inpatient or residential care. We meet both moments with a clear plan and a consistent week.",
+      "Care includes DBT skills groups, individual therapy, family involvement, and expressive work through art, music, and mindfulness. Teens return home every evening and practice what they are learning in daily life."
+    ],
+    "primaryCta": "Start the conversation",
+    "secondaryCta": "See how we work →"
+  },
+  "pathways": {
+    "eyebrow": "What we treat",
+    "title": "What brings families to us.",
+    "cardCta": "Learn more →",
+    "allCta": "See all conditions we treat →",
+    "conditions": [
+      {
+        "title": "Depression & low mood",
+        "body": "Pulling away from people and activities, low energy, sleep that is off, or irritability that will not lift."
+      },
+      {
+        "title": "Anxiety & panic",
+        "body": "Worry that does not switch off, avoidance, panic symptoms, or intense fear around school and social situations."
+      },
+      {
+        "title": "ADHD & executive functioning",
+        "body": "Trouble starting or finishing tasks, acting before thinking, and strong reactions to frustration or perceived failure."
+      },
+      {
+        "title": "Trauma & PTSD",
+        "body": "Feeling constantly on alert, shutting down, or reacting strongly when the present connects to something painful."
+      },
+      {
+        "title": "Autism & social communication",
+        "body": "Sensory overload, hard transitions, masking exhaustion, or anxiety and low mood alongside autism."
+      },
+      {
+        "title": "Emotional dysregulation & mood",
+        "body": "Big reactions that are hard to control, rapid mood shifts, and a long road back to calm after conflict."
+      }
+    ]
+  },
+  "programs": {
+    "eyebrow": "Our programs",
+    "title": "Two levels of structured outpatient care.",
+    "intro": "PHP provides a full treatment day. IOP meets after school during the school year. Both allow teens to return home every evening.",
+    "php": {
+      "tag": "Partial Hospitalization Program",
+      "title": "Full-day treatment during the week.",
+      "schedule": "Daytime programming · Home each evening",
+      "body": "Our highest level of outpatient care, for teens who need more structure and support than weekly or after-school therapy.",
+      "features": [
+        "Group and individual therapy",
+        "Family sessions",
+        "Care coordination and transition planning",
+        "Psychiatric care coordination as clinically indicated"
+      ],
+      "cta": "Explore the PHP program →"
+    },
+    "iop": {
+      "tag": "Intensive Outpatient Program",
+      "title": "After-school treatment, three days a week.",
+      "schedule": "Mon/Wed/Fri · 3:30–6:30pm during the school year",
+      "body": "A step below PHP for teens who need more than weekly therapy while continuing school and daily routines.",
+      "features": [
+        "After-school scheduling",
+        "Group and individual therapy",
+        "DBT skills practiced in session",
+        "Family therapy built into treatment"
+      ],
+      "cta": "Explore the IOP program →"
+    },
+    "insuranceNote": "We'll verify your insurance benefits and walk you through expected costs before care begins. We do not accept Medicaid."
+  },
+  "measure": {
+    "eyebrow": "Care that adapts",
+    "title": "Progress should show up in real life.",
+    "intro": "We check progress from intake through discharge. If your teen is not improving in the ways that matter, the team revisits the plan.",
+    "points": [
+      {
+        "title": "Know what the plan is for",
+        "body": "After intake, you will know what your teen is working on and why it matters."
+      },
+      {
+        "title": "Look beyond the therapy room",
+        "body": "Progress should be visible at school, with friends, and during the hard moments at home."
+      },
+      {
+        "title": "Stay part of the work",
+        "body": "The team will talk with you about how care is going and what you can reinforce at home."
+      }
+    ],
+    "cta": "How we measure progress →"
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "title": "Three steps to a clearer next move.",
+    "steps": [
+      {
+        "title": "Fill out the form",
+        "body": "A two-minute form. No medical details. We cover those by phone."
+      },
+      {
+        "title": "We call you",
+        "body": "A conversation about what is happening and whether this level of care may fit your teen."
+      },
+      {
+        "title": "Start within days",
+        "body": "A typical start is three to five days from first contact. We recommend the level of care that fits and build the plan together."
+      }
+    ]
+  },
+  "location": {
+    "eyebrow": "Visit us",
+    "title": "Apex, NC. Easy access from across the Triangle.",
+    "intro": "Serving families across Cary, Holly Springs, Raleigh, Durham, and Chapel Hill.",
+    "directionsCta": "Get directions"
+  },
+  "closing": {
+    "eyebrow": "Admissions",
+    "title": "Not sure which program is right?",
+    "body": "You do not have to decide before you call. A licensed therapist will assess what your teen needs, and our admissions team will explain the options first.",
+    "primaryCta": "Start the conversation"
+  }
+}

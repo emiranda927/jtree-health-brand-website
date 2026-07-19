@@ -1,59 +1,39 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import { getEntry } from 'astro:content';
 
-// Until clinician-reviewed articles are ready, this page points families to
-// the practical resources that are already available on the site.
-const resources = [
-  {
-    title: 'What we treat',
-    body: 'Observable signs of anxiety, depression, ADHD, trauma, school avoidance, and other concerns families bring us.',
-    href: '/what-we-treat',
-  },
-  {
-    title: 'Insurance, explained',
-    body: 'What in-network means, how PHP and IOP are billed, and the exact questions to ask your insurer before care begins.',
-    href: '/insurance',
-  },
-  {
-    title: 'Crisis resources',
-    body: 'If you or your teen is in crisis, here are the numbers to call or text right now, and what to do next.',
-    href: '/crisis',
-  },
-  {
-    title: 'How admissions works',
-    body: 'What happens when you reach out, what the first call is like, and what to have ready. No commitment, no pressure.',
-    href: '/get-started',
-  },
-];
+const learningHubEntry = await getEntry('learningHubPage', 'learning-hub');
+if (!learningHubEntry) throw new Error('Missing CMS content: learning hub page');
+const content = learningHubEntry.data;
 ---
 <Base
   bodyClass="brand-page rollout-page"
-  title="Learning Hub | Joshua Tree Health"
-  description="Plain-language resources on teen mental health, PHP, IOP, insurance, admissions, and crisis support from Joshua Tree Health."
+  title={content.seo.title}
+  description={content.seo.description}
 >
   <PageHero
-    eyebrow="Learning hub"
+    eyebrow={content.hero.eyebrow}
     art="approach"
-    title="Start with what you need to know."
-    sub="Program details, insurance help, admissions steps, and crisis resources in plain language."
-    primaryCta={{ label: 'Start the Conversation', href: '/get-started' }}
+    title={content.hero.title}
+    sub={content.hero.sub}
+    primaryCta={{ label: content.hero.primaryCta, href: '/get-started' }}
   />
 
   <!-- ===== START HERE ===== -->
   <section class="section" aria-labelledby="start-title">
     <div class="container-x">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">Start here</p>
-        <h2 class="section-title font-display" id="start-title">The questions families bring first.</h2>
-        <p class="section-sub">Choose the question in front of you. Each page gives a direct answer and a clear next step.</p>
+        <p class="eyebrow">{content.resources.eyebrow}</p>
+        <h2 class="section-title font-display" id="start-title">{content.resources.title}</h2>
+        <p class="section-sub">{content.resources.intro}</p>
       </div>
       <div class="grid-2" data-reveal-group>
-        {resources.map((r) => (
+        {content.resources.items.map((r) => (
           <a class="info-card info-card--hover" href={r.href} data-reveal-item>
             <h3 class="info-card__title">{r.title}</h3>
             <p class="info-card__body">{r.body}</p>
-            <span class="link-arrow">Read more →</span>
+            <span class="link-arrow">{content.resources.itemCta}</span>
           </a>
         ))}
       </div>
@@ -64,10 +44,10 @@ const resources = [
   <section class="section surface-green" aria-labelledby="learninghub-cta-title">
     <div class="container-x">
       <div class="section-head section-head--center" data-reveal>
-        <h2 class="section-title font-display" id="learninghub-cta-title">Would it help to just talk it through?</h2>
-        <p class="section-sub">You don't have to read your way to an answer. One call is enough to find out whether Joshua Tree is the right fit for your teen.</p>
+        <h2 class="section-title font-display" id="learninghub-cta-title">{content.closing.title}</h2>
+        <p class="section-sub">{content.closing.body}</p>
         <div class="page-hero__actions">
-          <a class="btn btn--on-dark" href="/get-started">Start the Conversation <span class="btn__arrow">→</span></a>
+          <a class="btn btn--on-dark" href="/get-started">{content.closing.primaryCta} <span class="btn__arrow">→</span></a>
           <a class="btn btn--ghost-on-dark" href="tel:+19193355053">Call (919) 335-5053</a>
         </div>
       </div>
