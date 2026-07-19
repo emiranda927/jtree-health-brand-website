@@ -14,11 +14,11 @@ The editor cannot change page layouts, navigation behavior, GSAP or Lenis motion
 
 ## Administrator setup
 
-1. Go to [app.pagescms.org](https://app.pagescms.org/) and sign in with the GitHub account that owns or administers `emiranda927/jtree-health-brand-website`.
-2. Install the Pages CMS GitHub App for this repository only.
+1. Go to [app.pagescms.org](https://app.pagescms.org/) and sign in with a GitHub administrator account whose repository access you are comfortable authorizing for Pages CMS. Hosted GitHub sign-in requests repository access.
+2. Install the Pages CMS GitHub App for `emiranda927/jtree-health-brand-website` only. Do not grant it access to every repository.
 3. Open the repository in Pages CMS.
 4. Select the `content/drafts` branch. Do not edit website copy on `main`.
-5. Open the collaborator settings and invite the founder and Clinical Director by email.
+5. Open the collaborator settings and invite the founder and Clinical Director by email. They should use the email invitation rather than authorizing personal GitHub accounts.
 6. Send each person this guide and confirm that they can open **Website copy pilot**.
 
 If the repository or fields do not appear, confirm that Pages CMS is on `content/drafts` and refresh. The editor configuration lives in `.pages.yml` on that branch.
@@ -30,7 +30,7 @@ If the repository or fields do not appear, confirm that Pages CMS is on `content
 3. Open **Website copy pilot**.
 4. Choose Homepage, About Joshua Tree Health, Team, or Learning Hub.
 5. Edit the labeled fields.
-6. Save the page. Saving creates a Git commit on the draft branch; it does not change the production website.
+6. Save the page. Saving creates a Git commit under the Pages CMS app identity on the draft branch; it does not expose the editor's email in the public Git history and does not change the production website.
 7. Wait for the Vercel preview deployment to finish, then review the rendered page before requesting publication.
 
 Required fields cannot be left empty. Search titles and descriptions have practical length limits. Verified homepage facts and Learning Hub destinations are visible but locked.

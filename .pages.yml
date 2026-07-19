@@ -9,7 +9,7 @@ settings:
   content:
     merge: true
   commit:
-    identity: user
+    identity: app
     templates:
       update: "content: update {path} via Pages CMS"
 
