@@ -8,7 +8,7 @@
     "lineTwo": "entirely",
     "lineThree": "your own.",
     "ledeOne": "For teens who need more than a weekly appointment.",
-    "ledeTwo": "Structured PHP and IOP in Apex, with evenings at home.",
+    "ledeTwo": "Structured PHP and IOP in Apex.",
     "primaryCta": "Start the conversation",
     "secondaryCta": "Explore programs"
   },
@@ -16,10 +16,10 @@
     "Apex, North Carolina",
     "Ages 10–17",
     "No waitlist",
-    "Benefits verification"
+    "In network with major insurance"
   ],
   "manifesto": {
-    "title": "When one appointment a week is no longer enough, there is care that still keeps home in the picture.",
+    "title": "When weekly therapy isn't enough.",
     "paragraphs": [
       "IOP and PHP provide more time, structure, and clinical support without an overnight stay.",
       "Some teens come when symptoms are getting harder to manage between weekly sessions. Others need a steady transition home after inpatient or residential care. We meet both moments with a clear plan and a consistent week.",
@@ -29,8 +29,8 @@
     "secondaryCta": "See how we work →"
   },
   "pathways": {
-    "eyebrow": "What we treat",
-    "title": "What brings families to us.",
+    "eyebrow": "",
+    "title": "What we treat.",
     "cardCta": "Learn more →",
     "allCta": "See all conditions we treat →",
     "conditions": [
@@ -63,7 +63,7 @@
   "programs": {
     "eyebrow": "Our programs",
     "title": "Two levels of structured outpatient care.",
-    "intro": "PHP provides a full treatment day. IOP meets after school during the school year. Both allow teens to return home every evening.",
+    "intro": "PHP provides a full treatment day. IOP runs part-day, three to four days a week, mornings or afternoons. Both allow teens to return home every evening.",
     "php": {
       "tag": "Partial Hospitalization Program",
       "title": "Full-day treatment during the week.",
@@ -79,8 +79,8 @@
     },
     "iop": {
       "tag": "Intensive Outpatient Program",
-      "title": "After-school treatment, three days a week.",
-      "schedule": "Mon/Wed/Fri · 3:30–6:30pm during the school year",
+      "title": "Part-day treatment, three to four days a week.",
+      "schedule": "Mon/Wed/Thu · 9am–12pm or 3:30–6:30pm",
       "body": "A step below PHP for teens who need more than weekly therapy while continuing school and daily routines.",
       "features": [
         "After-school scheduling",
