@@ -102,7 +102,7 @@ const conditions = content.pathways.conditions.map((condition, index) => ({
     <div class="container-x">
       <div class="section-head" data-reveal>
         <img class="section-punct" src="/brand-v2/graphics/element-1-forest.svg" alt="" aria-hidden="true" />
-        <p class="eyebrow">{content.pathways.eyebrow}</p>
+        {content.pathways.eyebrow && <p class="eyebrow">{content.pathways.eyebrow}</p>}
         <h2 class="section-title font-display" id="pathways-title">{content.pathways.title}</h2>
       </div>
       <div class="pathways__grid" data-reveal-group>
@@ -326,7 +326,7 @@ const conditions = content.pathways.conditions.map((condition, index) => ({
   .hero__actions { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 2.8rem; }
   .hero__actions .btn { min-width: 210px; justify-content: center; }
 
-  .trust { background: var(--color-lime); color: var(--color-deep-green); }
+  .trust { background: #8fbfb0; color: var(--color-deep-green); } /* Mist Sage — calmer than the lime accent */
   .trust__inner { min-height: 96px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; margin: 0 auto; padding-block: 1.35rem; list-style: none; }
   .trust li { min-width: 0; padding-inline: 1.25rem; font-family: var(--font-head); font-size: clamp(.95rem, 1.15vw, 1.08rem); line-height: 1.12; text-align: center; text-transform: uppercase; letter-spacing: .02em; }
   .trust li + li { border-left: 1px solid rgba(30, 61, 52, .34); }

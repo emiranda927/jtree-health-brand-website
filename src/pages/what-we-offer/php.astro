@@ -27,7 +27,7 @@ const whoItsFor = [
 const faqs = [
   {
     q: "What's the difference between PHP and IOP?",
-    a: "PHP is our highest level of outpatient care. It runs during the day and meets more days per week than IOP, which meets three afternoons a week during the school year. Both are outpatient, so teens go home every evening. If you're unsure which level fits, the assessment with one of our licensed therapists will help answer that.",
+    a: "PHP is our highest level of outpatient care. It runs during the day and meets more days per week than IOP, which runs three to four days a week. Both are outpatient, so teens go home every evening. If you're unsure which level fits, the assessment with one of our licensed therapists will help answer that.",
   },
   {
     q: 'Does my teen go home at night?',
@@ -40,7 +40,7 @@ const faqs = [
   },
   {
     q: 'How long does PHP last?',
-    a: 'Length of stay is decided with the teen, family, and treatment team and reviewed throughout care. Most teens step down into IOP as they stabilize.',
+    a: 'Most teens are in PHP for about 2 to 6 weeks before stepping down, often into IOP. Length of stay is individualized — decided with the teen, family, and treatment team and reviewed throughout care.',
   },
   {
     q: 'How quickly can we start?',
@@ -69,6 +69,7 @@ const faqSchema = {
 >
   <PageHero
     art="session"
+    hideTape
     title="Partial Hospitalization Program (PHP)"
     sub="Our most intensive outpatient program. Teens spend the day in treatment and return home every evening."
     primaryCta={{ label: 'Find the right level of care', href: '/get-started' }}
@@ -98,8 +99,9 @@ const faqSchema = {
           and needs structure during that transition.
         </p>
         <p>
-          Most teens step down into IOP as they stabilize. Length of stay is decided with the teen,
-          family, and treatment team and reviewed throughout care.
+          Most teens are in PHP for about 2 to 6 weeks and step down into IOP as they stabilize.
+          Length of stay is decided with the teen, family, and treatment team and reviewed throughout
+          care.
         </p>
         <!-- TODO: VERIFY current school-coordination practice during PHP before describing a formal process. -->
         <p>

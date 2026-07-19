@@ -64,6 +64,7 @@ interface Props {
   variant?: 'cream' | 'green';
   center?: boolean;
   art?: keyof typeof artMap;
+  hideTape?: boolean;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
 }
@@ -75,6 +76,7 @@ const {
   variant = 'cream',
   center = false,
   art,
+  hideTape = false,
   primaryCta,
   secondaryCta,
 } = Astro.props;
@@ -115,7 +117,9 @@ const cls = [
       <figure class:list={['page-hero__art', `page-hero__art--${artData.kind}`]} data-hero>
         <img class="page-hero__wash" src={variant === 'green' ? '/brand-v2/washes/wash-03.webp' : '/brand-v2/washes/wash-01.webp'} alt="" aria-hidden="true" />
         <img class="page-hero__image" src={artData.src} alt={artData.alt} />
-        <img class="page-hero__tape" src="/brand-v2/tapes/tape-01.webp" alt="" aria-hidden="true" />
+        {!hideTape && (
+          <img class="page-hero__tape" src="/brand-v2/tapes/tape-01.webp" alt="" aria-hidden="true" />
+        )}
         <img class="page-hero__punct" src={variant === 'green' ? '/brand-v2/halos/halo-10-lime.svg' : '/brand-v2/graphics/element-1-forest.svg'} alt="" aria-hidden="true" />
       </figure>
     )}

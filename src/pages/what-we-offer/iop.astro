@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 
 const includes = [
-  'Group therapy on Monday, Wednesday, and Friday',
+  'Group therapy on Monday, Wednesday, and Thursday',
   'A DBT skills curriculum taught in sequence: mindfulness, distress tolerance, emotion regulation, and interpersonal effectiveness',
   'Polyvagal-informed and somatic work (experiential therapy)',
   'Art therapy and music therapy (expressive therapy)',
@@ -25,15 +25,15 @@ const whoItsFor = [
 const faqs = [
   {
     q: 'What does a typical week look like?',
-    a: 'During the school year, groups meet Monday, Wednesday, and Friday from 3:30–6:30pm. Summer groups meet the same days from 9am–12pm. Individual and family therapy are scheduled alongside the group program.',
+    a: 'Teen groups meet Monday, Wednesday, and Thursday, with a morning option (9am–12pm) or an afternoon option (3:30–6:30pm). A parent DBT skills group meets Tuesdays from 3:30–6:30pm for some families, so IOP runs three to four days a week. Individual and family therapy are scheduled alongside the group program.',
   },
   {
     q: 'Can my teen stay in school during IOP?',
-    a: 'Yes. The program is designed around school schedules. Teens attend school as usual and come to Joshua Tree in the afternoons.',
+    a: 'Yes. Many families choose the afternoon group (3:30–6:30pm) so teens keep their regular school day, coming to Joshua Tree on Monday, Wednesday, and Thursday. A morning group (9am–12pm) is also available.',
   },
   {
     q: 'How long does IOP last?',
-    a: 'Length of stay is decided with the teen, family, and treatment team and reviewed throughout care. It depends on clinical progress, insurance authorization, and medical need, so we do not set a fixed number of weeks up front.',
+    a: 'Most teens are in IOP for about 6 to 12 weeks. Length of stay is individualized — decided with the teen, family, and treatment team and reviewed throughout care, and it depends on clinical progress, insurance authorization, and medical need.',
   },
   {
     q: 'How quickly can we start?',
@@ -61,13 +61,13 @@ const faqSchema = {
 <Base
   bodyClass="brand-page rollout-page"
   title="Teen Intensive Outpatient Program (IOP) | Joshua Tree Health"
-  description="IOP for teens ages 10–17 in Apex, NC. Groups meet Mon/Wed/Fri after school during the school year, with individual and family therapy alongside. No waitlist."
+  description="IOP for teens ages 10–17 in Apex, NC. Groups meet Mon/Wed/Thu, mornings or afternoons, with individual and family therapy alongside. Typically 6–12 weeks. No waitlist."
   jsonLd={faqSchema}
 >
   <PageHero
     art="group"
     title="Intensive Outpatient Program (IOP)"
-    sub="Three afternoons a week during the school year. More support than weekly therapy, with school and home still part of daily life."
+    sub="Three to four days a week, mornings or afternoons. More support than weekly therapy, with school and home still part of daily life."
     primaryCta={{ label: 'Find the right level of care', href: '/get-started' }}
     secondaryCta={{ label: 'Call (919) 335-5053', href: 'tel:+19193355053' }}
   />
@@ -83,15 +83,17 @@ const faqSchema = {
           happening.
         </p>
         <p>
-          Groups meet three days a week and follow a three-part structure: a processing group with
-          peers and a facilitator, skills building with DBT and polyvagal-informed work, and an
-          experiential group with art therapy, music therapy, somatic exercises, and mindfulness.
-          Individual therapy and family sessions run alongside the group program.
+          Teen groups meet three days a week — Monday, Wednesday, and Thursday — and follow a
+          three-part structure: a processing group with peers and a facilitator, skills building with
+          DBT and polyvagal-informed work, and an experiential group with art therapy, music therapy,
+          somatic exercises, and mindfulness. A parent DBT skills group meets Tuesdays for some
+          families, so IOP runs three to four days a week. Individual therapy and family sessions run
+          alongside the group program.
         </p>
         <p>
-          There is no fixed number of weeks. Length of stay is decided with the teen, family, and
-          treatment team, and reviewed throughout care as clinical progress and insurance
-          authorization take shape.
+          Most teens are in IOP for about 6 to 12 weeks, though length of stay is individualized. It
+          is decided with the teen, family, and treatment team, and reviewed throughout care as
+          clinical progress and insurance authorization take shape.
         </p>
         <p>
           Teens go home every evening. School, friendships, and family life remain part of the week,
@@ -106,14 +108,14 @@ const faqSchema = {
       <div class="section-head" data-reveal>
         <p class="eyebrow">Sample weekly schedule</p>
         <h2 class="section-title font-display" id="iop-schedule-title">A week teens can count on.</h2>
-        <p class="section-sub">School-year groups meet Monday, Wednesday, and Friday from 3:30–6:30pm. Summer groups meet the same days from 9am–12pm.</p>
+        <p class="section-sub">Teen groups meet Monday, Wednesday, and Thursday, with a morning option (9am–12pm) or an afternoon option (3:30–6:30pm). A parent DBT skills group meets Tuesdays from 3:30–6:30pm for some families.</p>
       </div>
       <div class="grid-3" data-reveal-group>
         <article class="info-card" data-reveal-item><h3>Processing group</h3><p>Teens share what has been going on with peers and a facilitator in a structured group setting.</p></article>
         <article class="info-card" data-reveal-item><h3>Skills-building group</h3><p>DBT and polyvagal-informed skills work: distress tolerance, emotion regulation, mindfulness, and interpersonal effectiveness.</p></article>
         <article class="info-card" data-reveal-item><h3>Experiential group</h3><p>Art, music, movement, somatic exercises, and mindfulness reinforce the skills being practiced.</p></article>
       </div>
-      <!-- TODO: VERIFY dedicated fifth-day individual therapy and family-session cadence before publishing a fixed weekly structure. -->
+      <!-- TODO: VERIFY dedicated fifth-day individual therapy before publishing a set day for it. -->
       <p class="program-note" data-reveal>Individual and family therapy are scheduled alongside the group program. Admissions will walk you through how those sessions fit into your teen's week.</p>
     </div>
   </section>
@@ -158,8 +160,9 @@ const faqSchema = {
       <div class="prose" data-reveal>
         <h3>Will my teen be able to stay in school?</h3>
         <p>
-          Yes. IOP runs after school during the school year, so teens keep their regular school day.
-          The afternoon group meets from 3:30–6:30pm; the summer group meets from 9am–12pm.
+          Yes. Many families choose the afternoon group (3:30–6:30pm), which meets after the school
+          day, so teens keep their regular schedule. A morning group (9am–12pm) is also available.
+          Groups meet Monday, Wednesday, and Thursday.
         </p>
 
         <h3>Do they go home every evening?</h3>
@@ -169,19 +172,20 @@ const faqSchema = {
         </p>
 
         <h3>How involved will I be?</h3>
-        <!-- TODO: VERIFY Parent DBT Skills Group availability and family-session cadence before naming a standing group or fixed frequency. -->
         <p>
           Family therapy is part of the work, and you'll have regular contact with your teen's
-          treatment team. Some of that work is practical: parents learn the same skills their teen
-          is practicing, so the tools your teen brings home are ones you recognize.
+          treatment team. For some families, a parent DBT skills group meets on Tuesdays, so parents
+          learn the same skills their teen is practicing and the tools your teen brings home are ones
+          you recognize.
         </p>
 
         <h3>What will my teen be doing each week?</h3>
         <!-- TODO: VERIFY dedicated fifth-day individual therapy before describing a set day. -->
         <p>
-          Three group sessions, each with the same three-part structure: processing with peers, DBT
-          and polyvagal skills practice, and experiential work with art, music, somatic exercises,
-          and mindfulness. Individual therapy runs alongside the group program.
+          Three group sessions — Monday, Wednesday, and Thursday — each with the same three-part
+          structure: processing with peers, DBT and polyvagal skills practice, and experiential work
+          with art, music, somatic exercises, and mindfulness. Individual therapy runs alongside the
+          group program.
         </p>
 
         <h3>What do they leave with?</h3>

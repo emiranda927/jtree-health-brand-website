@@ -44,6 +44,16 @@ const howWeHelp = [
   'Answer questions about copays, deductibles, and what to expect at billing',
 ];
 
+// In-network payers confirmed by site owner 2026-07-19 (docs/CLAIM_REGISTER.md).
+const inNetworkPayers = [
+  { src: '/brand/insurers/aetna.svg', alt: 'Aetna' },
+  { src: '/brand/insurers/blue-cross-blue-shield.svg', alt: 'Blue Cross Blue Shield' },
+  { src: '/brand/insurers/cigna.svg', alt: 'Cigna' },
+  { src: '/brand/insurers/optum.png', alt: 'Optum' },
+  { src: '/brand/insurers/tricare.svg', alt: 'TRICARE' },
+  { src: '/brand/insurers/unitedhealthcare.svg', alt: 'UnitedHealthcare' },
+];
+
 const faqs = [
   {
     q: 'Do you accept Medicaid?',
@@ -80,7 +90,6 @@ const faqs = [
   title="Insurance & Costs for Teen PHP & IOP | Joshua Tree Health"
   description="How coverage works for adolescent PHP and IOP at Joshua Tree Health in Apex, NC. We verify your benefits and explain expected costs before care begins."
 >
-  <!-- TODO: VERIFY "many commercial insurance plans" phrasing against current payer participation before launch (docs/CLAIM_REGISTER.md: named in-network payer contracts pending). -->
   <PageHero
     art="growth"
     title="Understand your coverage before care begins."
@@ -88,6 +97,25 @@ const faqs = [
     primaryCta={{ label: 'Check your coverage', href: '/get-started' }}
     secondaryCta={{ label: 'Call (919) 335-5053', href: 'tel:+19193355053' }}
   />
+
+  <!-- ===== IN-NETWORK PAYERS ===== -->
+  <section class="section" aria-labelledby="in-network-title">
+    <div class="container-x">
+      <div class="section-head section-head--center" data-reveal>
+        <p class="eyebrow">In network</p>
+        <h2 class="section-title font-display" id="in-network-title">Insurers we're in network with.</h2>
+        <p class="section-sub">We're in network with these plans. Coverage still varies by policy, so we verify your specific benefits and explain your expected costs before care begins.</p>
+      </div>
+      <ul class="insurer-logos" data-reveal aria-label="Insurers Joshua Tree Health is in network with">
+        {inNetworkPayers.map((payer) => (
+          <li class="insurer-logos__item">
+            <img src={payer.src} alt={payer.alt} loading="lazy" />
+          </li>
+        ))}
+      </ul>
+      <p class="insurer-note" data-reveal>Don't see your plan? <a class="link-arrow" href="/get-started">Check your coverage</a> — we'll verify your specific benefits and let you know what comes back.</p>
+    </div>
+  </section>
 
   <section class="section surface-cream-deep" aria-labelledby="coverage-process-title">
     <div class="container-x">
@@ -130,7 +158,6 @@ const faqs = [
   </section>
 
   <!-- ===== PLAN VERIFICATION ===== -->
-  <!-- TODO: VERIFY named in-network payer contracts before adding any insurer list or logo strip here (docs/CLAIM_REGISTER.md: pending contract verification). -->
   <section class="section surface-cream-deep" aria-labelledby="plan-verification-title">
     <div class="container-x">
       <div class="section-head" data-reveal>
@@ -195,4 +222,50 @@ const faqs = [
 
 <style>
   .coverage-note { margin-top: 2rem; max-width: 52rem; color: var(--color-ink-soft); font-size: 1.05rem; line-height: 1.6; }
+
+  .insurer-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding: 0;
+    list-style: none;
+  }
+  .insurer-logos__item {
+    flex: 1 1 calc((100% - 2.5rem) / 3);
+    max-width: calc((100% - 2.5rem) / 3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 104px;
+    padding: 1.25rem 1.5rem;
+    background: var(--color-cream-card);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-lg);
+  }
+  .insurer-logos__item img {
+    max-height: 44px;
+    max-width: 100%;
+    width: auto;
+    filter: grayscale(1);
+    opacity: 0.72;
+    transition: filter var(--dur) var(--ease-soft), opacity var(--dur) var(--ease-soft);
+  }
+  /* Square-ish logos read small at a shared height — give them more presence (BCBS most). */
+  .insurer-logos__item img[src*="tricare"] { max-height: 54px; }
+  .insurer-logos__item img[src*="blue-cross"] { max-height: 62px; }
+  .insurer-logos__item:hover img,
+  .insurer-logos__item:focus-within img {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+  .insurer-note { margin-top: 1.75rem; text-align: center; color: var(--color-ink-soft); font-size: 1.02rem; line-height: 1.6; }
+  .insurer-note .link-arrow { white-space: nowrap; }
+
+  @media (max-width: 640px) {
+    .insurer-logos__item { flex-basis: calc((100% - 1.25rem) / 2); max-width: calc((100% - 1.25rem) / 2); min-height: 92px; padding: 1rem; }
+    .insurer-logos__item img[src*="tricare"] { max-height: 48px; }
+    .insurer-logos__item img[src*="blue-cross"] { max-height: 54px; }
+  }
 </style>

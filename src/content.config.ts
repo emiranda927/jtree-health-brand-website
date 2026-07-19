@@ -33,7 +33,7 @@ const homePage = defineCollection({
       secondaryCta: z.string().min(1),
     }),
     pathways: z.object({
-      eyebrow: z.string().min(1),
+      eyebrow: z.string(), // may be empty — the treatment section can render without an eyebrow
       title: z.string().min(1),
       cardCta: z.string().min(1),
       allCta: z.string().min(1),
