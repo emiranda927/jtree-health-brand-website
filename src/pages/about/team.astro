@@ -6,6 +6,8 @@ import { getEntry } from 'astro:content';
 const teamEntry = await getEntry('teamPage', 'team');
 if (!teamEntry) throw new Error('Missing CMS content: team page');
 const content = teamEntry.data;
+// Founder + clinicians shown together as one team (no leadership/clinical split).
+const teamMembers = [...content.leadership.members, ...content.clinical.members];
 
 // Build initials for the temporary portrait treatment from the member's name.
 const initials = (name) =>
@@ -29,38 +31,16 @@ const initials = (name) =>
     variant="green"
   />
 
-  <!-- ===== LEADERSHIP ===== -->
-  <section class="section" aria-labelledby="leadership-title">
+  <!-- ===== TEAM (founder + clinicians together, one group) ===== -->
+  <section class="section" aria-labelledby="team-title">
     <div class="container-x">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">{content.leadership.eyebrow}</p>
-        <h2 class="section-title font-display" id="leadership-title">{content.leadership.title}</h2>
-      </div>
-      <div class="grid-3 team-grid" data-reveal-group>
-        {content.leadership.members.map((member) => (
-          <article class="team-card" data-reveal-item>
-            <div class="team-card__photo" aria-hidden="true">
-              <span class="team-card__initials font-display">{initials(member.name)}</span>
-            </div>
-            <h3 class="team-card__name font-display">{member.name}</h3>
-            <p class="team-card__cred">{member.credentials}</p>
-            <p class="team-card__title">{member.title}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CLINICAL TEAM ===== -->
-  <section class="section surface-cream-deep" aria-labelledby="clinical-title">
-    <div class="container-x">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">{content.clinical.eyebrow}</p>
-        <h2 class="section-title font-display" id="clinical-title">{content.clinical.title}</h2>
+        <p class="eyebrow">Our team</p>
+        <h2 class="section-title font-display" id="team-title">The people behind the care.</h2>
         <p class="section-sub">{content.clinical.intro}</p>
       </div>
       <div class="grid-3 team-grid" data-reveal-group>
-        {content.clinical.members.map((member) => (
+        {teamMembers.map((member) => (
           <article class="team-card" data-reveal-item>
             <div class="team-card__photo" aria-hidden="true">
               <span class="team-card__initials font-display">{initials(member.name)}</span>
