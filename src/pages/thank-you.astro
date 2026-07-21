@@ -18,9 +18,9 @@ const next = [
     art="happy"
     eyebrow="Request received"
     title="Your request is <em>in.</em>"
-    sub="An admissions team member will read what you sent and call the number you provided."
-    primaryCta={{ label: 'Back to home', href: '/' }}
-    secondaryCta={{ label: 'Explore programs', href: '/what-we-offer' }}
+    sub="Ready to start? Complete your intake details now. Otherwise, an admissions team member will contact you on the number you provided."
+    primaryCta={{ label: 'Complete your intake', href: 'https://simplyteens.ritten.io/#/lead-application', external: true }}
+    secondaryCta={{ label: 'Back to home', href: '/' }}
   />
 
   <section class="section section--tight" aria-labelledby="next-title">
@@ -37,6 +37,23 @@ const next = [
           </li>
         ))}
       </ol>
+    </div>
+  </section>
+
+  <section class="section intake-cta" aria-labelledby="intake-title">
+    <div class="container-x">
+      <div class="callout surface-lavender" data-reveal>
+        <div class="callout__text">
+          <h2 id="intake-title" class="section-title font-display">Ready to start?</h2>
+          <p class="section-sub">Want a head start? You can complete your intake and insurance details now. It helps us provide a smoother experience once we connect.</p>
+        </div>
+        <a
+          href="https://simplyteens.ritten.io/#/lead-application"
+          class="btn callout__cta"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Complete your intake</a>
+      </div>
     </div>
   </section>
 
@@ -67,4 +84,5 @@ const next = [
 
 <style>
   .section--tight { padding-block: clamp(2.5rem, 2rem + 3vw, 4rem); }
+  .intake-cta { padding-top: 0; }
 </style>
