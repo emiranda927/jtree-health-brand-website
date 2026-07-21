@@ -96,10 +96,10 @@ function init(form: HTMLFormElement) {
       else if (res.status >= 400 && res.status < 500 && body && Array.isArray(body.errors)) {
         body.errors.forEach((er: any) => { if (er && er.field) showError(er.field, er.message || 'Please check this field.'); });
         showBanner('Please fix the highlighted fields and try again.');
-      } else showBanner('Something went wrong on our side. Please email careers@jtreehealth.com and we’ll take it from there.');
+      } else showBanner('Something went wrong on our side. Please email admissions@jtreehealth.com and we’ll take it from there.');
       if (TURNSTILE_KEY && w.turnstile && widgetId !== null) { try { w.turnstile.reset(widgetId); } catch {} }
     } catch {
-      showBanner('We couldn’t reach our server. Please email careers@jtreehealth.com, or try again in a minute.');
+      showBanner('We couldn’t reach our server. Please email admissions@jtreehealth.com, or try again in a minute.');
     } finally {
       setBusy(false);
     }

@@ -22,7 +22,7 @@ const measures = [
 ---
 
 <Base
-  bodyClass="brand-page"
+  bodyClass="brand-page outcomes-page"
   title="Clinical Outcomes | Joshua Tree Health"
   description="How Joshua Tree Health measures teen PHP and IOP progress: standardized measures at intake, during care, and at discharge in Apex, NC."
 >
@@ -32,7 +32,7 @@ const measures = [
     art="growth"
   />
 
-  <section class="section" aria-labelledby="measurement-title">
+  <section class="section outcomes-lead" aria-labelledby="measurement-title">
     <div class="container-x">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Measurement-informed care</p>
@@ -56,14 +56,27 @@ const measures = [
       <p>The treatment team reviews progress regularly and shares it with families during the program, in plain language. You should not have to wait until discharge to learn how treatment is going.</p>
       <p>We will publish outcome percentages only after the data and methodology have been reviewed. Testimonials require documented consent. No program can guarantee an outcome for your teen.</p>
       <p>Families and referring clinicians are welcome to ask the clinical team how progress is measured in the current program.</p>
-      <div class="cta-row">
-        <a class="btn" href="/get-started">Get started <span class="btn__arrow">→</span></a>
-        <a class="btn btn--ghost" href="tel:+19193355053">Call (919) 335-5053</a>
+    </div>
+  </section>
+
+  <!-- ===== CLOSING CTA ===== -->
+  <section class="section surface-green" aria-labelledby="outcomes-cta-title">
+    <div class="container-x">
+      <div class="section-head section-head--center" data-reveal>
+        <h2 class="section-title font-display" id="outcomes-cta-title">See whether this is the right fit.</h2>
+        <p class="section-sub">Tell us what has been happening. Admissions will explain the assessment and the next step.</p>
+        <div class="cta-row">
+          <a class="btn btn--on-dark" href="/get-started">Get started <span class="btn__arrow">→</span></a>
+          <a class="btn btn--ghost-on-dark" href="tel:+19193355053">Call (919) 335-5053</a>
+        </div>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .cta-row { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 1.8rem; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .85rem; justify-content: center; margin-top: 1.8rem; }
+  /* Bring the body up: the growth hero + default section padding left a large gap below the hero. */
+  :global(.outcomes-page .page-hero__grid) { padding-block: clamp(3rem, 5vw, 5.5rem); }
+  .outcomes-lead { padding-top: clamp(1rem, 0.5rem + 1.5vw, 2rem); }
 </style>

@@ -8,7 +8,8 @@
     { "source": "/blog", "destination": "/learning-hub", "permanent": true },
     { "source": "/learning-hub/blog", "destination": "/learning-hub", "permanent": true },
     { "source": "/for-teens", "destination": "/what-we-treat", "permanent": true },
-    { "source": "/programs", "destination": "/what-we-offer", "permanent": true }
+    { "source": "/programs", "destination": "/what-we-offer", "permanent": true },
+    { "source": "/what-we-offer/our-approach/polyvagal", "destination": "/what-we-offer/our-approach/nervous-system-regulation", "permanent": true }
   ],
   "headers": [
     {

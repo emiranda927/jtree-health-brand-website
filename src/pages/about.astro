@@ -27,7 +27,6 @@ const content = aboutEntry.data;
     <div class="about-hero-art">
       <img class="about-hero-art__wash" src="/brand-v2/washes/wash-03.webp" alt="" aria-hidden="true" />
       <img class="about-hero-art__tree" src="/brand-v2/collage/joshua-tree-cut-collage.webp" alt="A Joshua tree cut into a layered paper collage" />
-      <img class="about-hero-art__tape" src="/brand-v2/tapes/tape-01.webp" alt="" aria-hidden="true" />
       <img class="about-hero-art__mark" src="/brand-v2/graphics/element-1-forest.svg" alt="" aria-hidden="true" />
     </div>
   </BrandPageHero>
@@ -53,7 +52,6 @@ const content = aboutEntry.data;
         <div class="founder-art__frame">
           <Image src={gabyImg} alt={`${content.founder.name}, ${content.founder.role} of Joshua Tree Health`} widths={[540, 800, 1100]} sizes="(max-width: 980px) 88vw, 44vw" class="founder-art__photo" />
         </div>
-        <img class="founder-art__tape" src="/brand-v2/tapes/tape-06.webp" alt="" aria-hidden="true" />
         <img class="founder-art__mark" src="/brand-v2/halos/halo-9-lavender.svg" alt="" aria-hidden="true" />
         <figcaption>{content.founder.name} · {content.founder.role}</figcaption>
       </figure>
@@ -103,6 +101,10 @@ const content = aboutEntry.data;
         <p class="eyebrow">{content.programFacts.eyebrow}</p>
         <h2 class="section-title font-display" id="program-facts-title">{content.programFacts.title}</h2>
         <p class="section-sub">{content.programFacts.intro}</p>
+        <div class="about-carf">
+          <img src="/brand/carf-accredited.svg" alt="CARF Accredited" width="72" height="72" />
+          <p>Joshua Tree Health is <strong>CARF-accredited</strong> — an independent, international mark of quality and accountability in behavioral health care.</p>
+        </div>
       </div>
       <dl class="credibility-facts" data-reveal data-reveal-delay="0.08">
         {content.programFacts.items.map((fact) => <div><dt>{fact.label}</dt><dd>{fact.detail}</dd></div>)}
@@ -131,16 +133,18 @@ const content = aboutEntry.data;
   .about-hero-art img { position: absolute; max-width: none; }
   .about-hero-art__wash { z-index: -1; width: 110%; left: 50%; top: 4%; opacity: .72; transform: translateX(-50%) rotate(-3deg); }
   .about-hero-art__tree { z-index: 2; width: 108%; left: 50%; bottom: -18%; transform: translateX(-50%); filter: drop-shadow(0 24px 34px rgba(7, 23, 17, .18)); }
-  .about-hero-art__tape { z-index: 3; width: 29%; right: 1%; top: 8%; transform: rotate(12deg); }
   .about-hero-art__mark { z-index: 4; width: 15%; left: 1%; top: 8%; transform: rotate(-9deg); filter: brightness(0) saturate(100%) invert(91%) sepia(35%) saturate(943%) hue-rotate(27deg) brightness(101%); }
 
   .about-mission { background: var(--color-cream); }
   .about-mission__layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(3rem, 8vw, 9rem); align-items: start; }
-  .about-mission__copy { max-width: 52rem; display: grid; gap: 1.3rem; color: var(--color-ink-soft); font-size: 1.08rem; line-height: 1.68; }
+  .about-mission__copy { max-width: 52rem; display: grid; gap: 1.3rem; color: var(--color-ink-soft); font-size: 1.18rem; line-height: 1.7; }
   .about-mission__lead { font-family: var(--font-sans); font-size: clamp(1.5rem, 2.3vw, 2.35rem); line-height: 1.32; color: var(--color-deep-green); }
   .about-mission__personal { display: grid; grid-template-columns: 4.5rem 1fr; gap: 1.5rem; align-items: start; margin-top: 1rem; padding: 1.6rem 0 0; border-top: 1px solid var(--color-line-strong); }
   .about-mission__personal img { width: 64px; transform: rotate(-8deg); }
   .about-mission__personal p { font-size: 1.08rem; }
+  .about-carf { display: flex; align-items: center; gap: 1rem; margin-top: 1.75rem; }
+  .about-carf img { width: 68px; height: 68px; flex: none; }
+  .about-carf p { color: var(--color-ink-soft); font-size: 1.02rem; line-height: 1.55; margin: 0; }
 
   .founder-section { overflow: hidden; background: var(--color-lavender-soft); }
   .founder-section__layout { display: grid; grid-template-columns: minmax(380px, .92fr) minmax(0, 1.08fr); gap: clamp(3rem, 8vw, 9rem); align-items: center; }

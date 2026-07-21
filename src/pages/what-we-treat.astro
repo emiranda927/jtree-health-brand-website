@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 
 // Condition cards follow the founder guide's format (EHR order), filtered
 // through docs/CLAIM_REGISTER.md.
-// TODO: VERIFY scope of staff trauma-informed and polyvagal training before
+// TODO: VERIFY scope of staff trauma-informed and nervous-system-regulation training before
 // restoring the guide's "every member of our clinical team is trained" line.
 // The trauma card below describes the practice instead of the credential.
 const conditions: { title: string; mark: string; bullets: string[]; help: string }[] = [
@@ -144,7 +144,7 @@ const faqs = [
   },
   {
     question: 'Does insurance cover this?',
-    answer: 'Coverage depends on your specific plan. We’ll verify your insurance benefits and walk you through expected costs before care begins. We do not accept Medicaid.',
+    answer: 'Coverage depends on your specific plan. We’ll verify your insurance benefits and walk you through expected costs before care begins.',
   },
 ];
 
@@ -190,9 +190,7 @@ const faqSchema = {
           <img src="/brand-v2/washes/wash-01.webp" alt="" style="position:absolute;z-index:1;top:-10px;left:18px;width:72%;transform:rotate(-7deg);opacity:.9;pointer-events:none" />
           <img src="/brand-v2/washes/wash-03.webp" alt="" style="position:absolute;z-index:1;top:-2%;right:2%;width:46%;transform:rotate(6deg);opacity:.75;pointer-events:none" />
           <img src="/brand-v2/collage/joshua-tree-cut-collage.webp" alt="A Joshua tree framed inside torn paper" style="position:absolute;z-index:2;top:-69px;left:106px;width:438px;height:406px;filter:drop-shadow(0 26px 42px rgba(30,61,52,.22))" />
-          <img src="/brand-v2/tapes/tape-08.webp" alt="" style="position:absolute;z-index:3;top:-51px;left:290px;width:27%;transform:rotate(15deg);pointer-events:none" />
           <div style="position:absolute;z-index:4;width:min(465px,82%);background:var(--jt-cream-card);box-shadow:var(--shadow-lg);padding:1.35rem 1.5rem 1.25rem;transform:rotate(-1.2deg);left:90px;top:300px">
-            <img src="/brand-v2/tapes/tape-01.webp" alt="" style="position:absolute;top:-14px;left:26px;width:82px;transform:rotate(-7deg);pointer-events:none" />
             <div style="font-family:var(--font-label);text-transform:uppercase;letter-spacing:.08em;font-size:.72rem;color:var(--jt-deep-sage)">Some things we help families with</div>
             <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.55rem 1rem;margin-top:.95rem">
               <div style="display:flex;align-items:center;gap:.5rem;min-width:0"><span style="width:7px;height:7px;border-radius:50%;background:var(--jt-digital-lavender);flex:none"></span><span style="font-family:var(--font-display);font-weight:700;font-size:1.02rem;color:var(--jt-forest)">Depression</span></div>
@@ -212,7 +210,6 @@ const faqSchema = {
             <img class="tree" src="/brand-v2/collage/joshua-tree-cut-collage.webp" alt="A Joshua tree framed inside torn paper" />
           </div>
           <div class="treat-dc-hero__card-m">
-            <img class="card-tape" src="/brand-v2/tapes/tape-01.webp" alt="" />
             <div class="card-label">Some things we help families with</div>
             <ul class="card-list">
               <li>Depression</li>

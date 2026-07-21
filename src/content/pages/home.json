@@ -1,7 +1,7 @@
 {
   "seo": {
     "title": "Joshua Tree Health | Teen PHP & IOP in Apex, NC",
-    "description": "PHP and IOP mental health care for adolescents ages 10–17 in Apex, NC, grounded in DBT, polyvagal-informed care, and family involvement."
+    "description": "PHP and IOP mental health care for adolescents ages 10–17 in Apex, NC, grounded in DBT, nervous system regulation, and family involvement."
   },
   "hero": {
     "lineOne": "Grow in a shape",
@@ -63,11 +63,11 @@
   "programs": {
     "eyebrow": "Our programs",
     "title": "Two levels of structured outpatient care.",
-    "intro": "PHP provides a full treatment day. IOP runs part-day, three to four days a week, mornings or afternoons. Both allow teens to return home every evening.",
+    "intro": "PHP provides a full treatment day, four to five days a week. IOP runs part-day, three to four days a week, mornings or afternoons. Both allow teens to return home every evening.",
     "php": {
       "tag": "Partial Hospitalization Program",
       "title": "Full-day treatment during the week.",
-      "schedule": "Daytime programming · Home each evening",
+      "schedule": "Daytime · four to five days a week · Home each evening",
       "body": "Our highest level of outpatient care, for teens who need more structure and support than weekly or after-school therapy.",
       "features": [
         "Group and individual therapy",
@@ -90,7 +90,7 @@
       ],
       "cta": "Explore the IOP program →"
     },
-    "insuranceNote": "We'll verify your insurance benefits and walk you through expected costs before care begins. We do not accept Medicaid."
+    "insuranceNote": "We'll verify your insurance benefits and walk you through expected costs before care begins."
   },
   "measure": {
     "eyebrow": "Care that adapts",
