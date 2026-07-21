@@ -99,8 +99,9 @@ const care = [
   }
   .footer__crisis { margin-top: 1rem; max-width: 38ch; font-size: 0.95rem; line-height: 1.55; color: rgba(246, 244, 236, 0.76); }
   .footer__crisis a { color: var(--color-lime); border-bottom: 1px solid rgba(200, 232, 105, 0.3); }
-  .footer__carf { margin-top: 1.5rem; background: var(--color-lavender); border-radius: 12px; padding: 0.6rem; width: fit-content; }
-  .footer__carf img { display: block; width: 52px; height: 52px; }
+  .footer__carf { margin-top: 1.5rem; }
+  /* Transparent on the dark-green footer; reverse the blue seal to white so it stays legible. */
+  .footer__carf img { display: block; width: 84px; height: 84px; filter: brightness(0) invert(1); opacity: 0.9; }
 
   .footer__col { display: flex; flex-direction: column; gap: 0.7rem; }
   .footer__heading {
