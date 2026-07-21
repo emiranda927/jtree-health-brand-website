@@ -8,6 +8,7 @@ const foundations = [
   {
     id: 'dbt',
     name: 'Dialectical Behavior Therapy (DBT)',
+    href: '/what-we-offer/our-approach/dbt',
     body: [
       'DBT is the clinical spine of our program. It was developed for people whose emotions can become intense and hard to regulate. In our program, it gives each week a clear structure and gives teens something concrete to practice.',
       'Our groups are built around the four DBT skill sets: mindfulness, distress tolerance, emotion regulation, and interpersonal effectiveness. These are concrete tools, practiced in session and used at home, at school, and in relationships.',
@@ -16,6 +17,7 @@ const foundations = [
   {
     id: 'nervous-system',
     name: 'Nervous System Regulation',
+    href: '/what-we-offer/our-approach/nervous-system-regulation',
     body: [
       'Threat and shutdown can make it much harder to think, speak, and learn. Nervous system regulation asks clinicians to notice that state before pushing ahead with discussion or skills.',
       'We help teens notice what is happening in their body and practice settling enough to stay present. That attention to timing shapes how sessions run.',
@@ -50,6 +52,7 @@ const additionalMethods = [
   {
     id: 'family-systems',
     name: 'Family Systems Therapy',
+    href: '/what-we-offer/our-approach/family-therapy',
     body: [
       'We understand a teen’s challenges in the context of the family around them, and family therapy is built into treatment. Parents leave sessions with concrete tools to support their teen at home.',
     ],
@@ -161,12 +164,6 @@ const supportingTags = [
   'Mindfulness Practice',
 ];
 
-const deeperPages = [
-  { title: 'Dialectical Behavior Therapy', body: 'The four DBT skill sets and what skills practice can look like for adolescents.', href: '/what-we-offer/our-approach/dbt' },
-  { title: 'Nervous system regulation', body: 'How Joshua Tree uses nervous-system awareness and somatic work to help teens settle enough to engage.', href: '/what-we-offer/our-approach/nervous-system-regulation' },
-  { title: 'Family therapy', body: 'How family participation connects treatment with communication and support at home.', href: '/what-we-offer/our-approach/family-therapy' },
-];
-
 const faqs = [
   {
     q: 'What does DBT look like in a group session?',
@@ -227,20 +224,9 @@ const faqs = [
             {m.body.map((p) => (
               <p class="info-card__body">{p}</p>
             ))}
+            {m.href && <a class="link-arrow" href={m.href}>Learn more →</a>}
           </article>
         ))}
-      </div>
-      <div class="subsection" data-reveal>
-        <h3 class="subsection__title font-display">Read the method behind the language.</h3>
-        <div class="grid-3" data-reveal-group>
-          {deeperPages.map((page) => (
-            <a class="info-card info-card--hover" href={page.href} data-reveal-item>
-              <h3>{page.title}</h3>
-              <p>{page.body}</p>
-              <span class="link-arrow">Learn more →</span>
-            </a>
-          ))}
-        </div>
       </div>
     </div>
   </section>
@@ -308,6 +294,7 @@ const faqs = [
             {m.body.map((p) => (
               <p class="info-card__body">{p}</p>
             ))}
+            {m.href && <a class="link-arrow" href={m.href}>Learn more →</a>}
           </article>
         ))}
       </div>
@@ -416,6 +403,7 @@ const faqs = [
     margin-bottom: 0.55rem;
   }
   .week-note { margin-top: clamp(1.75rem, 1.25rem + 1.5vw, 2.75rem); }
+  .info-card .link-arrow { margin-top: 0.9rem; display: inline-flex; }
   .subsection { margin-top: clamp(2.75rem, 2rem + 2.5vw, 4.5rem); }
   .subsection__title {
     font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem);
