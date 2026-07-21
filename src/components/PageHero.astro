@@ -65,8 +65,8 @@ interface Props {
   center?: boolean;
   art?: keyof typeof artMap;
   hideTape?: boolean;
-  primaryCta?: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
+  primaryCta?: { label: string; href: string; external?: boolean };
+  secondaryCta?: { label: string; href: string; external?: boolean };
 }
 
 const {
@@ -100,12 +100,22 @@ const cls = [
       {(primaryCta || secondaryCta) && (
         <div class="page-hero__actions" data-hero>
           {primaryCta && (
-            <a href={primaryCta.href} class:list={['btn', variant === 'green' && 'btn--on-dark']}>
+            <a
+              href={primaryCta.href}
+              class:list={['btn', variant === 'green' && 'btn--on-dark']}
+              target={primaryCta.external ? '_blank' : undefined}
+              rel={primaryCta.external ? 'noopener noreferrer' : undefined}
+            >
               {primaryCta.label} <span class="btn__arrow">→</span>
             </a>
           )}
           {secondaryCta && (
-            <a href={secondaryCta.href} class:list={['btn', variant === 'green' ? 'btn--ghost-on-dark' : 'btn--ghost']}>
+            <a
+              href={secondaryCta.href}
+              class:list={['btn', variant === 'green' ? 'btn--ghost-on-dark' : 'btn--ghost']}
+              target={secondaryCta.external ? '_blank' : undefined}
+              rel={secondaryCta.external ? 'noopener noreferrer' : undefined}
+            >
               {secondaryCta.label}
             </a>
           )}
