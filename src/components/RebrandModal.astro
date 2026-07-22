@@ -8,18 +8,21 @@
  * Referrer-Policy: strict-origin-when-cross-origin plus 301s from direct/Google
  * traffic strip it for most visitors, so the URL tag is the reliable signal.
  *
- * Behaviour: fire once per visitor (localStorage), strip the tag from the address
- * bar after reading it, and auto-off 90 days after LAUNCH_DATE. To remove the
- * feature entirely, delete this file and its <RebrandModal /> include in Base.astro.
+ * Behaviour: fire once per visitor (localStorage) and strip the tag from the
+ * address bar after reading it. Always on while ENABLED (below) is true — turn it
+ * off by flipping ENABLED to false, or remove the feature entirely by deleting this
+ * file and its <RebrandModal /> include in Base.astro.
  *
  * Design: Claude Design "Rebrand Redirect Modal" (Forest split → mobile bottom
  * sheet). Mapped onto the site's real brand faces (Batica Sans / Misoka Heavy) and
  * canonical tokens rather than the reference's Google-font/hex stand-ins.
  */
 
-// --- Config: confirm LAUNCH_DATE before go-live ---
-const LAUNCH_DATE = '2026-08-01'; // ISO date the redirect campaign goes live
-const LIFESPAN_DAYS = 90;         // auto-off this many days after LAUNCH_DATE
+// --- Config ---
+// Live now — launched alongside the Simply Teens redirects. The 90-day auto-off
+// window was removed at the owner's request; turn the modal off manually by
+// setting ENABLED to false here (or removing <RebrandModal /> from Base.astro).
+const ENABLED = true;
 const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand story)
 ---
 
@@ -39,7 +42,6 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
       </div>
       <div class="rbm-art">
         <span class="rbm-handle" aria-hidden="true"></span>
-        <img class="rbm-doodle" src="/rebrand/star-trail.svg" alt="" aria-hidden="true" />
         <img class="rbm-spot" src="/rebrand/happy.svg" alt="" aria-hidden="true" />
         <button type="button" class="rbm-close" data-rbm-dismiss aria-label="Close">&times;</button>
       </div>
@@ -170,19 +172,12 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
     background: var(--rbm-mist);
     overflow: hidden;
   }
-  .rbm-doodle {
-    position: absolute;
-    top: 16px;
-    right: 18px;
-    width: 100px;
-    transform: rotate(10deg);
-  }
   .rbm-spot {
     position: absolute;
-    bottom: 0;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    height: 222px;
+    transform: translate(-50%, -50%);
+    height: 200px;
   }
   .rbm-close {
     position: absolute;
@@ -225,7 +220,6 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
     .rbm-link { border: 2px solid rgba(246, 241, 228, 0.4); border-radius: 999px; }
     .rbm-art { width: 100%; height: 150px; }
     .rbm-spot { height: 140px; }
-    .rbm-doodle { width: 84px; }
     .rbm-handle {
       display: block;
       position: absolute;
@@ -254,20 +248,13 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
   }
 </style>
 
-<script is:inline define:vars={{ LAUNCH_DATE, LIFESPAN_DAYS }}>
+<script is:inline define:vars={{ ENABLED }}>
   (function () {
     'use strict';
     var PARAM = 'from';
     var VALUE = 'simplyteens';
     var STORAGE_KEY = 'jth_rebrand_seen';
 
-    function withinWindow() {
-      var start = new Date(LAUNCH_DATE).getTime();
-      if (isNaN(start)) return false;
-      var end = start + LIFESPAN_DAYS * 86400000;
-      var now = Date.now();
-      return now >= start && now <= end;
-    }
     function alreadySeen() {
       try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
     }
@@ -326,7 +313,7 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
       var params = new URLSearchParams(window.location.search);
       if (params.get(PARAM) !== VALUE) return;
       stripTag(); /* always clean the URL once we've read the tag */
-      if (alreadySeen() || !withinWindow()) return;
+      if (!ENABLED || alreadySeen()) return;
       open();
     }
 
