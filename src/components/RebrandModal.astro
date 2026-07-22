@@ -101,7 +101,7 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
     flex-direction: column;
     justify-content: center;
   }
-  .rbm-logo { height: 32px; width: auto; align-self: flex-start; }
+  .rbm-logo { height: 56px; width: auto; align-self: flex-start; }
   .rbm-eyebrow {
     margin: 22px 0 0;
     font-family: var(--rbm-font-label);
@@ -131,7 +131,8 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
   .rbm-actions {
     display: flex;
     align-items: center;
-    gap: 14px;
+    flex-wrap: wrap;
+    gap: 12px 14px;
     margin-top: 24px;
   }
 
@@ -162,6 +163,7 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
     letter-spacing: 0.05em;
     color: var(--rbm-cream);
     text-decoration: none;
+    white-space: nowrap;
   }
   .rbm-link:hover { text-decoration: underline; }
 
