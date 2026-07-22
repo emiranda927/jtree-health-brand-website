@@ -1,0 +1,340 @@
+---
+/*
+ * RebrandModal — one-time "Simply Teens is now Joshua Tree Health" welcome.
+ *
+ * Shows ONLY for visitors who arrive via a Simply Teens 301 redirect, which is
+ * detected by the `?from=simplyteens` tag appended to every redirect destination
+ * (the RankMath redirect map). Referrer is intentionally NOT used — the site's
+ * Referrer-Policy: strict-origin-when-cross-origin plus 301s from direct/Google
+ * traffic strip it for most visitors, so the URL tag is the reliable signal.
+ *
+ * Behaviour: fire once per visitor (localStorage), strip the tag from the address
+ * bar after reading it, and auto-off 90 days after LAUNCH_DATE. To remove the
+ * feature entirely, delete this file and its <RebrandModal /> include in Base.astro.
+ *
+ * Design: Claude Design "Rebrand Redirect Modal" (Forest split → mobile bottom
+ * sheet). Mapped onto the site's real brand faces (Batica Sans / Misoka Heavy) and
+ * canonical tokens rather than the reference's Google-font/hex stand-ins.
+ */
+
+// --- Config: confirm LAUNCH_DATE before go-live ---
+const LAUNCH_DATE = '2026-08-01'; // ISO date the redirect campaign goes live
+const LIFESPAN_DAYS = 90;         // auto-off this many days after LAUNCH_DATE
+const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand story)
+---
+
+<template id="rbm-template">
+  <div class="rbm-overlay" role="dialog" aria-modal="true" aria-labelledby="rbm-title">
+    <div class="rbm-scrim" data-rbm-dismiss></div>
+    <div class="rbm-modal">
+      <div class="rbm-content">
+        <img class="rbm-logo" src="/brand/logo-inverted-cream.svg" alt="Joshua Tree Health" />
+        <p class="rbm-eyebrow">A new chapter</p>
+        <h2 id="rbm-title" class="rbm-title">Simply Teens is now Joshua Tree Health</h2>
+        <p class="rbm-body">Same team, same place in Apex — a new name for the same care. You&rsquo;re exactly where you meant to be.</p>
+        <div class="rbm-actions">
+          <button type="button" class="rbm-btn rbm-btn--primary" data-rbm-dismiss>Continue</button>
+          <a class="rbm-link" href={ABOUT_HREF} data-rbm-link>What changed &rarr;</a>
+        </div>
+      </div>
+      <div class="rbm-art">
+        <span class="rbm-handle" aria-hidden="true"></span>
+        <img class="rbm-doodle" src="/rebrand/star-trail.svg" alt="" aria-hidden="true" />
+        <img class="rbm-spot" src="/rebrand/happy.svg" alt="" aria-hidden="true" />
+        <button type="button" class="rbm-close" data-rbm-dismiss aria-label="Close">&times;</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style is:global>
+  /* Self-contained: the modal mounts at <body> level (outside .brand-page), so it
+     carries its own values instead of relying on brand-page-scoped tokens. Colors
+     reuse the global :root brand tokens where they exist; fonts reference the real
+     faces directly (both are declared @font-face at global scope). */
+  .rbm-overlay {
+    --rbm-forest: var(--color-deep-green, #1e3d34);
+    --rbm-cream: var(--color-cream, #fffaf3);
+    --rbm-mist: #8fbfb0;            /* Mist Sage — only bound to --color-sage inside .brand-page */
+    --rbm-lime: var(--color-lime, #b8e04a);
+    --rbm-lime-press: #a6ce38;
+    --rbm-on-dark: rgba(246, 241, 228, 0.82);
+    --rbm-ease: var(--ease-soft, cubic-bezier(0.22, 1, 0.36, 1));
+    --rbm-font-body: "Batica Sans", "Sora Variable", ui-sans-serif, system-ui, sans-serif;
+    --rbm-font-label: "Misoka Heavy", "Batica Sans", "Sora Variable", ui-sans-serif, sans-serif;
+
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .rbm-scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 61, 52, 0.62);
+    animation: rbm-fade 0.3s ease;
+  }
+
+  .rbm-modal {
+    position: relative;
+    width: 560px;
+    max-width: 100%;
+    display: flex;
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--rbm-forest);
+    box-shadow: 0 30px 80px -18px rgba(0, 0, 0, 0.6);
+    animation: rbm-pop 0.5s var(--rbm-ease);
+  }
+
+  /* Left: copy column */
+  .rbm-content {
+    width: 58%;
+    padding: 38px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .rbm-logo { height: 32px; width: auto; align-self: flex-start; }
+  .rbm-eyebrow {
+    margin: 22px 0 0;
+    font-family: var(--rbm-font-label);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    color: var(--rbm-lime);
+  }
+  .rbm-title {
+    margin: 7px 0 0;
+    font-family: var(--rbm-font-body);
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--rbm-cream);
+  }
+  .rbm-body {
+    margin: 12px 0 0;
+    font-family: var(--rbm-font-body);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--rbm-on-dark);
+  }
+  .rbm-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  /* Buttons / links */
+  .rbm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85em 1.6em;
+    font-family: var(--rbm-font-label);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s var(--rbm-ease), transform 0.12s var(--rbm-ease);
+  }
+  .rbm-btn--primary { background: var(--rbm-lime); color: var(--rbm-forest); }
+  .rbm-btn--primary:hover { background: var(--rbm-lime-press); }
+  .rbm-btn:active { transform: scale(0.96); }
+  .rbm-link {
+    font-family: var(--rbm-font-label);
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--rbm-cream);
+    text-decoration: none;
+  }
+  .rbm-link:hover { text-decoration: underline; }
+
+  /* Right: art panel */
+  .rbm-art {
+    width: 42%;
+    position: relative;
+    background: var(--rbm-mist);
+    overflow: hidden;
+  }
+  .rbm-doodle {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    width: 100px;
+    transform: rotate(10deg);
+  }
+  .rbm-spot {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 222px;
+  }
+  .rbm-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid rgba(30, 61, 52, 0.3);
+    background: rgba(251, 248, 240, 0.6);
+    color: var(--rbm-forest);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .rbm-close:hover { background: #fff; }
+
+  .rbm-handle { display: none; }
+
+  /* Mobile: below 560px the split becomes a bottom sheet (same DOM). */
+  @media (max-width: 560px) {
+    .rbm-overlay { align-items: flex-end; padding: 0; }
+    .rbm-modal {
+      width: 100%;
+      flex-direction: column-reverse; /* art on top, copy below */
+      border-radius: 28px 28px 0 0;
+      animation: rbm-slide-up 0.5s var(--rbm-ease);
+    }
+    .rbm-content { width: 100%; padding: 22px 24px 30px; text-align: center; }
+    .rbm-logo { align-self: center; margin-top: 4px; }
+    .rbm-actions { flex-direction: column; gap: 10px; margin-top: 20px; }
+    .rbm-btn, .rbm-link {
+      width: 100%;
+      padding: 0.95em 1.5em;
+      box-sizing: border-box;
+    }
+    .rbm-link { border: 2px solid rgba(246, 241, 228, 0.4); border-radius: 999px; }
+    .rbm-art { width: 100%; height: 150px; }
+    .rbm-spot { height: 140px; }
+    .rbm-doodle { width: 84px; }
+    .rbm-handle {
+      display: block;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 42px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(246, 241, 228, 0.35);
+      z-index: 2;
+    }
+  }
+
+  @keyframes rbm-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes rbm-pop {
+    from { opacity: 0; transform: translateY(12px) scale(0.985); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes rbm-slide-up {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rbm-scrim, .rbm-modal { animation: none; }
+  }
+</style>
+
+<script is:inline define:vars={{ LAUNCH_DATE, LIFESPAN_DAYS }}>
+  (function () {
+    'use strict';
+    var PARAM = 'from';
+    var VALUE = 'simplyteens';
+    var STORAGE_KEY = 'jth_rebrand_seen';
+
+    function withinWindow() {
+      var start = new Date(LAUNCH_DATE).getTime();
+      if (isNaN(start)) return false;
+      var end = start + LIFESPAN_DAYS * 86400000;
+      var now = Date.now();
+      return now >= start && now <= end;
+    }
+    function alreadySeen() {
+      try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
+    }
+    function markSeen() {
+      try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+    }
+    /* Remove ?from=simplyteens without reloading; keep any other query params. */
+    function stripTag() {
+      try {
+        var url = new URL(window.location.href);
+        if (url.searchParams.get(PARAM) === VALUE) {
+          url.searchParams.delete(PARAM);
+          var qs = url.searchParams.toString();
+          window.history.replaceState({}, document.title, url.pathname + (qs ? '?' + qs : '') + url.hash);
+        }
+      } catch (e) {}
+    }
+
+    function open() {
+      var tpl = document.getElementById('rbm-template');
+      if (!tpl || !tpl.content) return;
+      var lastFocus = document.activeElement;
+      var overlay = tpl.content.firstElementChild.cloneNode(true);
+      document.body.appendChild(overlay);
+      document.documentElement.style.overflow = 'hidden';
+
+      function close() {
+        markSeen();
+        document.removeEventListener('keydown', onKey);
+        document.documentElement.style.overflow = '';
+        overlay.remove();
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+      function onKey(e) {
+        if (e.key === 'Escape') { close(); return; }
+        if (e.key !== 'Tab') return;
+        var f = overlay.querySelectorAll('button, a[href]');
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+
+      overlay.addEventListener('click', function (e) {
+        var link = e.target.closest('[data-rbm-link]');
+        if (link) { markSeen(); return; } /* let "What changed" navigate */
+        if (e.target.closest('[data-rbm-dismiss]')) { e.preventDefault(); close(); }
+      });
+      document.addEventListener('keydown', onKey);
+
+      var primary = overlay.querySelector('.rbm-btn--primary');
+      if (primary) primary.focus();
+    }
+
+    function init() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get(PARAM) !== VALUE) return;
+      stripTag(); /* always clean the URL once we've read the tag */
+      if (alreadySeen() || !withinWindow()) return;
+      open();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init, { once: true });
+    } else {
+      init();
+    }
+    window.__rebrandModal = { open: open };
+  })();
+</script>
