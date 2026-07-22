@@ -18,5 +18,13 @@ node_modules/
 npm-debug.log*
 *.log
 
+# internal brand/marketing docs — not for the public repo
+/BRAND_ASSETS.md
+/JTree_BrandKit_Full.pdf
+/Marketing_v3.pdf
+/Joshua_Tree_Health_Brand_Kit.docx
+/JTree_Website_Copy_Edit.docx
+/JTree_Website_Copy_Edit.docx.md
+
 # macOS
 .DS_Store

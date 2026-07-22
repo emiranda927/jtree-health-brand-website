@@ -65,16 +65,7 @@ The `multiply` blend dissolves the white background into a brand-tinted panel �
 
 ---
 
-## Before launch — verify these claims
-
-1. **Founder story** — add Gaby's approved personal paragraph in her own words.
-2. **Team** — confirm every displayed name, role, license, credential, biography,
-   and portrait with the clinician before publication.
-3. **Program claims** — verify CARF status, PHP hours, age-track structure, family
-   session cadence, Parent DBT Skills Group availability, and lead-therapist DBT credentials.
-4. **Insurance** — confirm every payer contract before naming a plan as in-network.
-5. **Privacy** — `src/pages/privacy.astro` is a website privacy policy, not the HIPAA
-   Notice of Privacy Practices. Have legal review before launch.
+## Privacy & data handling
 
 The admissions form posts only after explicit submission. Do not restore abandoned-
 form capture or send form fields, teen ages, insurance selections, or messages to analytics.
@@ -96,5 +87,3 @@ caching + security headers. Set the production domain to `www.jtreehealth.com`
 WCAG-AA contrast (brand-approved pairings), visible focus states, `prefers-reduced-motion`
 honored, semantic landmarks, labelled forms. Images are responsive WebP via `astro:assets`;
 static output keeps Lighthouse high.
-
-<!-- vercel-git-connect smoke test 2026-07-17T17:53:37Z -->
