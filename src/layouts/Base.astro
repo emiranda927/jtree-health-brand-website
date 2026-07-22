@@ -9,6 +9,7 @@ import CrisisBar from '../components/CrisisBar.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import RebrandModal from '../components/RebrandModal.astro';
 
 interface Props {
   title?: string;
@@ -170,6 +171,7 @@ const jtreeConfig = {
     <Footer />
     <div class="grain grain--fixed" aria-hidden="true"></div>
     <CookieConsent />
+    <RebrandModal />
 
     <script>
       import { initMotion } from '../lib/motion';
