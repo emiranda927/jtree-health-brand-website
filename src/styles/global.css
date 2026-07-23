@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
-/* Official JTH identity fonts. They are opt-in through page-level brand tokens
-   until the revised visual system is approved for every route. */
+/* Batica Sans — self-hosted brand display face (2026-07 kit; see BRAND_ASSETS.md).
+   Sigmar/Volkhov (used below in .brand-page) are Fontsource imports from
+   Base.astro, not @font-face rules here — nothing missing. */
 @font-face {
   font-family: "Batica Sans";
   src: url("/brand-v2/fonts/batica-sans-regular.ttf") format("truetype");
@@ -14,27 +15,6 @@
   src: url("/brand-v2/fonts/batica-sans-bold.ttf") format("truetype");
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Misoka Heavy";
-  src: url("/brand-v2/fonts/misoka-heavy.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Fraunces SuperSoft";
-  src: url("/brand-v2/fonts/fraunces-supersoft-regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Fraunces SuperSoft";
-  src: url("/brand-v2/fonts/fraunces-supersoft-semibold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 600;
   font-display: swap;
 }
 
@@ -256,9 +236,9 @@
   --color-ink-faint: #667970;
   --color-cream-dim: rgba(255, 250, 243, .76);
   --font-display: "Batica Sans", Arial, sans-serif;
-  --font-head: "Misoka Heavy", "Batica Sans", Arial, sans-serif;
-  --font-sans: "Fraunces SuperSoft", Georgia, serif;
-  --font-mono: "Misoka Heavy", "Batica Sans", Arial, sans-serif;
+  --font-head: "Sigmar", "Batica Sans", Arial, sans-serif;
+  --font-sans: "Volkhov", Georgia, serif;
+  --font-mono: "Sigmar", "Batica Sans", Arial, sans-serif;
   --type-reading: clamp(1.0625rem, 1rem + .24vw, 1.125rem);
   --type-reading-small: 1rem;
   --type-ui: 1rem;
