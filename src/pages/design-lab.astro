@@ -33,6 +33,35 @@ const colors = [
     <a class="lab-jump" href="#review">Review criteria</a>
   </header>
 
+  <div class="ab-bar" role="group" aria-label="Typography A/B test">
+    <div class="ab-bar__inner">
+      <p class="ab-bar__label">
+        <strong>Typography test —</strong> this whole page can switch between the site's current fonts and the proposed redesign. Toggle to compare headings, buttons, and body copy.
+      </p>
+      <div class="ab-bar__switch">
+        <button type="button" class="ab-bar__option" data-typeface-choice="current" aria-pressed="false">
+          <span class="ab-bar__option-name">Current site</span>
+          <span class="ab-bar__option-detail">Misoka Heavy + Fraunces</span>
+        </button>
+        <button type="button" class="ab-bar__option" data-typeface-choice="proposed" aria-pressed="true">
+          <span class="ab-bar__option-name">Proposed redesign</span>
+          <span class="ab-bar__option-detail">Sigmar + Volkhov</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const typefaceButtons = document.querySelectorAll('.ab-bar__option');
+    typefaceButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const choice = button.getAttribute('data-typeface-choice') ?? 'proposed';
+        document.documentElement.setAttribute('data-typeface', choice);
+        typefaceButtons.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      });
+    });
+  </script>
+
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
       <FigmaHeroArt />
@@ -197,8 +226,8 @@ const colors = [
 
       <div class="type-specimen">
         <div class="type-primary"><span>Batica Sans</span><p>Primary display headings: warm, modern, and slightly unconventional.</p></div>
-        <div class="type-impact"><span>Misoka Heavy</span><p>Brows, navigation, buttons, short headings, and compact moments of emphasis.</p></div>
-        <div class="type-editorial"><span>Fraunces SuperSoft</span><p>Body copy and editorial support that restores warmth and clinical credibility.</p></div>
+        <div class="type-impact"><span>Sigmar</span><p>Brows, navigation, buttons, short headings, and compact moments of emphasis.</p></div>
+        <div class="type-editorial"><span>Volkhov Regular</span><p>Body copy and editorial support that restores warmth and clinical credibility.</p></div>
       </div>
 
       <div class="palette" aria-label="Official brand colors">
@@ -216,7 +245,7 @@ const colors = [
       <p class="eyebrow">Approval gate</p>
       <h2 id="review-title">Before this touches the live site</h2>
       <ol>
-        <li><span>01</span><p>Does the Batica, Misoka, and Fraunces hierarchy balance personality with clinical credibility?</p></li>
+        <li><span>01</span><p>Does the Batica, Sigmar, and Volkhov hierarchy balance personality with clinical credibility?</p></li>
         <li><span>02</span><p>Does Light Cream feel right as the default ground instead of white?</p></li>
         <li><span>03</span><p>Is the increased use of spot art, line work, color, and underlines expressive without becoming busy?</p></li>
         <li><span>04</span><p>Do the parent and referral sections feel calm and clinically trustworthy?</p></li>
@@ -250,6 +279,73 @@ const colors = [
   .lab-brand img { width: 174px; height: auto; }
   .lab-bar p { margin: 0; font-family: var(--jth-impact); font-size: .95rem; line-height: 1.15; text-transform: uppercase; letter-spacing: .04em; color: var(--jth-ink-soft); }
   .lab-jump { justify-self: end; font-family: var(--jth-impact); font-size: .95rem; line-height: 1.15; text-transform: uppercase; letter-spacing: .025em; text-decoration: none; border-bottom: 2px solid var(--jth-lavender); }
+
+  /* Typography A/B toggle — deliberately set in --jth-ui (Batica Sans), never
+     --jth-impact, so the control itself reads consistently in both states;
+     only the page content beneath it is meant to visibly change. */
+  .ab-bar {
+    position: sticky;
+    top: 78px;
+    z-index: 19;
+    background: var(--jth-lavender);
+    border-bottom: 1px solid var(--jth-forest);
+  }
+  .ab-bar__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem 1.5rem;
+    padding: .85rem clamp(1.25rem, 4vw, 4.5rem);
+  }
+  .ab-bar__label {
+    margin: 0;
+    max-width: 44rem;
+    font-family: var(--jth-ui);
+    font-size: .92rem;
+    line-height: 1.45;
+    color: var(--jth-forest);
+  }
+  .ab-bar__label strong { text-transform: uppercase; letter-spacing: .02em; }
+  .ab-bar__switch {
+    display: inline-flex;
+    flex: none;
+    padding: .25rem;
+    gap: .25rem;
+    background: var(--jth-cream);
+    border: 1px solid var(--jth-forest);
+    border-radius: 999px;
+  }
+  .ab-bar__option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .1rem;
+    min-width: 9.5rem;
+    padding: .5rem 1.1rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--jth-forest);
+    font-family: inherit;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background 160ms ease, color 160ms ease;
+  }
+  .ab-bar__option-name { font-family: var(--jth-ui); font-weight: 700; font-size: .92rem; text-transform: uppercase; letter-spacing: .02em; }
+  .ab-bar__option-detail { font-family: var(--jth-ui); font-size: .76rem; letter-spacing: .01em; opacity: .7; }
+  .ab-bar__option[aria-pressed='true'] { background: var(--jth-forest); color: var(--jth-cream); }
+  .ab-bar__option[aria-pressed='true'] .ab-bar__option-detail { opacity: .85; }
+  .ab-bar__option:not([aria-pressed='true']):hover { background: rgba(30, 61, 52, .1); }
+  .ab-bar__option:focus-visible { outline: 3px solid var(--jth-forest); outline-offset: 2px; }
+
+  @media (max-width: 700px) {
+    .ab-bar { top: 68px; }
+    .ab-bar__inner { padding: .75rem 1rem; }
+    .ab-bar__option { min-width: 0; padding: .45rem .85rem; }
+  }
 
   .hero {
     position: relative;

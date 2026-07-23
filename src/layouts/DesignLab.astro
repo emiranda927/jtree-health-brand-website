@@ -1,4 +1,10 @@
 ---
+import '@fontsource/sigmar/400.css';
+import '@fontsource/volkhov/400.css';
+import '@fontsource/volkhov/400-italic.css';
+import '@fontsource/volkhov/700.css';
+import '@fontsource/volkhov/700-italic.css';
+
 interface Props {
   title?: string;
   description?: string;
@@ -44,6 +50,8 @@ const {
     font-display: swap;
   }
 
+  /* Current (live-site) faces — kept alongside the proposed faces below so the
+     A/B toggle on the design-lab page can flip instantly, with no reload. */
   @font-face {
     font-family: 'Misoka Heavy';
     src: url('/brand-v2/fonts/misoka-heavy.ttf') format('truetype');
@@ -51,7 +59,6 @@ const {
     font-weight: 900;
     font-display: swap;
   }
-
   @font-face {
     font-family: 'Fraunces SuperSoft';
     src: url('/brand-v2/fonts/fraunces-supersoft-regular.ttf') format('truetype');
@@ -59,7 +66,6 @@ const {
     font-weight: 400;
     font-display: swap;
   }
-
   @font-face {
     font-family: 'Fraunces SuperSoft';
     src: url('/brand-v2/fonts/fraunces-supersoft-semibold.ttf') format('truetype');
@@ -79,10 +85,28 @@ const {
     --jth-ink-soft: #4d625b;
     --jth-line: rgba(30, 61, 52, 0.18);
     --jth-display: 'Batica Sans', Arial, sans-serif;
-    --jth-impact: 'Misoka Heavy', 'Batica Sans', Arial, sans-serif;
-    --jth-editorial: 'Fraunces SuperSoft', Georgia, serif;
-    --jth-body: 'Fraunces SuperSoft', Georgia, serif;
     --jth-ui: 'Batica Sans', Arial, sans-serif;
+
+    /* --- Typography A/B test ---------------------------------------------
+       Two named font pairings for the impact (headings/nav/buttons) and
+       editorial (body) roles. `data-typeface` on <html> selects which one
+       is live; see the toggle script on the design-lab page. Defaults to
+       the proposed pairing. --jth-ui / --jth-display (Batica Sans) are
+       intentionally excluded from the test so the toggle control itself
+       and the page's main headline stay stable while switching. --- */
+    --jth-impact-current: 'Misoka Heavy', 'Batica Sans', Arial, sans-serif;
+    --jth-editorial-current: 'Fraunces SuperSoft', Georgia, serif;
+    --jth-impact-proposed: 'Sigmar', 'Batica Sans', Arial, sans-serif;
+    --jth-editorial-proposed: 'Volkhov', Georgia, serif;
+
+    --jth-impact: var(--jth-impact-proposed);
+    --jth-editorial: var(--jth-editorial-proposed);
+    --jth-body: var(--jth-editorial);
+  }
+
+  html[data-typeface='current'] {
+    --jth-impact: var(--jth-impact-current);
+    --jth-editorial: var(--jth-editorial-current);
   }
 
   * { box-sizing: border-box; }
