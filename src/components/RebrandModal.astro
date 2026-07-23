@@ -14,7 +14,7 @@
  * file and its <RebrandModal /> include in Base.astro.
  *
  * Design: Claude Design "Rebrand Redirect Modal" (Forest split → mobile bottom
- * sheet). Mapped onto the site's real brand faces (Batica Sans / Misoka Heavy) and
+ * sheet). Mapped onto the site's real brand faces (Batica Sans / Sigmar) and
  * canonical tokens rather than the reference's Google-font/hex stand-ins.
  */
 
@@ -53,7 +53,8 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
   /* Self-contained: the modal mounts at <body> level (outside .brand-page), so it
      carries its own values instead of relying on brand-page-scoped tokens. Colors
      reuse the global :root brand tokens where they exist; fonts reference the real
-     faces directly (both are declared @font-face at global scope). */
+     faces directly — Batica Sans is declared @font-face in global.css, Sigmar
+     loads via the Fontsource import in Base.astro. */
   .rbm-overlay {
     --rbm-forest: var(--color-deep-green, #1e3d34);
     --rbm-cream: var(--color-cream, #fffaf3);
@@ -63,7 +64,7 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
     --rbm-on-dark: rgba(246, 241, 228, 0.82);
     --rbm-ease: var(--ease-soft, cubic-bezier(0.22, 1, 0.36, 1));
     --rbm-font-body: "Batica Sans", "Sora Variable", ui-sans-serif, system-ui, sans-serif;
-    --rbm-font-label: "Misoka Heavy", "Batica Sans", "Sora Variable", ui-sans-serif, sans-serif;
+    --rbm-font-label: "Sigmar", "Batica Sans", "Sora Variable", ui-sans-serif, sans-serif;
 
     position: fixed;
     inset: 0;
