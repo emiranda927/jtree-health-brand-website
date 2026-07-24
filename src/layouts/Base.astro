@@ -118,10 +118,14 @@ const jtreeConfig = {
     <meta name="googlebot" content={robots} />
     <link rel="canonical" href={canonical.href} />
 
-    <link rel="icon" type="image/svg+xml" href="/brand-v2/logos/submark-forest.svg?v=20260719" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/brand-v2/logos/favicon-32.png?v=20260719" />
-    <link rel="icon" type="image/png" sizes="64x64" href="/brand-v2/logos/favicon-64.png?v=20260719" />
-    <link rel="apple-touch-icon" href="/brand-v2/logos/apple-touch-icon.png?v=20260719" />
+    <!-- Google's favicon crawler wants a multiple of 48px and falls back to /favicon.ico -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48 96x96" />
+    <link rel="icon" type="image/svg+xml" href="/brand-v2/logos/submark-forest.svg?v=20260724" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand-v2/logos/favicon-32.png?v=20260724" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/brand-v2/logos/favicon-48.png?v=20260724" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/brand-v2/logos/favicon-96.png?v=20260724" />
+    <link rel="icon" type="image/png" sizes="144x144" href="/brand-v2/logos/favicon-144.png?v=20260724" />
+    <link rel="apple-touch-icon" href="/brand-v2/logos/apple-touch-icon.png?v=20260724" />
     <meta name="theme-color" content="#183b2e" />
 
     <meta property="og:type" content="website" />
