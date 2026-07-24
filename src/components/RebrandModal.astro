@@ -1,17 +1,19 @@
 ---
 /*
- * RebrandModal — one-time "Simply Teens is now Joshua Tree Health" welcome.
+ * RebrandModal — "Simply Teens is now Joshua Tree Health" welcome.
  *
- * Shows ONLY for visitors who arrive via a Simply Teens 301 redirect, which is
+ * Shows for every visitor who arrives via a Simply Teens 301 redirect, which is
  * detected by the `?from=simplyteens` tag appended to every redirect destination
  * (the RankMath redirect map). Referrer is intentionally NOT used — the site's
  * Referrer-Policy: strict-origin-when-cross-origin plus 301s from direct/Google
  * traffic strip it for most visitors, so the URL tag is the reliable signal.
  *
- * Behaviour: fire once per visitor (localStorage) and strip the tag from the
- * address bar after reading it. Always on while ENABLED (below) is true — turn it
- * off by flipping ENABLED to false, or remove the feature entirely by deleting this
- * file and its <RebrandModal /> include in Base.astro.
+ * Behaviour: fires on every redirect visit (no per-visitor suppression — the tag
+ * only appears on an actual redirect, so normal browsing/repeat visits without
+ * the tag never trigger it) and strips the tag from the address bar after
+ * reading it. Always on while ENABLED (below) is true — turn it off by flipping
+ * ENABLED to false, or remove the feature entirely by deleting this file and its
+ * <RebrandModal /> include in Base.astro.
  *
  * Design: Claude Design "Rebrand Redirect Modal" (Forest split → mobile bottom
  * sheet). Mapped onto the site's real brand faces (Batica Sans / Sigmar) and
@@ -256,14 +258,7 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
     'use strict';
     var PARAM = 'from';
     var VALUE = 'simplyteens';
-    var STORAGE_KEY = 'jth_rebrand_seen';
 
-    function alreadySeen() {
-      try { return localStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { return false; }
-    }
-    function markSeen() {
-      try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
-    }
     /* Remove ?from=simplyteens without reloading; keep any other query params. */
     function stripTag() {
       try {
@@ -285,7 +280,6 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
       document.documentElement.style.overflow = 'hidden';
 
       function close() {
-        markSeen();
         document.removeEventListener('keydown', onKey);
         document.documentElement.style.overflow = '';
         overlay.remove();
@@ -302,8 +296,7 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
       }
 
       overlay.addEventListener('click', function (e) {
-        var link = e.target.closest('[data-rbm-link]');
-        if (link) { markSeen(); return; } /* let "What changed" navigate */
+        if (e.target.closest('[data-rbm-link]')) return; /* let "What changed" navigate */
         if (e.target.closest('[data-rbm-dismiss]')) { e.preventDefault(); close(); }
       });
       document.addEventListener('keydown', onKey);
@@ -316,7 +309,7 @@ const ABOUT_HREF = '/about';      // "What changed →" destination (the rebrand
       var params = new URLSearchParams(window.location.search);
       if (params.get(PARAM) !== VALUE) return;
       stripTag(); /* always clean the URL once we've read the tag */
-      if (!ENABLED || alreadySeen()) return;
+      if (!ENABLED) return;
       open();
     }
 
