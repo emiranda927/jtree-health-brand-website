@@ -1,0 +1,41 @@
+"on":
+  schedule:
+    # 07:10 UTC daily = 3:10 AM EDT / 2:10 AM EST. Quiet hours either way.
+    - cron: "10 7 * * *"
+  workflow_dispatch:
+
+name: Nightly rebuild
+
+# The site is a static Astro build, so anything date-gated (the homepage
+# announcement callout, upcoming vs past on /news/, the "Passed" flags on the
+# workshop schedule) is frozen at whatever `new Date()` returned during the last
+# deploy. This job redeploys once a day so those roll over on their own.
+#
+# Vercel's own cron needs serverless functions and this project has no adapter,
+# hence GitHub Actions plus a Vercel Deploy Hook.
+#
+# Setup (one time, needs Vercel + GitHub admin):
+#   1. Vercel > Project > Settings > Git > Deploy Hooks: create one on `main`.
+#   2. GitHub > Settings > Secrets and variables > Actions: save the URL as
+#      VERCEL_DEPLOY_HOOK_URL.
+# Until that secret exists this job fails loudly rather than passing silently.
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy hook
+        env:
+          HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK_URL" ]; then
+            echo "::error::VERCEL_DEPLOY_HOOK_URL is not set. Date-gated content will not roll over."
+            exit 1
+          fi
+          status=$(curl -sS -o /tmp/body -w '%{http_code}' -X POST "$HOOK_URL")
+          echo "Deploy hook responded $status"
+          cat /tmp/body
+          case "$status" in
+            2*) ;;
+            *) echo "::error::Deploy hook failed with HTTP $status"; exit 1 ;;
+          esac

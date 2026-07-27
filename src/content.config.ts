@@ -197,7 +197,7 @@ const learningHubPage = defineCollection({
         title: z.string().min(1),
         body: z.string().min(1),
         href: z.string().startsWith('/'),
-      })).length(4),
+      })).min(4).max(6),
       itemCta: z.string().min(1),
     }),
     closing: z.object({
@@ -208,4 +208,85 @@ const learningHubPage = defineCollection({
   }),
 });
 
-export const collections = { homePage, aboutPage, teamPage, learningHubPage };
+/*
+ * News — time-bound announcements and events.
+ *
+ * One file per item. `kind` decides the JSON-LD: 'event' emits schema.org Event
+ * (one per session, since sessions are booked individually), 'announcement'
+ * emits Article. Dates are plain ISO date strings; times are local to the clinic
+ * (America/New_York) and are stamped onto the ISO 8601 values at render time.
+ *
+ * Anything date-gated (the homepage callout, upcoming vs past) is resolved at
+ * BUILD time — the site is static, so the nightly Vercel cron in vercel.json is
+ * what actually makes these roll over. Without it, dates freeze at last deploy.
+ */
+const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Use YYYY-MM-DD');
+const isoTime = z.string().regex(/^\d{2}:\d{2}$/, 'Use HH:MM (24h)');
+
+const news = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/content/news' }),
+  schema: z.object({
+    kind: z.enum(['event', 'announcement']),
+    title: z.string().min(1),
+    seo: seoSchema,
+    // Shown on the index card and used as the meta/schema description.
+    summary: z.string().min(1),
+    // Drives ordering on the index and the upcoming/past split.
+    publishDate: isoDate,
+    // Last day the item is treated as current. For an event series this is the
+    // final session; after it passes the item moves to "Past" and the homepage
+    // callout stops rendering.
+    endDate: isoDate,
+    // Homepage callout. Omit `homeUntil` to fall back to `endDate`.
+    featureOnHome: z.boolean().default(false),
+    homeUntil: isoDate.optional(),
+    callout: z.object({
+      eyebrow: z.string().min(1),
+      title: z.string().min(1),
+      body: z.string().min(1),
+      cta: z.string().min(1),
+    }).optional(),
+    hero: z.object({
+      eyebrow: z.string().min(1),
+      sub: z.string().min(1),
+    }),
+    intro: z.array(z.string().min(1)).min(1),
+    // Event-only fields.
+    event: z.object({
+      startTime: isoTime,
+      endTime: isoTime,
+      priceLabel: z.string().min(1),
+      price: z.number().nonnegative(),
+      priceCurrency: z.string().length(3).default('USD'),
+      registrationUrl: z.string().url(),
+      registrationLabel: z.string().min(1),
+      locationName: z.string().min(1),
+      streetAddress: z.string().min(1),
+      addressLocality: z.string().min(1),
+      addressRegion: z.string().min(1),
+      postalCode: z.string().min(1),
+      details: z.array(textPairSchema).min(1),
+      sessions: z.array(z.object({
+        date: isoDate,
+        topic: z.string().min(1),
+        // Optional deep link to the clinical page that covers this topic.
+        href: z.string().startsWith('/').optional(),
+      })).min(1),
+    }).optional(),
+    // Optional printable asset (the referral-partner flier).
+    download: z.object({
+      label: z.string().min(1),
+      href: z.string().startsWith('/'),
+    }).optional(),
+    closing: z.object({
+      title: z.string().min(1),
+      body: z.string().min(1),
+      primaryCta: z.string().min(1),
+    }),
+  }).refine((d) => d.kind !== 'event' || d.event, {
+    message: 'kind: "event" requires an `event` block',
+    path: ['event'],
+  }),
+});
+
+export const collections = { homePage, aboutPage, teamPage, learningHubPage, news };

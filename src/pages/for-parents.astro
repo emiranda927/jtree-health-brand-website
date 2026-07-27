@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import BrandPageHero from '../components/BrandPageHero.astro';
+import NewsPromo from '../components/NewsPromo.astro';
 import { Image } from 'astro:assets';
 import parentHero from '../assets/images/hero-background.webp';
 
@@ -136,6 +137,12 @@ const faqs = [
           </details>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Upcoming for parents">
+    <div class="container-x">
+      <NewsPromo note="We run a workshop series for parents on Tuesday evenings, covering the things this page only has room to summarize: power struggles, boundaries, anxiety, and what to do in hard moments. Your teen does not need to be a patient here." />
     </div>
   </section>
 

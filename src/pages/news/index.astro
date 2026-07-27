@@ -1,0 +1,118 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getNews, formatShortDate, upcomingSessions } from '../../lib/news';
+
+const { current, past } = await getNews();
+
+const nextSessionLabel = (entry: typeof current[number]) => {
+  const next = upcomingSessions(entry)[0];
+  return next ? `Next: ${formatShortDate(next.date)}` : null;
+};
+---
+<Base
+  bodyClass="brand-page rollout-page"
+  title="News & Events | Joshua Tree Health"
+  description="Workshops, groups, and announcements from Joshua Tree Health, the adolescent PHP and IOP program in Apex, North Carolina."
+>
+  <PageHero
+    eyebrow="News & events"
+    art="happy"
+    title="What's happening here."
+    sub="Workshops, groups, and announcements. If something has a date on it, you'll find it here."
+  />
+
+  <!-- ===== CURRENT ===== -->
+  <section class="section" aria-labelledby="news-current-title">
+    <div class="container-x">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Happening now</p>
+        <h2 class="section-title font-display" id="news-current-title">Open to families right now.</h2>
+      </div>
+      {current.length > 0 ? (
+        <div class="grid-2" data-reveal-group>
+          {current.map((entry) => (
+            <a class="info-card info-card--hover" href={`/news/${entry.id}/`} data-reveal-item>
+              {nextSessionLabel(entry) && (
+                <p class="news-card__meta">{nextSessionLabel(entry)}</p>
+              )}
+              <h3 class="info-card__title">{entry.data.title}</h3>
+              <p class="info-card__body">{entry.data.summary}</p>
+              <span class="link-arrow">Read more →</span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="prose" data-reveal>
+          <p>
+            Nothing scheduled at the moment. Our programs run year round, so if you're
+            looking for care rather than an event, <a href="/get-started">start here</a> or
+            call <a href="tel:+19193355053">(919) 335-5053</a>.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {past.length > 0 && (
+    <!-- ===== PAST ===== -->
+    <section class="section surface-cream-deep" aria-labelledby="news-past-title">
+      <div class="container-x">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Archive</p>
+          <h2 class="section-title font-display" id="news-past-title">Already happened.</h2>
+          <p class="section-sub">Kept here so the details stay findable. These are no longer open for signup.</p>
+        </div>
+        <ul class="news-past" data-reveal-group>
+          {past.map((entry) => (
+            <li data-reveal-item>
+              <a href={`/news/${entry.id}/`}>
+                <span class="news-past__title">{entry.data.title}</span>
+                <span class="news-past__date">Ended {formatShortDate(entry.data.endDate)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- ===== CLOSING CTA ===== -->
+  <section class="section surface-green" aria-labelledby="news-cta-title">
+    <div class="container-x">
+      <div class="section-head section-head--center" data-reveal>
+        <h2 class="section-title font-display" id="news-cta-title">Looking for care, not a calendar?</h2>
+        <p class="section-sub">One call is enough to find out whether Joshua Tree is the right fit for your teen.</p>
+        <div class="page-hero__actions">
+          <a class="btn btn--on-dark" href="/get-started">Start the Conversation <span class="btn__arrow">→</span></a>
+          <a class="btn btn--ghost-on-dark" href="tel:+19193355053">Call (919) 335-5053</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .news-card__meta {
+    font-family: var(--font-head);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-lavender-deep);
+  }
+
+  .news-past { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--color-line-strong); }
+  .news-past li { border-bottom: 1px solid var(--color-line-strong); }
+  .news-past a {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 1.1rem 0;
+    text-decoration: none;
+  }
+  .news-past__title { font-family: var(--font-display); font-weight: 700; color: var(--color-deep-green); }
+  .news-past__date { font-size: 0.95rem; color: var(--color-ink-soft); }
+  .news-past a:hover .news-past__title { text-decoration: underline; text-underline-offset: 0.2em; }
+</style>
