@@ -8,6 +8,7 @@
     "start": "astro dev",
     "build": "astro build",
     "check:seo": "node scripts/seo-audit.mjs",
+    "gen:favicons": "node scripts/generate-favicons.mjs",
     "verify": "npm run build && npm run check:seo",
     "preview": "astro preview",
     "astro": "astro"
