@@ -1,0 +1,67 @@
+---
+/*
+ * NewsPromo — inline pointer from an evergreen clinical page to whatever
+ * time-bound thing is currently running.
+ *
+ * Renders nothing when no news item is active, so the host pages need no edits
+ * when a series ends. Like everything date-gated on this site it resolves at
+ * BUILD time; the nightly cron in vercel.json is what retires it.
+ *
+ * Deliberately not a Field or a card grid — it's a quiet note on Paper, so it
+ * can sit on any page without spending that page's accent budget (DESIGN.md §4).
+ */
+import { homeCallout, upcomingSessions, formatLongDate } from '../lib/news';
+
+interface Props {
+  /** Page-specific framing. Falls back to the item's own callout body. */
+  note?: string;
+}
+
+const { note } = Astro.props;
+const featured = await homeCallout();
+const next = featured ? upcomingSessions(featured)[0] : undefined;
+const featuredHref = featured
+  ? `/news/${featured.id}/${featured.data.event ? '#workshop-schedule-title' : ''}`
+  : '';
+---
+{featured && (
+  <aside class="news-promo" data-reveal>
+    <p class="news-promo__eyebrow">{featured.data.callout?.eyebrow ?? 'Upcoming'}</p>
+    <p class="news-promo__body">
+      {note ?? featured.data.callout?.body ?? featured.data.summary}
+    </p>
+    {next && <p class="news-promo__next">Next session: {formatLongDate(next.date)}</p>}
+    <a class="link-arrow" href={featuredHref}>{featured.data.title} →</a>
+  </aside>
+)}
+
+<style>
+  .news-promo {
+    max-width: 42rem;
+    margin-block: clamp(2.5rem, 4vw, 3.5rem);
+    padding: 1.4rem 1.6rem;
+    border: 1px solid var(--color-lavender);
+    border-radius: var(--radius);
+    background: var(--color-lavender-soft);
+  }
+  .news-promo__eyebrow {
+    font-family: var(--font-head);
+    font-size: 0.78rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--color-lavender-deep);
+  }
+  .news-promo__body {
+    margin-top: 0.5rem;
+    color: var(--color-deep-green);
+    font-size: var(--type-reading);
+    line-height: 1.6;
+  }
+  .news-promo__next {
+    margin-top: 0.55rem;
+    font-size: 0.92rem;
+    color: var(--color-deep-green);
+    opacity: 0.75;
+  }
+  .news-promo .link-arrow { margin-top: 0.9rem; }
+</style>

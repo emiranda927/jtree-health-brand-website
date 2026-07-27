@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import NewsPromo from '../components/NewsPromo.astro';
 
 // Condition cards follow the founder guide's format (EHR order), filtered
 // through docs/CLAIM_REGISTER.md.
@@ -351,6 +352,12 @@ const faqSchema = {
         </div>
         <a href="/insurance" class="link-arrow">See insurance details →</a>
       </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Upcoming for parents">
+    <div class="container-x">
+      <NewsPromo note="Our parent workshop series takes several of these conditions one at a time, including anxiety, depression, ADHD, and autism, in sessions built for parents rather than clinicians. Open whether or not your teen is a patient here." />
     </div>
   </section>
 

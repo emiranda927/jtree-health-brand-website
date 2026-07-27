@@ -1,0 +1,77 @@
+{
+  "kind": "event",
+  "title": "Parent Psychoeducation & Skills Workshop",
+  "seo": {
+    "title": "Parent Psychoeducation & Skills Workshop | Apex, NC",
+    "description": "A 12-week workshop for parents of teens and preteens in Apex, NC. Tuesdays, 5 to 6:30 PM. $30 per session, no enrollment required."
+  },
+  "summary": "Twelve Tuesday evenings of practical skills for parents in Apex, July 28 through October 14. $30 per session, come to one or all twelve.",
+  "publishDate": "2026-07-27",
+  "endDate": "2026-10-14",
+  "featureOnHome": true,
+  "callout": {
+    "eyebrow": "Now enrolling",
+    "title": "A weekly workshop for parents",
+    "body": "Practical sessions on anxiety, boundaries, communication, and more. $30 each, come to what fits your week.",
+    "cta": "See the schedule"
+  },
+  "hero": {
+    "eyebrow": "Parent workshop",
+    "sub": "Twelve Tuesday evenings, 5 to 6:30 PM, taught by the clinicians who work with teens every day."
+  },
+  "intro": [
+    "This workshop teaches the same language and skills our clinical team uses with teens. There's no enrollment and no prerequisite: come to one session or all twelve.",
+    "It's for parents and caregivers only; teens aren't part of the room. Sessions combine psychoeducation with DBT-informed skills practice, and you're welcome whether or not your teen is a current patient here."
+  ],
+  "event": {
+    "startTime": "17:00",
+    "endTime": "18:30",
+    "priceLabel": "$30 per session",
+    "price": 30,
+    "priceCurrency": "USD",
+    "registrationUrl": "https://docs.google.com/forms/d/e/1FAIpQLSc77aYwJUbfRNtXWjsmZf_fGepor5bwjyBvLlTpfiJKKMq6ww/viewform",
+    "registrationLabel": "Sign up for a session",
+    "locationName": "Joshua Tree Health",
+    "streetAddress": "800 West Williams St, Suite 203",
+    "addressLocality": "Apex",
+    "addressRegion": "NC",
+    "postalCode": "27502",
+    "details": [
+      {
+        "title": "When",
+        "body": "Tuesdays, 5:00 to 6:30 PM, July 28 through October 14, 2026."
+      },
+      {
+        "title": "Where",
+        "body": "Joshua Tree Health, 800 West Williams St, Suite 203, Apex, NC 27502."
+      },
+      {
+        "title": "Cost",
+        "body": "$30 per session. No package, no minimum number of sessions."
+      },
+      {
+        "title": "Who it's for",
+        "body": "Parents and caregivers of teens and preteens, whether or not your teen is a current patient here."
+      }
+    ],
+    "sessions": [
+      { "date": "2026-07-28", "topic": "Understanding teen mental health", "href": "/what-we-treat" },
+      { "date": "2026-08-04", "topic": "Understanding the nervous system", "href": "/what-we-offer/our-approach/nervous-system-regulation" },
+      { "date": "2026-08-11", "topic": "Why emotions make sense", "href": "/what-we-offer/our-approach/dbt" },
+      { "date": "2026-08-18", "topic": "Parenting without power struggles", "href": "/for-parents" },
+      { "date": "2026-08-25", "topic": "Teen & preteen anxiety", "href": "/what-we-treat" },
+      { "date": "2026-09-01", "topic": "Teen & preteen depression", "href": "/what-we-treat" },
+      { "date": "2026-09-08", "topic": "Trust building communication", "href": "/what-we-offer/our-approach/family-therapy" },
+      { "date": "2026-09-15", "topic": "Boundaries & consequences", "href": "/for-parents" },
+      { "date": "2026-09-22", "topic": "Self-harm, suicide, & safety", "href": "/crisis" },
+      { "date": "2026-09-29", "topic": "Building resilience", "href": "/what-we-offer/our-approach" },
+      { "date": "2026-10-06", "topic": "Understanding autism / ASD", "href": "/what-we-treat" },
+      { "date": "2026-10-14", "topic": "Understanding ADHD", "href": "/what-we-treat" }
+    ]
+  },
+  "closing": {
+    "title": "Not sure it's the right fit?",
+    "body": "Call and ask. We'd rather talk it through than have you guess.",
+    "primaryCta": "Start the Conversation"
+  }
+}

@@ -2,10 +2,21 @@
 import Base from '../layouts/Base.astro';
 import FigmaHeroArt from '../components/brand/FigmaHeroArt.astro';
 import { getEntry } from 'astro:content';
+import { homeCallout, upcomingSessions, formatLongDate } from '../lib/news';
 
 const homeEntry = await getEntry('homePage', 'home');
 if (!homeEntry) throw new Error('Missing CMS content: home page');
 const content = homeEntry.data;
+
+// Time-bound callout from the news collection. Resolved at build time, so the
+// nightly Vercel cron is what retires it — see vercel.json.
+const featured = await homeCallout();
+const featuredNext = featured ? upcomingSessions(featured)[0] : undefined;
+// The callout's CTA promises a schedule, so land on it rather than the top
+// of the page the reader would have to scroll past again.
+const featuredHref = featured
+  ? `/news/${featured.id}/${featured.data.event ? '#workshop-schedule-title' : ''}`
+  : '';
 
 const conditionVisuals = [
   {
@@ -202,6 +213,28 @@ const conditions = content.pathways.conditions.map((condition, index) => ({
       </ol>
     </div>
   </section>
+
+  {featured && featured.data.callout && (
+    <section class="section announce" aria-labelledby="announce-title">
+      <div class="container-x">
+        <div class="announce__card" data-reveal>
+          <div class="announce__copy">
+            <p class="eyebrow">{featured.data.callout.eyebrow}</p>
+            <h2 class="announce__title font-display" id="announce-title">{featured.data.callout.title}</h2>
+            <p class="announce__body">{featured.data.callout.body}</p>
+            {featuredNext && (
+              <p class="announce__next">Next session: {formatLongDate(featuredNext.date)}</p>
+            )}
+          </div>
+          <div class="announce__actions">
+            <a class="btn" href={featuredHref}>
+              {featured.data.callout.cta} <span class="btn__arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
 
   <section class="section location" aria-labelledby="location-title">
     <div class="container-x location__grid">
@@ -411,6 +444,47 @@ const conditions = content.pathways.conditions.map((condition, index) => ({
   .quote__punct { width: clamp(118px, 10vw, 164px); margin: 0 auto 2.4rem; }
   .quote__text { color: var(--color-deep-green); font-size: clamp(2.2rem, 4.5vw, 4.5rem); line-height: 1.02; }
   .quote__cite { margin-top: 1.8rem; font-family: var(--font-head); font-size: .98rem; line-height: 1.2; text-transform: uppercase; letter-spacing: .025em; }
+
+  /* Time-bound announcement. Paper section holding one flat lavender card, so it
+     reads as a notice without spending the page's Field budget (DESIGN.md §4). */
+  .announce { background: var(--color-cream); padding-block: clamp(2.5rem, 4vw, 4rem); }
+  .announce__card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.75rem 3rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(1.75rem, 3.5vw, 2.75rem);
+    background: var(--color-lavender-soft);
+    border: 1px solid var(--color-lavender);
+    border-radius: var(--radius-lg);
+  }
+  .announce__copy { flex: 1 1 22rem; }
+  .announce__title {
+    font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    color: var(--color-deep-green);
+    margin-top: 0.35rem;
+  }
+  .announce__body {
+    margin-top: 0.75rem;
+    max-width: 44ch;
+    color: var(--color-deep-green);
+    opacity: 0.86;
+    font-size: var(--type-reading);
+    line-height: 1.6;
+  }
+  .announce__next {
+    margin-top: 0.85rem;
+    font-family: var(--font-head);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-lavender-deep);
+  }
+  .announce__actions { flex: 0 0 auto; }
 
   .location { overflow: clip; background: var(--color-cream); }
   .location__grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: clamp(3rem, 6vw, 7rem); }
