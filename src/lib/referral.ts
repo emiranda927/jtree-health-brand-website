@@ -35,7 +35,17 @@ function init(root: HTMLElement) {
     });
     panels.forEach((p) => p.classList.toggle('is-hidden', p.dataset.panel !== name));
   };
-  tabs.forEach((t) => t.addEventListener('click', () => showTab(t.dataset.tab || 'full')));
+  tabs.forEach((t) => t.addEventListener('click', () => {
+    const name = t.dataset.tab || 'full';
+    showTab(name);
+    // The "full" tab looks like a CTA and is the default-active state, so a
+    // click on it (even when already active) should behave like clicking the
+    // "Open clinical referral form" link below it, not just toggle a panel.
+    if (name === 'full') {
+      const link = root.querySelector<HTMLAnchorElement>('[data-panel="full"] .chooser__cta');
+      if (link) window.open(link.href, '_blank', 'noopener');
+    }
+  }));
   root.querySelectorAll<HTMLAnchorElement>('[data-goto]').forEach((link) => {
     link.addEventListener('click', (e) => { e.preventDefault(); showTab(link.dataset.goto || 'quick'); });
   });
