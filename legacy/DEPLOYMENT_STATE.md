@@ -1,5 +1,7 @@
 # JTree Health — Deployment State (2026-05-26)
 
+> **⚠️ STALE — archived launch-day snapshot, not current state.** This describes the original WordPress/Flywheel deployment plan, which was superseded by the Astro + Vercel site (see commit `3b5346b`, 2026-06-22). Kept here for historical reference only — do not treat any value below as live config. In particular: the "Vercel env vars currently set" table (§2) reflects values from before `admissions@jtreehealth.com` was split off from `eliseo@jtreehealth.com` into its own account; those `ADMISSIONS_EMAIL` / `OWNER_ALERT_EMAIL` values are known to be wrong as of 2026-07-22 (they caused admissions inquiries to route to Eliseo's personal inbox — see `jtree-vercel-infra` memory). Check the live Vercel dashboard for actual current values.
+
 Snapshot for picking up the launch work in a new Claude session. Use this alongside `FRONT_END_REQUIREMENTS.md` (designer brief) and `site/AGENT_HANDOFF.md` (project architecture).
 
 ---
