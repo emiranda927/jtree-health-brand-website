@@ -3,6 +3,10 @@ import Base from '../layouts/Base.astro';
 
 const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 const isLegacyAdmissionsRoute = Astro.url.pathname === '/admissions' || Astro.url.pathname === '/admissions/';
+// The full Ritten intake. Offered alongside the short form for anyone ready to
+// give us everything up front; it cannot be embedded (X-Frame-Options), so it
+// opens in a new tab.
+const RITTEN_URL = 'https://joshuatreehealth.ritten.io/#/lead-application';
 
 const steps = [
   { n: '01', t: 'Call us or complete the form', b: "Call (919) 335-5053 or fill out the short form. We'll ask for some basic information about your teen and what's been going on. No commitment, no pressure." },
@@ -61,6 +65,10 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
         <div class="admissions__formwrap">
           <div class="admissions__formhead">
             <p>Admissions inquiry</p>
+            <a class="formhead__alt" href={RITTEN_URL} target="_blank" rel="noopener">
+              Full intake form <span aria-hidden="true">↗</span>
+              <span class="sr-only">(opens in a new tab)</span>
+            </a>
           </div>
           <form class="form" id="inquiry-form" novalidate>
             <div class="form-error-banner" role="alert" aria-live="assertive"></div>
@@ -148,12 +156,11 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
               does not apply to them.
             */}
             <div class="form__referral" data-referral-fields hidden>
-              <p class="form__referral-lead">Who referred you? This lets us send them updates on your teen's progress.</p>
+              <p class="form__referral-lead">Who referred you?</p>
               <div class="form__row form__row--2">
-                <div class="field field--req">
-                  <label for="referral_provider_name">Referring provider's name</label>
+                <div class="field">
+                  <label for="referral_provider_name">Referring provider's name <span class="field__opt">(optional)</span></label>
                   <input id="referral_provider_name" name="referral_provider_name" type="text" autocomplete="off" />
-                  <span class="jth-field-error" id="err-referral_provider_name"></span>
                 </div>
                 <div class="field">
                   <label for="referral_organization">Practice, school, or organization <span class="field__opt">(optional)</span></label>
@@ -313,10 +320,38 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
     box-shadow: var(--shadow);
   }
   .admissions__formhead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
     padding: 1.25rem clamp(1.5rem, 3vw, 2.25rem);
     background: var(--color-deep-green); color: var(--color-cream);
   }
   .admissions__formhead p { font-family: var(--font-head); font-size: 1.35rem; line-height: 1.12; letter-spacing: .02em; text-transform: uppercase; }
+  /* Escape hatch to the full Ritten intake for anyone ready to give us
+     everything now. Deliberately quieter than the form's own submit button. */
+  .formhead__alt {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border: 1.5px solid rgba(253, 251, 245, 0.45);
+    border-radius: 999px;
+    font-family: var(--font-head);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+    white-space: nowrap;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+  }
+  .formhead__alt:hover,
+  .formhead__alt:focus-visible {
+    background: rgba(253, 251, 245, 0.14);
+    border-color: var(--color-cream);
+  }
   .admissions__formwrap .form { padding: clamp(1.5rem, 3vw, 2.25rem); }
 
   .form-error-banner { display: none; padding: 0.8rem 1rem; border-radius: var(--radius); background: #efe5ed; border: 1px solid #c9a9bf; color: #6f3158; font-size: 0.95rem; }

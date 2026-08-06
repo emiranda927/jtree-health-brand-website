@@ -130,12 +130,9 @@ function init(form: HTMLFormElement) {
     if (!data.phone || !/^\d{10,11}$/.test(data.phone.replace(/\D/g, ''))) errors.push(['phone', 'Please enter a 10-digit phone number.']);
     if (!data.teen_age) errors.push(['teen_age', 'Please select your teen’s age.']);
     if (!data.program_interest) errors.push(['program_interest', 'Please pick a program.']);
-    // Only the provider's name is required, and only once the block is showing.
-    // Their practice and contact details are a bonus; a parent who does not know
-    // the therapist's email should not be blocked from reaching us.
-    if (referralShown() && !data.referral_provider_name?.trim()) {
-      errors.push(['referral_provider_name', 'Please tell us who referred you.']);
-    }
+    // Every referral field stays optional. "Referral" covers a friend or a
+    // relative as readily as a clinician, so someone can legitimately pick it
+    // and have no provider to name. Nothing here blocks reaching us.
     if (errors.length) { errors.forEach((er) => showError(er[0], er[1])); showBanner('Please fix the highlighted fields and try again.'); return; }
 
     const payload: Record<string, unknown> = {
