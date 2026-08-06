@@ -135,6 +135,9 @@ function init(root: HTMLElement) {
   // Level-of-care -> program_interest enum (IOP/PHP/Unsure).
   const mapProgram = (v: string): 'IOP' | 'PHP' | 'Unsure' => (v === 'IOP' || v === 'PHP' ? v : 'Unsure');
 
+  // Role, organization, the provider's own contact details, and the patient's
+  // initials are sent as real fields now, so they land in their own columns and
+  // reach the CRM card. Notes carries only what has nowhere else to go.
   const buildNotes = (d: Record<string, string>): string => {
     const locLabel = d.level_of_care === 'IOP' || d.level_of_care === 'PHP'
       ? d.level_of_care
@@ -142,8 +145,6 @@ function init(root: HTMLElement) {
     const lines = [
       'Provider referral (via website Quick referral).',
       `Role: ${d.role || '—'}`,
-      `Organization: ${d.organization?.trim() || '—'}`,
-      `Patient initials: ${d.patient_initials?.trim() || '—'}`,
       `Level of care requested: ${locLabel}`,
       `Timeframe: ${d.timeframe || 'Routine'}`,
       `Reason: ${d.reason?.trim() || '—'}`,
@@ -170,6 +171,7 @@ function init(root: HTMLElement) {
     const errors: [string, string][] = [];
     if (!data.name?.trim()) errors.push(['name', 'Please enter your name.']);
     if (!data.role) errors.push(['role', 'Please select your role.']);
+    if (!data.organization?.trim()) errors.push(['organization', 'Please enter your practice, school, or hospital.']);
     if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.push(['email', 'Please enter a valid email.']);
     if (!data.phone || !/^\d{10,11}$/.test(data.phone.replace(/\D/g, ''))) errors.push(['phone', 'Please enter a 10-digit phone number.']);
     if (!data.patient_age) errors.push(['patient_age', "Please select the patient's age."]);
@@ -177,14 +179,23 @@ function init(root: HTMLElement) {
 
     const payload: Record<string, unknown> = {
       name: data.name.trim(),
+      lead_type: 'provider',
       email: data.email.trim(),
       phone: data.phone.trim(),
       teen_age: parseInt(data.patient_age, 10),
       program_interest: mapProgram(data.level_of_care),
       how_did_you_hear: 'Referral',
+      // On this form the submitter IS the referral source, so it maps onto the
+      // same three fields the parent form uses. One place to look, either way.
+      referral_organization: data.organization.trim(),
+      referral_provider_name: data.name.trim(),
+      referral_provider_contact: data.email.trim(),
       notes: buildNotes(data),
       session_id: sessionId,
     };
+    // Initials are all we ask a provider for, and they title the CRM card far
+    // better than the referring clinician's own name did.
+    if (data.patient_initials?.trim()) payload.client_name = data.patient_initials.trim();
     const bt = mapBestTime(data.best_time);
     if (bt) payload.best_time_to_call = bt;
     if (utms.utm_source) payload.utm_source = utms.utm_source;
@@ -216,7 +227,7 @@ function init(root: HTMLElement) {
       else if (res.status >= 400 && res.status < 500 && body && Array.isArray(body.errors)) {
         // Map any API field errors we can surface; provider-form field names differ,
         // so unknown fields fall back to the banner.
-        const known = new Set(['name', 'email', 'phone']);
+        const known = new Set(['name', 'email', 'phone', 'organization', 'referral_organization']);
         body.errors.forEach((er: any) => { if (er && er.field && known.has(er.field)) showError(er.field, er.message); });
         showBanner('Please fix the highlighted fields and try again.');
       } else showBanner('Something went wrong on our side. Please call us at (919) 335-5053 and we’ll take it from there.');

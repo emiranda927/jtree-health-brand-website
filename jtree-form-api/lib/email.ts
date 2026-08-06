@@ -27,7 +27,7 @@ export async function sendEmailToAdmissions(lead: Lead): Promise<void> {
   const { error } = await resend.emails.send({
     from: "Joshua Tree Health <noreply@jtreehealth.com>",
     to: [to],
-    subject: `New Inquiry: ${lead.name} — ${lead.program_interest}`,
+    subject: buildLeadEmailSubject(lead),
     html,
   });
 
@@ -73,21 +73,49 @@ export async function sendAlertEmail(subject: string, body: string): Promise<voi
   logger.info("Alert email sent");
 }
 
+/**
+ * Inbox line. A provider referral and a parent inquiry used to arrive with the
+ * same "New Inquiry: <submitter>" subject, which put the referring clinician's
+ * name where admissions expects the client's. Lead the subject with the teen
+ * whenever we know who they are, and say plainly which kind of thing this is.
+ */
+export function buildLeadEmailSubject(lead: Lead): string {
+  const isProvider = lead.lead_type === "provider";
+  const who = lead.client_name?.trim() || (isProvider ? "patient TBD" : lead.name);
+  const kind = isProvider ? "New provider referral" : "New inquiry";
+  return `${kind}: ${who} (${lead.program_interest})`;
+}
+
 function buildLeadEmailHtml(lead: Lead): string {
+  const isProvider = lead.lead_type === "provider";
   const rows: Array<[string, string]> = [
     ["Lead ID", lead.lead_id],
     ["Submitted", new Date(lead.submitted_at).toLocaleString("en-US", { timeZone: "America/New_York" })],
-    ["Name", lead.name],
+    ["Type", isProvider ? "Provider referral" : "Parent / self-referral"],
+    [isProvider ? "Patient" : "Teen's name", lead.client_name || "—"],
+    [isProvider ? "Referring provider" : "Parent / guardian", lead.name],
     ["Email", lead.email],
     ["Phone", lead.phone],
     ["Teen Age", String(lead.teen_age)],
     ["Program Interest", lead.program_interest],
     ["Best Time to Call", lead.best_time_to_call ?? "—"],
     ["How Did You Hear", lead.how_did_you_hear ?? "—"],
+  ];
+
+  // Referral block — only when there is one, so parent inquiries stay short.
+  if (lead.referral_organization || lead.referral_provider_name || lead.referral_provider_contact) {
+    rows.push(
+      ["Referral organization", lead.referral_organization || "—"],
+      ["Referral contact", lead.referral_provider_name || "—"],
+      ["Referral contact info", lead.referral_provider_contact || "—"]
+    );
+  }
+
+  rows.push(
     ["ZIP", lead.zip ?? "—"],
     ["Insurance", lead.insurance ?? "—"],
-    ["Anything to know", lead.notes ?? "—"],
-  ];
+    ["Anything to know", lead.notes ?? "—"]
+  );
 
   const tableRows = rows
     .map(
@@ -102,7 +130,7 @@ function buildLeadEmailHtml(lead: Lead): string {
   return `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;max-width:600px;margin:0 auto;">
       <div style="background:#2d6a4f;color:white;padding:20px 24px;border-radius:8px 8px 0 0;">
-        <h2 style="margin:0;font-size:20px;">New Inquiry Received</h2>
+        <h2 style="margin:0;font-size:20px;">${isProvider ? "New Provider Referral" : "New Inquiry Received"}</h2>
         <p style="margin:4px 0 0;opacity:0.9;font-size:14px;">Joshua Tree Health — Admissions</p>
       </div>
       <table style="width:100%;border-collapse:collapse;border:1px solid #e2e8f0;">

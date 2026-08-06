@@ -61,6 +61,25 @@ function init(form: HTMLFormElement) {
   }
   const utms = readUtms();
   try { sessionStorage.setItem(UTM_KEY, JSON.stringify(utms)); } catch {}
+
+  // Referral fields appear only for referral-shaped sources. A parent who found
+  // us on Google is never shown them, so no one has to type "N/A" into a field
+  // that does not apply. Values are cleared on hide so a changed answer cannot
+  // leave stale provider details in the payload.
+  const REFERRAL_SOURCES = ['Referral', 'Doctor', 'School'];
+  const referralBlock = form.querySelector<HTMLElement>('[data-referral-fields]');
+  const sourceSelect = form.querySelector<HTMLSelectElement>('[name="how_did_you_hear"]');
+  const referralShown = () => !!referralBlock && !referralBlock.hidden;
+  const syncReferralFields = () => {
+    if (!referralBlock || !sourceSelect) return;
+    const show = REFERRAL_SOURCES.indexOf(sourceSelect.value) !== -1;
+    referralBlock.hidden = !show;
+    if (!show) {
+      referralBlock.querySelectorAll('input').forEach((el) => { el.value = ''; });
+    }
+  };
+  sourceSelect?.addEventListener('change', syncReferralFields);
+  syncReferralFields();
   // Preserve attribution without carrying query strings or fragments that may
   // contain names, search terms, or other sensitive information.
   const referrer = (() => {
@@ -106,14 +125,23 @@ function init(form: HTMLFormElement) {
 
     const errors: [string, string][] = [];
     if (!data.name?.trim()) errors.push(['name', 'Please enter your name.']);
+    if (!data.client_name?.trim()) errors.push(['client_name', 'Please enter your teen’s name.']);
     if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.push(['email', 'Please enter a valid email.']);
     if (!data.phone || !/^\d{10,11}$/.test(data.phone.replace(/\D/g, ''))) errors.push(['phone', 'Please enter a 10-digit phone number.']);
     if (!data.teen_age) errors.push(['teen_age', 'Please select your teen’s age.']);
     if (!data.program_interest) errors.push(['program_interest', 'Please pick a program.']);
+    // Only the provider's name is required, and only once the block is showing.
+    // Their practice and contact details are a bonus; a parent who does not know
+    // the therapist's email should not be blocked from reaching us.
+    if (referralShown() && !data.referral_provider_name?.trim()) {
+      errors.push(['referral_provider_name', 'Please tell us who referred you.']);
+    }
     if (errors.length) { errors.forEach((er) => showError(er[0], er[1])); showBanner('Please fix the highlighted fields and try again.'); return; }
 
     const payload: Record<string, unknown> = {
       name: data.name.trim(),
+      client_name: data.client_name.trim(),
+      lead_type: 'self',
       email: data.email.trim(),
       phone: data.phone.trim(),
       teen_age: parseInt(data.teen_age, 10),
@@ -125,6 +153,11 @@ function init(form: HTMLFormElement) {
     if (data.zip?.trim()) payload.zip = data.zip.trim();
     if (data.insurance) payload.insurance = data.insurance;
     if (data.notes?.trim()) payload.notes = data.notes.trim();
+    if (referralShown()) {
+      if (data.referral_provider_name?.trim()) payload.referral_provider_name = data.referral_provider_name.trim();
+      if (data.referral_organization?.trim()) payload.referral_organization = data.referral_organization.trim();
+      if (data.referral_provider_contact?.trim()) payload.referral_provider_contact = data.referral_provider_contact.trim();
+    }
     // Attribution — carried through so channel performance / CAC is measurable on completed leads.
     if (utms.utm_source) payload.utm_source = utms.utm_source;
     if (utms.utm_medium) payload.utm_medium = utms.utm_medium;

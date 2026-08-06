@@ -32,13 +32,32 @@ export const HowDidYouHear = z.enum([
   "Other",
 ]);
 
+/**
+ * Who sent this inquiry. `self` is a parent/guardian on /get-started; `provider`
+ * is a referring clinician using the Quick referral on /refer. Downstream code
+ * uses this to title the CRM card and the admissions email correctly, instead of
+ * inferring it from `how_did_you_hear`.
+ */
+export const LeadType = z.enum(["self", "provider"]);
+
 export const InquirySchema = z.object({
-  // One name — the form no longer asks "parent vs teen"; the pre-screen call
-  // clarifies who this is and captures the patient's name.
+  // The submitter: parent/guardian on /get-started, referring provider on /refer.
   name: z
     .string()
     .min(1, "Please enter your name")
     .max(100, "Name must be 100 characters or fewer"),
+
+  // The teen. Required in the browser (admissions can't open a chart without
+  // it) but OPTIONAL here on purpose: the site and this API deploy from the same
+  // push, so a hard requirement would 422 any page already open on the previous
+  // build. On /refer this carries the patient's initials, which is all the
+  // referring provider is asked for.
+  client_name: z
+    .string()
+    .max(100, "Name must be 100 characters or fewer")
+    .optional(),
+
+  lead_type: LeadType.optional().default("self"),
 
   email: z
     .string()
@@ -64,6 +83,14 @@ export const InquirySchema = z.object({
   // Optional, friction-reducing fields.
   best_time_to_call: BestTimeToCall.optional(),
   how_did_you_hear: HowDidYouHear.optional(),
+
+  // Referral attribution — ONE shape for both forms, so the team never has to
+  // look in two places for "who sent us this". On /get-started these are the
+  // provider the parent names (shown only when they say a provider sent them);
+  // on /refer they describe the submitting provider themselves.
+  referral_organization: z.string().max(100, "Organization too long").optional(),
+  referral_provider_name: z.string().max(100, "Name too long").optional(),
+  referral_provider_contact: z.string().max(200, "Contact too long").optional(),
   zip: z.string().max(10, "ZIP too long").optional(),
   insurance: z.string().max(60, "Insurance too long").optional(),
   notes: z.string().max(1000, "Please keep this under 1000 characters").optional(),

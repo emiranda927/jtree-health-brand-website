@@ -67,23 +67,31 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
 
             <div class="form__row form__row--2">
               <div class="field field--req">
-                <label for="name">Your name</label>
+                <label for="name">Parent or guardian name</label>
                 <input id="name" name="name" type="text" autocomplete="name" required />
                 <span class="jth-field-error" id="err-name"></span>
               </div>
               <div class="field field--req">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" autocomplete="email" required />
-                <span class="jth-field-error" id="err-email"></span>
+                <label for="client_name">Teen's name</label>
+                <input id="client_name" name="client_name" type="text" autocomplete="off" required />
+                <span class="jth-field-error" id="err-client_name"></span>
               </div>
             </div>
 
             <div class="form__row form__row--2">
               <div class="field field--req">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+                <span class="jth-field-error" id="err-email"></span>
+              </div>
+              <div class="field field--req">
                 <label for="phone">Phone</label>
                 <input id="phone" name="phone" type="tel" autocomplete="tel" required />
                 <span class="jth-field-error" id="err-phone"></span>
               </div>
+            </div>
+
+            <div class="form__row form__row--2">
               <div class="field field--req">
                 <label for="teen_age">Teen's age</label>
                 <select id="teen_age" name="teen_age" required>
@@ -92,9 +100,6 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
                 </select>
                 <span class="jth-field-error" id="err-teen_age"></span>
               </div>
-            </div>
-
-            <div class="form__row form__row--2">
               <div class="field field--req">
                 <label for="program_interest">Program of interest</label>
                 <select id="program_interest" name="program_interest" required>
@@ -103,6 +108,9 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
                 </select>
                 <span class="jth-field-error" id="err-program_interest"></span>
               </div>
+            </div>
+
+            <div class="form__row form__row--2">
               <div class="field">
                 <label for="best_time_to_call">Best time to call <span class="field__opt">(optional)</span></label>
                 <select id="best_time_to_call" name="best_time_to_call">
@@ -110,9 +118,6 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
                   {times.map((t) => <option value={t}>{t}</option>)}
                 </select>
               </div>
-            </div>
-
-            <div class="form__row form__row--2">
               <div class="field">
                 <label for="insurance">Insurance <span class="field__opt">(optional)</span></label>
                 <select id="insurance" name="insurance">
@@ -120,13 +125,13 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
                   {insurances.map((i) => <option value={i}>{i}</option>)}
                 </select>
               </div>
+            </div>
+
+            <div class="form__row form__row--2">
               <div class="field">
                 <label for="zip">ZIP code <span class="field__opt">(optional)</span></label>
                 <input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" />
               </div>
-            </div>
-
-            <div class="form__row form__row--2">
               <div class="field">
                 <label for="how_did_you_hear">How did you hear about us? <span class="field__opt">(optional)</span></label>
                 <select id="how_did_you_hear" name="how_did_you_hear">
@@ -134,7 +139,33 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
                   {sources.map((s) => <option value={s}>{s}</option>)}
                 </select>
               </div>
-              <div class="field"></div>
+            </div>
+
+            {/*
+              Referral capture, revealed only when the parent says a provider,
+              doctor, or school sent them. A parent who found us on Google never
+              sees these, so nobody is asked to type "N/A" into a field that
+              does not apply to them.
+            */}
+            <div class="form__referral" data-referral-fields hidden>
+              <p class="form__referral-lead">Who referred you? This lets us send them updates on your teen's progress.</p>
+              <div class="form__row form__row--2">
+                <div class="field field--req">
+                  <label for="referral_provider_name">Referring provider's name</label>
+                  <input id="referral_provider_name" name="referral_provider_name" type="text" autocomplete="off" />
+                  <span class="jth-field-error" id="err-referral_provider_name"></span>
+                </div>
+                <div class="field">
+                  <label for="referral_organization">Practice, school, or organization <span class="field__opt">(optional)</span></label>
+                  <input id="referral_organization" name="referral_organization" type="text" autocomplete="off" />
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="field">
+                  <label for="referral_provider_contact">Their email or phone <span class="field__opt">(optional)</span></label>
+                  <input id="referral_provider_contact" name="referral_provider_contact" type="text" autocomplete="off" />
+                </div>
+              </div>
             </div>
 
             <div class="form__row">
@@ -296,6 +327,24 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
   .form__note-link { color: var(--color-pine); border-bottom: 1.5px solid var(--color-lime); }
   .field__opt { font-family: "Batica Sans", Arial, sans-serif; font-weight: 400; color: var(--color-ink-faint); font-size: 0.9rem; letter-spacing: 0; text-transform: none; }
   .form__disclaimer { font-size: 0.95rem; color: var(--color-ink-faint); line-height: 1.58; margin: 0; }
+
+  /* Referral fields — revealed only for referral-shaped answers to "how did you
+     hear about us". [hidden] is the source of truth so the block stays collapsed
+     when JS has not run. */
+  .form__referral[hidden] { display: none; }
+  .form__referral {
+    padding: 1rem 1.1rem 0.35rem;
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius);
+    background: var(--color-cream);
+  }
+  .form__referral-lead {
+    margin: 0 0 0.9rem;
+    font-family: var(--font-sans);
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
   .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .cf-turnstile-box { min-height: 65px; }
   .btn.is-loading { opacity: 0.85; cursor: progress; }

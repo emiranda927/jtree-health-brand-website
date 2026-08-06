@@ -1,24 +1,33 @@
 /**
  * Google Sheets fallback writer.
  *
- * Writes inquiries to a single 12-column sheet:
- *   A: lead_id            G: teen_age            (blank for partials)
- *   B: submitted_at       H: program_interest
- *   C: parent_first_name  I: best_time_to_call
- *   D: parent_last_name   J: how_did_you_hear
- *   E: parent_email       K: status              ('lead' | 'partial')
- *   F: parent_phone       L: session_id
+ * Writes inquiries to a single 17-column sheet:
+ *   A: lead_id            G: teen_age            M: lead_type
+ *   B: submitted_at       H: program_interest    N: referral_organization
+ *   C: submitter_name     I: best_time_to_call   O: referral_provider_name
+ *   D: client_name        J: how_did_you_hear    P: referral_provider_contact
+ *   E: email              K: status              Q: notes
+ *   F: phone              L: session_id          (G–J, M–Q blank for partials)
  *
  * IMPORTANT: the existing sheet must have columns K + L added by hand (header
  * row: `status`, `session_id`). Pre-existing rows will have those cells blank,
- * which the admissions team can read as "lead" for legacy data.
+ * which the admissions team can read as "lead" for legacy data. Columns M–Q
+ * likewise need headers added by hand; rows written before then are still
+ * correct, just unlabelled.
+ *
+ * Column D was the old `parent_last_name` and sat empty from the single-name
+ * form onward. It now carries the teen's name, so the sheet keeps its original
+ * left-hand layout.
+ *
+ * Note that `countRecentLeads` reads `Leads!B:K` independently — widening the
+ * write range does not move the columns the watchdog depends on.
  */
 
 import { google } from "googleapis";
 import type { Lead, PartialLead } from "./validate.js";
 import { logger } from "./logger.js";
 
-const SHEET_RANGE = "Leads!A:L";
+const SHEET_RANGE = "Leads!A:Q";
 
 function getAuth() {
   const json = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
@@ -50,15 +59,17 @@ async function appendRow(row: string[]): Promise<void> {
   });
 }
 
-export async function appendLeadToSheet(lead: Lead): Promise<void> {
-  // Legacy mirror: the sheet keeps its original 12-column layout. The form now
-  // collects one name, so it goes in the former first-name column (C) and the
-  // last-name column (D) is left blank.
-  const row = [
+/**
+ * The 17-column row for a completed lead, exported so the column layout is
+ * covered by tests. Positions here are load-bearing: admissions reads this
+ * sheet by column, and `countRecentLeads` depends on B and K specifically.
+ */
+export function buildLeadRow(lead: Lead): string[] {
+  return [
     lead.lead_id,
     lead.submitted_at,
     lead.name,
-    "",
+    lead.client_name ?? "",
     lead.email,
     lead.phone,
     String(lead.teen_age),
@@ -67,9 +78,19 @@ export async function appendLeadToSheet(lead: Lead): Promise<void> {
     lead.how_did_you_hear ?? "",
     "lead",
     lead.session_id ?? "",
+    lead.lead_type ?? "self",
+    lead.referral_organization ?? "",
+    lead.referral_provider_name ?? "",
+    lead.referral_provider_contact ?? "",
+    // Notes carry the referring provider's role, timeframe, and reason on a
+    // /refer submission. Dropping this column is why provider referrals used to
+    // read as blank rows here.
+    lead.notes ?? "",
   ];
+}
 
-  await appendRow(row);
+export async function appendLeadToSheet(lead: Lead): Promise<void> {
+  await appendRow(buildLeadRow(lead));
   logger.info("Lead written to Google Sheets", { lead_id: lead.lead_id });
 }
 
