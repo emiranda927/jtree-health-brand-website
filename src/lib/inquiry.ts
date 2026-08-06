@@ -16,8 +16,39 @@ const TURNSTILE_KEY = CONFIG.turnstileSiteKey || '';
 const SESSION_KEY = 'jth_session_id';
 const UTM_KEY = 'jth_utm';
 
+// Fired when the short form becomes visible, so the Turnstile widget is only
+// rendered into a laid-out container. Rendering into a display:none panel gives
+// a zero-size or missing widget.
+const QUICK_SHOWN = 'jth:quick-inquiry-shown';
+
+const chooser = document.querySelector('[data-admissions]') as HTMLElement | null;
+if (chooser) initChooser(chooser);
+
 const form = document.getElementById('inquiry-form') as HTMLFormElement | null;
 if (form) init(form);
+
+/**
+ * Full intake (the Ritten form) against the short inquiry. Full intake is the
+ * default panel; the tabs only swap panels, and the Ritten form opens from its
+ * own button rather than on tab click.
+ */
+function initChooser(root: HTMLElement) {
+  const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.chooser__tab'));
+  const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-panel]'));
+  const showTab = (name: string) => {
+    tabs.forEach((t) => {
+      const on = t.dataset.tab === name;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    panels.forEach((p) => p.classList.toggle('is-hidden', p.dataset.panel !== name));
+    if (name === 'quick') document.dispatchEvent(new CustomEvent(QUICK_SHOWN));
+  };
+  tabs.forEach((t) => t.addEventListener('click', () => showTab(t.dataset.tab || 'full')));
+  root.querySelectorAll<HTMLAnchorElement>('[data-goto]').forEach((link) => {
+    link.addEventListener('click', (e) => { e.preventDefault(); showTab(link.dataset.goto || 'quick'); });
+  });
+}
 
 function init(form: HTMLFormElement) {
   const submit = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
@@ -47,7 +78,17 @@ function init(form: HTMLFormElement) {
     try { widgetId = w.turnstile.render(container, { sitekey: TURNSTILE_KEY, theme: 'light', action: 'inquiry' }); }
     catch { /* render failed — submit will surface it */ }
   }
-  renderTurnstile();
+  // Render once, and only once the form is actually on screen. The form starts
+  // behind the "Quick inquiry" tab, so on first load that means waiting for the
+  // reveal; if the chooser is absent the form is visible immediately.
+  let turnstileRendered = false;
+  const ensureTurnstile = () => {
+    if (turnstileRendered) return;
+    turnstileRendered = true;
+    renderTurnstile();
+  };
+  if (form.offsetParent !== null) ensureTurnstile();
+  document.addEventListener(QUICK_SHOWN, ensureTurnstile);
 
   // UTM capture — sticky across navigations within the tab.
   function readUtms(): Record<string, string> {
