@@ -61,10 +61,21 @@ function inquiryDate(lead: Lead): string {
 function timelineBody(lead: Lead): string {
   const bits = [`interested in ${lead.program_interest}`];
   if (lead.best_time_to_call) bits.push(`best time ${lead.best_time_to_call}`);
-  return `Website inquiry — ${lead.name}, teen age ${lead.teen_age}, ${bits.join(", ")}.`;
+  if (lead.lead_type === "provider") {
+    const from = lead.referral_organization
+      ? `${lead.name} (${lead.referral_organization})`
+      : lead.name;
+    const who = lead.client_name?.trim() || "patient TBD";
+    return `Provider referral from ${from} — ${who}, age ${lead.teen_age}, ${bits.join(", ")}.`;
+  }
+  const who = lead.client_name?.trim() ? `${lead.client_name} via ${lead.name}` : lead.name;
+  return `Website inquiry — ${who}, teen age ${lead.teen_age}, ${bits.join(", ")}.`;
 }
 function followUpNote(lead: Lead): string {
-  return `Call ${lead.name.split(/\s+/)[0]} back — new website inquiry`;
+  const first = lead.name.split(/\s+/)[0];
+  return lead.lead_type === "provider"
+    ? `Call ${first} back — new provider referral`
+    : `Call ${first} back — new website inquiry`;
 }
 
 /**
@@ -84,10 +95,15 @@ export function buildClientRecord(
   const source = lead.how_did_you_hear ? SOURCE_MAP[lead.how_did_you_hear] ?? "Other" : "Other";
   const isTest = lead.name.trim().toLowerCase().startsWith("test");
 
+  // The card is titled after the teen when we know their name, with the
+  // submitter moved to `guardian`. Without this, a /refer submission produced a
+  // card named after the referring clinician, aged 15.
+  const clientName = lead.client_name?.trim();
+
   const data: Record<string, unknown> = {
     id,
-    name: lead.name,
-    guardian: "",
+    name: clientName || lead.name,
+    guardian: clientName ? lead.name : "",
     age: lead.teen_age,
     program: "",
     programInterest: lead.program_interest,
@@ -115,6 +131,14 @@ export function buildClientRecord(
     leadId: lead.lead_id,
     sessionId: lead.session_id ?? null,
   };
+  // Referral attribution — only when present, so cards stay clean. These are
+  // what admissions needs to send treatment updates back to the referring
+  // provider; before this they were buried in the free-text notes blob.
+  if (lead.lead_type) data.leadType = lead.lead_type;
+  if (lead.referral_organization) data.referralOrg = lead.referral_organization;
+  if (lead.referral_provider_name) data.referredBy = lead.referral_provider_name;
+  if (lead.referral_provider_contact) data.referredByContact = lead.referral_provider_contact;
+
   // Attribution — only when present, so cards stay clean.
   if (lead.utm_source) data.utmSource = lead.utm_source;
   if (lead.utm_medium) data.utmMedium = lead.utm_medium;

@@ -3,6 +3,10 @@ import Base from '../layouts/Base.astro';
 
 const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 const isLegacyAdmissionsRoute = Astro.url.pathname === '/admissions' || Astro.url.pathname === '/admissions/';
+// The full Ritten intake. Offered alongside the short form for anyone ready to
+// give us everything up front; it cannot be embedded (X-Frame-Options), so it
+// opens in a new tab.
+const RITTEN_URL = 'https://joshuatreehealth.ritten.io/#/lead-application';
 
 const steps = [
   { n: '01', t: 'Call us or complete the form', b: "Call (919) 335-5053 or fill out the short form. We'll ask for some basic information about your teen and what's been going on. No commitment, no pressure." },
@@ -62,28 +66,67 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
           <div class="admissions__formhead">
             <p>Admissions inquiry</p>
           </div>
-          <form class="form" id="inquiry-form" novalidate>
+
+          <div class="chooser" data-admissions>
+            <p class="chooser__title font-display">How would you like to start?</p>
+
+            <div class="chooser__tabs" role="tablist" aria-label="How to start">
+              <button type="button" class="chooser__tab is-active" data-tab="full" role="tab" aria-selected="true">Full intake</button>
+              <button type="button" class="chooser__tab" data-tab="quick" role="tab" aria-selected="false">Quick inquiry</button>
+            </div>
+
+            <!-- PANEL: full intake (Ritten). Shown first. -->
+            <div class="chooser__panel-body" data-panel="full">
+              <div class="chooser__meta">
+                <span class="chooser__secure"><span class="chooser__dot" aria-hidden="true"></span>Secure · HIPAA</span>
+                <span class="chooser__powered">Powered by Ritten</span>
+              </div>
+              <p class="chooser__lead">The same questions we would ask you on the phone: your teen's details, how to reach you, and a short note about what has been going on. It takes a few minutes.</p>
+              <ul class="chooser__points">
+                <li>Goes straight to our admissions team</li>
+                <li>Insurance is optional. Fill in what you have and skip the rest</li>
+                <li>One less thing to do after we talk</li>
+              </ul>
+              <a class="btn chooser__cta" href={RITTEN_URL} target="_blank" rel="noopener">
+                Open the full intake form <span class="btn__arrow">→</span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+              <p class="chooser__fine">Opens in a new tab. Would you rather we called you first? <a href="#" data-goto="quick">Send a quick inquiry instead →</a></p>
+            </div>
+
+            <!-- PANEL: the short form -->
+            <div class="chooser__panel-body is-hidden" data-panel="quick">
+              <p class="chooser__lead">The short version, for when you would rather talk to a person first. Answer a few questions and someone from admissions calls you back.</p>
+              <form class="form" id="inquiry-form" novalidate>
             <div class="form-error-banner" role="alert" aria-live="assertive"></div>
 
             <div class="form__row form__row--2">
               <div class="field field--req">
-                <label for="name">Your name</label>
+                <label for="name">Parent or guardian name</label>
                 <input id="name" name="name" type="text" autocomplete="name" required />
                 <span class="jth-field-error" id="err-name"></span>
               </div>
               <div class="field field--req">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" autocomplete="email" required />
-                <span class="jth-field-error" id="err-email"></span>
+                <label for="client_name">Teen's name</label>
+                <input id="client_name" name="client_name" type="text" autocomplete="off" required />
+                <span class="jth-field-error" id="err-client_name"></span>
               </div>
             </div>
 
             <div class="form__row form__row--2">
               <div class="field field--req">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+                <span class="jth-field-error" id="err-email"></span>
+              </div>
+              <div class="field field--req">
                 <label for="phone">Phone</label>
                 <input id="phone" name="phone" type="tel" autocomplete="tel" required />
                 <span class="jth-field-error" id="err-phone"></span>
               </div>
+            </div>
+
+            <div class="form__row form__row--2">
               <div class="field field--req">
                 <label for="teen_age">Teen's age</label>
                 <select id="teen_age" name="teen_age" required>
@@ -92,9 +135,6 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
                 </select>
                 <span class="jth-field-error" id="err-teen_age"></span>
               </div>
-            </div>
-
-            <div class="form__row form__row--2">
               <div class="field field--req">
                 <label for="program_interest">Program of interest</label>
                 <select id="program_interest" name="program_interest" required>
@@ -103,6 +143,9 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
                 </select>
                 <span class="jth-field-error" id="err-program_interest"></span>
               </div>
+            </div>
+
+            <div class="form__row form__row--2">
               <div class="field">
                 <label for="best_time_to_call">Best time to call <span class="field__opt">(optional)</span></label>
                 <select id="best_time_to_call" name="best_time_to_call">
@@ -110,9 +153,6 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
                   {times.map((t) => <option value={t}>{t}</option>)}
                 </select>
               </div>
-            </div>
-
-            <div class="form__row form__row--2">
               <div class="field">
                 <label for="insurance">Insurance <span class="field__opt">(optional)</span></label>
                 <select id="insurance" name="insurance">
@@ -120,13 +160,13 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
                   {insurances.map((i) => <option value={i}>{i}</option>)}
                 </select>
               </div>
+            </div>
+
+            <div class="form__row form__row--2">
               <div class="field">
                 <label for="zip">ZIP code <span class="field__opt">(optional)</span></label>
                 <input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" />
               </div>
-            </div>
-
-            <div class="form__row form__row--2">
               <div class="field">
                 <label for="how_did_you_hear">How did you hear about us? <span class="field__opt">(optional)</span></label>
                 <select id="how_did_you_hear" name="how_did_you_hear">
@@ -134,7 +174,32 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
                   {sources.map((s) => <option value={s}>{s}</option>)}
                 </select>
               </div>
-              <div class="field"></div>
+            </div>
+
+            {/*
+              Referral capture, revealed only when the parent says a provider,
+              doctor, or school sent them. A parent who found us on Google never
+              sees these, so nobody is asked to type "N/A" into a field that
+              does not apply to them.
+            */}
+            <div class="form__referral" data-referral-fields hidden>
+              <p class="form__referral-lead">Who referred you?</p>
+              <div class="form__row form__row--2">
+                <div class="field">
+                  <label for="referral_provider_name">Referring provider's name <span class="field__opt">(optional)</span></label>
+                  <input id="referral_provider_name" name="referral_provider_name" type="text" autocomplete="off" />
+                </div>
+                <div class="field">
+                  <label for="referral_organization">Practice, school, or organization <span class="field__opt">(optional)</span></label>
+                  <input id="referral_organization" name="referral_organization" type="text" autocomplete="off" />
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="field">
+                  <label for="referral_provider_contact">Their email or phone <span class="field__opt">(optional)</span></label>
+                  <input id="referral_provider_contact" name="referral_provider_contact" type="text" autocomplete="off" />
+                </div>
+              </div>
             </div>
 
             <div class="form__row">
@@ -157,7 +222,10 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
 
             <button type="submit" class="btn form__submit">Start the conversation <span class="btn__arrow">→</span></button>
             <p class="form__note">Prefer to talk now? Call <a href="tel:+19193355053" class="form__note-link">(919) 335-5053</a>.</p>
-          </form>
+              </form>
+              <p class="chooser__fine">Ready to give us everything now? <a href="#" data-goto="full">Switch to the full intake →</a></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -286,7 +354,46 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
     background: var(--color-deep-green); color: var(--color-cream);
   }
   .admissions__formhead p { font-family: var(--font-head); font-size: 1.35rem; line-height: 1.12; letter-spacing: .02em; text-transform: uppercase; }
-  .admissions__formwrap .form { padding: clamp(1.5rem, 3vw, 2.25rem); }
+
+  /* ===== Chooser: full Ritten intake vs. the short form =====
+     Mirrors the referral chooser on /refer, minus its outer card chrome —
+     the surrounding .admissions__formwrap already provides that. */
+  .chooser { padding: clamp(1.5rem, 3vw, 2.25rem); }
+  .chooser__title {
+    font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.7rem);
+    line-height: 1.02; letter-spacing: -0.03em;
+    color: var(--color-deep-green); margin: 0 0 1rem;
+  }
+  .chooser__tabs { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; }
+  .chooser__tab {
+    flex: 1; padding: 0.8rem 0.6rem;
+    font-family: var(--font-head); font-weight: 900; text-transform: uppercase;
+    letter-spacing: 0.03em; font-size: 0.78rem; line-height: 1.1;
+    border-radius: var(--radius-pill);
+    background: transparent; color: var(--color-deep-green);
+    border: 1px solid var(--color-line-strong);
+    cursor: pointer;
+    transition: background-color var(--dur) var(--ease-soft), color var(--dur) var(--ease-soft), border-color var(--dur) var(--ease-soft);
+  }
+  .chooser__tab.is-active { background: var(--color-deep-green); color: var(--color-cream); border-color: var(--color-deep-green); }
+
+  .chooser__panel-body.is-hidden { display: none; }
+  .chooser__meta { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.85rem; flex-wrap: wrap; }
+  .chooser__secure {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    border: 1px solid var(--color-line-strong); padding: 0.3rem 0.6rem;
+    font-family: var(--font-head); font-weight: 900; text-transform: uppercase;
+    letter-spacing: 0.04em; font-size: 0.66rem; color: var(--color-deep-green);
+  }
+  .chooser__dot { width: 7px; height: 7px; background: var(--color-lime); border-radius: 50%; }
+  .chooser__powered { font-family: var(--font-sans); font-size: 0.86rem; color: var(--color-ink-faint); }
+  .chooser__lead { font-size: 1.02rem; line-height: 1.55; color: var(--color-ink-soft); margin: 0 0 1rem; }
+  .chooser__points { list-style: none; padding: 0; margin: 0 0 1.25rem; display: grid; gap: 0.55rem; }
+  .chooser__points li { position: relative; padding-left: 1.6rem; font-size: 1rem; line-height: 1.5; color: var(--color-ink-soft); }
+  .chooser__points li::before { content: "→"; position: absolute; left: 0; top: 0; color: var(--color-lime-deep); font-weight: 700; }
+  .chooser__cta { width: 100%; }
+  .chooser__fine { font-size: 0.86rem; color: var(--color-ink-faint); line-height: 1.5; margin: 0.85rem 0 0; }
+  .chooser__fine a { color: var(--color-pine); border-bottom: 1.5px solid var(--color-lime); }
 
   .form-error-banner { display: none; padding: 0.8rem 1rem; border-radius: var(--radius); background: #efe5ed; border: 1px solid #c9a9bf; color: #6f3158; font-size: 0.95rem; }
   .form-error-banner.is-visible { display: block; }
@@ -296,6 +403,24 @@ const insurances = ['Aetna', 'BCBS NC', 'Cigna', 'UnitedHealthcare', 'UMR', 'Sel
   .form__note-link { color: var(--color-pine); border-bottom: 1.5px solid var(--color-lime); }
   .field__opt { font-family: "Batica Sans", Arial, sans-serif; font-weight: 400; color: var(--color-ink-faint); font-size: 0.9rem; letter-spacing: 0; text-transform: none; }
   .form__disclaimer { font-size: 0.95rem; color: var(--color-ink-faint); line-height: 1.58; margin: 0; }
+
+  /* Referral fields — revealed only for referral-shaped answers to "how did you
+     hear about us". [hidden] is the source of truth so the block stays collapsed
+     when JS has not run. */
+  .form__referral[hidden] { display: none; }
+  .form__referral {
+    padding: 1rem 1.1rem 0.35rem;
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius);
+    background: var(--color-cream);
+  }
+  .form__referral-lead {
+    margin: 0 0 0.9rem;
+    font-family: var(--font-sans);
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
   .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .cf-turnstile-box { min-height: 65px; }
   .btn.is-loading { opacity: 0.85; cursor: progress; }

@@ -146,9 +146,10 @@ const faqSchema = {
               </div>
 
               <div class="form__row form__row--2">
-                <div class="field">
-                  <label for="ref_org">Organization <span class="field__opt">(optional)</span></label>
-                  <input id="ref_org" name="organization" type="text" placeholder="Practice, school, or hospital" />
+                <div class="field field--req">
+                  <label for="ref_org">Organization</label>
+                  <input id="ref_org" name="organization" type="text" placeholder="Practice, school, or hospital" required />
+                  <span class="jth-field-error" id="err-organization"></span>
                 </div>
                 <div class="field field--req">
                   <label for="ref_email">Work email</label>
