@@ -144,6 +144,33 @@ const aboutPage = defineCollection({
   }),
 });
 
+/*
+ * Team members.
+ *
+ * `credentials` is optional: non-clinical staff simply omit the line.
+ * `image` is a lookup key, not a path. It is either a filename inside
+ * src/assets/images/team/ (e.g. "beth-bertram.jpg") or the literal "gaby",
+ * which resolves to the founder portrait shared with /about. Members with no
+ * image fall back to the initials placeholder.
+ * `bio` drives the flip card: members without one render as a static card.
+ * Each bio entry is either a paragraph or an intro line plus a bulleted list.
+ */
+const teamBioBlockSchema = z.union([
+  z.string().min(1),
+  z.object({
+    intro: z.string().min(1),
+    items: z.array(z.string().min(1)).min(1),
+  }),
+]);
+
+const teamMemberSchema = z.object({
+  name: z.string().min(1),
+  credentials: z.string().min(1).optional(),
+  title: z.string().min(1),
+  image: z.string().min(1).optional(),
+  bio: z.array(teamBioBlockSchema).min(1).optional(),
+});
+
 const teamPage = defineCollection({
   loader: glob({ pattern: 'team.json', base: './src/content/pages' }),
   schema: z.object({
@@ -155,21 +182,13 @@ const teamPage = defineCollection({
     leadership: z.object({
       eyebrow: z.string().min(1),
       title: z.string().min(1),
-      members: z.array(z.object({
-        name: z.string().min(1),
-        credentials: z.string().min(1),
-        title: z.string().min(1),
-      })).min(1),
+      members: z.array(teamMemberSchema).min(1),
     }),
     clinical: z.object({
       eyebrow: z.string().min(1),
       title: z.string().min(1),
       intro: z.string().min(1),
-      members: z.array(z.object({
-        name: z.string().min(1),
-        credentials: z.string().min(1),
-        title: z.string().min(1),
-      })).min(1),
+      members: z.array(teamMemberSchema).min(1),
     }),
     closing: z.object({
       title: z.string().min(1),
