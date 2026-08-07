@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
+import TeamCard from '../../components/TeamCard.astro';
 import { getEntry } from 'astro:content';
 
 const teamEntry = await getEntry('teamPage', 'team');
@@ -8,16 +9,6 @@ if (!teamEntry) throw new Error('Missing CMS content: team page');
 const content = teamEntry.data;
 // Founder + clinicians shown together as one team (no leadership/clinical split).
 const teamMembers = [...content.leadership.members, ...content.clinical.members];
-
-// Build initials for the temporary portrait treatment from the member's name.
-const initials = (name) =>
-  name
-    .split(' ')
-    .filter(Boolean)
-    .map((part) => part[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
 ---
 <Base
   bodyClass="brand-page rollout-page"
@@ -40,16 +31,7 @@ const initials = (name) =>
         <p class="section-sub">{content.clinical.intro}</p>
       </div>
       <div class="grid-3 team-grid" data-reveal-group>
-        {teamMembers.map((member) => (
-          <article class="team-card" data-reveal-item>
-            <div class="team-card__photo" aria-hidden="true">
-              <span class="team-card__initials font-display">{initials(member.name)}</span>
-            </div>
-            <h3 class="team-card__name font-display">{member.name}</h3>
-            <p class="team-card__cred">{member.credentials}</p>
-            <p class="team-card__title">{member.title}</p>
-          </article>
-        ))}
+        {teamMembers.map((member) => <TeamCard member={member} />)}
       </div>
     </div>
   </section>
@@ -70,65 +52,9 @@ const initials = (name) =>
 </Base>
 
 <style>
-  .team-grid { align-items: start; }
-
-  .team-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.35rem;
-  }
-
-  .team-card__photo {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    border-radius: var(--radius-2xl);
-    background: var(--color-cream-deep);
-    border: 1px solid color-mix(in srgb, var(--color-sage) 22%, transparent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .surface-cream-deep .team-card__photo {
-    background: var(--color-cream);
-  }
-
-  .team-card__initials {
-    font-size: clamp(2.2rem, 1.6rem + 2vw, 3rem);
-    color: var(--color-sage);
-    letter-spacing: 0.04em;
-  }
-
-  .team-card__name {
-    font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.5rem);
-    color: var(--color-deep-green);
-  }
-
-  .team-card__cred {
-    color: var(--color-ink-soft);
-    font-size: 1.0625rem;
-    line-height: 1.55;
-  }
-
-  .team-card__title {
-    font-family: var(--font-mono);
-    font-size: 0.95rem;
-    line-height: 1.15;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-deep-sage);
-    margin-top: 0.15rem;
-  }
-
-  .team-card__bio {
-    margin-top: 0.8rem;
-    color: var(--color-ink-soft);
-    line-height: 1.6;
-    font-size: 1.0625rem;
+  .team-grid {
+    align-items: start;
+    row-gap: clamp(2.25rem, 1.6rem + 2vw, 3.25rem);
   }
 
   .cta-row {

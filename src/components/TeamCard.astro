@@ -1,0 +1,415 @@
+---
+/*
+ * TeamCard: one member of the /about/team grid.
+ *
+ * Members with a `bio` become flip cards: the front is a button, the back is a
+ * scrollable bio. Members without a bio render as a plain static card with no
+ * hover response and no affordance, exactly as the page did before.
+ *
+ * Photos are looked up by filename from src/assets/images/team/, plus the
+ * literal key "gaby" for the founder portrait shared with /about. Anything
+ * without a match falls back to the initials placeholder.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import gabyImg from '../assets/images/Gaby-founder-headshot.JPG';
+
+const teamPhotos = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/images/team/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+
+const photos: Record<string, ImageMetadata> = { gaby: gabyImg };
+for (const [path, mod] of Object.entries(teamPhotos)) {
+  photos[path.slice(path.lastIndexOf('/') + 1)] = mod.default;
+}
+
+type BioBlock = string | { intro: string; items: string[] };
+
+interface Props {
+  member: {
+    name: string;
+    credentials?: string;
+    title: string;
+    image?: string;
+    bio?: BioBlock[];
+  };
+}
+
+const { member } = Astro.props;
+const { name, credentials, title, image, bio } = member;
+
+const photo = image ? photos[image] : undefined;
+if (image && !photo) {
+  throw new Error(`Unknown team image key "${image}" for ${name}; expected a file in src/assets/images/team/ or "gaby".`);
+}
+const hasBio = Array.isArray(bio) && bio.length > 0;
+
+const initials = name
+  .split(' ')
+  .filter(Boolean)
+  .map((part) => part[0])
+  .join('')
+  .slice(0, 2)
+  .toUpperCase();
+
+const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const backId = `team-bio-${slug}`;
+const triggerId = `team-bio-trigger-${slug}`;
+---
+
+<article class:list={['team-card', hasBio && 'team-card--flippable']} data-reveal-item data-team-card>
+  <div class="team-card__flip">
+    <div class="team-card__inner">
+      <div class="team-card__face team-card__front" data-team-front>
+        {photo ? (
+          <div class="team-card__photo team-card__photo--image">
+            <Image
+              src={photo}
+              alt={`${name}, ${title} at Joshua Tree Health`}
+              widths={[420, 640, 900]}
+              sizes="(max-width: 759px) 88vw, 30vw"
+              class:list={['team-card__img', image === 'gaby' && 'team-card__img--founder']}
+            />
+          </div>
+        ) : (
+          <div class="team-card__photo" aria-hidden="true">
+            <span class="team-card__initials font-display">{initials}</span>
+          </div>
+        )}
+        <h3 class="team-card__name font-display">{name}</h3>
+        {credentials && <p class="team-card__cred">{credentials}</p>}
+        <p class="team-card__title">{title}</p>
+        {hasBio && (
+          <button
+            type="button"
+            class="team-card__trigger eyebrow"
+            id={triggerId}
+            aria-label={`Read bio for ${name}`}
+            aria-expanded="false"
+            aria-controls={backId}
+            data-team-trigger
+          >
+            Read bio <span class="team-card__trigger-arrow" aria-hidden="true">→</span>
+          </button>
+        )}
+      </div>
+
+      {hasBio && (
+        <div class="team-card__face team-card__back" id={backId} aria-hidden="true" inert data-team-back>
+          <div class="team-card__back-head">
+            <h3 class="team-card__back-name font-display">{name}</h3>
+            <button
+              type="button"
+              class="team-card__close"
+              aria-label={`Close bio for ${name}`}
+              data-team-close
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div
+            class="team-card__bio"
+            tabindex="0"
+            role="region"
+            aria-label={`About ${name}`}
+            data-lenis-prevent
+            data-team-scroll
+          >
+            {bio!.map((block) =>
+              typeof block === 'string' ? (
+                <p>{block}</p>
+              ) : (
+                <div class="team-card__bio-list">
+                  <p>{block.intro}</p>
+                  <ul>
+                    {block.items.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+  .team-card { position: relative; }
+
+  .team-card__flip {
+    perspective: 1200px;
+    border-radius: var(--radius-2xl);
+    transition: transform 200ms ease;
+  }
+
+  .team-card__inner {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 500ms ease;
+  }
+
+  .team-card.is-flipped .team-card__inner { transform: rotateY(180deg); }
+
+  .team-card__face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* ---- Front ---- */
+  .team-card__front {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.35rem;
+  }
+
+  .team-card__photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-2xl);
+    background: var(--color-cream-deep);
+    border: 1px solid color-mix(in srgb, var(--color-sage) 22%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 200ms ease;
+  }
+
+  /* The staged team headshots are already 4:5, so they need no repositioning.
+     The founder portrait is landscape and crops the same way it does on /about. */
+  .team-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    transition: transform 200ms ease;
+  }
+
+  .team-card__img--founder { object-position: 42% 28%; }
+
+  .team-card__initials {
+    font-size: clamp(2.2rem, 1.6rem + 2vw, 3rem);
+    color: var(--color-sage);
+    letter-spacing: 0.04em;
+  }
+
+  .team-card__name {
+    font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.5rem);
+    color: var(--color-deep-green);
+  }
+
+  .team-card__cred {
+    color: var(--color-ink-soft);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+
+  .team-card__title {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-deep-sage);
+    margin-top: 0.15rem;
+  }
+
+  /* The trigger sits in flow so the affordance reads as part of the card, but a
+     stretched pseudo-element makes the whole front face clickable. */
+  .team-card__trigger {
+    margin-top: 0.7rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    color: var(--color-deep-sage);
+    transition: color 200ms ease;
+  }
+
+  .team-card__trigger::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-2xl);
+  }
+
+  .team-card__trigger:focus-visible { border-radius: var(--radius-pill); }
+  .team-card__trigger-arrow { transition: transform 200ms ease; }
+
+  /* Without JS the flip can't happen, so don't advertise it. */
+  :global(html:not(.has-js)) .team-card__trigger { display: none; }
+
+  /* ---- Hover (flippable cards, hover-capable pointers only) ---- */
+  @media (hover: hover) and (pointer: fine) {
+    .team-card--flippable:not(.is-flipped) .team-card__flip:hover { transform: translateY(-4px); }
+    .team-card--flippable:not(.is-flipped) .team-card__flip:hover .team-card__photo { box-shadow: var(--shadow-lg); }
+    .team-card--flippable:not(.is-flipped) .team-card__flip:hover .team-card__img { transform: scale(1.03); }
+    .team-card--flippable:not(.is-flipped) .team-card__flip:hover .team-card__trigger { color: var(--color-deep-green); }
+    .team-card--flippable:not(.is-flipped) .team-card__flip:hover .team-card__trigger-arrow { transform: translateX(3px); }
+  }
+
+  .team-card--flippable:has(.team-card__trigger:focus-visible) .team-card__flip { transform: translateY(-4px); }
+  .team-card--flippable:has(.team-card__trigger:focus-visible) .team-card__photo { box-shadow: var(--shadow-lg); }
+
+  /* ---- Back ---- */
+  .team-card__back {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.5rem 1.25rem 1.4rem 1.5rem;
+    text-align: left;
+    background: var(--color-cream-deep);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow);
+    transform: rotateY(180deg);
+  }
+
+  .team-card:not(.is-flipped) .team-card__back { pointer-events: none; }
+  .team-card.is-flipped .team-card__front { pointer-events: none; }
+
+  .team-card__back-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .team-card__back-name {
+    font-size: 1.15rem;
+    line-height: 1.05;
+    color: var(--color-deep-green);
+  }
+
+  .team-card__close {
+    flex: none;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    font-size: 1.35rem;
+    line-height: 1;
+    color: var(--color-deep-green);
+    background: var(--color-cream);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: background-color 200ms ease, border-color 200ms ease;
+  }
+
+  .team-card__close:hover {
+    background: var(--color-cream-card);
+    border-color: var(--color-deep-sage);
+  }
+
+  .team-card__bio {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 0.6rem;
+    display: grid;
+    gap: 0.75rem;
+    font-size: 0.97rem;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--color-deep-sage) 40%, transparent) transparent;
+  }
+
+  .team-card__bio::-webkit-scrollbar { width: 6px; }
+  .team-card__bio::-webkit-scrollbar-track { background: transparent; }
+  .team-card__bio::-webkit-scrollbar-thumb {
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--color-deep-sage) 40%, transparent);
+  }
+
+  .team-card__bio-list ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .team-card__bio-list li { padding-left: 0.15rem; }
+
+  /* ---- Reduced motion: crossfade instead of a 3D rotation ---- */
+  @media (prefers-reduced-motion: reduce) {
+    /* Must out-rank the hover-lift selector above, which carries higher specificity. */
+    .team-card--flippable:not(.is-flipped) .team-card__flip:hover { transform: none; }
+    .team-card--flippable:has(.team-card__trigger:focus-visible) .team-card__flip { transform: none; }
+    .team-card__inner { transform: none !important; }
+    .team-card__face { backface-visibility: visible; -webkit-backface-visibility: visible; }
+    .team-card__img { transform: none !important; }
+    .team-card__back { transform: none; opacity: 0; visibility: hidden; }
+    .team-card.is-flipped .team-card__back { opacity: 1; visibility: visible; }
+    .team-card.is-flipped .team-card__front { opacity: 0; visibility: hidden; }
+  }
+
+  :global(html.reduced-motion) .team-card--flippable:not(.is-flipped) .team-card__flip:hover { transform: none; }
+  :global(html.reduced-motion) .team-card--flippable:has(.team-card__trigger:focus-visible) .team-card__flip { transform: none; }
+  :global(html.reduced-motion) .team-card__inner { transform: none !important; }
+  :global(html.reduced-motion) .team-card__face { backface-visibility: visible; -webkit-backface-visibility: visible; }
+  :global(html.reduced-motion) .team-card__img { transform: none !important; }
+  :global(html.reduced-motion) .team-card__back { transform: none; opacity: 0; visibility: hidden; transition: opacity 200ms ease, visibility 200ms; }
+  :global(html.reduced-motion) .team-card.is-flipped .team-card__back { opacity: 1; visibility: visible; }
+  :global(html.reduced-motion) .team-card__front { transition: opacity 200ms ease, visibility 200ms; }
+  :global(html.reduced-motion) .team-card.is-flipped .team-card__front { opacity: 0; visibility: hidden; }
+</style>
+
+<script>
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-team-card]'));
+
+  function setFlipped(card: HTMLElement, open: boolean) {
+    const trigger = card.querySelector<HTMLButtonElement>('[data-team-trigger]');
+    const front = card.querySelector<HTMLElement>('[data-team-front]');
+    const back = card.querySelector<HTMLElement>('[data-team-back]');
+    const scroller = card.querySelector<HTMLElement>('[data-team-scroll]');
+    if (!trigger || !front || !back || !scroller) return;
+
+    card.classList.toggle('is-flipped', open);
+    trigger.setAttribute('aria-expanded', String(open));
+
+    if (open) {
+      // Un-hide the back before moving focus into it, then park the front.
+      back.removeAttribute('inert');
+      back.removeAttribute('aria-hidden');
+      scroller.scrollTop = 0;
+      scroller.focus({ preventScroll: true });
+      front.setAttribute('inert', '');
+    } else {
+      const hadFocus = card.contains(document.activeElement);
+      front.removeAttribute('inert');
+      if (hadFocus) trigger.focus({ preventScroll: true });
+      back.setAttribute('inert', '');
+      back.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  cards.forEach((card) => {
+    const trigger = card.querySelector<HTMLButtonElement>('[data-team-trigger]');
+    if (!trigger) return; // static card, nothing to wire up
+    trigger.addEventListener('click', () => {
+      setFlipped(card, !card.classList.contains('is-flipped'));
+    });
+    card.querySelector<HTMLButtonElement>('[data-team-close]')?.addEventListener('click', () => {
+      setFlipped(card, false);
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    cards.filter((card) => card.classList.contains('is-flipped')).forEach((card) => setFlipped(card, false));
+  });
+</script>

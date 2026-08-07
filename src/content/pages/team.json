@@ -13,8 +13,8 @@
     "members": [
       {
         "name": "Gabriela Forter",
-        "credentials": "Founder & CEO",
-        "title": "Leadership"
+        "title": "Founder & CEO",
+        "image": "gaby"
       }
     ]
   },
@@ -25,23 +25,83 @@
     "members": [
       {
         "name": "Beth Bertram",
-        "credentials": "Licensed Therapist",
-        "title": "IOP Clinical Lead"
-      },
-      {
-        "name": "Caitlyn Dowdy",
-        "credentials": "Licensed Therapist",
-        "title": "Clinical Director"
+        "credentials": "LCSW",
+        "title": "IOP Clinical Lead",
+        "image": "beth-bertram.jpg",
+        "bio": [
+          "I’m passionate about creating a safe, welcoming space where all clients feel heard, valued, and empowered. My approach is grounded in compassion, curiosity, authenticity, and respect for each client’s unique experience. I affirm and celebrate all identities.",
+          "I earned my bachelor’s degree from Anderson University (Indiana) and began my professional career at a Child Advocacy Center, where I worked as a forensic interviewer and victim advocate. In this role, I worked closely with children and families navigating investigations of abuse and neglect.",
+          "I later earned my master’s degree from Indiana University. Following graduation, I worked as an intensive in-home therapist supporting families involved with the juvenile justice system or child protective services. Most recently, I have worked as an outpatient therapist serving children, teens, and young adults. In this role, I was also intensively trained as a Dialectical Behavior therapist, working with individual DBT clients and leading multifamily DBT groups.",
+          "I have training and experience in several evidence-based practices including Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT), Family Centered Treatment (FCT), Motivational Interviewing (MI), mindfulness practice, and Trauma-Focused Cognitive Behavioral Therapy (TF-CBT). I tailor these approaches to support clients with a variety of diagnoses and concerns including anger, anxiety, communication, depression, domestic violence, emotion regulation, life transitions, and PTSD."
+        ]
       },
       {
         "name": "Grace Beasley",
-        "credentials": "Licensed Therapist",
-        "title": "Primary Therapist"
+        "credentials": "LCSWA",
+        "title": "Primary Therapist",
+        "bio": [
+          "My therapeutic style is highly collaborative with my clients and person centered. I work with folks ages 10+ who may be struggling socially, at school, or with emotion regulation through techniques such as play therapy, sandtray therapy, parent collaboration, and creative expression. With my clients, I take a person centered approach that combines multiple avenues of expression and options for all ages to increase self-determination, engagement, and empowerment to make a safe space. My approach is to combine art or expressive based activities with evidence based modalities such as DBT (Dialectical Behavioral Therapy), CBT (Cognitive Behavioral Therapy), and ACT (Acceptance and Commitment Therapy) with a trauma informed lens. I am always looking to learn more and increase my knowledge base with modalities such as IFS (Internal Family Systems) and increasing my skills around supporting neurodivergence.",
+          "Additionally, I enjoy working with young adults and older teens in a time of life transition who may be figuring out their pathways towards independence amid their own mental health challenges or stress of the future. Adolescents have such strengths and challenges today and my goal is to support their journey in self-exploration, while finding ways to support their mental health that make sense for their needs.",
+          "I received my Master of Social Work from North Carolina State University and was in a fellowship program that furthered education on trauma, especially in adolescents, LGBTQIA+ affirming practices, and at-risk youth. My master’s internship was working with adolescents in an IOP (Intensive Outpatient Program), working with teens who were living through depression, suicidal ideation, self-harm, anxiety, and trauma. After my education and internship, I found a passion for the IOP level of care and for the uniqueness of adolescents’ stage of life. I continued collaborating with families and their teens who were encountering life struggles, self-harm, depression, school refusal, and ADHD/ASD. With my teens, I also prioritize caring for the whole family unit. I enjoy working with families to help parents find techniques/skills that work for their child(ren’s) unique needs and increase family cohesion. Our support systems are so important and I am always looking to help empower families to find connection in the midst of challenges."
+        ]
       },
       {
         "name": "Alayna West",
-        "credentials": "Licensed Therapist",
-        "title": "Primary Therapist"
+        "credentials": "LCMHCA",
+        "title": "Primary Therapist",
+        "image": "alayna-west.jpg",
+        "bio": [
+          "My therapeutic approach is integrative, relational, and trauma-informed. I am passionate about providing a therapeutic space that fosters connection, acceptance, insight, growth, and healing.",
+          "I am proudly affirming of all identities. I believe each client is unique and the expert of their own life, and I treat them as such.",
+          "I earned my bachelor’s degree from the University of Missouri and my master’s degree later on in Clinical Mental Health Counseling from the University of South Dakota. During my internship year and for two years following graduation, I worked at a community mental health agency in South Dakota as a homebased therapist supporting at risk adolescents and their families. During my time with this agency, I was also leading adolescent DBT, ART, and MRT groups. I moved to North Carolina in 2024 and started working as an intensive-outpatient therapist at Joshua Tree Health, previously known as Simply Teens Outpatient. For over five years, I have provided clinical individual, group, and family therapy, focusing on helping adolescents impacted by trauma.",
+          "I have training and experience in several evidence-based practices including Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT), Brief Strategic Family Therapy (BSFT), Trauma and Resilience-Informed Care, Aggression Replacement Training (ART), mindfulness practice, and I am currently in training for Eye-Movement Desensitization and Reprocessing (EMDR).",
+          {
+            "intro": "My counseling services address concerns or issues including, but not limited to:",
+            "items": [
+              "Depression and anxiety",
+              "Self-harm and suicidality",
+              "Emotional dysregulation",
+              "Trauma, PTSD, grief",
+              "ADHD, ASD (Level 1)",
+              "Shame, self-esteem, and self-image",
+              "Interpersonal relationships",
+              "Wellness, spirituality, and mindfulness",
+              "Family concerns, such as: strained relationships, conflict resolution, boundary setting, poor regulation, and communication difficulties",
+              "Life transitions"
+            ]
+          },
+          "I enjoy journaling, reading, swimming, spending time with friends, playing games, binge-watching television shows, and hot yoga. I also like to try new restaurants and travel to the beach whenever I can."
+        ]
+      },
+      {
+        "name": "Hannah Pridemore",
+        "title": "Clinical & Community Outreach",
+        "image": "hannah-pridemore.jpg",
+        "bio": [
+          "My heart for helping families comes from seeing firsthand the impact mental health can have on the people we love. Having family members who have experienced mental health challenges has given me a deep appreciation for how important it is to have supportive people in your corner. That's why I am dedicated to helping families find hope, guidance, and the right support when they need it most.",
+          "I earned my bachelor's degree in Psychology from Duke University and later completed my master's degree at Duke University's Fuqua School of Business. While I'm not a clinician, I have the privilege of being one of the first people families and referral partners connect with. My goal is to make the process feel approachable, supportive, and hopeful from the very first conversation.",
+          "I joined Joshua Tree Health because I immediately connected with Gabriela's vision and dedication to creating a place where teens and families receive exceptional, evidence-based care. I love building relationships throughout the community and helping families find relief during what is often one of the hardest seasons of their lives. If I can help a parent take a deep breath and feel confident they're in the right place, I've done my job.",
+          "Outside of work, you'll usually find me spending time with my five nieces and nephews (all under six!), volunteering, cheering on the Duke Blue Devils, watching just about any sporting event, or hanging out with my two dogs: Casper, my Pyredoodle (Great Pyrenees and Standard Poodle mix), and James, my French Bulldog.",
+          "Whether you're a parent looking for guidance or a provider searching for resources, please don't hesitate to reach out. I believe no family should have to navigate a mental health crisis alone, and I'm always happy to be a resource, answer questions, and help connect your family or patient with the support they need."
+        ]
+      },
+      {
+        "name": "Alexander Magnuson",
+        "title": "Therapist Assistant",
+        "image": "alexander-magnuson.jpg"
+      },
+      {
+        "name": "David Wingfield",
+        "title": "Therapy Intern & Educational Liaison",
+        "image": "david-wingfield.jpg",
+        "bio": [
+          "I am a Master of Social Work student at Liberty University with a concentration in Individual and Family Clinical Practice. My background in education, behavioral health, and outpatient counseling has given me the opportunity to work alongside adolescents and families navigating anxiety, depression, life transitions, and relationship challenges. I am passionate about creating a space where clients feel comfortable showing up as themselves without fear of judgment.",
+          "My approach is grounded in empathy, authenticity, and genuine connection. I enjoy helping clients better understand themselves, build confidence, and develop practical tools to navigate life's challenges. I believe growth and healing begin when people feel seen, heard, and supported."
+        ]
+      },
+      {
+        "name": "Analee Dubbs",
+        "title": "Therapy Intern"
       }
     ]
   },
