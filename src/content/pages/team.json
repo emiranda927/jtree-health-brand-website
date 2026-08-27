@@ -36,9 +36,21 @@
         ]
       },
       {
+        "name": "Mariah Echevarria",
+        "credentials": "PA-C",
+        "title": "Psychiatric Physician Assistant",
+        "image": "mariah-echevarria.jpg",
+        "bio": [
+          "Mariah is a Florida native who earned her Bachelor of Science from the University of Florida and her Master of Physician Assistant Studies from the University of South Florida. She has over four years of experience providing outpatient psychiatric care to patients ages 5 and older, treating a wide range of mental health conditions.",
+          "Her clinical interests include anxiety, OCD, ADHD, trauma, women’s mental health, and life transitions. Mariah is passionate about creating a supportive, patient-centered environment where individuals feel heard, respected, and empowered through shared decision-making. She is also a strong advocate for compassionate, individualized care that recognizes the whole person.",
+          "In addition to clinical practice, Mariah serves as an adjunct instructor at the University of South Florida, where she teaches behavioral health to future physician assistants. Outside of work, she enjoys spending time with her dogs, Sunnie and Skye, getting lost in a good book, and trying new hobbies and adventures."
+        ]
+      },
+      {
         "name": "Grace Beasley",
         "credentials": "LCSWA",
         "title": "Primary Therapist",
+        "image": "grace-beasley.jpg",
         "bio": [
           "My therapeutic style is highly collaborative with my clients and person centered. I work with folks ages 10+ who may be struggling socially, at school, or with emotion regulation through techniques such as play therapy, sandtray therapy, parent collaboration, and creative expression. With my clients, I take a person centered approach that combines multiple avenues of expression and options for all ages to increase self-determination, engagement, and empowerment to make a safe space. My approach is to combine art or expressive based activities with evidence based modalities such as DBT (Dialectical Behavioral Therapy), CBT (Cognitive Behavioral Therapy), and ACT (Acceptance and Commitment Therapy) with a trauma informed lens. I am always looking to learn more and increase my knowledge base with modalities such as IFS (Internal Family Systems) and increasing my skills around supporting neurodivergence.",
           "Additionally, I enjoy working with young adults and older teens in a time of life transition who may be figuring out their pathways towards independence amid their own mental health challenges or stress of the future. Adolescents have such strengths and challenges today and my goal is to support their journey in self-exploration, while finding ways to support their mental health that make sense for their needs.",
@@ -91,12 +103,33 @@
         "image": "alexander-magnuson.jpg"
       },
       {
+        "name": "Corissa Phannenstill",
+        "title": "Qualified Professional",
+        "image": "corissa-phannenstill.jpg",
+        "bio": [
+          "I’m dedicated to fostering a safe, supportive, and non-judgmental space where all individuals are valued, respected, and understood. My areas of interest include emotional regulation, LGBTQIA+ populations, intersectionality, and social-emotional development. My approach is grounded in a strengths-based perspective, emphasizing each person’s strengths for the capacity for growth.",
+          "I earned my bachelor’s degree in Social Work from the University of Wisconsin-Whitewater and will be working towards my master’s degree in the future. I also have a certificate in LGBTQ+ Studies and Women’s and Gender Studies.",
+          "During my undergraduate degree internship, I worked alongside a non-profit organization providing advocacy and support to survivors of domestic violence.",
+          "I enjoy reading, photography, spending time with family and friends, and finding new restaurants and coffee shops."
+        ]
+      },
+      {
         "name": "David Wingfield",
         "title": "Therapy Intern & Educational Liaison",
         "image": "david-wingfield.jpg",
         "bio": [
           "I am a Master of Social Work student at Liberty University with a concentration in Individual and Family Clinical Practice. My background in education, behavioral health, and outpatient counseling has given me the opportunity to work alongside adolescents and families navigating anxiety, depression, life transitions, and relationship challenges. I am passionate about creating a space where clients feel comfortable showing up as themselves without fear of judgment.",
           "My approach is grounded in empathy, authenticity, and genuine connection. I enjoy helping clients better understand themselves, build confidence, and develop practical tools to navigate life's challenges. I believe growth and healing begin when people feel seen, heard, and supported."
+        ]
+      },
+      {
+        "name": "Ashley Masingale",
+        "title": "Therapy Intern",
+        "image": "ashley-masingale.jpg",
+        "bio": [
+          "I hold a Bachelor of Social Work degree from North Carolina State University and am currently enrolled in the Advanced Standing Master of Social Work program at the University of North Carolina, working toward clinical licensure.",
+          "My passion for the arts, nature, and outdoor activities informs my approach to creating meaningful and impactful connections in practice with clients. I emphasize autonomy, empowerment, and creativity in my approach; I’m especially drawn to DBT, expressive arts, and trauma-informed practices as ways to help clients build skills, process experience, and discover themselves. I value curiosity and acceptance and am committed to cultivating spaces where these values can flourish.",
+          "I enjoy rock climbing, figure skating, doing theatre, and I’m a proud gecko mom! Whether I’m on a climbing wall, on the ice, or on stage, I find that staying creative and active outside of work keeps me grounded and better able to show up for the people I work with."
         ]
       },
       {
