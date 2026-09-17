@@ -24,29 +24,6 @@
     "intro": "Our clinical team focuses on adolescent behavioral health. Admissions can walk you through who will be part of your teen’s assessment and care.",
     "members": [
       {
-        "name": "Beth Bertram",
-        "credentials": "LCSWS",
-        "title": "IOP Clinical Lead",
-        "image": "beth-bertram.jpg",
-        "bio": [
-          "I’m passionate about creating a safe, welcoming space where all clients feel heard, valued, and empowered. My approach is grounded in compassion, curiosity, authenticity, and respect for each client’s unique experience. I affirm and celebrate all identities.",
-          "I earned my bachelor’s degree from Anderson University (Indiana) and began my professional career at a Child Advocacy Center, where I worked as a forensic interviewer and victim advocate. In this role, I worked closely with children and families navigating investigations of abuse and neglect.",
-          "I later earned my master’s degree from Indiana University. Following graduation, I worked as an intensive in-home therapist supporting families involved with the juvenile justice system or child protective services. Most recently, I have worked as an outpatient therapist serving children, teens, and young adults. In this role, I was also intensively trained as a Dialectical Behavior therapist, working with individual DBT clients and leading multifamily DBT groups.",
-          "I have training and experience in several evidence-based practices including Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT), Family Centered Treatment (FCT), Motivational Interviewing (MI), mindfulness practice, and Trauma-Focused Cognitive Behavioral Therapy (TF-CBT). I tailor these approaches to support clients with a variety of diagnoses and concerns including anger, anxiety, communication, depression, domestic violence, emotion regulation, life transitions, and PTSD."
-        ]
-      },
-      {
-        "name": "Mariah Echevarria",
-        "credentials": "PA-C",
-        "title": "Psychiatric Physician Assistant",
-        "image": "mariah-echevarria.jpg",
-        "bio": [
-          "Mariah is a Florida native who earned her Bachelor of Science from the University of Florida and her Master of Physician Assistant Studies from the University of South Florida. She has over four years of experience providing outpatient psychiatric care to patients ages 5 and older, treating a wide range of mental health conditions.",
-          "Her clinical interests include anxiety, OCD, ADHD, trauma, women’s mental health, and life transitions. Mariah is passionate about creating a supportive, patient-centered environment where individuals feel heard, respected, and empowered through shared decision-making. She is also a strong advocate for compassionate, individualized care that recognizes the whole person.",
-          "In addition to clinical practice, Mariah serves as an adjunct instructor at the University of South Florida, where she teaches behavioral health to future physician assistants. Outside of work, she enjoys spending time with her dogs, Sunnie and Skye, getting lost in a good book, and trying new hobbies and adventures."
-        ]
-      },
-      {
         "name": "Grace Beasley",
         "credentials": "LCSWA",
         "title": "Primary Therapist",
@@ -58,31 +35,15 @@
         ]
       },
       {
-        "name": "Alayna West",
-        "credentials": "LCMHCA",
-        "title": "Primary Therapist",
-        "image": "alayna-west.jpg",
+        "name": "Beth Bertram",
+        "credentials": "LCSWS",
+        "title": "IOP Clinical Lead",
+        "image": "beth-bertram.jpg",
         "bio": [
-          "My therapeutic approach is integrative, relational, and trauma-informed. I am passionate about providing a therapeutic space that fosters connection, acceptance, insight, growth, and healing.",
-          "I am proudly affirming of all identities. I believe each client is unique and the expert of their own life, and I treat them as such.",
-          "I earned my bachelor’s degree from the University of Missouri and my master’s degree later on in Clinical Mental Health Counseling from the University of South Dakota. During my internship year and for two years following graduation, I worked at a community mental health agency in South Dakota as a homebased therapist supporting at risk adolescents and their families. During my time with this agency, I was also leading adolescent DBT, ART, and MRT groups. I moved to North Carolina in 2024 and started working as an intensive-outpatient therapist at Joshua Tree Health, previously known as Simply Teens Outpatient. For over five years, I have provided clinical individual, group, and family therapy, focusing on helping adolescents impacted by trauma.",
-          "I have training and experience in several evidence-based practices including Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT), Brief Strategic Family Therapy (BSFT), Trauma and Resilience-Informed Care, Aggression Replacement Training (ART), mindfulness practice, and I am currently in training for Eye-Movement Desensitization and Reprocessing (EMDR).",
-          {
-            "intro": "My counseling services address concerns or issues including, but not limited to:",
-            "items": [
-              "Depression and anxiety",
-              "Self-harm and suicidality",
-              "Emotional dysregulation",
-              "Trauma, PTSD, grief",
-              "ADHD, ASD (Level 1)",
-              "Shame, self-esteem, and self-image",
-              "Interpersonal relationships",
-              "Wellness, spirituality, and mindfulness",
-              "Family concerns, such as: strained relationships, conflict resolution, boundary setting, poor regulation, and communication difficulties",
-              "Life transitions"
-            ]
-          },
-          "I enjoy journaling, reading, swimming, spending time with friends, playing games, binge-watching television shows, and hot yoga. I also like to try new restaurants and travel to the beach whenever I can."
+          "I’m passionate about creating a safe, welcoming space where all clients feel heard, valued, and empowered. My approach is grounded in compassion, curiosity, authenticity, and respect for each client’s unique experience. I affirm and celebrate all identities.",
+          "I earned my bachelor’s degree from Anderson University (Indiana) and began my professional career at a Child Advocacy Center, where I worked as a forensic interviewer and victim advocate. In this role, I worked closely with children and families navigating investigations of abuse and neglect.",
+          "I later earned my master’s degree from Indiana University. Following graduation, I worked as an intensive in-home therapist supporting families involved with the juvenile justice system or child protective services. Most recently, I have worked as an outpatient therapist serving children, teens, and young adults. In this role, I was also intensively trained as a Dialectical Behavior therapist, working with individual DBT clients and leading multifamily DBT groups.",
+          "I have training and experience in several evidence-based practices including Cognitive Behavioral Therapy (CBT), Dialectical Behavior Therapy (DBT), Family Centered Treatment (FCT), Motivational Interviewing (MI), mindfulness practice, and Trauma-Focused Cognitive Behavioral Therapy (TF-CBT). I tailor these approaches to support clients with a variety of diagnoses and concerns including anger, anxiety, communication, depression, domestic violence, emotion regulation, life transitions, and PTSD."
         ]
       },
       {
@@ -114,6 +75,21 @@
         ]
       },
       {
+        "name": "Mariah Echevarria",
+        "credentials": "PA-C",
+        "title": "Psychiatric Physician Assistant",
+        "image": "mariah-echevarria.jpg",
+        "bio": [
+          "Mariah is a Florida native who earned her Bachelor of Science from the University of Florida and her Master of Physician Assistant Studies from the University of South Florida. She has over four years of experience providing outpatient psychiatric care to patients ages 5 and older, treating a wide range of mental health conditions.",
+          "Her clinical interests include anxiety, OCD, ADHD, trauma, women’s mental health, and life transitions. Mariah is passionate about creating a supportive, patient-centered environment where individuals feel heard, respected, and empowered through shared decision-making. She is also a strong advocate for compassionate, individualized care that recognizes the whole person.",
+          "In addition to clinical practice, Mariah serves as an adjunct instructor at the University of South Florida, where she teaches behavioral health to future physician assistants. Outside of work, she enjoys spending time with her dogs, Sunnie and Skye, getting lost in a good book, and trying new hobbies and adventures."
+        ]
+      },
+      {
+        "name": "Dani Hoyos",
+        "title": "Admissions Coordinator"
+      },
+      {
         "name": "David Wingfield",
         "title": "Therapy Intern & Educational Liaison",
         "image": "david-wingfield.jpg",
@@ -131,10 +107,6 @@
           "My passion for the arts, nature, and outdoor activities informs my approach to creating meaningful and impactful connections in practice with clients. I emphasize autonomy, empowerment, and creativity in my approach; I’m especially drawn to DBT, expressive arts, and trauma-informed practices as ways to help clients build skills, process experience, and discover themselves. I value curiosity and acceptance and am committed to cultivating spaces where these values can flourish.",
           "I enjoy rock climbing, figure skating, doing theatre, and I’m a proud gecko mom! Whether I’m on a climbing wall, on the ice, or on stage, I find that staying creative and active outside of work keeps me grounded and better able to show up for the people I work with."
         ]
-      },
-      {
-        "name": "Analee Dubbs",
-        "title": "Therapy Intern"
       }
     ]
   },
