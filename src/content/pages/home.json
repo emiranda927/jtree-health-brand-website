@@ -63,11 +63,11 @@
   "programs": {
     "eyebrow": "Our programs",
     "title": "Two levels of structured outpatient care.",
-    "intro": "PHP provides a full treatment day, four to five days a week. IOP runs part-day, three to four days a week, mornings or afternoons. Both allow teens to return home every evening.",
+    "intro": "PHP provides a full treatment day, five days a week. IOP runs part-day, four afternoons a week. Both allow teens to return home every evening.",
     "php": {
       "tag": "Partial Hospitalization Program",
       "title": "Full-day treatment during the week.",
-      "schedule": "Daytime · four to five days a week · Home each evening",
+      "schedule": "Mon–Fri · 9am–3pm · Home each evening",
       "body": "Our highest level of outpatient care, for teens who need more structure and support than weekly or after-school therapy.",
       "features": [
         "Group and individual therapy",
@@ -79,8 +79,8 @@
     },
     "iop": {
       "tag": "Intensive Outpatient Program",
-      "title": "Part-day treatment, three to four days a week.",
-      "schedule": "Mon/Wed/Thu · 9am–12pm or 3:30–6:30pm",
+      "title": "Part-day treatment, four days a week.",
+      "schedule": "Mon–Thu · 3:30–6:30pm",
       "body": "A step below PHP for teens who need more than weekly therapy while continuing school and daily routines.",
       "features": [
         "After-school scheduling",

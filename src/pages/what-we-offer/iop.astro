@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 
 const includes = [
-  'Group therapy on Monday, Wednesday, and Thursday',
+  'Group therapy Monday through Thursday, 3:30–6:30pm',
   'A DBT skills curriculum taught in sequence: mindfulness, distress tolerance, emotion regulation, and interpersonal effectiveness',
   'Nervous system regulation and somatic work (experiential therapy)',
   'Art therapy and music therapy (expressive therapy)',
@@ -25,11 +25,11 @@ const whoItsFor = [
 const faqs = [
   {
     q: 'What does a typical week look like?',
-    a: 'Teen groups meet Monday, Wednesday, and Thursday, with a morning option (9am–12pm) or an afternoon option (3:30–6:30pm). A parent DBT skills group meets Tuesdays from 3:30–6:30pm for some families, so IOP runs three to four days a week. Individual and family therapy are scheduled alongside the group program.',
+    a: 'Teen groups meet Monday through Thursday in the afternoon (3:30–6:30pm), so IOP runs four days a week. A parent DBT skills group meets Tuesdays, either 3:30–5:00pm or 5:00–6:30pm, and we strongly encourage every family to take part. Individual and family therapy are scheduled alongside the group program.',
   },
   {
     q: 'Can my teen stay in school during IOP?',
-    a: 'Yes. Many families choose the afternoon group (3:30–6:30pm) so teens keep their regular school day, coming to Joshua Tree on Monday, Wednesday, and Thursday. A morning group (9am–12pm) is also available.',
+    a: 'Yes. Groups meet Monday through Thursday from 3:30–6:30pm, after the school day, which keeps the disruption to your teen’s routine as small as we can make it. Your teen stays in class, keeps up with friends and activities, and gets to practice DBT skills at school the same week they learn them.',
   },
   {
     q: 'How long does IOP last?',
@@ -61,13 +61,13 @@ const faqSchema = {
 <Base
   bodyClass="brand-page rollout-page"
   title="Teen Intensive Outpatient Program (IOP) | Joshua Tree Health"
-  description="IOP for teens ages 10–17 in Apex, NC. Groups meet Mon/Wed/Thu, mornings or afternoons, with individual and family therapy alongside. Typically 6–12 weeks. No waitlist."
+  description="IOP for teens ages 10–17 in Apex, NC. Groups meet Monday–Thursday, 3:30–6:30pm, with individual and family therapy alongside. Typically 6–12 weeks. No waitlist."
   jsonLd={faqSchema}
 >
   <PageHero
     art="group"
     title="Intensive Outpatient Program (IOP)"
-    sub="Three to four days a week, mornings or afternoons. More support than weekly therapy, with school and home still part of daily life."
+    sub="Four afternoons a week, Monday through Thursday. More support than weekly therapy, with school and home still part of daily life."
     primaryCta={{ label: 'Find the right level of care', href: '/get-started' }}
     secondaryCta={{ label: 'Call (919) 335-5053', href: 'tel:+19193355053' }}
   />
@@ -83,11 +83,11 @@ const faqSchema = {
           happening.
         </p>
         <p>
-          Teen groups meet three days a week — Monday, Wednesday, and Thursday — and follow a
+          Teen groups meet four days a week, Monday through Thursday, 3:30–6:30pm. Each group follows a
           three-part structure: a processing group with peers and a facilitator, skills building with
           DBT and CBT plus nervous system regulation, and an experiential group with art therapy, music therapy,
-          somatic exercises, and mindfulness. A parent DBT skills group meets Tuesdays for some
-          families, so IOP runs three to four days a week. Individual therapy and family sessions run
+          somatic exercises, and mindfulness. A parent DBT skills group meets Tuesdays, and we
+          strongly encourage every family to take part. Individual therapy and family sessions run
           alongside the group program.
         </p>
         <p>
@@ -108,7 +108,7 @@ const faqSchema = {
       <div class="section-head" data-reveal>
         <p class="eyebrow">Sample weekly schedule</p>
         <h2 class="section-title font-display" id="iop-schedule-title">A week teens can count on.</h2>
-        <p class="section-sub">Teen groups meet Monday, Wednesday, and Thursday, with a morning option (9am–12pm) or an afternoon option (3:30–6:30pm). A parent DBT skills group meets Tuesdays from 3:30–6:30pm for some families.</p>
+        <p class="section-sub">Teen groups meet Monday through Thursday in the afternoon, 3:30–6:30pm. A parent DBT skills group meets Tuesdays, either 3:30–5:00pm or 5:00–6:30pm.</p>
       </div>
       <div class="grid-3" data-reveal-group>
         <article class="info-card" data-reveal-item><h3>Processing group</h3><p>Teens share what has been going on with peers and a facilitator in a structured group setting.</p></article>
@@ -160,9 +160,10 @@ const faqSchema = {
       <div class="prose" data-reveal>
         <h3>Will my teen be able to stay in school?</h3>
         <p>
-          Yes. Many families choose the afternoon group (3:30–6:30pm), which meets after the school
-          day, so teens keep their regular schedule. A morning group (9am–12pm) is also available.
-          Groups meet Monday, Wednesday, and Thursday.
+          Yes. Groups meet Monday through Thursday from 3:30–6:30pm, after the school day ends, so
+          treatment disrupts as little of your teen's daily life as possible. They stay in class,
+          keep up with friends and activities, and get to practice DBT skills in the place they
+          actually need them: at school, the same week they learn them.
         </p>
 
         <h3>Do they go home every evening?</h3>
@@ -174,15 +175,15 @@ const faqSchema = {
         <h3>How involved will I be?</h3>
         <p>
           Family therapy is part of the work, and you'll have regular contact with your teen's
-          treatment team. For some families, a parent DBT skills group meets on Tuesdays, so parents
-          learn the same skills their teen is practicing and the tools your teen brings home are ones
-          you recognize.
+          treatment team. A parent DBT skills group meets on Tuesdays, so parents learn the same
+          skills their teen is practicing and the tools your teen brings home are ones you
+          recognize. We strongly encourage every family to take part.
         </p>
 
         <h3>What will my teen be doing each week?</h3>
         <!-- TODO: VERIFY dedicated fifth-day individual therapy before describing a set day. -->
         <p>
-          Three group sessions — Monday, Wednesday, and Thursday — each with the same three-part
+          Four group sessions, Monday through Thursday, each with the same three-part
           structure: processing with peers, DBT and CBT skills practice with nervous system regulation, and experiential work
           with art, music, somatic exercises, and mindfulness. Individual therapy runs alongside the
           group program.
