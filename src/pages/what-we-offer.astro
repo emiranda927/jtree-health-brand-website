@@ -17,8 +17,7 @@ const steps = [
   {
     num: '03',
     title: 'The program',
-    // TODO: VERIFY PHP exact daily hours before publishing specifics.
-    body: "Your teen starts in IOP or PHP, based on the assessment. IOP groups meet three to four days a week. PHP runs during the day, four to five days a week, and our admissions team will confirm the current schedule with you. Individual therapy, family therapy, and the core clinical work happen throughout. You'll be involved at every stage.",
+    body: "Your teen starts in IOP or PHP, based on the assessment. IOP groups meet four afternoons a week, Monday through Thursday. PHP runs during the day, Monday through Friday. Individual therapy, family therapy, and the core clinical work happen throughout. You'll be involved at every stage.",
   },
   {
     num: '04',
@@ -38,8 +37,8 @@ const programs = [
   },
   {
     tag: 'Intensive outpatient · IOP',
-    title: 'Structured support, three to four days a week',
-    body: 'Group therapy three to four days a week, typically over 6–12 weeks. Teens go home every evening and stay connected to school.',
+    title: 'Structured support, four afternoons a week',
+    body: 'Group therapy Monday through Thursday, typically over 6–12 weeks. Teens go home every evening and stay connected to school.',
     href: '/what-we-offer/iop',
     link: 'Learn about IOP →',
     accent: true,
@@ -115,6 +114,7 @@ const programs = [
           </article>
         ))}
       </div>
+      <p class="programs-note" data-reveal>Schedule note: IOP teen groups meet Monday through Thursday, 3:30–6:30pm. Morning IOP groups (9am–12pm) run during the summer only. PHP runs Monday through Friday, 9am–3pm.</p>
     </div>
   </section>
 
@@ -147,4 +147,5 @@ const programs = [
 <style>
   .wwo-steps { list-style: none; margin: 0; padding: 0; }
   .wwo-steps__action { margin-top: 0.4rem; }
+  .programs-note { max-width: 52rem; margin-top: 2.2rem; font-size: 1rem; line-height: 1.6; color: var(--color-ink-soft); }
 </style>

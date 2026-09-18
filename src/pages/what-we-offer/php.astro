@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 
 const includes = [
-  'Group therapy during the day, four to five days a week',
+  'Group therapy during the day, Monday through Friday, 9am–3pm',
   'DBT and CBT skills practice',
   'Nervous system regulation and somatic work (experiential therapy)',
   'Art therapy and music therapy (expressive therapy)',
@@ -11,8 +11,7 @@ const includes = [
   // TODO: VERIFY dedicated-day individual therapy before describing a set day.
   'Individual therapy alongside the group program',
   'Family therapy sessions',
-  // TODO: VERIFY current school-coordination practice during PHP before describing a formal process.
-  'Help with school logistics during the school year',
+  'An educational liaison who helps plan for the pause in school attendance',
   // TODO: VERIFY scope of coordinated psychiatric care before naming it directly.
   'Care coordination with outside providers, as clinically indicated',
   'Discharge planning and transition support, often into IOP',
@@ -27,7 +26,7 @@ const whoItsFor = [
 const faqs = [
   {
     q: "What's the difference between PHP and IOP?",
-    a: "PHP is our highest level of outpatient care. It runs during the day, four to five days a week — more than IOP, which runs three to four days a week. Both are outpatient, so teens go home every evening. If you're unsure which level fits, the assessment with one of our licensed therapists will help answer that.",
+    a: "PHP is our highest level of outpatient care. It runs during the day, Monday through Friday, 9am–3pm, more than IOP, which runs four afternoons a week. Both are outpatient, so teens go home every evening. If you're unsure which level fits, the assessment with one of our licensed therapists will help answer that.",
   },
   {
     q: 'Does my teen go home at night?',
@@ -35,8 +34,7 @@ const faqs = [
   },
   {
     q: 'What happens to school during PHP?',
-    // TODO: VERIFY current school-coordination practice during PHP before describing a formal process.
-    a: 'During the school year, we work with families on school logistics. Admissions and the clinical team will talk through what that could look like for your teen.',
+    a: 'PHP runs during the school day, so school attendance is paused while your teen is in the program. Our educational liaison works with you and your teen’s school to plan for that pause and for the return to class afterward.',
   },
   {
     q: 'How long does PHP last?',
@@ -87,11 +85,10 @@ const faqSchema = {
           PHP is our highest level of outpatient care. It is for teens who are medically stable and
           safe at home while needing focused clinical attention during the day.
         </p>
-        <!-- TODO: VERIFY exact PHP daily hours before publishing specifics. -->
         <p>
-          The program runs during the day, four to five days a week — more than IOP. Teens come to
-          Joshua Tree in the morning and go home each evening, so family life remains part of
-          treatment. Admissions will walk you through the current weekly schedule.
+          The program runs during the day, Monday through Friday, 9am–3pm, more than IOP. Teens
+          come to Joshua Tree in the morning and go home each evening, so family life remains part of
+          treatment.
         </p>
         <p>
           PHP is often the right fit in two situations: when a teen needs more support than IOP can
@@ -103,10 +100,10 @@ const faqSchema = {
           Length of stay is decided with the teen, family, and treatment team and reviewed throughout
           care.
         </p>
-        <!-- TODO: VERIFY current school-coordination practice during PHP before describing a formal process. -->
         <p>
-          During the school year, we work with families on the practical questions around school.
-          Admissions and the clinical team will explain what that can look like for your teen.
+          Because PHP runs during the school day, school attendance is paused while your teen is in
+          the program. Our educational liaison works with you and your teen's school to plan for that
+          pause and for the return to class afterward.
         </p>
       </div>
     </div>
@@ -153,10 +150,10 @@ const faqSchema = {
         </p>
 
         <h3>What happens with school?</h3>
-        <!-- TODO: VERIFY current school-coordination practice during PHP before describing a formal process. -->
         <p>
-          During the school year, we work with families on school logistics. Admissions and the
-          clinical team will talk through what that could look like for your teen.
+          School attendance is paused while your teen is in PHP, since the program runs during the
+          school day. Our educational liaison works with you and your teen's school to plan for that
+          pause and for the return to class afterward.
         </p>
 
         <h3>How involved will I be?</h3>
@@ -166,12 +163,11 @@ const faqSchema = {
         </p>
 
         <h3>What does the day look like?</h3>
-        <!-- TODO: VERIFY exact PHP hours and weekly day count before publishing specifics. -->
         <p>
-          Groups follow the same three-part structure used across our programs: processing with
-          peers, DBT and CBT skills practice with nervous system regulation, and experiential work
-          with art, music, somatic exercises, and mindfulness. Individual therapy runs alongside the
-          group program, and admissions will walk you through the current weekly schedule.
+          Days run 9am–3pm, Monday through Friday. Groups follow the same three-part structure used
+          across our programs: processing with peers, DBT and CBT skills practice with nervous system
+          regulation, and experiential work with art, music, somatic exercises, and mindfulness.
+          Individual therapy runs alongside the group program.
         </p>
 
         <h3>What happens after PHP?</h3>
